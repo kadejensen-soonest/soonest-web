@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soonest vs. QGenda/Shift Admin — The Honest Comparison</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary:    #101828;
+      --secondary:  #475467;
+      --tertiary:   #98A2B3;
+      --heading:    #1D2939;
+      --text:       #475467;
+      --accent:     #444CE7;
+      --bg:         #F9FAFB;
+      --bg-alt:     #F2F4F7;
+      --white:      #FFFFFF;
+      --green:      #12B76A;
+      --red:        #F04438;
+      --orange:     #F79009;
+      --border:     #E4E7EC;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Figtree', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────────── */
+    nav {
+      background: var(--primary);
+      padding: 0 48px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: -0.3px;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .btn-nav {
+      background: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-nav:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── HERO ────────────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(156deg, #475467 31%, #101828 98%);
+      padding: 96px 48px 80px;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(68, 76, 231, 0.25);
+      border: 1px solid rgba(68, 76, 231, 0.5);
+      color: #A5B4FC;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.15;
+      max-width: 760px;
+      margin: 0 auto 20px;
+    }
+
+    .hero h1 span { color: #818CF8; }
+
+    .hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.72);
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.65;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .btn-primary {
+      background: var(--bg);
+      color: var(--primary);
+      border: none;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.5);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.08); }
+
+    /* ─── STAT STRIP ──────────────────────────────────────── */
+    .stat-strip {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: center;
+      gap: 80px;
+    }
+
+    .stat-item { text-align: center; }
+
+    .stat-number {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--secondary);
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    /* ─── SECTION BASE ────────────────────────────────────── */
+    section { padding: 100px 48px; }
+
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .section-heading {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--heading);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--secondary);
+      max-width: 600px;
+      line-height: 1.65;
+      margin-bottom: 56px;
+    }
+
+    /* ─── PAIN CARDS ──────────────────────────────────────── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .pain-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #818CF8);
+    }
+    .pain-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(16,24,40,0.1);
+    }
+
+    .pain-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(68,76,231,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .pain-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 10px;
+    }
+
+    .pain-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--secondary);
+    }
+
+    .pain-tag {
+      display: inline-block;
+      margin-top: 16px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--red);
+      background: rgba(240,68,56,0.08);
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    /* ─── PERSONA TABS ────────────────────────────────────── */
+    .persona-section {
+      background: var(--primary);
+      padding: 80px 48px;
+    }
+
+    .persona-section .section-heading { color: var(--white); }
+    .persona-section .section-sub { color: rgba(255,255,255,0.65); }
+    .persona-section .section-eyebrow { color: #818CF8; }
+
+    .persona-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 40px;
+      background: rgba(255,255,255,0.08);
+      padding: 6px;
+      border-radius: 12px;
+      width: fit-content;
+    }
+
+    .persona-tab {
+      padding: 10px 24px;
+      border-radius: 8px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .persona-tab.active {
+      background: var(--white);
+      color: var(--primary);
+    }
+
+    .persona-content { display: none; }
+    .persona-content.active { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+    .persona-card {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 32px;
+    }
+
+    .persona-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .persona-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 100%;
+      background: linear-gradient(135deg, var(--accent), #818CF8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .persona-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .persona-card .role {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .persona-wins {
+      list-style: none;
+    }
+
+    .persona-wins li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.55;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .persona-wins li:last-child { border-bottom: none; }
+
+    .win-dot {
+      width: 20px;
+      height: 20px;
+      background: rgba(18,183,106,0.2);
+      border-radius: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .win-dot svg { width: 11px; height: 11px; }
+
+    /* ─── COMPARISON TABLE ────────────────────────────────── */
+    .comparison-section { background: var(--bg-alt); }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(16,24,40,0.08);
+    }
+
+    .comparison-table thead tr {
+      background: var(--primary);
+    }
+
+    .comparison-table thead th {
+      padding: 24px 28px;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .col-feature { color: rgba(255,255,255,0.55); width: 32%; }
+
+    .col-soonest {
+      color: var(--white);
+      background: var(--accent);
+      text-align: center;
+      width: 34%;
+      position: relative;
+    }
+
+    .col-soonest::after {
+      content: 'RECOMMENDED';
+      position: absolute;
+      top: -1px; right: 16px;
+      background: var(--green);
+      color: white;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .col-competitor {
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      background: rgba(255,255,255,0.05);
+      width: 34%;
+    }
+
+    .comparison-table tbody tr {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .comparison-table tbody tr:hover { background: #FAFBFF; }
+    .comparison-table tbody tr:last-child { border-bottom: none; }
+
+    .comparison-table tbody tr.section-row {
+      background: var(--bg-alt);
+      pointer-events: none;
+    }
+
+    .comparison-table tbody tr.section-row td {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--tertiary);
+      padding: 12px 28px 8px;
+    }
+
+    .comparison-table td {
+      padding: 18px 28px;
+      font-size: 14px;
+    }
+
+    .td-feature {
+      font-weight: 500;
+      color: var(--heading);
+    }
+
+    .td-feature small {
+      display: block;
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--tertiary);
+      margin-top: 3px;
+    }
+
+    .td-soonest, .td-competitor {
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .check {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .cross {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--red);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .partial {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--orange);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .check-icon { font-size: 16px; }
+
+    .td-note {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--tertiary);
+      margin-top: 4px;
+    }
+
+    /* ─── FEATURE DEEP DIVES ──────────────────────────────── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px 28px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(16,24,40,0.08);
+    }
+
+    .feature-badge {
+      display: inline-block;
+      background: rgba(68,76,231,0.08);
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .feature-card p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--secondary);
+      margin-bottom: 20px;
+    }
+
+    .feature-vs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .vs-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .vs-label {
+      font-weight: 700;
+      flex-shrink: 0;
+      width: 72px;
+    }
+
+    .vs-soonest .vs-label { color: var(--green); }
+    .vs-qgenda .vs-label { color: var(--red); }
+    .vs-soonest .vs-text { color: var(--heading); }
+    .vs-qgenda .vs-text { color: var(--secondary); }
+
+    /* ─── COST SECTION ────────────────────────────────────── */
+    .cost-section {
+      background: linear-gradient(160deg, #475467 47%, #101828 96%);
+      padding: 100px 48px;
+    }
+
+    .cost-section .section-heading { color: var(--white); }
+    .cost-section .section-sub { color: rgba(255,255,255,0.65); }
+    .cost-section .section-eyebrow { color: #818CF8; }
+
+    .cost-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .cost-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+
+    .cost-card-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 8px;
+    }
+
+    .cost-card-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+
+    .cost-card-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.55;
+    }
+
+    .cost-card.highlight {
+      background: rgba(68,76,231,0.25);
+      border-color: rgba(68,76,231,0.5);
+    }
+
+    .cost-card.highlight .cost-card-value { color: #818CF8; }
+
+    /* ─── CTA SECTION ─────────────────────────────────────── */
+    .cta-section {
+      background: var(--bg);
+      padding: 100px 48px;
+      text-align: center;
+    }
+
+    .cta-card {
+      max-width: 680px;
+      margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 64px 56px;
+      box-shadow: 0 8px 32px rgba(16,24,40,0.08);
+    }
+
+    .cta-card h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--heading);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .cta-card p {
+      font-size: 16px;
+      color: var(--secondary);
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: var(--white);
+      border: 1px solid var(--accent);
+      padding: 14px 32px;
+      border-radius: 8px;
+      font-family: 'Figtree', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-accent:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      background: var(--primary);
+      padding: 32px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--white);
+    }
+
+    .footer-note {
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ─── UTILITY ─────────────────────────────────────────── */
+    .text-center { text-align: center; }
+
+    .badge-new {
+      display: inline-block;
+      background: rgba(18,183,106,0.12);
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero h1, .hero-sub, .hero-cta-row {
+      animation: fadeUp 0.5s ease both;
+    }
+    .hero-sub { animation-delay: 0.1s; }
+    .hero-cta-row { animation-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#">Soonest</a>
+  <ul class="nav-links">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Resources</a></li>
+    <li><a href="#comparison">See Comparison</a></li>
+  </ul>
+  <a href="#cta" class="btn-nav">Request a Demo</a>
+</nav>
+
+<!-- ─── HERO ────────────────────────────────────────────── -->
+<div class="hero">
+  <div class="hero-eyebrow">Competitive Comparison</div>
+  <h1>Soonest vs. <span>QGenda</span><br/>The Honest Side-by-Side</h1>
+  <p class="hero-sub">
+    QGenda was built for hospital enterprise. Your group isn't one.
+    See why independent physician groups and urgent cares are making the switch.
+  </p>
+  <div class="hero-cta-row">
+    <a href="#comparison" class="btn-primary">See the Comparison</a>
+    <a href="#cta" class="btn-ghost">Request a Demo</a>
+  </div>
+</div>
+
+<!-- ─── STAT STRIP ──────────────────────────────────────── -->
+<div class="stat-strip">
+  <div class="stat-item">
+    <div class="stat-number">10–40hrs</div>
+    <div class="stat-label">Spent on manual scheduling per month</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">43%</div>
+    <div class="stat-label">Of physicians report burnout symptoms (AMA, 2024)</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">$500K+</div>
+    <div class="stat-label">Average cost to replace a physician</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-number">Days</div>
+    <div class="stat-label">Soonest onboarding vs. weeks for QGenda</div>
+  </div>
+</div>
+
+<!-- ─── WHY GROUPS SWITCH ────────────────────────────────── -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">Why Groups Leave QGenda</p>
+    <h2 class="section-heading">The problems no one talks about<br/>in the sales cycle</h2>
+    <p class="section-sub">These aren't edge cases. They're the most common complaints from practices that have been down this road.</p>
+    <div class="pain-grid">
+
+      <div class="pain-card">
+        <div class="pain-icon">📱</div>
+        <h3>The mobile experience is nearly useless</h3>
+        <p>QGenda's admin mobile app is read-only. Admins can't process swaps, fill gaps, or approve requests from their phone — meaning scheduling crises still route to email and texts.</p>
+        <span class="pain-tag">Verified complaint — G2 & Capterra</span>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-icon">⏳</div>
+        <h3>Implementation takes months, not days</h3>
+        <p>QGenda's rules engine is powerful — but configuring it takes weeks and often requires professional services. Most independent groups don't have the IT bandwidth for that.</p>
+        <span class="pain-tag">Verified complaint — G2 & Capterra</span>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-icon">💰</div>
+        <h3>Priced for health systems, not your group</h3>
+        <p>QGenda's enterprise pricing was designed for multi-campus health systems with 500+ providers. For a 15-physician ED group, you're paying for infrastructure you'll never use.</p>
+        <span class="pain-tag">Pricing mismatch — independent groups</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PERSONA TABS ─────────────────────────────────────── -->
+<div class="persona-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">Built Around Your Role</p>
+    <h2 class="section-heading">What matters most — depends on who you are</h2>
+    <p class="section-sub">Select your role to see the wins that matter most to you.</p>
+
+    <div class="persona-tabs">
+      <button class="persona-tab active" onclick="switchPersona('director')">Medical Director</button>
+      <button class="persona-tab" onclick="switchPersona('manager')">Practice Manager</button>
+      <button class="persona-tab" onclick="switchPersona('regional')">Regional Director</button>
+    </div>
+
+    <!-- Medical Director -->
+    <div class="persona-content active" id="persona-director">
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar">👨‍⚕️</div>
+          <div>
+            <h3>What Soonest gives you</h3>
+            <span class="role">Medical Director, Emergency Medicine</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Transparent fairness tracking — every physician can see night/weekend/holiday distribution
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Physicians self-manage swaps within your rules — without texting you first
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Reduce scheduling admin from 30+ hours/month to under 5
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Set up in days, not weeks — no IT team required
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Pricing built for independent groups, not enterprise health systems
+          </li>
+        </ul>
+      </div>
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, #475467, #98A2B3);">⚠️</div>
+          <div>
+            <h3>What QGenda costs you</h3>
+            <span class="role">The hidden friction points</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Months of setup time before your group sees any value
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Mobile admin app is read-only — swaps still land in your inbox
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Enterprise pricing designed for 500-physician hospital systems
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Complexity requires ongoing IT support and training to maintain
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Customer success contact reassigned after restructure — slower support
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Practice Manager -->
+    <div class="persona-content" id="persona-manager">
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar">📋</div>
+          <div>
+            <h3>What Soonest gives you</h3>
+            <span class="role">Practice Manager / Scheduling Coordinator</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Providers swap and claim shifts without texting you — you get your inbox back
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Open shift pools fill themselves — you post, they claim
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            One source of truth for the schedule — no more version confusion
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Setup in days — you won't spend months on implementation
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Real-time notifications so providers stay informed without calling you
+          </li>
+        </ul>
+      </div>
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, #475467, #98A2B3);">⚠️</div>
+          <div>
+            <h3>What QGenda costs you</h3>
+            <span class="role">The hidden friction points</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            You're still the bottleneck — swaps require admin action on desktop
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Complex admin interface requires significant training time
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Months of setup before you see any workflow relief
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Mobile login issues — frequent session timeouts reported by users
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            If the rules engine breaks, you need IT to fix it — not a quick settings change
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Regional Director -->
+    <div class="persona-content" id="persona-regional">
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar">🏢</div>
+          <div>
+            <h3>What Soonest gives you</h3>
+            <span class="role">Regional Director of Operations</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Standardized scheduling process across all your locations — one system, every site
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Reduce overtime and unplanned locum spend with better coverage visibility
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Clinic managers spend less time on scheduling — more on clinic operations
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Fast implementation per site — new locations onboard in days, not months
+          </li>
+          <li>
+            <div class="win-dot"><svg viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#12B76A" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Scheduling knowledge stays in the system — not in a manager's head
+          </li>
+        </ul>
+      </div>
+      <div class="persona-card">
+        <div class="persona-card-header">
+          <div class="persona-avatar" style="background: linear-gradient(135deg, #475467, #98A2B3);">⚠️</div>
+          <div>
+            <h3>What QGenda costs you</h3>
+            <span class="role">The hidden friction points</span>
+          </div>
+        </div>
+        <ul class="persona-wins">
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Enterprise pricing scales painfully — expect significant cost per site
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Implementation at each new site requires professional services engagement
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Roadmap and support prioritize large health system customers
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Complex configuration creates dependency on IT or QGenda PS team
+          </li>
+          <li>
+            <div class="win-dot" style="background: rgba(240,68,56,0.1)"><svg viewBox="0 0 12 12" fill="none"><path d="M3 3l6 6M9 3l-6 6" stroke="#F04438" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+            Clinic managers report interface is not intuitive — slower adoption
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── COMPARISON TABLE ──────────────────────────────────── -->
+<section class="comparison-section" id="comparison">
+  <div class="section-inner">
+    <p class="section-eyebrow">Feature Comparison</p>
+    <h2 class="section-heading">Every dimension. No spin.</h2>
+    <p class="section-sub">A complete feature-by-feature breakdown so you can make an informed decision.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th class="col-feature">Feature</th>
+          <th class="col-soonest">Soonest</th>
+          <th class="col-competitor">QGenda / Shift Admin</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="section-row"><td colspan="3">Setup & Onboarding</td></tr>
+        <tr>
+          <td class="td-feature">Time to go live<small>From contract to live schedules</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Days</span></span><span class="td-note">Most groups live within a week</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Weeks to months</span></span><span class="td-note">Professional services often required</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">IT resources required<small>Internal technical support needed</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>None</span></span><span class="td-note">No IT team needed</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Significant</span></span><span class="td-note">Rules configuration is complex</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Configuration complexity</td>
+          <td class="td-soonest"><span class="check">✓ <span>Simple</span></span><span class="td-note">Template-driven, intuitive setup</span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>High</span></span><span class="td-note">Powerful but steep learning curve</span></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="3">Mobile Experience</td></tr>
+        <tr>
+          <td class="td-feature">Admin mobile app<small>Process swaps, fill shifts on mobile</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Full functionality</span></span><span class="td-note">Manage everything from your phone</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Read-only</span></span><span class="td-note">Admins can't process actions on mobile</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Provider mobile app<small>View schedule, request swaps</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Full self-service</span></span><span class="td-note">Claim shifts, swap, set availability</span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>Basic</span></span><span class="td-note">View + limited actions; login issues reported</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Real-time notifications</td>
+          <td class="td-soonest"><span class="check">✓ <span>SMS + email</span></span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>Email only</span></span></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="3">Employee Self-Service</td></tr>
+        <tr>
+          <td class="td-feature">Self-managed shift swaps<small>Providers handle swaps without admin</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Core feature</span></span><span class="td-note">Swaps happen before hitting your inbox</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Admin-routed</span></span><span class="td-note">Requests still flow through admin</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Open shift claiming<small>Staff claim uncovered shifts</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Built-in</span></span><span class="td-note">Post open shifts; staff claim instantly</span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>Limited</span></span><span class="td-note">Feature exists but admin-heavy process</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Availability management<small>Staff update own availability</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Real-time</span></span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>Via request</span></span></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="3">Scheduling Intelligence</td></tr>
+        <tr>
+          <td class="td-feature">Schedule templates<small>Recurring shift patterns</small></td>
+          <td class="td-soonest"><span class="check">✓</span></td>
+          <td class="td-competitor"><span class="check">✓ <span>Advanced</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Automated schedule generation<small>AI-driven schedule builds</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>SoonestAI</span></span></td>
+          <td class="td-competitor"><span class="check">✓ <span>Industry-leading</span></span><span class="td-note">QGenda's rules engine is best-in-class</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Fairness / equity tracking<small>Night/weekend/holiday distribution</small></td>
+          <td class="td-soonest"><span class="check">✓</span></td>
+          <td class="td-competitor"><span class="check">✓ <span>Advanced</span></span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Multi-site support</td>
+          <td class="td-soonest"><span class="check">✓</span></td>
+          <td class="td-competitor"><span class="check">✓</span></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="3">Pricing & Support</td></tr>
+        <tr>
+          <td class="td-feature">Pricing model<small>What you actually pay</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Built for groups</span></span><span class="td-note">Accessible pricing, no enterprise minimums</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Enterprise pricing</span></span><span class="td-note">~$5+/provider/month; custom quotes required</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Dedicated onboarding support<small>Hands-on help getting started</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Included</span></span><span class="td-note">Live onboarding, training, support</span></td>
+          <td class="td-competitor"><span class="partial">⚠ <span>Paid PS</span></span><span class="td-note">Professional services engagement extra</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">KLAS recognition</td>
+          <td class="td-soonest"><span class="partial">⚠ <span>Emerging</span></span></td>
+          <td class="td-competitor"><span class="check">✓ <span>Category Leader</span></span><span class="td-note">Two-time KLAS winner</span></td>
+        </tr>
+        <tr>
+          <td class="td-feature">Built for independent groups<small>Not retrofitted from enterprise</small></td>
+          <td class="td-soonest"><span class="check">✓ <span>Purpose-built</span></span><span class="td-note">Designed alongside real clinic operators</span></td>
+          <td class="td-competitor"><span class="cross">✗ <span>Enterprise-first</span></span><span class="td-note">Roadmap driven by large health systems</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ─── FEATURE DEEP DIVES ───────────────────────────────── -->
+<section>
+  <div class="section-inner">
+    <p class="section-eyebrow">Where It Matters Most</p>
+    <h2 class="section-heading">Three things that change<br/>how your clinic runs every day</h2>
+    <p class="section-sub">Not every feature gap is equal. These three are the ones your team will feel immediately.</p>
+
+    <div class="feature-grid">
+
+      <div class="feature-card">
+        <div class="feature-badge">Mobile First</div>
+        <h3>Your admin shouldn't be chained to a desktop</h3>
+        <p>QGenda's mobile admin app is read-only. That means every urgent swap, last-minute call-out, and coverage gap still requires someone at a laptop. In emergency medicine, that's not acceptable.</p>
+        <div class="feature-vs">
+          <div class="vs-row vs-soonest">
+            <span class="vs-label">Soonest:</span>
+            <span class="vs-text">Full admin functionality on mobile. Approve swaps, post shifts, and manage coverage from anywhere.</span>
+          </div>
+          <div class="vs-row vs-qgenda">
+            <span class="vs-label">QGenda:</span>
+            <span class="vs-text">Mobile app is view-only for admins. Urgent actions route back to email and desktop.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">Self-Service</div>
+        <h3>Stop being the middleman for every swap request</h3>
+        <p>In most scheduling systems, every swap request flows through the admin. That's your weekend texts, your late-night emails, your Monday morning inbox. It doesn't have to be that way.</p>
+        <div class="feature-vs">
+          <div class="vs-row vs-soonest">
+            <span class="vs-label">Soonest:</span>
+            <span class="vs-text">Providers swap shifts and claim open shifts directly — within manager-set rules — before it ever reaches your inbox.</span>
+          </div>
+          <div class="vs-row vs-qgenda">
+            <span class="vs-label">QGenda:</span>
+            <span class="vs-text">Shift requests still route through admin approval. The bottleneck stays in place.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">Time to Value</div>
+        <h3>You need relief now, not in three months</h3>
+        <p>QGenda's rules engine is the most powerful in the industry — but configuring it for your group takes weeks and often requires professional services. Your scheduling problem is today.</p>
+        <div class="feature-vs">
+          <div class="vs-row vs-soonest">
+            <span class="vs-label">Soonest:</span>
+            <span class="vs-text">Most groups are live and running real schedules within a week. Onboarding and training included.</span>
+          </div>
+          <div class="vs-row vs-qgenda">
+            <span class="vs-label">QGenda:</span>
+            <span class="vs-text">Implementation typically takes weeks to months. Professional services engagement often required at additional cost.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── COST SECTION ─────────────────────────────────────── -->
+<div class="cost-section">
+  <div class="section-inner">
+    <p class="section-eyebrow">The Real Cost of Doing Nothing</p>
+    <h2 class="section-heading">Scheduling isn't just an admin problem.<br/>It's a financial one.</h2>
+    <p class="section-sub" style="margin-bottom: 48px;">Every month on spreadsheets and group texts is costing your organization real money. Here's what the numbers look like.</p>
+
+    <div class="cost-grid">
+      <div class="cost-card">
+        <div class="cost-card-label">Admin Time Lost</div>
+        <div class="cost-card-value">30+ hrs</div>
+        <div class="cost-card-desc">Average hours spent per month building, adjusting, and fielding requests on manual schedules</div>
+      </div>
+      <div class="cost-card highlight">
+        <div class="cost-card-label">Physician Replacement Cost</div>
+        <div class="cost-card-value">$500K+</div>
+        <div class="cost-card-desc">Average cost to recruit and onboard a new emergency physician — driven in part by preventable burnout</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-label">Locum Spend Driver</div>
+        <div class="cost-card-value">2–3×</div>
+        <div class="cost-card-desc">Locum tenens rates vs. staff physician rates — every coverage gap filled externally multiplies your labor cost</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-label">Burnout Rate (2024)</div>
+        <div class="cost-card-value">43.2%</div>
+        <div class="cost-card-desc">Of U.S. physicians report at least one burnout symptom, per the AMA national study</div>
+      </div>
+      <div class="cost-card highlight">
+        <div class="cost-card-label">Scheduling's Role</div>
+        <div class="cost-card-value">#1</div>
+        <div class="cost-card-desc">Scheduling is one of the most controllable levers organizations have to reduce burnout and improve retention</div>
+      </div>
+      <div class="cost-card">
+        <div class="cost-card-label">Overtime Multiplier</div>
+        <div class="cost-card-value">1.5×</div>
+        <div class="cost-card-desc">Minimum cost multiplier for every unplanned overtime hour — coverage gaps compound labor budgets quickly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CTA ───────────────────────────────────────────────── -->
+<section class="cta-section" id="cta">
+  <div class="cta-card">
+    <h2>See Soonest in action.<br/>Decide for yourself.</h2>
+    <p>We'll show you the platform live, walk through your specific scheduling setup, and let you ask every question. No pressure, no enterprise sales cycle.</p>
+    <a href="#" class="btn-accent">Request a Demo →</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-logo">Soonest</div>
+  <div class="footer-note">© 2026 Soonest. Intelligent scheduling for physician groups and urgent cares.</div>
+  <div class="footer-note">support@getsoonest.com · (385) 475-5793</div>
+</footer>
+
+<script>
+  function switchPersona(id) {
+    // Update tabs
+    document.querySelectorAll('.persona-tab').forEach(tab => tab.classList.remove('active'));
+    event.target.classList.add('active');
+
+    // Update content panels
+    document.querySelectorAll('.persona-content').forEach(panel => panel.classList.remove('active'));
+    document.getElementById('persona-' + id).classList.add('active');
+  }
+
+  // Smooth fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pain-card, .feature-card, .cost-card, .persona-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
