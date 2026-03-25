@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soonest Cold Call Guide</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0f1f35;
+    --blue: #0ea5e9;
+    --blue-light: #e0f2fe;
+    --green: #10b981;
+    --green-light: #d1fae5;
+    --amber: #f59e0b;
+    --amber-light: #fef3c7;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --purple: #8b5cf6;
+    --purple-light: #ede9fe;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
+    --gray-900: #111827;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-900);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  header h1 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+  header span { font-size: 13px; color: #94a3b8; margin-left: 4px; }
+
+  /* TABS */
+  .tabs {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    gap: 2px;
+    padding: 0 20px;
+    position: sticky;
+    top: 53px;
+    z-index: 99;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 12px 18px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: all 0.15s;
+    letter-spacing: 0.2px;
+  }
+  .tab-btn:hover { color: white; }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); }
+
+  /* CONTENT */
+  .tab-pane { display: none; padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+  .tab-pane.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    border: 1px solid var(--gray-200);
+  }
+  .card h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card h3 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-500);
+    margin: 16px 0 8px;
+  }
+  .card h3:first-child { margin-top: 0; }
+
+  /* SCRIPT BOXES */
+  .script-box {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 6px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    font-style: italic;
+    color: #0c4a6e;
+    position: relative;
+  }
+  .script-box .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 11px;
+    cursor: pointer;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .script-box .copy-btn:hover { background: #0284c7; }
+  .script-box .copy-btn.copied { background: var(--green); }
+
+  /* STAT BOXES */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .stat-box {
+    background: var(--amber-light);
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .stat-box .num { font-size: 22px; font-weight: 800; color: #92400e; line-height: 1.2; }
+  .stat-box .label { font-size: 12px; color: #78350f; margin-top: 3px; }
+
+  /* QUESTION BOXES */
+  .q-list { list-style: none; margin: 8px 0; }
+  .q-list li {
+    padding: 8px 12px 8px 36px;
+    margin-bottom: 6px;
+    background: var(--gray-50);
+    border-radius: 6px;
+    border: 1px solid var(--gray-200);
+    position: relative;
+    font-size: 14px;
+  }
+  .q-list li::before {
+    content: "?";
+    position: absolute;
+    left: 12px;
+    color: var(--blue);
+    font-weight: 800;
+  }
+
+  /* TIP BOXES */
+  .tip {
+    background: var(--green-light);
+    border-left: 4px solid var(--green);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #065f46;
+  }
+  .tip strong { color: #047857; }
+
+  .warn {
+    background: var(--amber-light);
+    border-left: 4px solid var(--amber);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #78350f;
+  }
+
+  /* OBJECTION BLOCKS */
+  .obj-block {
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .obj-trigger {
+    width: 100%;
+    background: var(--gray-50);
+    border: none;
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gray-900);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .obj-trigger .icon { font-size: 16px; }
+  .obj-trigger .arrow { margin-left: auto; color: var(--gray-500); transition: transform 0.2s; }
+  .obj-trigger.open .arrow { transform: rotate(180deg); }
+  .obj-body {
+    display: none;
+    padding: 14px 16px;
+    border-top: 1px solid var(--gray-200);
+    background: white;
+  }
+  .obj-body.open { display: block; }
+
+  /* COMPETITOR TABS */
+  .comp-tabs { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+  .comp-btn {
+    padding: 7px 14px;
+    border-radius: 20px;
+    border: 2px solid var(--gray-200);
+    background: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--gray-700);
+    transition: all 0.15s;
+  }
+  .comp-btn:hover { border-color: var(--blue); color: var(--blue); }
+  .comp-btn.active { background: var(--navy); border-color: var(--navy); color: white; }
+  .comp-pane { display: none; }
+  .comp-pane.active { display: block; }
+
+  /* BADGE */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .badge-red { background: var(--red-light); color: var(--red); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+  .badge-blue { background: var(--blue-light); color: #0369a1; }
+
+  /* QUOTE */
+  .review-quote {
+    background: #fafafa;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 14px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: var(--gray-700);
+    position: relative;
+  }
+  .review-quote::before {
+    content: '"';
+    font-size: 40px;
+    color: var(--gray-200);
+    position: absolute;
+    top: 4px;
+    left: 10px;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .review-quote p { padding-left: 22px; font-style: italic; }
+  .review-quote .source { font-size: 12px; color: var(--gray-500); margin-top: 6px; padding-left: 22px; font-style: normal; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--gray-200); margin: 16px 0; }
+
+  ul.plain { list-style: none; }
+  ul.plain li { padding: 5px 0; font-size: 14px; padding-left: 20px; position: relative; }
+  ul.plain li::before { content: "•"; position: absolute; left: 6px; color: var(--blue); font-weight: 700; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } .stat-grid { grid-template-columns: 1fr 1fr; } }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-500);
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎯 Soonest Cold Call Guide</h1>
+  <span>Quick reference for live calls</span>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('scripts', this)">📞 Call Scripts</button>
+  <button class="tab-btn" onclick="switchTab('gatekeeper', this)">🚪 Gatekeeper</button>
+  <button class="tab-btn" onclick="switchTab('battlecards', this)">⚔️ Battle Cards</button>
+  <button class="tab-btn" onclick="switchTab('competitors', this)">🔍 Competitor Intel</button>
+</div>
+
+<!-- ===================== TAB 1: CALL SCRIPTS ===================== -->
+<div id="scripts" class="tab-pane active">
+
+  <div class="card">
+    <h2>📟 Step 1 — Reaching the Gatekeeper (Receptionist)</h2>
+    <div class="section-label">What to say</div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "Hi there — I'm looking to speak with whoever oversees or builds out the staff and physician schedule. Is that person available?"
+    </div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "Hi — who at your organization would be the right person to talk to about your staff scheduling process?"
+    </div>
+    <div class="tip"><strong>Pro tip:</strong> If you already have a name (from research), use it: <em>"Hi, I'm looking to speak with Michael — is he available?"</em> Named asks skip the interrogation and feel more natural.</div>
+  </div>
+
+  <div class="card">
+    <h2>📞 Step 2 — Connected to the Decision-Maker</h2>
+    <div class="section-label">Opening pitch (tight version)</div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "Hi [name], Kade calling from Soonest — we build scheduling software specifically for emergency physician groups and urgent cares. Quick question — are you the person who handles the staff schedule for the group?"
+    </div>
+    <p style="font-size:13px; color: var(--gray-500); margin: 8px 0 14px;">(If yes, continue. If no, ask who is.)</p>
+
+    <div class="section-label">Value pitch after confirming right person</div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "We help groups like yours cut the admin time on scheduling in half while giving your providers more of a say in their own schedules. I'd love to show you what that looks like — do you have 20 minutes this week or next?"
+    </div>
+
+    <div class="section-label">Alternative — insight-led opener</div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "We talk to a lot of EM groups and the thing we hear most isn't that their scheduling software is broken — it's that it's quietly costing them more than they realize in overtime, admin time, and staff frustration. I'd love 20 minutes to show you what we've been able to do for groups just like yours."
+    </div>
+
+    <hr>
+    <h3>Free Schedule Offer</h3>
+    <div class="tip"><strong>When to use it:</strong> Best as a closer when they're lukewarm — not as your opening ask. If they're engaged, push for the meeting first. Use the free schedule as your "yes ladder" when they hesitate.</div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "Here's what I'd suggest — we'll actually build out a free sample schedule for your group so your team can see exactly how Soonest would work for your operation before committing to anything. No strings attached. Worth a look?"
+    </div>
+    <div class="warn">⚠️ Leading with "we'll build you a free schedule" before establishing any need can feel premature. It works better as a response to hesitation: <em>"I get it — before we ask you to take time for a full demo, here's what we can do first..."</em></div>
+  </div>
+
+  <div class="card">
+    <h2>📬 Voicemail Script</h2>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "Hi [name], this is Kade Jensen calling from Soonest — 385-832-7669. We help emergency physician groups save hours of admin time on scheduling while giving their providers more control over their shifts. I'll shoot you an email too, but if you want to connect, I'm at 385-832-7669. Talk soon."
+    </div>
+    <div class="tip"><strong>Keep voicemails under 25 seconds.</strong> Name, company, one-line value prop, number. Always follow with an email.</div>
+  </div>
+
+  <div class="card">
+    <h2>💡 Coaching Notes on Your Current Opener</h2>
+    <ul class="plain">
+      <li>Remove "like I mentioned" — it sounds like you're repeating yourself and signals filler</li>
+      <li>"Tomorrow or the next day" can feel pushy — try "this week or next" for less pressure</li>
+      <li>Confirm they're the right person before pitching — don't pitch the receptionist</li>
+      <li>Tailor "urgent care" vs "emergency group" based on who you're calling — don't say both</li>
+      <li>The free schedule is a strong offer but burns faster as an opener than as a closer</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ===================== TAB 2: GATEKEEPER ===================== -->
+<div id="gatekeeper" class="tab-pane">
+
+  <div class="card">
+    <h2>🕐 Best Times to Call Medical Groups</h2>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num">7–8am</div><div class="label">Before front desk gets slammed</div></div>
+      <div class="stat-box"><div class="num">12–1pm</div><div class="label">Lunch shift change — different person answers</div></div>
+      <div class="stat-box"><div class="num">5–6pm</div><div class="label">Receptionist often gone, admin still in</div></div>
+      <div class="stat-box"><div class="num">Tue–Thu</div><div class="label">Avoid Mon AM and Fri PM</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🚧 Common Gatekeeper Objections</h2>
+
+    <div class="obj-block">
+      <button class="obj-trigger" onclick="toggleObj(this)">
+        <span class="icon">📅</span> "They're in a meeting"
+        <span class="arrow">▼</span>
+      </button>
+      <div class="obj-body">
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "No worries at all — do you know when they might wrap up? I can call back at a better time."
+        </div>
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "That's fine — what's usually a better window for them, morning or afternoon?"
+        </div>
+        <div class="tip"><strong>Goal:</strong> Get a specific callback time. Avoid leaving a message — it gives them time to prepare a "no."</div>
+      </div>
+    </div>
+
+    <div class="obj-block">
+      <button class="obj-trigger" onclick="toggleObj(this)">
+        <span class="icon">🏠</span> "They're not in the office"
+        <span class="arrow">▼</span>
+      </button>
+      <div class="obj-body">
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "Got it — when are they typically in? I want to make sure I catch them directly."
+        </div>
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "Is there a direct line or extension I can use when I call back?"
+        </div>
+        <div class="tip"><strong>Bonus:</strong> Ask for a direct number or extension. Even if they don't give it, it signals you're serious and often loosens up the gatekeeper.</div>
+      </div>
+    </div>
+
+    <div class="obj-block">
+      <button class="obj-trigger" onclick="toggleObj(this)">
+        <span class="icon">📝</span> "I'll take a message"
+        <span class="arrow">▼</span>
+      </button>
+      <div class="obj-body">
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "I appreciate that — honestly I'd rather just call back when they're free so I don't miss them. When's a good window?"
+        </div>
+        <div class="tip"><strong>If they insist on taking a message:</strong> Leave your name and number, but say <em>"I'll plan to follow up as well just in case — what's the best time?"</em> Don't rely on callbacks.</div>
+        <div class="warn">⚠️ Messages rarely get returned. Treat it as intel-gathering (you confirmed there IS someone to reach) and call back on your own schedule.</div>
+      </div>
+    </div>
+
+    <div class="obj-block">
+      <button class="obj-trigger" onclick="toggleObj(this)">
+        <span class="icon">🤔</span> "Can I ask what this is regarding?"
+        <span class="arrow">▼</span>
+      </button>
+      <div class="obj-body">
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "Of course — I'm reaching out about their staff scheduling process. It'll be a quick conversation."
+        </div>
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "Sure — we work with physician groups on scheduling. I just want two minutes with [name] to see if it's relevant for them."
+        </div>
+        <div class="tip">Keep it vague enough to pass through, specific enough to sound legitimate. Never say "I'm trying to sell them something."</div>
+      </div>
+    </div>
+
+    <div class="obj-block">
+      <button class="obj-trigger" onclick="toggleObj(this)">
+        <span class="icon">😤</span> "We're not interested in any solicitations"
+        <span class="arrow">▼</span>
+      </button>
+      <div class="obj-body">
+        <div class="script-box">
+          <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+          "Totally understand — I'm not trying to pitch anything today, I just had a quick question for [name] about how your group currently handles scheduling. Would it be okay if I called back at a better time?"
+        </div>
+        <div class="tip">Disarming the word "solicitation" with "I just had a question" often gets you back in. The goal is just to get to the right person — you can pitch them yourself.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🔑 Gatekeeper Strategy Tips</h2>
+    <ul class="plain">
+      <li>Always research the decision-maker's name before calling — named asks have higher pass-through rates</li>
+      <li>Be warm and brief — receptionists respond to people who aren't annoyed or rushed</li>
+      <li>If you've been blocked 2–3 times, try calling at a different time of day — a different person may answer</li>
+      <li>Try the direct number from ZoomInfo or LinkedIn if available — skips the front desk entirely</li>
+      <li>If you get a name from the receptionist, use it on your next call: "Hi, is [name] available?"</li>
+      <li>Email + call combo: send a short email first, then call and reference it to get past "take a message"</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ===================== TAB 3: BATTLE CARDS ===================== -->
+<div id="battlecards" class="tab-pane">
+
+  <div class="card" style="border-left: 4px solid var(--blue);">
+    <h2>💬 Lead With an Insight (say this before asking anything)</h2>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "We talk to a lot of EM groups and the thing that comes up most isn't that their scheduling software is broken — it's that it's quietly costing them more than they realize in overtime, admin time, and staff frustration."
+    </div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "One thing we keep hearing is that the software works fine for the admin, but the providers are the ones who hate it — and that ends up being a retention problem."
+    </div>
+    <div class="script-box">
+      <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+      "63% of emergency medicine physicians report burnout — and the #1 thing they say would help is more control over their schedule. That's exactly what we're built around."
+    </div>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--amber);">
+    <h2>⏱️ Time & Admin Burden</h2>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num">500–1,500</div><div class="label">Hours saved/year with modern scheduling software</div></div>
+      <div class="stat-box"><div class="num">10–29 hrs</div><div class="label">Admin hours saved per week</div></div>
+      <div class="stat-box"><div class="num">25%</div><div class="label">Average reduction in scheduling costs</div></div>
+    </div>
+    <h3>Questions to ask</h3>
+    <ul class="q-list">
+      <li>"Even with your current tool, roughly how much time a week does someone spend actually managing the schedule?"</li>
+      <li>"What would an extra 10–15 hours a week look like for your team?"</li>
+      <li>"When the schedule changes — someone drops a shift or you have a new hire — how painful is it to update everything?"</li>
+      <li>"Is QGenda actually building the schedule automatically for you, or do you find yourself adjusting it manually pretty often?"</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--red);">
+    <h2>🚨 Last-Minute Callouts</h2>
+    <div class="tip"><strong>Key insight:</strong> Nearly half of physicians already work with understaffed teams more than 25% of the time — those physicians are 2x more likely to burn out. Callouts accelerate this cycle.</div>
+    <ul class="plain" style="margin: 10px 0;">
+      <li>Callouts trigger 1.5x overtime pay + increased payroll taxes + higher workers' comp premiums</li>
+      <li>Over-reliance on core staff causes morale drops → more callouts → harder to retain staff</li>
+      <li>34% of healthcare workers have on-call arrangements — highest of any industry</li>
+    </ul>
+    <h3>Questions to ask</h3>
+    <ul class="q-list">
+      <li>"When someone calls out last minute, what does that process actually look like for whoever manages it?"</li>
+      <li>"How long does it typically take to get that shift covered?"</li>
+      <li>"Is there a go-to person who gets called, or does it fall on whoever's available?"</li>
+      <li>"How often would you say that happens in a given month?"</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--green);">
+    <h2>💰 Overtime & Cost</h2>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num">1.5x</div><div class="label">Base pay for unplanned OT + tax increases</div></div>
+      <div class="stat-box"><div class="num">$61,110</div><div class="label">Average cost to replace one nurse</div></div>
+      <div class="stat-box"><div class="num">$500K</div><div class="label">Cost to replace a single physician</div></div>
+      <div class="stat-box"><div class="num">18.3%</div><div class="label">Hospital staff turnover rate</div></div>
+    </div>
+    <h3>Questions to ask</h3>
+    <ul class="q-list">
+      <li>"Do you have a sense of what you're spending on overtime each month from unplanned callouts?"</li>
+      <li>"If you could reduce the time it takes to fill an open shift by half, what would that do to your OT spend?"</li>
+      <li>"Is overtime something that comes up in conversations with leadership, or is it just accepted?"</li>
+    </ul>
+  </div>
+
+  <div class="card" style="border-left: 4px solid var(--purple);">
+    <h2>🔥 Burnout & Staff Retention</h2>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="num">63%</div><div class="label">EM physicians reporting burnout (2024)</div></div>
+      <div class="stat-box"><div class="num">68%</div><div class="label">EM physicians with emotional fatigue</div></div>
+      <div class="stat-box"><div class="num">39%</div><div class="label">Physicians who say better schedules would reduce their burnout</div></div>
+      <div class="stat-box"><div class="num">45%</div><div class="label">Healthcare workers who say duty allocation needs to change for them to enjoy work</div></div>
+    </div>
+    <div class="tip">Schedule autonomy is one of the strongest predictors of physician engagement — and the #1 structural thing groups can change without hiring anyone.</div>
+    <h3>Questions to ask</h3>
+    <ul class="q-list">
+      <li>"How are your providers feeling about the scheduling process overall — do you hear much from them about it?"</li>
+      <li>"If I asked your physicians or APPs what they'd change about how scheduling works, what do you think they'd say?"</li>
+      <li>"Is staff retention something you're actively thinking about right now?"</li>
+    </ul>
+  </div>
+
+  <div class="card" style="background: var(--navy); color: white; border: none;">
+    <h2 style="color: white;">🛡️ "We're Fine / No Pain" Handler</h2>
+    <p style="font-size: 13px; color: #94a3b8; margin-bottom: 14px;">When they say everything is working great — try these in order.</p>
+
+    <div style="background: rgba(255,255,255,0.08); border-left: 4px solid var(--blue); border-radius: 6px; padding: 14px 16px; margin: 10px 0; font-style: italic; color: #e2e8f0;">
+      "That's good to hear — honestly, most groups we talk to say the same thing. The thing we usually find is the pain isn't with the admin, it's with the providers. Can I ask — if your physicians or APPs could change one thing about scheduling, what do you think they'd say?"
+    </div>
+
+    <div style="background: rgba(255,255,255,0.08); border-left: 4px solid var(--amber); border-radius: 6px; padding: 14px 16px; margin: 10px 0; font-style: italic; color: #e2e8f0;">
+      "Totally fair. If you were pitching your CEO on switching to something new, what would you say the current process is costing you — even just in time or headaches?"
+    </div>
+
+    <div style="background: rgba(255,255,255,0.08); border-left: 4px solid var(--green); border-radius: 6px; padding: 14px 16px; margin: 10px 0; font-style: italic; color: #e2e8f0;">
+      "Understood. The one thing I'd leave you with — our groups tell us they didn't know how much time they were losing until they saw what their schedule looked like in Soonest. We'll build one free, no commitment. Worth 20 minutes just to see it?"
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== TAB 4: COMPETITOR INTEL ===================== -->
+<div id="competitors" class="tab-pane">
+
+  <div class="comp-tabs">
+    <button class="comp-btn active" onclick="switchComp('qgenda', this)">QGenda / Shift Admin</button>
+    <button class="comp-btn" onclick="switchComp('wheniwork', this)">When I Work</button>
+    <button class="comp-btn" onclick="switchComp('intrigma', this)">Intrigma</button>
+    <button class="comp-btn" onclick="switchComp('bytebloc', this)">ByteBloc</button>
+  </div>
+
+  <!-- QGENDA -->
+  <div id="qgenda" class="comp-pane active">
+    <div class="card">
+      <h2>QGenda / Shift Admin — Overview</h2>
+      <ul class="plain">
+        <li>Rules-based scheduling engine — requires admins to build and maintain all rules manually</li>
+        <li>Shift Admin acquired by QGenda in 2019 — essentially the same platform now</li>
+        <li>Used widely by large hospital systems and physician groups</li>
+        <li>Customer support was outsourced ~2023 — major source of current frustration</li>
+        <li>Expensive — barrier for mid-size groups</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Real User Complaints (verified reviews)</h2>
+
+      <div class="review-quote">
+        <p>The automated scheduling and rules set up seem to have hiccups or issues each time we try to fix them — a different one would arise so I just stopped using the automation.</p>
+        <div class="source">— Capterra, May 2024</div>
+      </div>
+
+      <div class="review-quote">
+        <p>They outsourced customer service and instead of having an individual assigned to your account you have generic people who respond to issues.</p>
+        <div class="source">— Capterra, May 2024</div>
+      </div>
+
+      <div class="review-quote">
+        <p>I sent a request for clarification on something new that was added in the last update — this was more than two weeks ago and I have not received a response.</p>
+        <div class="source">— Capterra, April 2025</div>
+      </div>
+
+      <div class="review-quote">
+        <p>The software is difficult to implement because it's not user friendly. If you didn't work on the software 8 hours a day you would never know how to use it.</p>
+        <div class="source">— GetApp</div>
+      </div>
+
+      <div class="review-quote">
+        <p>Login for QGenda has been the most frustrating — the recent redesign introduced a session timeout error that requires clicking through before reauthentication. Constantly having to log in even when toggling between apps.</p>
+        <div class="source">— App review, group of 60+ physicians</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Key Weaknesses to Probe</h2>
+      <div class="two-col">
+        <div>
+          <div class="section-label">Pain Point</div>
+          <ul class="plain">
+            <li>Automation breaks on complex rules — users go manual</li>
+            <li>No dedicated support rep anymore</li>
+            <li>Mobile app login is a daily frustration for providers</li>
+            <li>Setup requires IT-level maintenance ongoing</li>
+            <li>Not built for provider experience — admin tool only</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-label">Questions to Surface It</div>
+          <ul class="q-list">
+            <li>"Is it actually building the schedule automatically, or do you adjust it manually?"</li>
+            <li>"Do you have a dedicated rep, or is it the general support queue?"</li>
+            <li>"What do your providers say about using the mobile app?"</li>
+            <li>"When something changes in your operation, how easy is it to update QGenda?"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Soonest Against QGenda</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "QGenda requires someone to build and maintain the rules. When your operation changes, someone has to update the system. With Soonest, the AI adapts — you're not the one keeping it current."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "You've already proven you'll invest in scheduling software. The question is whether what you have is keeping pace with what's possible — or just keeping pace with what was possible five years ago."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Most groups using QGenda are still doing more manual work than they realize. The software handles the calendar. The admin is still handling the thinking."
+      </div>
+    </div>
+  </div>
+
+  <!-- WHEN I WORK -->
+  <div id="wheniwork" class="comp-pane">
+    <div class="card">
+      <h2>When I Work — Overview</h2>
+      <span class="badge badge-blue" style="margin-bottom: 12px; display: inline-block;">General shift scheduling — NOT built for healthcare</span>
+      <ul class="plain">
+        <li>Designed primarily for retail, restaurants, and hourly workers</li>
+        <li>Basic drag-and-drop scheduling with simple shift management</li>
+        <li>No physician-specific features — no call scheduling, no equitable distribution algorithms</li>
+        <li>No credential or compliance tracking</li>
+        <li>Low price point — appealing to smaller urgent cares watching budget</li>
+        <li>Simple enough that many staff actually like the interface</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Key Weaknesses for Medical Groups</h2>
+      <ul class="plain">
+        <li>No intelligent shift distribution — admin manually ensures fairness</li>
+        <li>Can't handle complex on-call, coverage requirements, or specialty assignments</li>
+        <li>No built-in way to manage preference requests at scale</li>
+        <li>Swap process is basic — no approval routing or conflict checking</li>
+        <li>Reporting is limited — hard to track equity or hours across providers</li>
+        <li>Not designed for 24/7 emergency department complexity</li>
+      </ul>
+      <div class="warn">⚠️ Groups using When I Work are likely a smaller urgent care — they may have outgrown it or don't know what better looks like. This is a great free-schedule-offer target.</div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions to Ask When I Work Users</h2>
+      <ul class="q-list">
+        <li>"How do you make sure shifts are distributed fairly across your providers?"</li>
+        <li>"When a provider wants to swap a shift, what does that process look like?"</li>
+        <li>"Do you ever run into situations where someone gets more undesirable shifts than others?"</li>
+        <li>"How do you track who's worked how many hours across different locations or shift types?"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Against When I Work</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "When I Work is great for restaurants and retail — it wasn't built for the complexity of a physician group. The difference is pretty stark once you see it."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "A lot of groups start on something like When I Work because it's simple, but as you grow or add providers, you hit a ceiling pretty fast."
+      </div>
+    </div>
+  </div>
+
+  <!-- INTRIGMA -->
+  <div id="intrigma" class="comp-pane">
+    <div class="card">
+      <h2>Intrigma — Overview</h2>
+      <ul class="plain">
+        <li>Healthcare-specific scheduling platform built for physician groups</li>
+        <li>Has AI-assisted scheduling capabilities — closer to Soonest's positioning</li>
+        <li>Better physician-facing experience than QGenda but still admin-heavy setup</li>
+        <li>Smaller company — support can be inconsistent</li>
+        <li>Often chosen by groups who found QGenda too complex</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Key Weaknesses</h2>
+      <ul class="plain">
+        <li>Less robust mobile experience — providers still rely on desktop</li>
+        <li>Implementation can take weeks to months</li>
+        <li>Limited integration with payroll and HR systems</li>
+        <li>Customer support is smaller team — slower response times</li>
+        <li>Less intuitive for new admins — learning curve similar to QGenda</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions to Ask Intrigma Users</h2>
+      <ul class="q-list">
+        <li>"How long did it take you to get fully set up and running on Intrigma?"</li>
+        <li>"Are your providers using the mobile app, or do they mostly check the schedule another way?"</li>
+        <li>"When you need support, how responsive is the team?"</li>
+        <li>"Are there things you wish it could do that it can't?"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Against Intrigma</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Intrigma moved in the right direction — they're healthcare-specific. Where Soonest is different is the staff experience side. We're designed for what the providers actually see and interact with, not just what the admin sees."
+      </div>
+    </div>
+  </div>
+
+  <!-- BYTEBLOC -->
+  <div id="bytebloc" class="comp-pane">
+    <div class="card">
+      <h2>ByteBloc — Overview</h2>
+      <ul class="plain">
+        <li>Emergency medicine-specific scheduling platform</li>
+        <li>Built specifically for EM groups — understands call scheduling and ED complexity</li>
+        <li>Strong rules engine for complex scheduling environments</li>
+        <li>More niche — smaller user base, less market visibility</li>
+        <li>Often seen in larger academic or hospital-employed EM groups</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Key Weaknesses</h2>
+      <ul class="plain">
+        <li>Older interface — UX hasn't kept pace with modern tools</li>
+        <li>Provider-facing experience is poor — staff still frustrated by the self-service side</li>
+        <li>Limited AI capabilities — still largely rules-based</li>
+        <li>Implementation and onboarding is complex</li>
+        <li>Support quality varies — smaller company</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions to Ask ByteBloc Users</h2>
+      <ul class="q-list">
+        <li>"How do your providers interact with their schedules day-to-day — is it mostly through ByteBloc?"</li>
+        <li>"If you had to pick one thing ByteBloc doesn't do well, what would it be?"</li>
+        <li>"Is the interface something your team finds easy to use, or is there a learning curve?"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Against ByteBloc</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "ByteBloc knows emergency medicine — that's a good thing. Where we're different is the technology underneath. They're still running on rule sets that have to be manually maintained. We use AI that learns your operation."
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(tabId, btn) {
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function switchComp(compId, btn) {
+    document.querySelectorAll('.comp-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.comp-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(compId).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleObj(trigger) {
+    const body = trigger.nextElementSibling;
+    trigger.classList.toggle('open');
+    body.classList.toggle('open');
+  }
+
+  function copyScript(btn) {
+    const box = btn.parentElement;
+    const text = box.innerText.replace('Copy', '').replace('Copied ✓', '').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
