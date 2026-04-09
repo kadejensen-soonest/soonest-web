@@ -614,6 +614,7 @@
     <button class="comp-btn" onclick="switchComp('wheniwork', this)">When I Work</button>
     <button class="comp-btn" onclick="switchComp('intrigma', this)">Intrigma</button>
     <button class="comp-btn" onclick="switchComp('bytebloc', this)">ByteBloc</button>
+    <button class="comp-btn" onclick="switchComp('payroll', this)">Payroll Systems</button>
   </div>
 
   <!-- QGENDA -->
@@ -833,6 +834,113 @@
         <button class="copy-btn" onclick="copyScript(this)">Copy</button>
         "ByteBloc knows emergency medicine — that's a good thing. Where we're different is the technology underneath. They're still running on rule sets that have to be manually maintained. We use AI that learns your operation."
       </div>
+    </div>
+  </div>
+
+  <!-- PAYROLL SYSTEMS -->
+  <div id="payroll" class="comp-pane">
+    <div class="card">
+      <h2>Payroll Systems (ADP, Paycor, Paylocity, Paychex) — Overview</h2>
+      <span class="badge badge-red" style="margin-bottom: 12px; display: inline-block;">Built for payroll — scheduling is an afterthought</span>
+      <ul class="plain">
+        <li>ADP, Paycor, Paylocity, and Paychex are payroll and HR platforms — scheduling is a bolt-on feature, not their core product</li>
+        <li>Work fine for simple, static schedules (same shifts, same people, week over week)</li>
+        <li>Common in urgent cares that haven't outgrown basic scheduling needs yet</li>
+        <li>Admins often say it's "easy" or "takes 5 minutes" — usually means the schedule never changes</li>
+        <li>Staff experience is poor — employees have to log into a payroll portal to see their schedule</li>
+        <li>No intelligent shift distribution, no preference engine, no AI — just a calendar grid</li>
+      </ul>
+      <div class="warn">⚠️ The "5 minutes a month" admin is usually running the same schedule on repeat. The real question is what happens when something changes.</div>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Real User Complaints (verified reviews)</h2>
+
+      <div class="review-quote">
+        <p>I use a third-party tool to do team scheduling because the scheduling tool within Paycor does not work for us.</p>
+        <div class="source">— Paycor review, G2</div>
+      </div>
+
+      <div class="review-quote">
+        <p>Scheduling tools were not available when our previous team needed them. Limitation on reporting and some industry-specific scheduling parameters are an issue.</p>
+        <div class="source">— Paycor review, Capterra</div>
+      </div>
+
+      <div class="review-quote">
+        <p>It is difficult to change, cancel, or adjust time off. Users struggle in the time off section — having to delete PTO submissions and resubmit when errors occur.</p>
+        <div class="source">— Paycor review, Capterra</div>
+      </div>
+
+      <div class="review-quote">
+        <p>There have been times when the ADP system has gone down and employees were not able to put their hours in a timely manner, causing delays in payroll or manual entry after a payroll cycle closed.</p>
+        <div class="source">— ADP Workforce Now review, Software Advice</div>
+      </div>
+
+      <div class="review-quote">
+        <p>Some of the less day-to-day services are not very intuitive to learn, with insufficient guidance on how to use them.</p>
+        <div class="source">— Paylocity review, G2</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Where Payroll Systems Break Down for Medical Groups</h2>
+      <div class="two-col">
+        <div>
+          <div class="section-label">The Hidden Pain Points</div>
+          <ul class="plain">
+            <li><strong>Last-minute callouts</strong> — no automated coverage workflow; someone manually calls or texts staff</li>
+            <li><strong>Swaps</strong> — providers can't self-service swap shifts; admin has to manually update</li>
+            <li><strong>Preferences</strong> — no way to capture or honor provider schedule preferences at scale</li>
+            <li><strong>Fair distribution</strong> — no equity engine; admin manually ensures no one is overloaded</li>
+            <li><strong>Multi-location</strong> — works until you have float staff or variable hours; then it breaks</li>
+            <li><strong>Staff experience</strong> — employees log into a payroll portal to check shifts — not a scheduling app</li>
+            <li><strong>Growth</strong> — "5 minutes" works for 10 staff on a static schedule; breaks fast when you scale</li>
+          </ul>
+        </div>
+        <div>
+          <div class="section-label">The "5 Minutes" Problem</div>
+          <div class="tip" style="margin-top:0;">
+            <strong>When an admin says it takes 5 minutes/month</strong>, it almost always means:
+            <ul style="margin-top:8px; padding-left:16px; list-style:disc;">
+              <li>The same schedule repeats every week</li>
+              <li>Staff rarely request changes</li>
+              <li>Callouts are handled informally (texts/calls)</li>
+              <li>They've never seen what a purpose-built scheduling tool looks like</li>
+            </ul>
+            <br>The 5 minutes is just building the template. The hours are in everything around it.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions to Surface the Hidden Pain</h2>
+      <ul class="q-list">
+        <li>"When someone calls out last minute, what does that process look like — how do you find coverage?"</li>
+        <li>"If a staff member wants to swap a shift or request a specific day off, how do they do that?"</li>
+        <li>"Does your staff check their schedule through Paycor/ADP, or do they find out another way?"</li>
+        <li>"How do you make sure the same people aren't always stuck with the less desirable shifts?"</li>
+        <li>"What happens when you have a new hire or someone changes their availability — how long does that take to update?"</li>
+        <li>"If I asked your staff how easy it is to see and manage their schedule, what do you think they'd say?"</li>
+        <li>"Are you planning to add any locations or staff in the next year or two?" <em style="color: var(--gray-500); font-size:12px;">(growth = complexity = need)</em></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Soonest Against Payroll Systems</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Paycor can do scheduling the same way a spreadsheet can — technically yes, but it's not built for it. The moment something changes or your staff wants more visibility, you're doing everything manually."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "The scheduling part of those platforms is designed to be good enough — not great. What we hear most from groups that switch is that the 5 minutes of building the schedule wasn't the problem. It was everything around it — the callouts, the swaps, the staff complaints."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "I totally get that it feels easy right now. What we usually find is the time isn't in building the schedule — it's in managing everything the schedule creates. Last-minute gaps, shift changes, staff asking questions. That's what we eliminate."
+      </div>
+      <div class="tip"><strong>Best play with "5 minutes" groups:</strong> Don't argue with them on admin time. Pivot to the staff experience and callout coverage angles — those are where the real pain lives and where they're most likely to feel it.</div>
     </div>
   </div>
 
