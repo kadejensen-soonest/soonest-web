@@ -612,9 +612,10 @@
   <div class="comp-tabs">
     <button class="comp-btn active" onclick="switchComp('qgenda', this)">QGenda / Shift Admin</button>
     <button class="comp-btn" onclick="switchComp('wheniwork', this)">When I Work</button>
+    <button class="comp-btn" onclick="switchComp('sling', this)">Sling</button>
+    <button class="comp-btn" onclick="switchComp('payroll', this)">Payroll Systems</button>
     <button class="comp-btn" onclick="switchComp('intrigma', this)">Intrigma</button>
     <button class="comp-btn" onclick="switchComp('bytebloc', this)">ByteBloc</button>
-    <button class="comp-btn" onclick="switchComp('payroll', this)">Payroll Systems</button>
   </div>
 
   <!-- QGENDA -->
@@ -748,6 +749,75 @@
       <div class="script-box">
         <button class="copy-btn" onclick="copyScript(this)">Copy</button>
         "A lot of groups start on something like When I Work because it's simple, but as you grow or add providers, you hit a ceiling pretty fast."
+      </div>
+    </div>
+  </div>
+
+  <!-- SLING -->
+  <div id="sling" class="comp-pane">
+    <div class="card">
+      <h2>Sling — Overview</h2>
+      <span class="badge badge-red" style="margin-bottom: 12px; display: inline-block;">Not HIPAA compliant. Built for retail and restaurants.</span>
+      <ul class="plain">
+        <li>Free shift scheduling app built for hourly workers in retail, restaurants, and hospitality</li>
+        <li>Common in urgent cares because the free plan is appealing for small teams</li>
+        <li>Easy drag-and-drop scheduling on desktop, but the mobile app lags behind</li>
+        <li>No medical-specific features: no call scheduling, no equitable distribution, no provider preference engine</li>
+        <li>No HIPAA compliance, which is a real concern for any healthcare organization storing staff data</li>
+        <li>Reporting is locked behind paid tiers and limited to raw data with no predictive insights</li>
+        <li>Per-user pricing becomes expensive as groups grow past ~50 staff</li>
+      </ul>
+      <div class="warn">⚠️ Sling is not HIPAA compliant. For a healthcare organization handling any staff health or schedule data, this is worth raising directly.</div>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Real User Complaints (verified reviews)</h2>
+
+      <div class="review-quote">
+        <p>The app can feel slow or glitchy at times. Schedule changes don't always push to the app immediately.</p>
+        <div class="source">— Capterra review</div>
+      </div>
+
+      <div class="review-quote">
+        <p>You can sort and view employees only by their job position and location when assigning shifts. This is restrictive because it doesn't consider other important factors like an employee's specific skills or experience.</p>
+        <div class="source">— Connecteam review of Sling, 2025</div>
+      </div>
+
+      <div class="review-quote">
+        <p>Analytics are restricted to the Business plan and desktop only. The platform offers raw data without predictive insights or AI-driven analysis.</p>
+        <div class="source">— Connecteam review of Sling, 2025</div>
+      </div>
+
+      <div class="review-quote">
+        <p>A 2024 change restricted shift swap visibility to managers only, removing a feature staff had relied on.</p>
+        <div class="source">— G2 user feedback, 2024</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions to Ask Sling Users</h2>
+      <ul class="q-list">
+        <li>"When your staff check their schedule on their phone, does it always show up correctly and on time?"</li>
+        <li>"Can your staff request swaps or time off directly through Sling, or does that still come through you?"</li>
+        <li>"Have you run into any situations where the schedule on the app was different from what you had set?"</li>
+        <li>"Do you know if Sling is HIPAA compliant? That tends to come up for healthcare groups." <em style="color:var(--gray-500); font-size:12px;">(it's not)</em></li>
+        <li>"As you add staff, have you looked at what Sling's pricing looks like at scale?"</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Soonest Against Sling</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Sling works great for a restaurant or a retail shop. For a medical group, you need something built for healthcare, HIPAA compliant, and designed around how clinical staff actually work."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "One thing worth knowing about Sling — it's not HIPAA compliant. That's not a dealbreaker for everyone, but it's something most healthcare groups want to have covered."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Sling is a great free tool to get started. Where it breaks down is when you need real visibility, staff autonomy, and something built for the complexity of a clinical environment. That's exactly what Soonest is."
       </div>
     </div>
   </div>
@@ -924,6 +994,41 @@
         <li>"If I asked your staff how easy it is to see and manage their schedule, what do you think they'd say?"</li>
         <li>"Are you planning to add any locations or staff in the next year or two?" <em style="color: var(--gray-500); font-size:12px;">(growth = complexity = need)</em></li>
       </ul>
+    </div>
+
+    <div class="card">
+      <h2>🗣️ What to Say After They Answer (Pivot to a Call)</h2>
+      <p style="font-size:13px; color:var(--gray-500); margin-bottom:12px;">After they respond to a discovery question, use one of these to connect the dot and push toward booking a meeting.</p>
+
+      <div class="section-label">If callouts are still manual</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "That's exactly what we hear from most groups. That manual process is where the real time goes. We automate that whole loop — the system finds coverage for you. Worth seeing how it works?"
+      </div>
+
+      <div class="section-label">If swaps go through the admin</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "So every swap still comes back to you. That's a lot of back-and-forth that shouldn't have to touch you at all. Soonest lets staff handle that themselves with built-in approvals. I'd love to show you that in a quick demo."
+      </div>
+
+      <div class="section-label">If staff check schedules through a payroll portal</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "That's one of the most common complaints we hear from staff — having to log into a payroll system just to see when they work. We give them a clean app built just for scheduling. It sounds small but it makes a real difference in how staff feel about the process."
+      </div>
+
+      <div class="section-label">If they're growing or adding locations</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Growth is exactly when this matters most. What works with one location and a stable team gets messy fast when you scale. Most groups that switch to Soonest do it right around that moment. Would love to show you what it looks like."
+      </div>
+
+      <div class="section-label">Universal close after any answer</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Five minutes is just the build. The hours are in managing everything the schedule creates. We eliminate that part entirely. Do you have 20 minutes this week to see it?"
+      </div>
     </div>
 
     <div class="card">
