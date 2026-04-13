@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soonest — Scheduling Built for Emergency Medicine</title>
+  <meta name="description" content="Intelligent staff scheduling for emergency physician groups and urgent care networks. Reduce admin work, give clinicians control, and keep your clinic running smoothly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:           #060D1B;
+      --bg-alt:       #080F1F;
+      --bg-card:      #0C1526;
+      --bg-card-h:    #112035;
+      --border:       #172338;
+      --border-mid:   #1F3050;
+      --accent:       #444CE7;
+      --accent-h:     #5D64EE;
+      --accent-dim:   rgba(68, 76, 231, 0.12);
+      --accent-glow:  rgba(68, 76, 231, 0.22);
+      --teal:         #00BFA5;
+      --teal-dim:     rgba(0, 191, 165, 0.1);
+      --text:         #D8E8FF;
+      --text-2:       #6D8AB2;
+      --text-3:       #3A5272;
+      --font-d:       'Bricolage Grotesque', sans-serif;
+      --font-b:       'Plus Jakarta Sans', sans-serif;
+      --max-w:        1200px;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITY ─────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(68,76,231,0.22);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .eyebrow.teal {
+      color: var(--teal);
+      background: var(--teal-dim);
+      border-color: rgba(0,191,165,0.22);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-family: var(--font-b);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      background: var(--accent-h);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px var(--accent-glow);
+    }
+    .btn-primary.lg { font-size: 15px; padding: 14px 26px; border-radius: 11px; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 9px;
+      border: 1px solid var(--border-mid);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover {
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
+    .btn-outline.lg { font-size: 15px; padding: 14px 26px; border-radius: 11px; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      padding: 0 40px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, backdrop-filter 0.3s, border-bottom 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(6,13,27,0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo img { height: 26px; width: auto; display: block; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-ghost {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-ghost:hover { color: var(--text); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 110px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 68% 28%, rgba(68,76,231,0.17) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 18% 78%, rgba(0,191,165,0.07) 0%, transparent 55%),
+        var(--bg);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(68,76,231,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(68,76,231,0.035) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(68,76,231,0.1);
+      border: 1px solid rgba(68,76,231,0.24);
+      color: #818BF5;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 26px;
+    }
+    .hero-tag-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      animation: blink 2.2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .hero h1 {
+      font-family: var(--font-d);
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 800;
+      line-height: 1.07;
+      letter-spacing: -0.028em;
+      color: #fff;
+      margin-bottom: 22px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(130deg, #6E75F5 0%, #A5AAFA 50%, #7B82F6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 17px;
+      line-height: 1.68;
+      color: var(--text-2);
+      max-width: 460px;
+      margin-bottom: 36px;
+    }
+    .hero-ctas { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .hero-trust {
+      margin-top: 44px;
+      padding-top: 28px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .trust-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+    .trust-pill svg { flex-shrink: 0; }
+
+    /* Product mockup */
+    .hero-visual { position: relative; }
+    .product-wrap {
+      background: #0A1524;
+      border: 1px solid var(--border-mid);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(68,76,231,0.14),
+        0 32px 96px rgba(0,0,0,0.55),
+        0 0 60px rgba(68,76,231,0.07);
+      transform: perspective(1100px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.5s ease;
+    }
+    .product-wrap:hover {
+      transform: perspective(1100px) rotateY(-2deg) rotateX(1deg);
+    }
+    .app-bar {
+      background: #081120;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .app-dots { display: flex; gap: 5px; }
+    .app-dots span {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+    .app-dots span:nth-child(1) { background: #FF5F57; }
+    .app-dots span:nth-child(2) { background: #FFBD2E; }
+    .app-dots span:nth-child(3) { background: #28CA41; }
+    .app-url {
+      flex: 1;
+      background: var(--border);
+      border-radius: 5px;
+      padding: 4px 12px;
+      font-size: 11.5px;
+      color: var(--text-3);
+      text-align: center;
+    }
+    .product-wrap img { width: 100%; height: auto; display: block; }
+
+    .float-badge {
+      position: absolute;
+      bottom: -18px;
+      left: -28px;
+      background: #0C1829;
+      border: 1px solid var(--border-mid);
+      border-radius: 13px;
+      padding: 13px 17px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
+    }
+    .float-badge-icon {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(0,191,165,0.2);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .float-badge strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+    .float-badge span { font-size: 12px; color: var(--text-2); }
+
+    /* ── TRUST BAR ────────────────────────────────────── */
+    .trust-bar {
+      padding: 36px 0;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .trust-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      flex-wrap: wrap;
+    }
+    .trust-label {
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+    .trust-sep { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
+    .trust-types { display: flex; gap: 28px; flex-wrap: wrap; }
+    .trust-type {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+    .t-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--teal); }
+
+    /* ── PROBLEM ─────────────────────────────────────── */
+    .problem { padding: 104px 0; }
+    .section-header { margin-bottom: 60px; }
+    .section-header.center { text-align: center; max-width: 580px; margin-left: auto; margin-right: auto; }
+    .section-title {
+      font-family: var(--font-d);
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 800;
+      letter-spacing: -0.022em;
+      color: #fff;
+      line-height: 1.13;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 16px;
+      line-height: 1.68;
+      color: var(--text-2);
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .pain-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+    .pain-card:hover {
+      border-color: var(--border-mid);
+      background: var(--bg-card-h);
+      transform: translateY(-2px);
+    }
+    .pain-icon {
+      width: 44px; height: 44px;
+      border-radius: 11px;
+      background: rgba(240,68,56,0.1);
+      border: 1px solid rgba(240,68,56,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .pain-card h3 {
+      font-family: var(--font-d);
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 9px;
+    }
+    .pain-card p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── HOW IT WORKS ─────────────────────────────────── */
+    .how {
+      padding: 104px 0;
+      background: var(--bg-alt);
+      position: relative;
+    }
+    .how::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-mid), transparent);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 64px;
+    }
+    .step {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      position: relative;
+      transition: border-color 0.25s;
+    }
+    .step:hover { border-color: rgba(68,76,231,0.28); }
+    .step-arrow {
+      position: absolute;
+      top: 42px; right: -18px;
+      color: var(--text-3);
+      font-size: 18px;
+      z-index: 1;
+    }
+    .step:last-child .step-arrow { display: none; }
+    .step-num {
+      width: 34px; height: 34px;
+      border-radius: 10px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(68,76,231,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12.5px; font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .step h3 {
+      font-family: var(--font-d);
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .step p { font-size: 13.5px; line-height: 1.6; color: var(--text-2); }
+
+    /* ── FEATURES ─────────────────────────────────────── */
+    .features { padding: 104px 0; }
+    .feature-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      margin-bottom: 96px;
+    }
+    .feature-block:last-child { margin-bottom: 0; }
+    .feature-block.flip { direction: rtl; }
+    .feature-block.flip > * { direction: ltr; }
+    .feature-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--teal-dim);
+      border: 1px solid rgba(0,191,165,0.2);
+      color: var(--teal);
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .feature-title {
+      font-family: var(--font-d);
+      font-size: clamp(24px, 2.8vw, 34px);
+      font-weight: 800;
+      letter-spacing: -0.022em;
+      color: #fff;
+      line-height: 1.13;
+      margin-bottom: 15px;
+    }
+    .feature-desc {
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-2);
+      margin-bottom: 26px;
+    }
+    .checks { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .checks li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--text-2); line-height: 1.5;
+    }
+    .check-dot {
+      width: 18px; height: 18px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--teal-dim);
+      border: 1px solid rgba(0,191,165,0.2);
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .img-wrap {
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+    .img-bar {
+      background: #081120;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 14px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .img-bar-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .img-wrap img { width: 100%; height: auto; display: block; }
+
+    /* ── BUILT BY PHYSICIAN ───────────────────────────── */
+    .built-by {
+      padding: 104px 0;
+      background: var(--bg-alt);
+      position: relative;
+    }
+    .built-by-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    blockquote {
+      font-family: var(--font-d);
+      font-size: clamp(20px, 2.4vw, 27px);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.32;
+      margin-bottom: 22px;
+      padding-left: 28px;
+      border-left: 3px solid var(--accent);
+    }
+    .founder-body {
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-2);
+      margin-bottom: 26px;
+    }
+    .founder-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 16px 20px;
+      width: fit-content;
+    }
+    .founder-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      border: 2px solid rgba(68,76,231,0.28);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 15px;
+      color: var(--accent);
+    }
+    .founder-card strong { display: block; font-size: 14px; font-weight: 700; color: #fff; }
+    .founder-card span { font-size: 12.5px; color: var(--text-2); }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .stat-card:hover { border-color: var(--border-mid); }
+    .stat-num {
+      font-family: var(--font-d);
+      font-size: 38px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.04em;
+      margin-bottom: 5px;
+    }
+    .stat-num sup { color: var(--teal); font-size: 22px; }
+    .stat-desc { font-size: 13px; line-height: 1.5; color: var(--text-2); }
+
+    /* ── WHO IT'S FOR ─────────────────────────────────── */
+    .who { padding: 104px 0; }
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 64px;
+    }
+    .who-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .who-card:hover {
+      border-color: rgba(68,76,231,0.28);
+      transform: translateY(-3px);
+    }
+    .who-icon { font-size: 28px; margin-bottom: 16px; display: block; }
+    .who-card h3 {
+      font-family: var(--font-d);
+      font-size: 18px; font-weight: 700;
+      color: #fff; margin-bottom: 10px;
+    }
+    .who-card p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    .faq {
+      padding: 104px 0;
+      background: var(--bg-alt);
+    }
+    .faq-list {
+      max-width: 800px;
+      margin: 64px auto 0;
+    }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: var(--font-b);
+      font-size: 16px;
+      font-weight: 600;
+      text-align: left;
+      padding: 22px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-btn:hover { color: var(--text); }
+    .faq-icon {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+      transition: background 0.2s, transform 0.3s;
+      color: var(--text-2);
+    }
+    .faq-item.open .faq-icon {
+      background: var(--accent-dim);
+      color: var(--accent);
+      transform: rotate(45deg);
+    }
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.38s ease;
+    }
+    .faq-inner {
+      padding-bottom: 22px;
+      font-size: 15px;
+      line-height: 1.72;
+      color: var(--text-2);
+    }
+
+    /* ── FINAL CTA ────────────────────────────────────── */
+    .final-cta {
+      padding: 128px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(68,76,231,0.2) 0%, transparent 65%),
+        var(--bg);
+    }
+    .final-cta-inner {
+      position: relative; z-index: 1;
+      text-align: center;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .final-cta h2 {
+      font-family: var(--font-d);
+      font-size: clamp(30px, 4vw, 50px);
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .final-cta p {
+      font-size: 17px;
+      color: var(--text-2);
+      line-height: 1.68;
+      margin-bottom: 38px;
+    }
+    .cta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .cta-note { margin-top: 18px; font-size: 13px; color: var(--text-3); }
+
+    /* ── FOOTER ───────────────────────────────────────── */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 24px; margin-bottom: 14px; }
+    .footer-brand p { font-size: 14px; line-height: 1.65; color: var(--text-2); max-width: 260px; }
+    .footer-col h4 {
+      font-size: 11.5px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a {
+      color: var(--text-2);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--text-3); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 13px; color: var(--text-3); text-decoration: none; transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--text-2); }
+
+    /* ── RESPONSIVE ───────────────────────────────────── */
+    @media (max-width: 960px) {
+      .container { padding: 0 24px; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .pain-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr 1fr; }
+      .feature-block, .feature-block.flip { grid-template-columns: 1fr; gap: 40px; direction: ltr; }
+      .built-by-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="https://getsoonest.com/wp-content/uploads/2025/10/SoonestLogoWhiteText.avif" alt="Soonest" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#who-for">Who It's For</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="mailto:kade.jensen@getsoonest.com" class="nav-ghost">Contact</a>
+      <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn-primary">Schedule Demo</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="hero-tag-dot"></span>
+            Built for Emergency Medicine
+          </div>
+          <h1>Scheduling that works the way your <em>EM group</em> actually does.</h1>
+          <p class="hero-sub">Give physicians control over their preferences. Let AI handle the optimization. Give admins their time back. Soonest is purpose-built for emergency physician groups and urgent care networks.</p>
+          <div class="hero-ctas">
+            <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn-primary lg">Schedule a Demo →</a>
+            <a href="#how-it-works" class="btn-outline lg">See How It Works</a>
+          </div>
+          <div class="hero-trust">
+            <div class="trust-pill">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M7.5 1L9.5 5.5H14L10 8.5L11.5 13L7.5 10.5L3.5 13L5 8.5L1 5.5H5.5L7.5 1Z" fill="#444CE7"/>
+              </svg>
+              Built by a practicing EM physician
+            </div>
+            <div style="width:1px;height:14px;background:var(--border)"></div>
+            <div class="trust-pill">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M12.5 4.5L6 11L2.5 7.5" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              No lengthy implementation
+            </div>
+            <div style="width:1px;height:14px;background:var(--border)"></div>
+            <div class="trust-pill">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <path d="M12.5 4.5L6 11L2.5 7.5" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Free schedule build to start
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal">
+          <div class="product-wrap">
+            <div class="app-bar">
+              <div class="app-dots"><span></span><span></span><span></span></div>
+              <div class="app-url">app.getsoonest.com</div>
+            </div>
+            <img
+              src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png"
+              alt="Soonest schedule view"
+              loading="eager"
+            />
+          </div>
+          <div class="float-badge">
+            <div class="float-badge-icon">
+              <svg width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M8.5 1L10.5 6H16L11.5 9.5L13.5 14.5L8.5 11.5L3.5 14.5L5.5 9.5L1 6H6.5L8.5 1Z" fill="#00BFA5"/>
+              </svg>
+            </div>
+            <div>
+              <strong>80% less admin overhead</strong>
+              <span>on scheduling, week over week</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TRUST BAR ──────────────────────────────────────── -->
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-bar-inner">
+        <span class="trust-label">Built for</span>
+        <div class="trust-sep"></div>
+        <div class="trust-types">
+          <div class="trust-type"><span class="t-dot"></span> Emergency Physician Groups</div>
+          <div class="trust-type"><span class="t-dot"></span> Urgent Care Networks</div>
+          <div class="trust-type"><span class="t-dot"></span> Multi-Site Clinics</div>
+          <div class="trust-type"><span class="t-dot"></span> Single-Specialty Groups</div>
+          <div class="trust-type"><span class="t-dot"></span> Independent EM Practices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PROBLEM ──────────────────────────────────────── -->
+  <section class="problem">
+    <div class="container">
+      <div class="section-header reveal" style="max-width:600px">
+        <div class="eyebrow">The Problem</div>
+        <h2 class="section-title">The old way is failing your team. And you already know it.</h2>
+        <p class="section-sub">Emergency physician groups are still running scheduling through email chains, complex spreadsheets, and software built for hospital systems — not the way your group actually works.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card reveal">
+          <div class="pain-icon">📋</div>
+          <h3>Schedule Requests Buried in Inboxes</h3>
+          <p>Swap requests, time-off asks, and preference changes scattered across email and text. Admins spending hours every week just keeping track of what changed.</p>
+        </div>
+        <div class="pain-card reveal" style="transition-delay:0.1s">
+          <div class="pain-icon">🔄</div>
+          <h3>Software That Manages the Calendar, Not the Work</h3>
+          <p>Tools like QGenda draw a clean grid, but the heavy lifting still falls on admin. Complex configurations, manual corrections, constant intervention required.</p>
+        </div>
+        <div class="pain-card reveal" style="transition-delay:0.2s">
+          <div class="pain-icon">😤</div>
+          <h3>Physicians With No Voice in Their Schedule</h3>
+          <p>When staff have no input into shift preferences, you get dissatisfaction, burnout, and the administrative burden of managing the fallout every cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────── -->
+  <section class="how" id="how-it-works">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="eyebrow">How It Works</div>
+        <h2 class="section-title">From preferences to published schedule — automatically.</h2>
+        <p class="section-sub">Four steps. No six-week onboarding. No implementation consultant needed.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="step-arrow">→</div>
+          <div class="step-num">01</div>
+          <h3>Staff Set Preferences</h3>
+          <p>Physicians submit their availability, preferred shifts, and constraints on their own time, from any device.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:0.08s">
+          <div class="step-arrow">→</div>
+          <div class="step-num">02</div>
+          <h3>AI Builds the Schedule</h3>
+          <p>SoonestAI optimizes across all preferences, coverage requirements, and compliance rules — in seconds, not hours.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:0.16s">
+          <div class="step-arrow">→</div>
+          <div class="step-num">03</div>
+          <h3>Admin Reviews and Approves</h3>
+          <p>Managers see a complete, optimized schedule. Conflicts flagged. Edits simple. Approval takes minutes.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:0.24s">
+          <div class="step-num">04</div>
+          <h3>Publish and Step Back</h3>
+          <p>Schedule goes live. Staff notified. Swap requests routed automatically. Admin involvement drops dramatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURES ──────────────────────────────────────── -->
+  <section class="features" id="features">
+    <div class="container">
+
+      <!-- Feature 1 -->
+      <div class="feature-block">
+        <div class="reveal">
+          <div class="feature-tag">Staff Empowerment</div>
+          <h3 class="feature-title">Give your team a voice — without losing control.</h3>
+          <p class="feature-desc">Physicians log their preferences, availability, and hard constraints directly in Soonest. The system honors them within the parameters you set — staff feel heard, managers stay in charge.</p>
+          <ul class="checks">
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Shift preferences and hard constraints, side by side
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Time-off requests with manager approval workflow
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Swap requests handled before they ever hit an inbox
+            </li>
+          </ul>
+        </div>
+        <div class="img-wrap reveal" style="transition-delay:0.15s">
+          <div class="img-bar">
+            <div class="img-bar-dot" style="background:#FF5F57"></div>
+            <div class="img-bar-dot" style="background:#FFBD2E"></div>
+            <div class="img-bar-dot" style="background:#28CA41"></div>
+          </div>
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/preference-768x546.png" alt="Staff preference management in Soonest" />
+        </div>
+      </div>
+
+      <!-- Feature 2 -->
+      <div class="feature-block flip">
+        <div class="reveal">
+          <div class="feature-tag">Admin Efficiency</div>
+          <h3 class="feature-title">The 20% of problems causing 80% of your headaches — solved.</h3>
+          <p class="feature-desc">Most scheduling software manages the visual calendar. Soonest handles the actual work: the back-and-forth, the edge cases, the last-minute changes that used to eat your week.</p>
+          <ul class="checks">
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Automated conflict detection and resolution
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Reduce overtime and locum tenens spend
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              One-click publishing with automatic staff notifications
+            </li>
+          </ul>
+        </div>
+        <div class="img-wrap reveal" style="transition-delay:0.15s">
+          <div class="img-bar">
+            <div class="img-bar-dot" style="background:#FF5F57"></div>
+            <div class="img-bar-dot" style="background:#FFBD2E"></div>
+            <div class="img-bar-dot" style="background:#28CA41"></div>
+          </div>
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png" alt="Schedule view in Soonest" />
+        </div>
+      </div>
+
+      <!-- Feature 3 -->
+      <div class="feature-block">
+        <div class="reveal">
+          <div class="feature-tag">SoonestAI</div>
+          <h3 class="feature-title">AI that does the heavy lifting, not just the display.</h3>
+          <p class="feature-desc">SoonestAI takes your coverage requirements, staff preferences, compliance rules, and historical patterns — and builds a schedule that actually works. In seconds.</p>
+          <ul class="checks">
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Optimizes across hundreds of constraints simultaneously
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Learns your group's patterns over time
+            </li>
+            <li>
+              <div class="check-dot">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5L4 7L8 3" stroke="#00BFA5" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              Flags gaps and coverage risks before you publish
+            </li>
+          </ul>
+        </div>
+        <div class="img-wrap reveal" style="transition-delay:0.15s">
+          <div class="img-bar">
+            <div class="img-bar-dot" style="background:#FF5F57"></div>
+            <div class="img-bar-dot" style="background:#FFBD2E"></div>
+            <div class="img-bar-dot" style="background:#28CA41"></div>
+          </div>
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/Screenshot-2025-10-24-at-4.53.20-PM-768x531.png" alt="SoonestAI optimization view" />
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BUILT BY EM PHYSICIAN ─────────────────────────── -->
+  <section class="built-by">
+    <div class="container">
+      <div class="built-by-grid">
+        <div class="reveal">
+          <div class="eyebrow">Built by Someone Who Gets It</div>
+          <blockquote>
+            I built my own group's schedule every month for years. I knew there had to be a better way — so I built it.
+          </blockquote>
+          <p class="founder-body">Soonest was co-founded by Todd Yeates, MD — an emergency physician who ran scheduling for his own group and got tired of the same broken process everyone else was using. Every feature in Soonest exists because a real EM team needed it.</p>
+          <div class="founder-card">
+            <div class="founder-avatar">TY</div>
+            <div>
+              <strong>Todd Yeates, MD</strong>
+              <span>Co-founder &amp; Emergency Physician</span>
+            </div>
+          </div>
+        </div>
+        <div class="stats-grid reveal" style="transition-delay:0.15s">
+          <div class="stat-card">
+            <div class="stat-num">80<sup>%</sup></div>
+            <div class="stat-desc">reduction in admin scheduling time</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">20<sup>%</sup></div>
+            <div class="stat-desc">of actions causing 80% of scheduling headaches, eliminated</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">&lt;1<sup>hr</sup></div>
+            <div class="stat-desc">to build and publish a full monthly schedule</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">0</div>
+            <div class="stat-desc">implementation consultants needed to get started</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO IT'S FOR ───────────────────────────────────── -->
+  <section class="who" id="who-for">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="eyebrow">Who It's For</div>
+        <h2 class="section-title">Made for groups that run lean and schedule smart.</h2>
+        <p class="section-sub">Soonest is purpose-built for the clinical structures that need it most.</p>
+      </div>
+      <div class="who-grid">
+        <div class="who-card reveal">
+          <span class="who-icon">🏥</span>
+          <h3>Emergency Physician Groups</h3>
+          <p>Independent and hospital-contracted EM groups that need to schedule quickly, honor physician preferences, and reduce admin overhead without sacrificing coverage.</p>
+        </div>
+        <div class="who-card reveal" style="transition-delay:0.1s">
+          <span class="who-icon">⚡</span>
+          <h3>Urgent Care Networks</h3>
+          <p>Multi-site urgent care operations that need consistent scheduling logic across locations, fast schedule creation, and staff who can self-manage availability.</p>
+        </div>
+        <div class="who-card reveal" style="transition-delay:0.2s">
+          <span class="who-icon">🧑‍⚕️</span>
+          <h3>Single-Specialty Clinics</h3>
+          <p>Focused physician practices that want a modern scheduling tool that doesn't require a dedicated admin or a six-week onboarding process to get started.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="eyebrow">FAQ</div>
+        <h2 class="section-title">Common questions, straight answers.</h2>
+      </div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            How long does it take to get set up?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Most groups are live within a week. There's no lengthy onboarding, no implementation consultant, and no complex configuration required. You tell us how your group works, we set up the parameters, and your team starts using it.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            How is this different from QGenda or ShiftAdmin?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Those tools manage the calendar display well, but they still require significant admin involvement for the actual work. Soonest uses AI to handle the optimization, conflict resolution, and staff communication — so your admin spends minutes reviewing rather than hours building. It's also purpose-built for EM groups, not retrofitted from hospital scheduling software.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            Can we customize the rules for our specific group?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Yes. You set the coverage requirements, shift types, blackout dates, fairness rules, and preference weighting. Soonest works within your parameters — the AI optimizes for your constraints, not a generic hospital template.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            Is our data secure?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Yes. Soonest uses industry-standard encryption for all data at rest and in transit. We follow HIPAA-aligned practices for handling staff and scheduling data, and we never sell or share your information with third parties.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            Do you offer a free trial or demo?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Yes. We offer a live demo tailored to your group's actual structure — so you see exactly how it would work for your situation. We also offer a free schedule build: give us your current requirements and we'll show you what Soonest produces. No commitment required.</div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-btn">
+            What size groups does Soonest work best for?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-body">
+            <div class="faq-inner">Soonest is a strong fit for groups of 10 to 100+ physicians. Smaller groups benefit most from time savings and staff satisfaction. Larger groups and multi-site networks benefit from the consistency, visibility, and reduction in back-and-forth across locations.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ──────────────────────────────────────── -->
+  <section class="final-cta">
+    <div class="final-cta-bg"></div>
+    <div class="container">
+      <div class="final-cta-inner reveal">
+        <div class="eyebrow" style="margin:0 auto 20px">Ready to See It?</div>
+        <h2>Your group deserves scheduling that actually works.</h2>
+        <p>Schedule a 30-minute demo and we'll show you exactly how Soonest fits your group, your coverage requirements, and your current pain points. Or let us build you a free sample schedule with no commitment and no pitch.</p>
+        <div class="cta-row">
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn-primary lg">Book a Demo →</a>
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Free Schedule Build Request" class="btn-outline lg">Request a Free Schedule</a>
+        </div>
+        <p class="cta-note">No sales pressure. No six-week implementation process. Just a look at what's possible.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/SoonestLogoWhiteText.avif" alt="Soonest" />
+          <p>Intelligent scheduling built for emergency physician groups and urgent care networks — made by someone who needed it.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#who-for">Who It's For</a></li>
+            <li><a href="https://getsoonest.com/wp-content/uploads/2025/10/Soonest-Graphic-Final-Blue.png" target="_blank">Overview PDF</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="https://getsoonest.com" target="_blank">Main Site</a></li>
+            <li><a href="mailto:kade.jensen@getsoonest.com">Contact Us</a></li>
+            <li><a href="https://linkedin.com/company/soonest" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Started</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request">Schedule Demo</a></li>
+            <li><a href="mailto:kade.jensen@getsoonest.com?subject=Free Schedule Build">Free Schedule Build</a></li>
+            <li><a href="https://getsoonest.com/privacy-policy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://getsoonest.com/terms" target="_blank">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Soonest. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://getsoonest.com/privacy-policy" target="_blank">Privacy</a>
+          <a href="https://getsoonest.com/terms" target="_blank">Terms</a>
+          <a href="https://linkedin.com/company/soonest" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Nav: add class on scroll
+    const nav = document.getElementById('nav');
+    const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Scroll-reveal via IntersectionObserver
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver(
+      (entries) => entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObs.unobserve(e.target);
+        }
+      }),
+      { threshold: 0.08, rootMargin: '0px 0px -48px 0px' }
+    );
+    reveals.forEach(el => revealObs.observe(el));
+
+    // Trigger hero visual immediately
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('visible'));
+    }, 120);
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const body = item.querySelector('.faq-body');
+        const isOpen = item.classList.contains('open');
+
+        // close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-body').style.maxHeight = '0';
+        });
+
+        // open this one if it was closed
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
