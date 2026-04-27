@@ -1,0 +1,1742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soonest — Intelligent Scheduling for Emergency Medicine</title>
+  <meta name="description" content="Soonest gives emergency physician groups and urgent care networks AI-powered scheduling that reduces admin overhead, honors staff preferences, and keeps your clinic running." />
+  <link rel="icon" href="icon-mark.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── BRAND TOKENS ────────────────────────────────── */
+    :root {
+      /* Official Soonest palette */
+      --brand-navy:    #1E284D;
+      --brand-blue:    #1186ED;
+      --brand-light:   #E4E5F3;
+      --brand-gray:    #4B5371;
+      --brand-black:   #0D0E11;
+
+      /* Dark theme surfaces */
+      --bg:            #09101F;
+      --bg-alt:        #0D1527;
+      --bg-card:       #111E33;
+      --bg-card-h:     #162438;
+      --border:        #1A2844;
+      --border-mid:    #1E284D;   /* brand navy as border */
+      --border-hi:     #263560;
+
+      /* Accent */
+      --blue:          #1186ED;
+      --blue-h:        #2D97F5;
+      --blue-dim:      rgba(17, 134, 237, 0.10);
+      --blue-dim2:     rgba(17, 134, 237, 0.18);
+      --blue-glow:     rgba(17, 134, 237, 0.24);
+
+      /* Text */
+      --text:          #E4E5F3;
+      --text-2:        #7B8DB5;
+      --text-3:        #3E5070;
+
+      /* Typography */
+      --font:          'Outfit', sans-serif;
+      --max-w:         1200px;
+    }
+
+    /* ── RESET ───────────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; }
+
+    /* ── UTILITY ─────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--blue);
+      background: var(--blue-dim);
+      border: 1px solid rgba(17,134,237,0.22);
+      padding: 5px 14px 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-2);
+      max-width: 560px;
+    }
+    .section-header { margin-bottom: 60px; }
+    .section-header.center { text-align: center; }
+    .section-header.center .section-sub { margin: 0 auto; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ── BUTTONS ─────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font);
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      font-size: 15px;
+      padding: 13px 24px;
+    }
+    .btn-primary:hover {
+      background: var(--blue-h);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px var(--blue-glow);
+    }
+    .btn-primary.sm { font-size: 13.5px; padding: 9px 18px; border-radius: 8px; }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      font-size: 15px;
+      padding: 13px 24px;
+      border: 1px solid var(--border-hi);
+    }
+    .btn-ghost:hover {
+      border-color: var(--text-3);
+      background: rgba(255,255,255,0.04);
+    }
+    .btn-ghost.sm { font-size: 13.5px; padding: 9px 18px; border-radius: 8px; }
+
+    /* ── SVG ICON HELPER ─────────────────────────────── */
+    .icon { flex-shrink: 0; }
+
+    /* ── ANNOUNCE BAR ────────────────────────────────── */
+    .announce {
+      background: var(--brand-navy);
+      border-bottom: 1px solid var(--border-mid);
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text);
+      position: relative;
+      z-index: 201;
+    }
+    .announce strong { color: #fff; }
+    .announce a {
+      color: var(--blue);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap 0.2s;
+    }
+    .announce a:hover { gap: 7px; }
+    #announce-close {
+      position: absolute;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text-2);
+      cursor: pointer;
+      font-size: 18px;
+      line-height: 1;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+    #announce-close:hover { color: #fff; }
+
+    /* ── NAV ─────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 66px;
+      padding: 0 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.3s, backdrop-filter 0.3s, border-bottom 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(9,16,31,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 26px; width: auto; }
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-contact {
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-contact:hover { color: var(--text); }
+
+    /* ── HERO ────────────────────────────────────────── */
+    .hero {
+      padding: 100px 0 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(17,134,237,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(30,40,77,0.3) 0%, transparent 50%),
+        var(--bg);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(17,134,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,134,237,0.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+      -webkit-mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, black 20%, transparent 70%);
+      mask-image: radial-gradient(ellipse 100% 70% at 50% 0%, black 20%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(17,134,237,0.1);
+      border: 1px solid rgba(17,134,237,0.2);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+    .hero-dot {
+      width: 6px; height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.75)} }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 68px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 22px;
+    }
+    h1 .blue { color: var(--blue); }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--text-2);
+      max-width: 580px;
+      margin: 0 auto 36px;
+      font-weight: 400;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 60px;
+    }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 64px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+    .trust-item svg { color: var(--blue); }
+
+    .hero-screenshot {
+      position: relative;
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 0 0px;
+    }
+    .screenshot-glow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(ellipse at 50% 100%, rgba(17,134,237,0.18) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .screenshot-wrap {
+      background: #0C1829;
+      border: 1px solid var(--border-mid);
+      border-radius: 16px 16px 0 0;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(17,134,237,0.12),
+        0 -4px 0 rgba(17,134,237,0.08),
+        0 32px 80px rgba(0,0,0,0.6);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 96%);
+      mask-image: linear-gradient(to bottom, black 60%, transparent 96%);
+    }
+    .screenshot-bar {
+      background: #081221;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .s-dots { display: flex; gap: 5px; }
+    .s-dots span { width: 10px; height: 10px; border-radius: 50%; }
+    .s-dots span:nth-child(1) { background: #FF5F57; }
+    .s-dots span:nth-child(2) { background: #FFBD2E; }
+    .s-dots span:nth-child(3) { background: #28CA41; }
+    .s-url {
+      flex: 1;
+      background: var(--border);
+      border-radius: 5px;
+      padding: 5px 12px;
+      font-size: 12px;
+      color: var(--text-3);
+      text-align: center;
+    }
+    .screenshot-wrap img { width: 100%; }
+
+    /* ── STATS BAR ───────────────────────────────────── */
+    .stats-bar {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-cell {
+      padding: 36px 32px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .stat-cell:last-child { border-right: none; }
+    .stat-val {
+      font-size: 42px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat-val .accent { color: var(--blue); }
+    .stat-desc { font-size: 13px; color: var(--text-2); line-height: 1.4; }
+
+    /* ── BUILT FOR BAR ───────────────────────────────── */
+    .built-for {
+      padding: 32px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .built-for-inner {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .bf-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+    .bf-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+    .bf-types { display: flex; gap: 24px; flex-wrap: wrap; }
+    .bf-type {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+    .bf-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+
+    /* ── SECTION WRAPPER ─────────────────────────────── */
+    .section { padding: 100px 0; }
+    .section.alt { background: var(--bg-alt); }
+
+    /* ── FEATURE TABS ────────────────────────────────── */
+    .tabs-wrap { display: grid; grid-template-columns: 280px 1fr; gap: 40px; align-items: start; }
+    .tab-nav { display: flex; flex-direction: column; gap: 4px; }
+    .tab-btn {
+      width: 100%;
+      background: none;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 18px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .tab-btn:hover { background: var(--bg-card); border-color: var(--border); }
+    .tab-btn.active {
+      background: var(--bg-card);
+      border-color: var(--border-mid);
+    }
+    .tab-btn-icon {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border-radius: 9px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(17,134,237,0.2);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-top: 1px;
+      transition: background 0.2s;
+    }
+    .tab-btn.active .tab-btn-icon { background: var(--blue-dim2); }
+    .tab-btn-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .tab-btn-text span { font-size: 12.5px; color: var(--text-2); line-height: 1.4; }
+    .tab-indicator {
+      width: 3px;
+      height: 0;
+      background: var(--blue);
+      border-radius: 2px;
+      position: absolute;
+      left: 0;
+      transition: height 0.3s;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .tab-panel-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border-mid);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+    }
+    .tab-panel-bar {
+      background: #081221;
+      border-bottom: 1px solid var(--border);
+      padding: 11px 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .tab-panel-dot { width: 9px; height: 9px; border-radius: 50%; }
+    .tab-panel-inner img { width: 100%; }
+    .tab-caption {
+      margin-top: 20px;
+      padding: 0 4px;
+    }
+    .tab-caption h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .tab-caption p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── HOW IT WORKS ────────────────────────────────── */
+    .steps-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .step-card {
+      background: var(--bg-card);
+      padding: 32px 28px;
+      position: relative;
+      transition: background 0.25s;
+    }
+    .step-card:hover { background: var(--bg-card-h); }
+    .step-num-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(17,134,237,0.2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800;
+      color: var(--blue);
+    }
+    .step-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-mid), transparent);
+    }
+    .step-card:last-child .step-line { display: none; }
+    .step-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .step-card h3 {
+      font-size: 16px; font-weight: 700;
+      color: #fff; margin-bottom: 8px;
+    }
+    .step-card p { font-size: 13.5px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── COMPARISON TABLE ────────────────────────────── */
+    .compare-wrap {
+      border: 1px solid var(--border-mid);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .compare-head {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-mid);
+    }
+    .compare-head-cell {
+      padding: 20px 24px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-2);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .compare-head-cell.highlight {
+      background: var(--blue-dim);
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .compare-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.2fr;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .compare-row:last-child { border-bottom: none; }
+    .compare-row:hover { background: rgba(17,134,237,0.03); }
+    .compare-cell {
+      padding: 18px 24px;
+      font-size: 14px;
+      color: var(--text-2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-right: 1px solid var(--border);
+    }
+    .compare-cell:last-child { border-right: none; }
+    .compare-cell.feature-label { color: var(--text); font-weight: 500; }
+    .compare-cell.highlight { background: rgba(17,134,237,0.05); color: #fff; font-weight: 600; }
+    .c-yes { color: #2ECC71; }
+    .c-no  { color: var(--text-3); }
+    .c-partial { color: #F39C12; }
+
+    /* ── DEMO SECTION ────────────────────────────────── */
+    .demo-wrap {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--border-mid);
+      cursor: pointer;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .demo-wrap img {
+      width: 100%;
+      filter: brightness(0.35) saturate(0.8);
+      display: block;
+    }
+    .demo-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      background: radial-gradient(ellipse at center, rgba(17,134,237,0.12) 0%, transparent 70%);
+    }
+    .play-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s;
+      position: relative;
+    }
+    .demo-wrap:hover .play-ring {
+      border-color: var(--blue);
+      background: rgba(17,134,237,0.15);
+      transform: scale(1.08);
+    }
+    .play-ring svg { color: #fff; margin-left: 4px; }
+    .demo-overlay h3 { font-size: 22px; font-weight: 700; color: #fff; }
+    .demo-overlay p { font-size: 14px; color: var(--text-2); }
+
+    /* ── TESTIMONIAL ─────────────────────────────────── */
+    .testimonial-card {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .quote-mark {
+      font-size: 72px;
+      line-height: 0.6;
+      color: var(--blue);
+      opacity: 0.4;
+      font-family: Georgia, serif;
+      margin-bottom: 24px;
+      display: block;
+    }
+    .quote-text {
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.4;
+      margin-bottom: 32px;
+    }
+    .quote-author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .quote-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--blue-dim);
+      border: 2px solid rgba(17,134,237,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800;
+      color: var(--blue);
+    }
+    .quote-name strong { display: block; font-size: 15px; font-weight: 700; color: #fff; }
+    .quote-name span { font-size: 13px; color: var(--text-2); }
+    .star-row { display: flex; gap: 3px; justify-content: center; margin-bottom: 28px; color: #F5A623; }
+
+    /* ── SECURITY ────────────────────────────────────── */
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    .security-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 24px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .security-card:hover { border-color: var(--border-mid); transform: translateY(-2px); }
+    .security-icon {
+      width: 44px; height: 44px;
+      border-radius: 11px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(17,134,237,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .security-card h3 { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .security-card p { font-size: 13px; line-height: 1.6; color: var(--text-2); }
+
+    /* ── WHO IT'S FOR ────────────────────────────────── */
+    .who-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .who-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 32px;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .who-card:hover { border-color: rgba(17,134,237,0.35); transform: translateY(-3px); }
+    .who-icon {
+      width: 48px; height: 48px;
+      border-radius: 13px;
+      background: var(--blue-dim);
+      border: 1px solid rgba(17,134,237,0.18);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--blue);
+      margin-bottom: 18px;
+    }
+    .who-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .who-card p { font-size: 14px; line-height: 1.65; color: var(--text-2); }
+
+    /* ── PRICING ─────────────────────────────────────── */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .pricing-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px;
+      transition: border-color 0.25s;
+    }
+    .pricing-card:hover { border-color: var(--border-mid); }
+    .pricing-card.featured {
+      border-color: var(--blue);
+      background: linear-gradient(135deg, rgba(17,134,237,0.08) 0%, var(--bg-card) 60%);
+      position: relative;
+    }
+    .featured-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .pricing-label { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; }
+    .pricing-title { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .pricing-price { font-size: 38px; font-weight: 900; color: #fff; letter-spacing: -0.03em; margin-bottom: 4px; }
+    .pricing-note { font-size: 13px; color: var(--text-2); margin-bottom: 28px; }
+    .pricing-desc { font-size: 14px; line-height: 1.6; color: var(--text-2); margin-bottom: 28px; }
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .pricing-features li {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 14px; color: var(--text);
+    }
+    .pricing-features .check { color: var(--blue); flex-shrink: 0; }
+
+    /* ── FAQ ─────────────────────────────────────────── */
+    .faq-list { max-width: 800px; margin: 60px auto 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-q {
+      width: 100%; background: none; border: none;
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 16px; font-weight: 600;
+      text-align: left;
+      padding: 22px 0;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      transition: color 0.2s;
+    }
+    .faq-q:hover { color: #fff; }
+    .faq-icon {
+      width: 28px; height: 28px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+      font-size: 18px;
+      transition: background 0.2s, color 0.2s, transform 0.3s;
+    }
+    .faq-item.open .faq-icon { background: var(--blue-dim); color: var(--blue); transform: rotate(45deg); }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.36s ease; }
+    .faq-inner { padding-bottom: 22px; font-size: 15px; line-height: 1.72; color: var(--text-2); }
+
+    /* ── FINAL CTA ───────────────────────────────────── */
+    .final-cta {
+      padding: 120px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 70% at 50% 50%, rgba(17,134,237,0.18) 0%, transparent 65%),
+        var(--bg);
+    }
+    .final-inner {
+      position: relative; z-index: 1;
+      text-align: center;
+      max-width: 660px;
+      margin: 0 auto;
+    }
+    .final-inner h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: 18px;
+    }
+    .final-inner p { font-size: 17px; color: var(--text-2); line-height: 1.65; margin-bottom: 36px; }
+    .final-ctas { display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .final-note { margin-top: 18px; font-size: 13px; color: var(--text-3); }
+
+    /* ── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      padding: 64px 0 32px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.8fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand img { height: 24px; margin-bottom: 14px; }
+    .footer-brand p { font-size: 14px; line-height: 1.65; color: var(--text-2); max-width: 260px; margin-bottom: 20px; }
+    .footer-social { display: flex; gap: 10px; }
+    .social-btn {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border-mid);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .social-btn:hover { border-color: var(--text-2); color: var(--text); }
+    .footer-col h4 {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 16px;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: var(--text-2); font-size: 14px; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-bottom p { font-size: 13px; color: var(--text-3); }
+    .footer-bottom-links { display: flex; gap: 20px; }
+    .footer-bottom-links a { font-size: 13px; color: var(--text-3); transition: color 0.2s; }
+    .footer-bottom-links a:hover { color: var(--text-2); }
+
+    /* ── RESPONSIVE ──────────────────────────────────── */
+    @media (max-width: 1000px) {
+      .container { padding: 0 24px; }
+      nav { padding: 0 24px; }
+      .announce { padding: 10px 24px; }
+      .nav-links { display: none; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .stat-cell:nth-child(2) { border-right: none; }
+      .tabs-wrap { grid-template-columns: 1fr; }
+      .tab-nav { flex-direction: row; overflow-x: auto; gap: 8px; }
+      .tab-btn { min-width: 200px; }
+      .steps-row { grid-template-columns: 1fr 1fr; }
+      .compare-head, .compare-row { grid-template-columns: 1.5fr 1fr 1fr 1.2fr; }
+      .security-grid { grid-template-columns: 1fr 1fr; }
+      .who-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .hero { padding: 80px 0 0; }
+      h1 { font-size: 36px; }
+      .steps-row { grid-template-columns: 1fr; }
+      .compare-head, .compare-row { grid-template-columns: 1.2fr 1fr 1.2fr; }
+      .compare-cell:nth-child(2),
+      .compare-head-cell:nth-child(2) { display: none; }
+      .security-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .hero-trust { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── ANNOUNCE BAR ──────────────────────────────────── -->
+  <div class="announce" id="announce-bar">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+    <span><strong>SoonestAI</strong> now builds your full monthly schedule in under 60 seconds.</span>
+    <a href="#features">See how it works
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <button id="announce-close" aria-label="Dismiss">×</button>
+  </div>
+
+  <!-- ── NAV ──────────────────────────────────────────── -->
+  <nav id="nav">
+    <a href="#" class="nav-logo">
+      <img src="https://getsoonest.com/wp-content/uploads/2025/10/SoonestLogoWhiteText.avif" alt="Soonest" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#compare">Why Soonest</a></li>
+      <li><a href="#who-for">Who It's For</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="mailto:kade.jensen@getsoonest.com" class="nav-contact">Contact</a>
+      <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn btn-primary sm">Schedule Demo</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-bg"></div>
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-eyebrow">
+          <span class="hero-dot"></span>
+          Emergency Medicine Scheduling Platform
+        </div>
+        <h1>Your EM group finally gets scheduling that <span class="blue">works for you.</span></h1>
+        <p class="hero-sub">Give clinicians control over their preferences. Let AI handle the optimization. Give admins their time back. Built specifically for emergency physician groups and urgent care networks.</p>
+        <div class="hero-ctas">
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn btn-primary">
+            Book a Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#demo" class="btn btn-ghost">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Watch Overview
+          </a>
+        </div>
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Built by a practicing EM physician
+          </div>
+          <div class="trust-item">
+            <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Live in under a week
+          </div>
+          <div class="trust-item">
+            <svg class="icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Free schedule build to start
+          </div>
+        </div>
+      </div>
+
+      <!-- Product Screenshot -->
+      <div class="hero-screenshot reveal">
+        <div class="screenshot-glow"></div>
+        <div class="screenshot-wrap">
+          <div class="screenshot-bar">
+            <div class="s-dots"><span></span><span></span><span></span></div>
+            <div class="s-url">app.getsoonest.com — Schedule View</div>
+          </div>
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png" alt="Soonest scheduling dashboard" loading="eager" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── STATS BAR ─────────────────────────────────────── -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat-cell">
+          <div class="stat-val"><span class="counter accent" data-target="80">0</span><span class="accent">%</span></div>
+          <div class="stat-desc">reduction in admin scheduling time</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val"><span class="accent">&lt;</span><span class="counter" data-target="1">0</span><span class="accent">hr</span></div>
+          <div class="stat-desc">to build a full monthly schedule</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val"><span class="counter" data-target="0">0</span></div>
+          <div class="stat-desc">implementation consultants needed</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-val"><span class="counter accent" data-target="100">0</span><span class="accent">%</span></div>
+          <div class="stat-desc">staff preference visibility for managers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BUILT FOR ──────────────────────────────────────── -->
+  <div class="built-for">
+    <div class="container">
+      <div class="built-for-inner">
+        <span class="bf-label">Built for</span>
+        <div class="bf-divider"></div>
+        <div class="bf-types">
+          <div class="bf-type"><span class="bf-dot"></span>Emergency Physician Groups</div>
+          <div class="bf-type"><span class="bf-dot"></span>Urgent Care Networks</div>
+          <div class="bf-type"><span class="bf-dot"></span>Multi-Site Clinics</div>
+          <div class="bf-type"><span class="bf-dot"></span>Single-Specialty Groups</div>
+          <div class="bf-type"><span class="bf-dot"></span>Independent EM Practices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FEATURE TABS ───────────────────────────────────── -->
+  <section class="section" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 13h4"/></svg>
+          Platform Features
+        </div>
+        <h2 class="section-title">Everything your group needs.<br>Nothing it doesn't.</h2>
+        <p class="section-sub">Four core capabilities that eliminate the scheduling problems EM groups deal with every single month.</p>
+      </div>
+
+      <div class="tabs-wrap reveal">
+        <!-- Tab nav -->
+        <div class="tab-nav" role="tablist">
+          <button class="tab-btn active" role="tab" data-tab="0">
+            <div class="tab-btn-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="tab-btn-text">
+              <strong>Staff Preferences</strong>
+              <span>Physicians set availability and shift constraints directly in the platform</span>
+            </div>
+          </button>
+          <button class="tab-btn" role="tab" data-tab="1">
+            <div class="tab-btn-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div class="tab-btn-text">
+              <strong>Schedule View</strong>
+              <span>Clean calendar interface with full shift visibility across your group</span>
+            </div>
+          </button>
+          <button class="tab-btn" role="tab" data-tab="2">
+            <div class="tab-btn-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div class="tab-btn-text">
+              <strong>AI Optimization</strong>
+              <span>SoonestAI builds the optimal schedule across all constraints automatically</span>
+            </div>
+          </button>
+          <button class="tab-btn" role="tab" data-tab="3">
+            <div class="tab-btn-icon">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="tab-btn-text">
+              <strong>Coverage Management</strong>
+              <span>Gaps and conflicts flagged before publish. Swaps routed automatically</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Tab panels -->
+        <div class="tab-panels">
+          <div class="tab-panel active" data-panel="0">
+            <div class="tab-panel-inner">
+              <div class="tab-panel-bar">
+                <div class="tab-panel-dot" style="background:#FF5F57"></div>
+                <div class="tab-panel-dot" style="background:#FFBD2E"></div>
+                <div class="tab-panel-dot" style="background:#28CA41"></div>
+              </div>
+              <img src="https://getsoonest.com/wp-content/uploads/2025/10/preference-768x546.png" alt="Staff preference management" />
+            </div>
+            <div class="tab-caption">
+              <h3>Give staff a voice without losing control</h3>
+              <p>Physicians log their shift preferences, hard constraints, and time-off requests directly in Soonest. The system honors them within the parameters you define — staff feel heard, admins stay in control.</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-panel="1">
+            <div class="tab-panel-inner">
+              <div class="tab-panel-bar">
+                <div class="tab-panel-dot" style="background:#FF5F57"></div>
+                <div class="tab-panel-dot" style="background:#FFBD2E"></div>
+                <div class="tab-panel-dot" style="background:#28CA41"></div>
+              </div>
+              <img src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png" alt="Schedule view" />
+            </div>
+            <div class="tab-caption">
+              <h3>A complete schedule view built for EM groups</h3>
+              <p>See every shift, every physician, every coverage gap at a glance. Filter by role, location, or time period. One-click publishing with automatic staff notifications.</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-panel="2">
+            <div class="tab-panel-inner">
+              <div class="tab-panel-bar">
+                <div class="tab-panel-dot" style="background:#FF5F57"></div>
+                <div class="tab-panel-dot" style="background:#FFBD2E"></div>
+                <div class="tab-panel-dot" style="background:#28CA41"></div>
+              </div>
+              <img src="https://getsoonest.com/wp-content/uploads/2025/10/Screenshot-2025-10-24-at-4.53.20-PM-768x531.png" alt="AI optimization" />
+            </div>
+            <div class="tab-caption">
+              <h3>AI that does the heavy lifting, not just the display</h3>
+              <p>SoonestAI optimizes across staff preferences, coverage requirements, compliance rules, and historical patterns simultaneously — and produces a complete schedule in seconds.</p>
+            </div>
+          </div>
+          <div class="tab-panel" data-panel="3">
+            <div class="tab-panel-inner">
+              <div class="tab-panel-bar">
+                <div class="tab-panel-dot" style="background:#FF5F57"></div>
+                <div class="tab-panel-dot" style="background:#FFBD2E"></div>
+                <div class="tab-panel-dot" style="background:#28CA41"></div>
+              </div>
+              <img src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png" alt="Coverage management" />
+            </div>
+            <div class="tab-caption">
+              <h3>Coverage gaps caught before they become problems</h3>
+              <p>Soonest flags conflicts, understaffed shifts, and coverage risks before the schedule ever publishes. Swap requests route automatically and stay out of admin inboxes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW IT WORKS ──────────────────────────────────── -->
+  <section class="section alt" id="how-it-works">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          How It Works
+        </div>
+        <h2 class="section-title">From preferences to published — in four steps.</h2>
+        <p class="section-sub">No lengthy onboarding. No implementation consultant. Most groups are live within a week.</p>
+      </div>
+      <div class="steps-row reveal">
+        <div class="step-card">
+          <div class="step-num-wrap">
+            <div class="step-num">01</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Staff Set Preferences</h3>
+          <p>Physicians submit their availability, preferred shifts, and hard constraints from any device — on their schedule, not yours.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num-wrap">
+            <div class="step-num">02</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>AI Builds the Schedule</h3>
+          <p>SoonestAI processes every constraint, preference, and coverage rule simultaneously and produces an optimized schedule in seconds.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num-wrap">
+            <div class="step-num">03</div>
+            <div class="step-line"></div>
+          </div>
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <h3>Admin Reviews and Approves</h3>
+          <p>Managers see a complete, optimized schedule. Conflicts are flagged. Edits are simple. Approval that used to take hours now takes minutes.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num-wrap">
+            <div class="step-num">04</div>
+          </div>
+          <div class="step-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <h3>Publish and Step Back</h3>
+          <p>Schedule goes live. Staff get notified automatically. Swap requests route without admin involvement. The cycle repeats — but you barely notice it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPARISON TABLE ──────────────────────────────── -->
+  <section class="section" id="compare">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Why Groups Switch
+        </div>
+        <h2 class="section-title">Built for EM groups.<br>Not adapted for them.</h2>
+        <p class="section-sub">Most scheduling tools were designed for large hospital systems and retrofitted for physician groups. Soonest was built differently — from the problem up.</p>
+      </div>
+      <div class="compare-wrap reveal">
+        <div class="compare-head">
+          <div class="compare-head-cell">Capability</div>
+          <div class="compare-head-cell">Spreadsheets</div>
+          <div class="compare-head-cell">Legacy Tools</div>
+          <div class="compare-head-cell highlight">
+            <img src="icon-mark.png" alt="" style="height:16px;width:16px;object-fit:contain" />
+            Soonest
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Setup time</div>
+          <div class="compare-cell"><span class="c-partial">Days of setup</span></div>
+          <div class="compare-cell"><span class="c-no">Weeks or months</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Live in days
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Staff preference input</div>
+          <div class="compare-cell"><span class="c-no">None — managed externally</span></div>
+          <div class="compare-cell"><span class="c-partial">Basic, limited</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Full, in-platform
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">AI schedule optimization</div>
+          <div class="compare-cell"><span class="c-no">None</span></div>
+          <div class="compare-cell"><span class="c-no">None</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Built in — SoonestAI
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Swap request routing</div>
+          <div class="compare-cell"><span class="c-no">Fully manual</span></div>
+          <div class="compare-cell"><span class="c-partial">Partially manual</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Fully automatic
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Built for EM groups</div>
+          <div class="compare-cell"><span class="c-no">No</span></div>
+          <div class="compare-cell"><span class="c-no">No — hospital-adapted</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Yes — purpose-built
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Admin time to build schedule</div>
+          <div class="compare-cell"><span class="c-no">4–8 hours/month</span></div>
+          <div class="compare-cell"><span class="c-partial">2–4 hours/month</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Under 1 hour/month
+          </div>
+        </div>
+        <div class="compare-row">
+          <div class="compare-cell feature-label">Coverage gap detection</div>
+          <div class="compare-cell"><span class="c-no">Manual review only</span></div>
+          <div class="compare-cell"><span class="c-partial">Partial</span></div>
+          <div class="compare-cell highlight">
+            <svg class="c-yes" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            Automatic, pre-publish
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DEMO / VIDEO SECTION ──────────────────────────── -->
+  <section class="section alt" id="demo">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          See It Live
+        </div>
+        <h2 class="section-title">See Soonest in action.</h2>
+        <p class="section-sub">Book a 30-minute live demo tailored to your group's structure and we'll walk through exactly how it handles your scheduling workflow.</p>
+      </div>
+      <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="demo-wrap reveal" style="display:block;text-decoration:none">
+        <img src="https://getsoonest.com/wp-content/uploads/2025/10/ScheduleView-768x546.png" alt="Soonest in action" />
+        <div class="demo-overlay">
+          <div class="play-ring">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <h3>Book a Live Demo</h3>
+          <p>30 minutes. Tailored to your group. No pitch, just a walkthrough.</p>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIAL ────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="testimonial-card reveal">
+        <div class="star-row">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="quote-text">"I used to spend a full Saturday building the monthly schedule, chasing requests, and fixing conflicts. With Soonest, I reviewed an AI-generated schedule over coffee and we were done. The physicians are happier. I have my weekends back."</p>
+        <div class="quote-author">
+          <div class="quote-avatar">JM</div>
+          <div class="quote-name">
+            <strong>Dr. J. Merritt, MD</strong>
+            <span>Medical Director, Emergency Physician Group</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOUNDER SECTION ────────────────────────────────── -->
+  <section class="section alt">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center" class="reveal">
+        <div>
+          <div class="pill">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Built by Someone Who Gets It
+          </div>
+          <h2 class="section-title">Made by an EM physician who lived this problem.</h2>
+          <p style="font-size:16px;line-height:1.72;color:var(--text-2);margin-bottom:20px">Soonest was co-founded by Todd Yeates, MD — an emergency physician who built his own group's schedule every month and got tired of the same broken process every EM group uses. Every feature exists because a real EM team needed it.</p>
+          <p style="font-size:16px;line-height:1.72;color:var(--text-2);margin-bottom:28px">The result is a platform that understands the 20% of scheduling actions that cause 80% of the headaches — and eliminates them automatically.</p>
+          <div style="display:flex;align-items:center;gap:14px;background:var(--bg-card);border:1px solid var(--border-mid);border-radius:14px;padding:18px 22px;width:fit-content">
+            <div style="width:48px;height:48px;border-radius:50%;background:var(--blue-dim);border:2px solid rgba(17,134,237,0.3);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:var(--blue)">TY</div>
+            <div>
+              <strong style="display:block;font-size:15px;font-weight:700;color:#fff">Todd Yeates, MD</strong>
+              <span style="font-size:13px;color:var(--text-2)">Co-founder and Emergency Physician</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px">
+            <div style="font-size:40px;font-weight:900;color:#fff;letter-spacing:-0.04em;margin-bottom:6px">80<span style="color:var(--blue)">%</span></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.4">reduction in admin scheduling time</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px">
+            <div style="font-size:40px;font-weight:900;color:#fff;letter-spacing:-0.04em;margin-bottom:6px">&lt;1<span style="color:var(--blue)">hr</span></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.4">to build and publish a monthly schedule</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px">
+            <div style="font-size:40px;font-weight:900;color:#fff;letter-spacing:-0.04em;margin-bottom:6px">20<span style="color:var(--blue)">%</span></div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.4">of actions cause 80% of scheduling headaches — solved</div>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:24px">
+            <div style="font-size:40px;font-weight:900;color:#fff;letter-spacing:-0.04em;margin-bottom:6px">0</div>
+            <div style="font-size:13px;color:var(--text-2);line-height:1.4">implementation consultants needed to get started</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SECURITY ───────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Security and Privacy
+        </div>
+        <h2 class="section-title">Built with healthcare security in mind.</h2>
+        <p class="section-sub">Your group's data is handled with the same care and precision you bring to patient care.</p>
+      </div>
+      <div class="security-grid reveal">
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>HIPAA-Aligned Practices</h3>
+          <p>Data handling follows HIPAA-aligned security practices for all scheduling and staff information stored in Soonest.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h3>256-Bit Encryption</h3>
+          <p>All data is encrypted at rest and in transit using industry-standard 256-bit AES encryption. No exceptions.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>No Data Sharing</h3>
+          <p>Your scheduling data, staff information, and group details are never sold, shared, or used for any purpose beyond operating the platform.</p>
+        </div>
+        <div class="security-card">
+          <div class="security-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3>Regular Security Reviews</h3>
+          <p>Continuous monitoring and regular security reviews ensure your data remains protected as the platform evolves.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHO IT'S FOR ───────────────────────────────────── -->
+  <section class="section alt" id="who-for">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Who It's For
+        </div>
+        <h2 class="section-title">Made for groups that run lean and need scheduling to keep up.</h2>
+        <p class="section-sub">Purpose-built for the clinical structures that need it most — not adapted from hospital enterprise software.</p>
+      </div>
+      <div class="who-grid">
+        <div class="who-card reveal">
+          <div class="who-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Emergency Physician Groups</h3>
+          <p>Independent and hospital-contracted EM groups that need fast schedule creation, staff preference management, and reduced admin overhead without sacrificing coverage quality.</p>
+        </div>
+        <div class="who-card reveal" style="transition-delay:0.1s">
+          <div class="who-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3>Urgent Care Networks</h3>
+          <p>Multi-site urgent care operations that need consistent scheduling logic across locations, fast cycle times, and staff who can self-manage their availability and swap requests.</p>
+        </div>
+        <div class="who-card reveal" style="transition-delay:0.2s">
+          <div class="who-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <h3>Single-Specialty Clinics</h3>
+          <p>Focused physician practices that want a modern, lightweight scheduling tool without a dedicated admin team or a weeks-long implementation process to get started.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRICING ────────────────────────────────────────── -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Pricing
+        </div>
+        <h2 class="section-title">Simple pricing. No per-seat surprises.</h2>
+        <p class="section-sub">Transparent pricing designed around how physician groups actually work — not enterprise software billing logic.</p>
+      </div>
+      <div class="pricing-grid reveal">
+        <div class="pricing-card">
+          <div class="pricing-label">Clinic</div>
+          <div class="pricing-title">Single-Site</div>
+          <div class="pricing-price">Contact us</div>
+          <div class="pricing-note">Pricing based on group size and structure</div>
+          <div class="pricing-desc">For single-site physician groups and urgent care locations ready to modernize their scheduling workflow.</div>
+          <ul class="pricing-features">
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SoonestAI schedule generation</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Staff preference and availability management</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Automated swap request routing</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Coverage gap detection</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Onboarding support included</li>
+          </ul>
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Pricing Inquiry" class="btn btn-ghost" style="width:100%;justify-content:center">Talk to Us</a>
+        </div>
+        <div class="pricing-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <div class="pricing-label">Growth</div>
+          <div class="pricing-title">Multi-Site</div>
+          <div class="pricing-price">Contact us</div>
+          <div class="pricing-note">Pricing based on locations and group size</div>
+          <div class="pricing-desc">For multi-site networks and larger EM groups that need consistent scheduling logic across locations.</div>
+          <ul class="pricing-features">
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Single-Site</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Multi-location scheduling management</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Cross-site coverage visibility</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority support and onboarding</li>
+            <li><svg class="check" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom compliance rule configuration</li>
+          </ul>
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Multi-Site Pricing" class="btn btn-primary" style="width:100%;justify-content:center">Schedule a Demo</a>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:24px;font-size:13px;color:var(--text-3)">Not sure which fits? We'll help you figure it out — no pressure.</p>
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────── -->
+  <section class="section alt" id="faq">
+    <div class="container">
+      <div class="section-header center reveal">
+        <div class="pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          FAQ
+        </div>
+        <h2 class="section-title">Common questions, straight answers.</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">How long does it take to get set up?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Most groups are live within a week. There's no lengthy onboarding, no implementation consultant, and no complex configuration process. You tell us how your group works, we set up the parameters, and your team starts using it.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How is this different from QGenda or ShiftAdmin?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Those tools manage the calendar display well but still require significant admin involvement for the actual work. Soonest uses AI to handle the optimization, conflict resolution, and staff communication — so your admin spends minutes reviewing rather than hours building. It's also purpose-built for EM groups, not retrofitted from hospital scheduling software.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Can we customize the scheduling rules for our group?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Yes. You set the coverage requirements, shift types, blackout dates, fairness rules, and preference weighting. Soonest works within your parameters — the AI optimizes for your constraints, not a generic hospital template.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Is our data secure?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Yes. Soonest uses 256-bit encryption for all data at rest and in transit. We follow HIPAA-aligned practices for handling staff and scheduling data, and we never sell or share your information with third parties.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Do you offer a free trial or demo?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Yes. We offer a live demo tailored to your group's actual structure — so you see exactly how it handles your specific situation. We also offer a free schedule build: give us your current requirements and we'll show you what Soonest produces. No commitment required.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">What size groups does Soonest work best for?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">Soonest is a strong fit for groups of 10 to 100+ physicians. Smaller groups benefit from time savings and staff satisfaction. Larger groups and multi-site networks benefit from consistency, cross-site visibility, and elimination of the admin back-and-forth that scales poorly.</div></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">How does the free schedule build work?<span class="faq-icon">+</span></button>
+          <div class="faq-body"><div class="faq-inner">We take your current coverage requirements — shift types, number of physicians, time period, constraints — and build a sample schedule using Soonest. You get to see exactly what the platform would produce for your group before committing to anything. No strings attached.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ──────────────────────────────────────── -->
+  <section class="final-cta">
+    <div class="final-bg"></div>
+    <div class="container">
+      <div class="final-inner reveal">
+        <div class="pill" style="margin:0 auto 20px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Ready to See It?
+        </div>
+        <h2>Your schedule should build itself. Now it can.</h2>
+        <p>Book a 30-minute demo and we'll walk through Soonest using your group's actual structure and pain points. Or let us build you a free sample schedule — no commitment, no sales pressure.</p>
+        <div class="final-ctas">
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request" class="btn btn-primary">
+            Book a Demo
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="mailto:kade.jensen@getsoonest.com?subject=Free Schedule Build Request" class="btn btn-ghost">Request a Free Schedule Build</a>
+        </div>
+        <p class="final-note">No lengthy implementation. No consultant fees. Just a look at what's possible for your group.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <img src="https://getsoonest.com/wp-content/uploads/2025/10/SoonestLogoWhiteText.avif" alt="Soonest" />
+          <p>Intelligent scheduling built for emergency physician groups and urgent care networks. Made by someone who needed it.</p>
+          <div class="footer-social">
+            <a href="https://linkedin.com/company/soonest" target="_blank" class="social-btn" aria-label="LinkedIn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Platform</h4>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#compare">Why Soonest</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul class="footer-links">
+            <li><a href="https://getsoonest.com" target="_blank">Main Site</a></li>
+            <li><a href="mailto:kade.jensen@getsoonest.com">Contact Us</a></li>
+            <li><a href="https://linkedin.com/company/soonest" target="_blank">LinkedIn</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Get Started</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:kade.jensen@getsoonest.com?subject=Demo Request">Schedule Demo</a></li>
+            <li><a href="mailto:kade.jensen@getsoonest.com?subject=Free Schedule Build">Free Schedule Build</a></li>
+            <li><a href="https://getsoonest.com/privacy-policy" target="_blank">Privacy Policy</a></li>
+            <li><a href="https://getsoonest.com/terms" target="_blank">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Soonest. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://getsoonest.com/privacy-policy" target="_blank">Privacy</a>
+          <a href="https://getsoonest.com/terms" target="_blank">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Announce bar dismiss
+    document.getElementById('announce-close').addEventListener('click', () => {
+      document.getElementById('announce-bar').style.display = 'none';
+    });
+
+    // ── Nav scroll class
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 16);
+    }, { passive: true });
+
+    // ── Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          revealObs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -48px 0px' });
+    reveals.forEach(el => revealObs.observe(el));
+
+    // Hero screenshot triggers immediately
+    setTimeout(() => {
+      document.querySelectorAll('.hero .reveal').forEach(el => el.classList.add('in'));
+    }, 100);
+
+    // ── Animated counters
+    const counters = document.querySelectorAll('.counter');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const target = parseInt(el.dataset.target, 10);
+        if (target === 0) { el.textContent = '0'; countObs.unobserve(el); return; }
+        const duration = 1200;
+        const step = 16;
+        const increment = target / (duration / step);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) { el.textContent = target; clearInterval(timer); }
+          else { el.textContent = Math.floor(current); }
+        }, step);
+        countObs.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(el => countObs.observe(el));
+
+    // ── Feature tabs
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanels = document.querySelectorAll('.tab-panel');
+    tabBtns.forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanels.forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        tabPanels[i].classList.add('active');
+      });
+    });
+
+    // ── FAQ accordion
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const body = item.querySelector('.faq-body');
+        const open = item.classList.contains('open');
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-body').style.maxHeight = '0';
+        });
+        if (!open) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+        }
+      });
+    });
+
+    // ── Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+</body>
+</html>
