@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Demo — Soonest</title>
+  <meta name="description" content="See Soonest in action. 30 minutes, no pressure. Walk away with a free custom schedule built from your real data." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED; --blue-dark: #0d6ec0; --navy: #1E284D; --navy-deep: #101828;
+      --gray-700: #475467; --gray-600: #4B5371; --gray-400: #98A2B3;
+      --gray-200: #E4E5F3; --gray-100: #F2F4F7; --off-white: #F9FAFB;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* Announce bar */
+    .announce-bar { background: var(--blue); color: white; text-align: center; padding: 10px 24px; font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
+    .announce-bar a { color: white; text-decoration: underline; }
+    .announce-dismiss { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; font-size: 18px; line-height: 1; opacity: 0.8; }
+
+    /* Nav */
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* Page header */
+    .page-header {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(17,134,237,.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: 48px; font-weight: 700; color: white; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.15; }
+    .page-header p { font-size: 18px; color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    @media (max-width: 768px) { .page-header h1 { font-size: 32px; } .page-header p { font-size: 16px; } }
+
+    /* Main layout */
+    .demo-section { padding: 72px 24px; }
+    .demo-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: start; }
+    @media (max-width: 900px) { .demo-inner { grid-template-columns: 1fr; gap: 48px; } }
+
+    /* Embed side */
+    .embed-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .embed-card-header {
+      background: var(--navy-deep);
+      padding: 20px 28px;
+    }
+    .embed-card-header h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
+    .embed-card-header p { font-size: 13px; color: rgba(255,255,255,.55); }
+    .embed-body { padding: 0; min-height: 500px; }
+
+    /* HubSpot embed placeholder — replace this div with the HubSpot meetings embed script */
+    .hubspot-placeholder {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+      text-align: center;
+      background: var(--off-white);
+    }
+    .hubspot-placeholder svg { width: 48px; height: 48px; color: var(--blue); margin-bottom: 16px; }
+    .hubspot-placeholder h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .hubspot-placeholder p { font-size: 14px; color: var(--gray-700); max-width: 280px; line-height: 1.6; margin-bottom: 24px; }
+    .placeholder-note { font-size: 12px; color: var(--gray-400); font-style: italic; background: var(--gray-100); padding: 8px 16px; border-radius: 6px; }
+
+    /* Info side */
+    .demo-info h2 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 12px; letter-spacing: -0.3px; line-height: 1.3; }
+    .demo-info > p { font-size: 16px; color: var(--gray-700); margin-bottom: 36px; line-height: 1.7; }
+
+    .expect-list { list-style: none; margin-bottom: 40px; }
+    .expect-list li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+    .expect-list li:last-child { border-bottom: none; }
+    .expect-icon { width: 36px; height: 36px; background: rgba(17,134,237,.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .expect-icon svg { width: 18px; height: 18px; color: var(--blue); }
+    .expect-text strong { display: block; font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+    .expect-text span { font-size: 14px; color: var(--gray-700); line-height: 1.5; }
+
+    .contact-block { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 24px; }
+    .contact-block h3 { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); margin-bottom: 16px; }
+    .contact-person { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .contact-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: white; flex-shrink: 0; }
+    .contact-name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .contact-title { font-size: 13px; color: var(--gray-700); }
+    .contact-links { display: flex; flex-direction: column; gap: 8px; }
+    .contact-link { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-700); text-decoration: none; transition: color 0.15s; }
+    .contact-link:hover { color: var(--blue); }
+    .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Footer */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color 0.15s; }
+    .footer-legal a:hover { color: white; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="announce-bar" id="announce-bar">
+  <span>Now accepting early access partners for 2026 — <a href="demo.html">lock in founder pricing while it lasts</a></span>
+  <button class="announce-dismiss" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Dismiss">&times;</button>
+</div>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="homepage-v3.html" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="homepage-v3.html#solutions">Solutions</a></li>
+      <li><a href="homepage-v3.html#platform">Platform</a></li>
+      <li><a href="homepage-v3.html#about">About</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo.html" class="nav-btn">Request a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>See Soonest in action.</h1>
+    <p>30 minutes. No sales pressure. Walk away with a free custom schedule built from your real data if you want one.</p>
+  </div>
+</div>
+
+<section class="demo-section">
+  <div class="demo-inner">
+
+    <!-- LEFT: HubSpot meeting embed -->
+    <div class="embed-card">
+      <div class="embed-card-header">
+        <h2>Book a time that works for you</h2>
+        <p>Pick any open slot below — we'll confirm within the hour.</p>
+      </div>
+      <div class="embed-body">
+        <!--
+          PASTE YOUR HUBSPOT MEETINGS EMBED CODE HERE.
+          Example: replace the placeholder div below with your HubSpot embed script.
+
+          <div class="meetings-iframe-container" data-src="https://meetings.hubspot.com/YOUR-LINK?embed=true"></div>
+          <script type="text/javascript" src="https://static.hsappstatic.net/MeetingsEmbed/ex/MeetingsEmbedCode.js"></script>
+        -->
+        <div class="hubspot-placeholder">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          <h3>Meeting scheduler loads here</h3>
+          <p>Paste your HubSpot meetings embed code to activate this calendar.</p>
+          <span class="placeholder-note">Replace this block with your HubSpot embed script</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: What to expect + contact -->
+    <div class="demo-info">
+      <h2>What happens on the call</h2>
+      <p>This isn't a feature walkthrough. It's a working session tailored to how your group actually schedules.</p>
+
+      <ul class="expect-list">
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>We learn your setup first</strong>
+            <span>How many providers, how many locations, how you currently build schedules — and where it breaks down.</span>
+          </div>
+        </li>
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>Live platform walkthrough</strong>
+            <span>See preference collection, AI schedule building, shift management, and time tracking — in that order.</span>
+          </div>
+        </li>
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>Free schedule offer</strong>
+            <span>Send us your shifts, locations, and headcount in any format. We'll build a real schedule from your data — no commitment.</span>
+          </div>
+        </li>
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>30 minutes, no longer</strong>
+            <span>We respect your time. If it's not a fit, we'll tell you straight.</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="contact-block">
+        <h3>Your point of contact</h3>
+        <div class="contact-person">
+          <div class="contact-avatar">KJ</div>
+          <div>
+            <div class="contact-name">Kade Jensen</div>
+            <div class="contact-title">Account Executive, Soonest</div>
+          </div>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:kade.jensen@getsoonest.com" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            kade.jensen@getsoonest.com
+          </a>
+          <a href="tel:3858327669" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6.29 6.29l.87-.87a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            385-832-7669
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">AI scheduling built to reduce burnout — for your staff and your admin team.</p>
+        <div class="footer-contact">
+          <a href="mailto:sales@getsoonest.com">sales@getsoonest.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="homepage-v3.html#solutions">AI Scheduling</a></li>
+          <li><a href="homepage-v3.html#platform">Shift Management</a></li>
+          <li><a href="homepage-v3.html#platform">Payroll &amp; Clock</a></li>
+          <li><a href="homepage-v3.html#platform">Pulse Check</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="homepage-v3.html#about">About Us</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="homepage-v3.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo.html">Request a Demo</a></li>
+          <li><a href="mailto:sales@getsoonest.com">Email Sales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Silicon Slopes, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>
