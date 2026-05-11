@@ -752,17 +752,15 @@
     .pulse-card-wrap {
       background: var(--navy);
       border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 32px 24px;
-      min-height: 320px;
+      overflow: hidden;
+      height: 360px;
     }
     .pulse-card-wrap img {
-      max-height: 320px;
-      width: auto;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       display: block;
-      filter: drop-shadow(0 12px 32px rgba(0,0,0,.5));
       border-radius: 0;
       box-shadow: none;
       border: none;
@@ -1390,13 +1388,13 @@
         <img src="https://www.thehouseofhearing.com/wp-content/uploads/2023/12/House-of-Hearing-Logo-150x103.png" alt="House of Hearing" />
       </div>
       <div class="logo-item">
-        <img src="https://cdn.worldvectorlogo.com/logos/university-of-utah-health-care.svg" alt="University of Utah Health" style="height:40px;width:auto;" />
+        <img src="https://cdn.worldvectorlogo.com/logos/university-of-utah-health-care.svg" alt="University of Utah Health" />
       </div>
       <div class="logo-item">
-        <img src="https://carepointhc.com/_next/static/media/CPH-color-rev-horiz.8a69fded.svg" alt="CarePoint" style="height:36px;width:auto;" />
+        <img src="https://carepointhc.com/_next/static/media/CPH-color-rev-horiz.8a69fded.svg" alt="CarePoint" />
       </div>
       <div class="logo-item">
-        <img src="https://images.squarespace-cdn.com/content/v1/67d07844f8351329271efc93/fd26020f-921f-46ec-b677-77df201d7cfd/cropped-My-ER-Logo.png?format=300w" alt="My Emergency Room 24/7" style="height:44px;width:auto;" />
+        <img src="https://images.squarespace-cdn.com/content/v1/67d07844f8351329271efc93/fd26020f-921f-46ec-b677-77df201d7cfd/cropped-My-ER-Logo.png?format=300w" alt="My Emergency Room 24/7" />
       </div>
     </div>
   </div>
