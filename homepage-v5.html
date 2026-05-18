@@ -379,8 +379,8 @@
       top: 0; left: 0; right: 0;
       height: 4px;
     }
-    .problem-card.staff::before { background: #F04438; }
-    .problem-card.admin::before { background: #F79009; }
+    .problem-card.staff::before { background: #1186ED; }
+    .problem-card.admin::before { background: #5bb5ff; }
     .problem-card.org::before { background: var(--blue); }
     .problem-icon {
       width: 48px; height: 48px;
@@ -388,8 +388,8 @@
       display: flex; align-items: center; justify-content: center;
       margin-bottom: 20px;
     }
-    .problem-icon.red { background: rgba(240,68,56,.1); }
-    .problem-icon.amber { background: rgba(247,144,9,.1); }
+    .problem-icon.red { background: rgba(17,134,237,.1); }
+    .problem-icon.amber { background: rgba(91,181,255,.12); }
     .problem-icon.blue { background: rgba(17,134,237,.1); }
     .problem-icon svg { width: 24px; height: 24px; }
     .problem-h3 {
@@ -472,8 +472,8 @@
       align-items: center;
       gap: 8px;
     }
-    .solutions-side-label.red { color: #F04438; }
-    .solutions-side-label.amber { color: #F79009; }
+    .solutions-side-label.red { color: #1186ED; }
+    .solutions-side-label.amber { color: #5bb5ff; }
     .solutions-pill {
       display: inline-flex;
       align-items: center;
@@ -812,7 +812,7 @@
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar" id="announce-bar">
-  <span>Now accepting early access partners for 2026 — <a href="demo.html" target="_blank">lock in founder pricing while it lasts</a></span>
+  <span>Now accepting early access partners for 2026 — <a href="demo.html">lock in founder pricing while it lasts</a></span>
   <button class="announce-dismiss" onclick="dismissBar()" aria-label="Dismiss">&times;</button>
 </div>
 
@@ -847,7 +847,7 @@
       <h1>One platform to prevent and reduce <span>healthcare burnout.</span></h1>
       <p class="hero-sub">AI scheduling that builds itself, payroll, real-time wellness intelligence, and coaching — unified in one platform built for healthcare teams.</p>
       <div class="hero-ctas">
-        <a href="demo.html" target="_blank" class="btn-primary">
+        <a href="demo.html" class="btn-primary">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
           Request a Demo
         </a>
@@ -924,7 +924,7 @@
 
       <div class="problem-card staff reveal">
         <div class="problem-icon red">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F04438" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
@@ -936,7 +936,7 @@
 
       <div class="problem-card admin reveal reveal-delay-1">
         <div class="problem-icon amber">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/>
             <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
@@ -992,12 +992,12 @@
           Coaching Programs
         </div>
         <!-- Admin stat subcard -->
-        <div style="margin-top:16px;background:rgba(240,68,56,.05);border:1px solid rgba(240,68,56,.15);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="margin-top:16px;background:rgba(17,134,237,.05);border:1px solid rgba(17,134,237,.15);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
           <div style="width:36px;height:36px;background:rgba(18,183,106,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <div>
-            <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1;">15 hrs saved</div>
+            <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1;">15 hours saved</div>
             <div style="font-size:12px;color:var(--gray-700);margin-top:3px;">Per scheduling cycle</div>
           </div>
         </div>
@@ -1033,7 +1033,7 @@
           Coaching Programs
         </div>
         <!-- Staff stat subcard -->
-        <div style="margin-top:16px;background:rgba(247,144,9,.05);border:1px solid rgba(247,144,9,.18);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
+        <div style="margin-top:16px;background:rgba(91,181,255,.06);border:1px solid rgba(91,181,255,.2);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
           <div style="width:36px;height:36px;background:rgba(17,134,237,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
           </div>
@@ -1077,15 +1077,7 @@
         <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">End-to-end, not point solutions</h3>
         <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Scheduling, shift management, payroll, wellbeing intelligence, and coaching in one platform. When everything connects, the data means something — and the interventions actually work.</p>
       </div>
-    </div>
-    <!-- Founded by physicians strip -->
-    <div style="margin-top:36px;padding:22px 28px;border-top:1px solid rgba(255,255,255,.08);display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
-      <div style="width:36px;height:36px;background:rgba(17,134,237,.2);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
-      <p style="font-size:14px;color:rgba(255,255,255,.55);line-height:1.6;"><span style="color:rgba(255,255,255,.85);font-weight:600;">Founded by physicians who lived the problem.</span> Our co-founder is an emergency physician who built his own group's schedules by hand for years. That frustration became this product.</p>
-    </div>
-  </div>
+    </div></div>
 </section>
 
 <!-- FEATURE TABS -->
@@ -1205,7 +1197,7 @@
             <div class="cv-card">
               <span class="cv-type one-on-one">1:1 Coaching</span>
               <div class="cv-icon-wrap" style="background:rgba(240,68,56,.08);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#F04438" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
               </div>
               <div class="cv-card-title">Burnout Recovery</div>
               <div class="cv-card-body">8-week program · Decompression, boundary setting, sustainable pacing</div>
@@ -1221,7 +1213,7 @@
             <div class="cv-card">
               <span class="cv-type course">Course</span>
               <div class="cv-icon-wrap" style="background:rgba(247,144,9,.08);">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="cv-card-title">Workplace Safety</div>
               <div class="cv-card-body">Aggressive patient encounters, escalation protocols, rapid response</div>
@@ -1357,11 +1349,11 @@
     <h2>Not sure where to start?<br>Let us build you a free schedule.</h2>
     <p>Send us your shifts, locations, and headcount — in any format. Screenshots, Excel, Google Sheets, email — whatever's easiest. We'll build your custom schedule and show you exactly what Soonest can do for your organization. No commitment.</p>
     <div class="cta-band-btns">
-      <a href="demo.html" target="_blank" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
+      <a href="demo.html" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
         Get Your Free Schedule
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="demo.html" target="_blank" class="btn-ghost">Request a Demo</a>
+      <a href="demo.html" class="btn-ghost">Request a Demo</a>
     </div>
   </div>
 </section>
