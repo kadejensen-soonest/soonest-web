@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 500" width="560" height="500">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;family=Figtree:wght@400;500&amp;display=swap');</style>
+    <linearGradient id="pov-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#1C2D62"/>
+      <stop offset="55%" stop-color="#12193A"/>
+      <stop offset="100%" stop-color="#0D1425"/>
+    </linearGradient>
+    <radialGradient id="pov-aura" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1186ED" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#1186ED" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pov-hubGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#223080"/>
+      <stop offset="100%" stop-color="#111E44"/>
+    </radialGradient>
+    <filter id="pov-card" x="-18%" y="-18%" width="136%" height="136%">
+      <feDropShadow dx="0" dy="5" stdDeviation="9" flood-color="#000" flood-opacity="0.38"/>
+    </filter>
+    <filter id="pov-hubGlow" x="-70%" y="-70%" width="240%" height="240%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="pov-arcGlow" x="-8%" y="-8%" width="116%" height="116%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="560" height="500" rx="20" fill="url(#pov-bg)"/>
+  <rect x="1" y="1" width="558" height="498" rx="19" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="1.5"/>
+
+  <!-- Center aura glow -->
+  <ellipse cx="280" cy="250" rx="192" ry="162" fill="url(#pov-aura)"/>
+
+  <!-- Spoke connector lines -->
+  <g stroke="rgba(255,255,255,0.14)" stroke-width="1.5" stroke-linecap="round">
+    <line x1="280" y1="212" x2="280" y2="131"/>
+    <line x1="318" y1="238" x2="364" y2="223"/>
+    <line x1="308" y1="288" x2="345" y2="339"/>
+    <line x1="252" y1="288" x2="215" y2="339"/>
+    <line x1="242" y1="238" x2="196" y2="223"/>
+  </g>
+
+  <!-- Teal dashed orbit arc -->
+  <circle cx="280" cy="250" r="158" fill="none" stroke="#0ABFBC" stroke-width="1.8" stroke-dasharray="8,5" opacity="0.68" filter="url(#pov-arcGlow)"/>
+
+  <!-- Center hub glow halo -->
+  <rect x="236" y="208" width="88" height="84" rx="20" fill="#1186ED" opacity="0.22" filter="url(#pov-hubGlow)"/>
+  <!-- Center hub card -->
+  <rect x="242" y="212" width="76" height="76" rx="16" fill="url(#pov-hubGrad)" stroke="#1186ED" stroke-width="1.5" stroke-opacity="0.5" filter="url(#pov-card)"/>
+  <!-- Hub blue top accent -->
+  <rect x="242" y="212" width="76" height="3" rx="1.5" fill="#1186ED"/>
+  <!-- Hub 2x2 grid icon -->
+  <g transform="translate(268,229)" fill="none" stroke="rgba(255,255,255,0.88)" stroke-width="1.7" stroke-linecap="round">
+    <rect x="0" y="0" width="9" height="9" rx="2"/>
+    <rect x="13" y="0" width="9" height="9" rx="2"/>
+    <rect x="0" y="13" width="9" height="9" rx="2"/>
+    <rect x="13" y="13" width="9" height="9" rx="2"/>
+  </g>
+  <!-- Hub label -->
+  <text x="280" y="262" font-family="'Poppins','Arial Black',sans-serif" font-size="10.5" font-weight="700" fill="white" text-anchor="middle" letter-spacing="1.5">SOONEST</text>
+  <text x="280" y="275" font-family="'Figtree',Arial,sans-serif" font-size="7" font-weight="500" fill="rgba(255,255,255,0.4)" text-anchor="middle" letter-spacing="1">PLATFORM</text>
+
+  <!-- TOP: AI Schedule Building -->
+  <g filter="url(#pov-card)">
+    <rect x="214" y="53" width="132" height="78" rx="13" fill="rgba(255,255,255,0.97)" stroke="rgba(17,134,237,0.18)" stroke-width="1"/>
+    <rect x="214" y="53" width="132" height="3" rx="1.5" fill="#1186ED"/>
+  </g>
+  <g transform="translate(224,63)" fill="none" stroke="#1186ED" stroke-width="1.7" stroke-linecap="round">
+    <rect x="0" y="2" width="20" height="17" rx="3"/>
+    <line x1="0" y1="8" x2="20" y2="8"/>
+    <line x1="5.5" y1="0" x2="5.5" y2="4"/>
+    <line x1="14.5" y1="0" x2="14.5" y2="4"/>
+    <polyline points="3,13 6,11 9,13.5 12.5,10 17,12.5" stroke-width="1.5"/>
+  </g>
+  <path d="M247,61 L247.7,64.2 L251,64.7 L247.7,65.2 L247,68.4 L246.3,65.2 L243,64.7 L246.3,64.2 Z" fill="#1186ED" opacity="0.85"/>
+  <text x="252" y="75" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">AI Schedule</text>
+  <text x="252" y="89" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Building</text>
+  <text x="252" y="103" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Smart · Preference-based</text>
+
+  <!-- TOP-RIGHT: Shift Management -->
+  <g filter="url(#pov-card)">
+    <rect x="364" y="162" width="132" height="78" rx="13" fill="rgba(255,255,255,0.97)" stroke="rgba(18,183,106,0.2)" stroke-width="1"/>
+    <rect x="364" y="162" width="132" height="3" rx="1.5" fill="#12B76A"/>
+  </g>
+  <g transform="translate(374,172)" fill="none" stroke="#12B76A" stroke-width="1.7" stroke-linecap="round">
+    <circle cx="10" cy="10" r="10"/>
+    <line x1="10" y1="5" x2="10" y2="10"/>
+    <line x1="10" y1="10" x2="14" y2="13"/>
+    <path d="M2,17 A10,10 0 0,1 18,17" stroke-width="1.5"/>
+    <polyline points="16,15 18,17 16,19" stroke-width="1.5"/>
+  </g>
+  <text x="400" y="184" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Shift</text>
+  <text x="400" y="198" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Management</text>
+  <text x="400" y="211" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Trades · Open shifts</text>
+
+  <!-- BOTTOM-RIGHT: Payroll & Time Clock -->
+  <g filter="url(#pov-card)">
+    <rect x="307" y="339" width="132" height="78" rx="13" fill="rgba(255,255,255,0.97)" stroke="rgba(247,144,9,0.2)" stroke-width="1"/>
+    <rect x="307" y="339" width="132" height="3" rx="1.5" fill="#F79009"/>
+  </g>
+  <g transform="translate(317,349)" fill="none" stroke="#F79009" stroke-width="1.7" stroke-linecap="round">
+    <line x1="7" y1="0" x2="7" y2="20"/>
+    <path d="M12,3.5 Q12,1 7,1 Q2,1 2,5 Q2,9 7,9 Q12,9 12,13 Q12,17 7,17 Q2,17 2,14.5"/>
+    <circle cx="17" cy="15" r="5"/>
+    <line x1="17" y1="11.5" x2="17" y2="15"/>
+    <line x1="17" y1="15" x2="19.5" y2="16.5"/>
+  </g>
+  <text x="345" y="361" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Payroll &amp;</text>
+  <text x="345" y="375" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Time Clock</text>
+  <text x="345" y="389" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Geofencing · Auto-export</text>
+
+  <!-- BOTTOM-LEFT: Pulse AI -->
+  <g filter="url(#pov-card)">
+    <rect x="121" y="339" width="132" height="78" rx="13" fill="rgba(255,255,255,0.97)" stroke="rgba(10,191,188,0.25)" stroke-width="1"/>
+    <rect x="121" y="339" width="132" height="3" rx="1.5" fill="#0ABFBC"/>
+  </g>
+  <g transform="translate(131,356)" fill="none" stroke="#0ABFBC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="0,8 4,8 7,1 11,15 14,5 17.5,11 21,8 26,8"/>
+  </g>
+  <text x="163" y="362" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Pulse AI</text>
+  <text x="163" y="376" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Feedback · Insights</text>
+  <text x="163" y="389" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">&amp; Recommendations</text>
+
+  <!-- LEFT: Coaching -->
+  <g filter="url(#pov-card)">
+    <rect x="64" y="162" width="132" height="78" rx="13" fill="rgba(255,255,255,0.97)" stroke="rgba(124,58,237,0.2)" stroke-width="1"/>
+    <rect x="64" y="162" width="132" height="3" rx="1.5" fill="#7C3AED"/>
+  </g>
+  <g transform="translate(74,172)" fill="none" stroke="#7C3AED" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10,1 L1.5,5 L1.5,12 Q1.5,18.5 10,21.5 Q18.5,18.5 18.5,12 L18.5,5 Z"/>
+    <polyline points="6,11 8.5,13.5 14,8"/>
+  </g>
+  <text x="100" y="184" font-family="'Poppins','Arial Black',sans-serif" font-size="11" font-weight="700" fill="#1E284D">Coaching</text>
+  <text x="100" y="198" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Recovery · Safety</text>
+  <text x="100" y="211" font-family="'Figtree',Arial,sans-serif" font-size="9" fill="#667085">Leadership · Team Health</text>
+</svg>
