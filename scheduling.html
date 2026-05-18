@@ -421,6 +421,9 @@
     .reveal-delay-1 { transition-delay: 0.1s; }
     .reveal-delay-2 { transition-delay: 0.2s; }
     .reveal-delay-3 { transition-delay: 0.3s; }
+    @media (max-width: 900px) {
+      .two-col-pref, .msg-two-col { grid-template-columns: 1fr !important; gap: 36px !important; }
+    }
   </style>
 </head>
 <body>
@@ -433,10 +436,8 @@
       <span class="nav-logo-text">Soonest</span>
     </a>
     <ul class="nav-links">
-      <li><a href="homepage-v5.html#solutions">Solutions</a></li>
       <li><a href="scheduling.html" class="active">AI Scheduling</a></li>
       <li><a href="pulse-ai.html">Pulse AI</a></li>
-      <li><a href="homepage-v5.html#about">About</a></li>
       <li><a href="resources.html">Resources</a></li>
     </ul>
     <div class="nav-right">
@@ -465,63 +466,51 @@
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section section-dark" id="how-it-works">
-  <div class="section-inner">
-    <span class="section-label reveal">How It Works</span>
-    <h2 class="section-h2 reveal">This is your new scheduling workflow.</h2>
-    <p class="section-sub reveal">Scheduling disappears from your plate. We handle the busy work. You stay in full control.</p>
-
-    <div class="steps-grid">
-      <div class="step-card reveal">
-        <div class="step-num">1</div>
-        <h3 class="step-h3">Preferences flow in automatically</h3>
-        <p class="step-body">Providers submit availability, preferences, and constraints in one place — on their own time.</p>
-      </div>
-      <div class="step-card reveal reveal-delay-1">
-        <div class="step-num">2</div>
-        <h3 class="step-h3">Schedules build themselves</h3>
-        <p class="step-body">AI generates a fair, rules-compliant schedule across all locations simultaneously. No manual rework.</p>
-      </div>
-      <div class="step-card reveal reveal-delay-2">
-        <div class="step-num">3</div>
-        <h3 class="step-h3">Swaps resolve without you</h3>
-        <p class="step-body">Staff trade, release, and cover shifts through the platform. No back-and-forth, no group texts.</p>
-      </div>
-      <div class="step-card reveal reveal-delay-3">
-        <div class="step-num">4</div>
-        <h3 class="step-h3">All you do is approve</h3>
-        <p class="step-body">One click. That's your new scheduling workflow.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PREFERENCE-BASED SCHEDULING -->
 <section class="section" id="preferences">
   <div class="section-inner">
-    <div class="two-col">
-      <div class="col-content reveal">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;" class="two-col-pref">
+      <div class="reveal">
         <span class="section-label">Preference-Based</span>
-        <h2>Make it easy to hear your staff.</h2>
-        <p>Providers walk through a guided preference wizard before each scheduling cycle — setting the days they prefer to work, shifts they'd like to avoid, and any hard constraints. Soonest collects everything in one place so nothing falls through the cracks.</p>
-        <p>When staff see their preferences honored, they feel heard. That's not a nice-to-have — it's a direct driver of engagement and retention in high-burnout environments.</p>
-        <ul class="feature-list">
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Guided multi-step preference collection for each cycle</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Hard blocks vs. soft preferences — the solver knows the difference</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Staff can see which preferences were honored and why</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>No chasing. No email threads. No spreadsheets.</li>
-        </ul>
+        <h2 class="section-h2">Make it easy to hear your staff.</h2>
+        <p style="font-size:16px;color:var(--gray-700);line-height:1.75;margin-bottom:20px;">Providers walk through a guided preference wizard before each scheduling cycle — setting the days they prefer to work, shifts they'd like to avoid, and any hard constraints. Soonest collects everything in one place so nothing falls through the cracks.</p>
+        <p style="font-size:16px;color:var(--gray-700);line-height:1.75;">When staff see their preferences honored, they feel heard. That's a direct driver of engagement and retention in high-burnout environments.</p>
       </div>
-      <div class="col-visual reveal reveal-delay-1">
-        <div class="phone-frame">
-          <img src="preference.png" alt="Soonest preference wizard — staff select preferred days to work" />
+      <div class="reveal reveal-delay-1">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:white;border:1px solid var(--gray-200);border-radius:12px;padding:20px;box-shadow:var(--shadow-card);">
+            <div style="width:36px;height:36px;background:rgba(17,134,237,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">Guided Collection</div>
+            <div style="font-size:12px;color:var(--gray-700);line-height:1.5;">Multi-step wizard walks providers through preferences for each scheduling cycle</div>
+          </div>
+          <div style="background:white;border:1px solid var(--gray-200);border-radius:12px;padding:20px;box-shadow:var(--shadow-card);">
+            <div style="width:36px;height:36px;background:rgba(18,183,106,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">Hard vs. Soft</div>
+            <div style="font-size:12px;color:var(--gray-700);line-height:1.5;">The solver knows the difference between "I'd prefer not to" and "I absolutely can't"</div>
+          </div>
+          <div style="background:white;border:1px solid var(--gray-200);border-radius:12px;padding:20px;box-shadow:var(--shadow-card);">
+            <div style="width:36px;height:36px;background:rgba(247,144,9,.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">Transparent Results</div>
+            <div style="font-size:12px;color:var(--gray-700);line-height:1.5;">Staff see exactly which preferences were honored in each published schedule — and why</div>
+          </div>
+          <div style="background:white;border:1px solid var(--gray-200);border-radius:12px;padding:20px;box-shadow:var(--shadow-card);">
+            <div style="width:36px;height:36px;background:rgba(240,68,56,.06);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F04438" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:var(--navy);margin-bottom:4px;">No Chasing</div>
+            <div style="font-size:12px;color:var(--gray-700);line-height:1.5;">No email threads, no spreadsheets. Preferences come in automatically before the cycle starts</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
 <!-- SHIFT MARKETPLACE -->
 <section class="section section-alt" id="shift-marketplace">
   <div class="section-inner">
@@ -572,7 +561,128 @@
     </div>
   </div>
 </section>
+<!-- HOW IT WORKS -->
+<section class="section section-dark" id="how-it-works">
+  <div class="section-inner">
+    <span class="section-label reveal">How It Works</span>
+    <h2 class="section-h2 reveal">This is your new scheduling workflow.</h2>
+    <p class="section-sub reveal">Scheduling disappears from your plate. We handle the busy work. You stay in full control.</p>
 
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 class="step-h3">Preferences flow in automatically</h3>
+        <p class="step-body">Providers submit availability, preferences, and constraints in one place — on their own time.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3 class="step-h3">Schedules build themselves</h3>
+        <p class="step-body">AI generates a fair, rules-compliant schedule across all locations simultaneously. No manual rework.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3 class="step-h3">Swaps resolve without you</h3>
+        <p class="step-body">Staff trade, release, and cover shifts through the platform. No back-and-forth, no group texts.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h3 class="step-h3">All you do is approve</h3>
+        <p class="step-body">One click. That's your new scheduling workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- MESSAGING -->
+<section class="section" id="messaging">
+  <div class="section-inner">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;" class="msg-two-col">
+      <div class="reveal">
+        <span class="section-label">Messaging &amp; Announcements</span>
+        <h2 class="section-h2">Keep your whole team in sync — without the group texts.</h2>
+        <p style="font-size:16px;color:var(--gray-700);line-height:1.75;margin-bottom:20px;">Soonest includes a built-in messaging hub so communication lives where the schedule does. Create org-wide channels, department groups, or direct messages — all in one place.</p>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Create custom groups by department, site, or role</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Org-wide announcements broadcast to all providers instantly</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Direct messaging between providers and admin</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Messages tied to schedules, shifts, and changes — context stays together</li>
+        </ul>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <!-- Messaging hub mockup -->
+        <div style="background:white;border-radius:14px;border:1px solid var(--gray-200);box-shadow:var(--shadow-screenshot);overflow:hidden;">
+          <!-- Header -->
+          <div style="background:var(--navy-deep);padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08);">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span style="font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;color:white;">Messaging Hub</span>
+            </div>
+            <span style="font-size:11px;font-weight:600;color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);padding:3px 8px;border-radius:4px;">3 unread</span>
+          </div>
+          <!-- Channel list + conversation -->
+          <div style="display:grid;grid-template-columns:160px 1fr;">
+            <!-- Sidebar -->
+            <div style="border-right:1px solid var(--gray-200);padding:12px 0;">
+              <div style="padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--gray-400);margin-bottom:4px;">Channels</div>
+              <div style="padding:8px 14px;background:rgba(17,134,237,.08);border-left:2px solid var(--blue);display:flex;align-items:center;gap:8px;">
+                <span style="font-size:13px;color:var(--navy);font-weight:600;"># general</span>
+              </div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:13px;color:var(--gray-700);"># ed-team</span>
+              </div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:13px;color:var(--gray-700);"># urgent-care</span>
+              </div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;">
+                <span style="font-size:13px;color:var(--gray-700);"># announcements</span>
+                <span style="margin-left:auto;background:var(--blue);color:white;font-size:10px;font-weight:700;border-radius:9px;padding:2px 6px;line-height:1;">2</span>
+              </div>
+              <div style="padding:6px 14px;font-size:11px;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;color:var(--gray-400);margin-top:8px;margin-bottom:4px;">Direct</div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;">
+                <div style="width:20px;height:20px;background:#12B76A;border-radius:50%;flex-shrink:0;"></div>
+                <span style="font-size:13px;color:var(--gray-700);">Dr. Yeates</span>
+              </div>
+              <div style="padding:8px 14px;display:flex;align-items:center;gap:8px;">
+                <div style="width:20px;height:20px;background:var(--blue);border-radius:50%;flex-shrink:0;"></div>
+                <span style="font-size:13px;color:var(--gray-700);">Admin</span>
+              </div>
+            </div>
+            <!-- Messages -->
+            <div style="padding:16px;display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:28px;height:28px;background:var(--navy);border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;color:white;">A</div>
+                <div>
+                  <div style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px;">Admin <span style="font-weight:400;color:var(--gray-400);font-size:11px;">9:04 AM</span></div>
+                  <div style="font-size:13px;color:var(--gray-700);background:var(--gray-100);border-radius:8px;padding:8px 12px;line-height:1.5;">Reminder: April schedule preferences due by Friday EOD. Submit via the app.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:28px;height:28px;background:#12B76A;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;color:white;">T</div>
+                <div>
+                  <div style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px;">Dr. Torres <span style="font-weight:400;color:var(--gray-400);font-size:11px;">9:17 AM</span></div>
+                  <div style="font-size:13px;color:var(--gray-700);background:var(--gray-100);border-radius:8px;padding:8px 12px;line-height:1.5;">Just submitted. Can someone cover my April 14th overnight? Happy to trade.</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:flex-start;">
+                <div style="width:28px;height:28px;background:#7C3AED;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:10px;font-weight:700;color:white;">K</div>
+                <div>
+                  <div style="font-family:'Poppins',sans-serif;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:2px;">Dr. Kim <span style="font-weight:400;color:var(--gray-400);font-size:11px;">9:31 AM</span></div>
+                  <div style="font-size:13px;color:var(--gray-700);background:var(--gray-100);border-radius:8px;padding:8px 12px;line-height:1.5;">I can take it — sending a trade request now.</div>
+                </div>
+              </div>
+              <!-- Compose -->
+              <div style="margin-top:4px;border-top:1px solid var(--gray-200);padding-top:12px;display:flex;align-items:center;gap:10px;">
+                <div style="flex:1;background:var(--gray-100);border-radius:8px;padding:9px 14px;font-size:13px;color:var(--gray-400);">Message #general...</div>
+                <div style="width:32px;height:32px;background:var(--blue);border-radius:7px;display:flex;align-items:center;justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!-- SCHEDULE ASSISTANT — THE HUMAN SIDE -->
 <section class="section" id="assistant">
   <div class="section-inner">
@@ -610,7 +720,6 @@
     </div>
   </div>
 </section>
-
 <!-- FREE SCHEDULE CTA BAND -->
 <section class="cta-band" id="cta-free">
   <div class="cta-band-inner">
