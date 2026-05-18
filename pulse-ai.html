@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse AI — Soonest</title>
+  <meta name="description" content="Real-time wellbeing intelligence for healthcare teams. A 30-second end-of-shift check-in that surfaces burnout signals, safety flags, and at-risk staff before it becomes a retention problem." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --teal: #0ABFBC;
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --black: #0D0E11;
+      --gray-700: #475467;
+      --gray-600: #4B5371;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --white: #FFFFFF;
+      --green: #12B76A;
+      --amber: #F79009;
+      --red: #F04438;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --cta-grad: linear-gradient(155deg, #2a3a6e 0%, #101828 100%);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+      --shadow-screenshot: 0 8px 40px rgba(0,0,0,.35);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--off-white);
+      color: var(--navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--navy-deep);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: box-shadow 0.2s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: white; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .nav-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(10,191,188,.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10,191,188,.15);
+      border: 1px solid rgba(10,191,188,.35);
+      color: #4dd9d7;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.2px;
+    }
+    .page-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 span { color: var(--teal); }
+    .page-hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .page-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(17,134,237,.35);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(17,134,237,.45); }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,.9);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.25);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+    @media (max-width: 600px) { .page-hero h1 { font-size: 36px; } .page-hero { padding: 56px 20px 64px; } }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 96px 24px; }
+    .section-alt { background: var(--gray-100); }
+    .section-dark { background: var(--navy-deep); color: white; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-label.teal { color: var(--teal); }
+    .section-dark .section-label { color: #4dd9d7; }
+    .section-h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--navy);
+      letter-spacing: -0.6px;
+      margin-bottom: 16px;
+    }
+    .section-dark .section-h2 { color: white; }
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+    .section-dark .section-sub { color: rgba(255,255,255,.65); }
+    @media (max-width: 600px) { .section { padding: 64px 20px; } .section-h2 { font-size: 30px; } }
+
+    /* ── HOW CHECK-IN WORKS ── */
+    .checkin-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    @media (max-width: 900px) { .checkin-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .checkin-grid { grid-template-columns: 1fr; } }
+    .checkin-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+    .checkin-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--teal);
+    }
+    .checkin-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--teal);
+      line-height: 1;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+    .checkin-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .checkin-body { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
+
+    /* ── DASHBOARD SECTION ── */
+    .dashboard-section {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 64px;
+      align-items: center;
+    }
+    @media (max-width: 960px) { .dashboard-section { grid-template-columns: 1fr; gap: 36px; } }
+    .dashboard-img-wrap img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 16px 56px rgba(0,0,0,.22);
+      display: block;
+      border: 1px solid rgba(0,0,0,.06);
+    }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--gray-700); }
+    .feature-list li svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+    /* ── DATA SIGNALS GRID ── */
+    .signals-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 700px) { .signals-grid { grid-template-columns: 1fr; } }
+    .signal-card {
+      background: white;
+      border-radius: 14px;
+      padding: 28px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: transform 0.2s;
+    }
+    .signal-card:hover { transform: translateY(-2px); }
+    .signal-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .signal-icon svg { width: 24px; height: 24px; }
+    .signal-h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .signal-body { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+
+    /* ── ALERT CALLOUT ── */
+    .alert-callout {
+      background: var(--navy-deep);
+      border-radius: 16px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    @media (max-width: 800px) { .alert-callout { grid-template-columns: 1fr; gap: 28px; padding: 32px; } }
+    .alert-callout h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 14px;
+      letter-spacing: -0.3px;
+    }
+    .alert-callout p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 20px; }
+    .alert-items { display: flex; flex-direction: column; gap: 14px; }
+    .alert-item { display: flex; align-items: flex-start; gap: 14px; }
+    .alert-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .alert-item-text { font-size: 14px; color: rgba(255,255,255,.75); line-height: 1.55; }
+    .alert-item-label { font-weight: 600; color: white; }
+
+    /* ── COACHING BRIDGE ── */
+    .coaching-bridge {
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--gray-200);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      box-shadow: var(--shadow-card);
+    }
+    .coaching-bridge-icon {
+      width: 64px; height: 64px;
+      background: rgba(124,58,237,.08);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .coaching-bridge-icon svg { width: 32px; height: 32px; color: #7C3AED; }
+    .coaching-bridge-text { flex: 1; min-width: 200px; }
+    .coaching-bridge-text h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .coaching-bridge-text p { font-size: 15px; color: var(--gray-700); line-height: 1.65; }
+    .coaching-bridge a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #7C3AED;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .coaching-bridge a:hover { text-decoration: underline; }
+
+    /* ── CTA BAND ── */
+    .cta-band { background: var(--cta-grad); padding: 72px 24px; }
+    .cta-band-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .cta-band h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.4px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-band-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="homepage-v5.html" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="homepage-v5.html#solutions">Solutions</a></li>
+      <li><a href="scheduling.html">AI Scheduling</a></li>
+      <li><a href="pulse-ai.html" class="active">Pulse AI</a></li>
+      <li><a href="homepage-v5.html#about">About</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo.html" class="nav-btn">Request a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Pulse AI
+    </div>
+    <h1>Know how your team is doing <span>before someone quits.</span></h1>
+    <p class="page-hero-sub">A 30-second end-of-shift check-in surfaces burnout signals, safety flags, and at-risk staff — so you can act before it becomes a retention crisis.</p>
+    <div class="page-hero-ctas">
+      <a href="demo.html" target="_blank" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Request a Demo
+      </a>
+      <a href="#dashboard" class="btn-ghost">
+        See the Dashboard
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW THE CHECK-IN WORKS -->
+<section class="section" id="how-it-works">
+  <div class="section-inner">
+    <span class="section-label teal reveal">How It Works</span>
+    <h2 class="section-h2 reveal">A 30-second check-in. Meaningful intelligence.</h2>
+    <p class="section-sub reveal">At the end of every shift, staff get a simple prompt. No lengthy surveys. No HR forms. Just a quick pulse that tells you what's actually happening across your organization.</p>
+
+    <div class="checkin-grid">
+      <div class="checkin-card reveal">
+        <div class="checkin-num">01</div>
+        <h3 class="checkin-h3">How heavy was today?</h3>
+        <p class="checkin-body">Staff rate shift intensity on a 1–10 scale. Voice or text response — their choice. Takes under 30 seconds and fits into the natural post-shift routine.</p>
+      </div>
+      <div class="checkin-card reveal reveal-delay-1">
+        <div class="checkin-num">02</div>
+        <h3 class="checkin-h3">What drove it?</h3>
+        <p class="checkin-body">An optional follow-up lets staff share what made the shift heavy. Posts anonymously if preferred. This is where the real signal comes from — patient complexity, team friction, safety incidents, emotional weight.</p>
+      </div>
+      <div class="checkin-card reveal reveal-delay-2">
+        <div class="checkin-num">03</div>
+        <h3 class="checkin-h3">AI does the rest.</h3>
+        <p class="checkin-body">Pulse AI runs sentiment analysis, clusters themes, flags safety concerns, and builds a real-time picture of wellbeing across your groups, teams, and individuals. You see it all in one dashboard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="section section-alt" id="dashboard">
+  <div class="section-inner">
+    <div class="dashboard-section">
+      <div class="reveal">
+        <span class="section-label teal">The Dashboard</span>
+        <h2 class="section-h2">Your organization's wellbeing — in one view.</h2>
+        <p style="font-size:16px;color:var(--gray-700);line-height:1.75;margin-bottom:24px;">Pulse AI aggregates check-in data into a live admin dashboard. See trending scores by department, team, and individual. Spot dips before they become crises. Act with specificity instead of guessing.</p>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Overall org health score updated after every shift cycle</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Drill down by department, team, or individual provider</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trending signals over time — see if things are improving or declining</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Anonymized theme clusters — what topics keep coming up across your team</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Predictive risk scoring so you know where to focus attention first</li>
+        </ul>
+      </div>
+      <div class="dashboard-img-wrap reveal reveal-delay-1">
+        <img src="pulse-dashboard.png" alt="Soonest Pulse AI admin dashboard — org health, team scores, trending signals" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATA BREAKDOWN -->
+<section class="section" id="signals">
+  <div class="section-inner">
+    <span class="section-label teal reveal">What Pulse AI Surfaces</span>
+    <h2 class="section-h2 reveal">From individual signals to org-level patterns.</h2>
+    <p class="section-sub reveal">Pulse AI doesn't just collect data — it tells you what it means. Every layer of your organization is visible, and the AI connects the dots between check-in patterns and real outcomes.</p>
+
+    <div class="signals-grid">
+      <div class="signal-card reveal">
+        <div class="signal-icon" style="background:rgba(17,134,237,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="signal-h3">Group Health</h3>
+          <p class="signal-body">See how your entire organization is tracking. Identify which departments are under strain and which are thriving. Spot cross-org trends before they compound.</p>
+        </div>
+      </div>
+      <div class="signal-card reveal reveal-delay-1">
+        <div class="signal-icon" style="background:rgba(10,191,188,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0ABFBC" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="signal-h3">Team-Level Trends</h3>
+          <p class="signal-body">Drill into specific teams and departments. Are certain shift types or locations driving heavier scores? Surface team dynamics, recurring friction points, and early warning patterns.</p>
+        </div>
+      </div>
+      <div class="signal-card reveal">
+        <div class="signal-icon" style="background:rgba(247,144,9,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="signal-h3">Individual Risk Scores</h3>
+          <p class="signal-body">Predictive scoring identifies providers most at risk of burnout or disengagement. See who needs attention before they reach the breaking point — or before they start quietly looking for another job.</p>
+        </div>
+      </div>
+      <div class="signal-card reveal reveal-delay-1">
+        <div class="signal-icon" style="background:rgba(18,183,106,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="signal-h3">Trending Signals</h3>
+          <p class="signal-body">AI topic clustering identifies what themes are emerging in staff responses — patient complexity, team conflict, workload spikes, safety concerns. Anonymized, aggregated, and continuously updated.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMART ALERTS + AT-RISK -->
+<section class="section section-dark" id="alerts">
+  <div class="section-inner">
+    <div class="alert-callout reveal">
+      <div>
+        <span class="section-label" style="color:#4dd9d7;margin-bottom:14px;">Smart Alerts</span>
+        <h3>Surface the signals that matter. Act before it's too late.</h3>
+        <p>Pulse AI doesn't wait for you to go looking. It sends proactive alerts when something needs your attention — so you can intervene early instead of managing a crisis.</p>
+      </div>
+      <div class="alert-items">
+        <div class="alert-item">
+          <div class="alert-dot" style="background:#F04438;"></div>
+          <div class="alert-item-text"><span class="alert-item-label">Safety flags:</span> Posts mentioning patient aggression, unsafe conditions, or critical incidents are automatically surfaced and routed to appropriate leadership.</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-dot" style="background:#F79009;"></div>
+          <div class="alert-item-text"><span class="alert-item-label">At-risk identification:</span> When a provider's score pattern indicates high burnout probability, you're notified before they reach a tipping point — giving you time to intervene.</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-dot" style="background:#0ABFBC;"></div>
+          <div class="alert-item-text"><span class="alert-item-label">Department dips:</span> When a team's aggregate score drops meaningfully across consecutive cycles, Pulse AI flags it so you can investigate the cause before it spreads.</div>
+        </div>
+        <div class="alert-item">
+          <div class="alert-dot" style="background:#12B76A;"></div>
+          <div class="alert-item-text"><span class="alert-item-label">Positive signals too:</span> Know when teams are thriving, when a new policy is landing well, or when a difficult period has turned around. Good data is actionable too.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COACHING BRIDGE -->
+<section class="section" id="coaching">
+  <div class="section-inner">
+    <span class="section-label teal reveal" style="text-align:center;display:block;margin-bottom:12px;">Connected to Coaching</span>
+    <h2 class="section-h2 reveal" style="text-align:center;max-width:680px;margin:0 auto 16px;">Pulse AI tells you what's wrong. Coaching fixes it.</h2>
+    <p style="font-size:17px;color:var(--gray-700);line-height:1.7;max-width:600px;margin:0 auto 48px;text-align:center;" class="reveal">The data is only as valuable as what you do with it. When Pulse AI identifies at-risk individuals or struggling teams, it connects directly to Soonest's coaching programs — recommending the right intervention based on your actual signals.</p>
+
+    <div class="coaching-bridge reveal">
+      <div class="coaching-bridge-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+        </svg>
+      </div>
+      <div class="coaching-bridge-text">
+        <h3>AI-recommended coaching programs</h3>
+        <p>When Pulse AI flags a provider or team, it surfaces a recommended coaching program based on the specific signals — burnout recovery, resilience training, team dynamics facilitation, workplace safety, or leadership development. No guesswork. No generic responses. The right support, matched to what your data actually shows.</p>
+      </div>
+      <a href="homepage-v5.html#features">
+        Learn about Coaching
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="cta-demo">
+  <div class="cta-band-inner">
+    <h2>See Pulse AI in action.</h2>
+    <p>Request a demo and we'll walk you through how Pulse AI works with your team's actual shift patterns — and show you what the dashboard looks like with real data behind it.</p>
+    <div class="cta-band-btns">
+      <a href="demo.html" target="_blank" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
+        Request a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="scheduling.html" class="btn-ghost">Explore AI Scheduling</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:sales@getsoonest.com">sales@getsoonest.com</a>
+          <a href="https://getsoonest.com" target="_blank">getsoonest.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling.html">AI Scheduling</a></li>
+          <li><a href="pulse-ai.html">Pulse AI</a></li>
+          <li><a href="homepage-v5.html#features">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="homepage-v5.html#about">About Us</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="homepage-v5.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo.html">Request a Demo</a></li>
+          <li><a href="scheduling.html#cta-free">Free Schedule Offer</a></li>
+          <li><a href="mailto:sales@getsoonest.com">Email Sales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Silicon Slopes, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

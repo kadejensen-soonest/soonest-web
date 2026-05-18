@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Scheduling — Soonest</title>
+  <meta name="description" content="Preference-based AI scheduling that builds itself. Multi-location, multi-role schedules resolved simultaneously. Built for healthcare." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --black: #0D0E11;
+      --gray-700: #475467;
+      --gray-600: #4B5371;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --white: #FFFFFF;
+      --green: #12B76A;
+      --amber: #F79009;
+      --red: #F04438;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --cta-grad: linear-gradient(155deg, #2a3a6e 0%, #101828 100%);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+      --shadow-screenshot: 0 8px 40px rgba(0,0,0,.35);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--off-white);
+      color: var(--navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--navy-deep);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: box-shadow 0.2s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: white; }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .nav-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(17,134,237,.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(17,134,237,.15);
+      border: 1px solid rgba(17,134,237,.3);
+      color: #5bb5ff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.2px;
+    }
+    .page-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 span { color: var(--blue); }
+    .page-hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .page-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(17,134,237,.35);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(17,134,237,.45); }
+    .btn-ghost {
+      background: transparent;
+      color: rgba(255,255,255,.9);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.25);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+    @media (max-width: 600px) { .page-hero h1 { font-size: 36px; } .page-hero { padding: 56px 20px 64px; } }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 96px 24px; }
+    .section-alt { background: var(--gray-100); }
+    .section-dark { background: var(--navy-deep); color: white; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+      display: block;
+    }
+    .section-dark .section-label { color: #5bb5ff; }
+    .section-h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--navy);
+      letter-spacing: -0.6px;
+      margin-bottom: 16px;
+    }
+    .section-dark .section-h2 { color: white; }
+    .section-sub {
+      font-size: 17px;
+      color: var(--gray-700);
+      line-height: 1.7;
+      max-width: 600px;
+      margin-bottom: 56px;
+    }
+    .section-dark .section-sub { color: rgba(255,255,255,.65); }
+    @media (max-width: 600px) { .section { padding: 64px 20px; } .section-h2 { font-size: 30px; } }
+
+    /* ── HOW IT WORKS ── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      position: relative;
+    }
+    .steps-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(12.5% + 28px);
+      right: calc(12.5% + 28px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), rgba(17,134,237,.2));
+    }
+    .step-card { text-align: center; position: relative; }
+    .step-num {
+      width: 56px; height: 56px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      margin: 0 auto 20px;
+      position: relative; z-index: 1;
+      box-shadow: 0 4px 16px rgba(17,134,237,.35);
+    }
+    .step-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .step-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+    @media (max-width: 900px) { .steps-grid { grid-template-columns: 1fr 1fr; gap: 24px; } .steps-grid::before { display: none; } }
+    @media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
+
+    /* ── PREFERENCE SECTION ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .two-col.reverse .col-visual { order: -1; }
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; gap: 36px; }
+      .two-col.reverse .col-visual { order: 0; }
+    }
+    .col-content h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      letter-spacing: -0.4px;
+      margin-bottom: 16px;
+    }
+    .col-content p {
+      font-size: 16px;
+      color: var(--gray-700);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
+    .feature-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--gray-700); }
+    .feature-list li svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; margin-top: 2px; }
+    .col-visual img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 12px 48px rgba(0,0,0,.18);
+      display: block;
+    }
+    .col-visual .phone-frame {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--gray-200);
+      box-shadow: 0 12px 48px rgba(0,0,0,.14);
+      overflow: hidden;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    .col-visual .phone-frame img {
+      width: 100%;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    /* ── SHIFT MARKETPLACE ── */
+    .marketplace-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 0;
+    }
+    @media (max-width: 900px) { .marketplace-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 600px) { .marketplace-grid { grid-template-columns: 1fr; } }
+    .market-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .market-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,.1); }
+    .market-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .market-card.trade::before { background: var(--blue); }
+    .market-card.release::before { background: var(--green); }
+    .market-card.callout::before { background: var(--amber); }
+    .market-icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+    }
+    .market-icon svg { width: 22px; height: 22px; }
+    .market-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .market-body { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
+
+    /* ── GRADE CALLOUT ── */
+    .grade-callout {
+      background: var(--navy);
+      border-radius: 16px;
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+    .grade-callout-icon {
+      width: 72px; height: 72px;
+      background: rgba(17,134,237,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .grade-callout-icon svg { width: 36px; height: 36px; color: #5bb5ff; }
+    .grade-callout-text h3 { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .grade-callout-text p { font-size: 15px; color: rgba(255,255,255,.65); line-height: 1.65; max-width: 600px; }
+
+    /* ── SCHEDULE ASSISTANT ── */
+    .assistant-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .assistant-visual { background: var(--navy); border-radius: 16px; padding: 40px 32px; color: white; }
+    .assistant-headline { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; }
+    .assistant-sub { font-size: 14px; color: rgba(255,255,255,.55); margin-bottom: 28px; }
+    .assistant-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .assistant-item:last-child { border-bottom: none; }
+    .assistant-item svg { width: 20px; height: 20px; color: var(--blue); flex-shrink: 0; margin-top: 1px; }
+    .assistant-item-text { font-size: 14px; color: rgba(255,255,255,.8); line-height: 1.5; }
+    @media (max-width: 900px) { .assistant-wrap { grid-template-columns: 1fr; } }
+
+    /* ── CTA BAND ── */
+    .cta-band { background: var(--cta-grad); padding: 72px 24px; }
+    .cta-band-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .cta-band h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.4px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-band-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="homepage-v5.html" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="homepage-v5.html#solutions">Solutions</a></li>
+      <li><a href="scheduling.html" class="active">AI Scheduling</a></li>
+      <li><a href="pulse-ai.html">Pulse AI</a></li>
+      <li><a href="homepage-v5.html#about">About</a></li>
+      <li><a href="resources.html">Resources</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo.html" class="nav-btn">Request a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">AI Scheduling</div>
+    <h1>Scheduling that <span>builds itself.</span></h1>
+    <p class="page-hero-sub">Providers set preferences. Admins set rules. The solver handles the rest — multi-location, multi-role schedules resolved simultaneously with no manual rework.</p>
+    <div class="page-hero-ctas">
+      <a href="demo.html" target="_blank" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+        Request a Demo
+      </a>
+      <a href="#cta-free" class="btn-ghost">
+        Get a Free Schedule Built
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-dark" id="how-it-works">
+  <div class="section-inner">
+    <span class="section-label reveal">How It Works</span>
+    <h2 class="section-h2 reveal">This is your new scheduling workflow.</h2>
+    <p class="section-sub reveal">Scheduling disappears from your plate. We handle the busy work. You stay in full control.</p>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 class="step-h3">Preferences flow in automatically</h3>
+        <p class="step-body">Providers submit availability, preferences, and constraints in one place — on their own time.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <h3 class="step-h3">Schedules build themselves</h3>
+        <p class="step-body">AI generates a fair, rules-compliant schedule across all locations simultaneously. No manual rework.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <h3 class="step-h3">Swaps resolve without you</h3>
+        <p class="step-body">Staff trade, release, and cover shifts through the platform. No back-and-forth, no group texts.</p>
+      </div>
+      <div class="step-card reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <h3 class="step-h3">All you do is approve</h3>
+        <p class="step-body">One click. That's your new scheduling workflow.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREFERENCE-BASED SCHEDULING -->
+<section class="section" id="preferences">
+  <div class="section-inner">
+    <div class="two-col">
+      <div class="col-content reveal">
+        <span class="section-label">Preference-Based</span>
+        <h2>Make it easy to hear your staff.</h2>
+        <p>Providers walk through a guided preference wizard before each scheduling cycle — setting the days they prefer to work, shifts they'd like to avoid, and any hard constraints. Soonest collects everything in one place so nothing falls through the cracks.</p>
+        <p>When staff see their preferences honored, they feel heard. That's not a nice-to-have — it's a direct driver of engagement and retention in high-burnout environments.</p>
+        <ul class="feature-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Guided multi-step preference collection for each cycle</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Hard blocks vs. soft preferences — the solver knows the difference</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Staff can see which preferences were honored and why</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>No chasing. No email threads. No spreadsheets.</li>
+        </ul>
+      </div>
+      <div class="col-visual reveal reveal-delay-1">
+        <div class="phone-frame">
+          <img src="preference.png" alt="Soonest preference wizard — staff select preferred days to work" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIFT MARKETPLACE -->
+<section class="section section-alt" id="shift-marketplace">
+  <div class="section-inner">
+    <span class="section-label reveal">Shift Management</span>
+    <h2 class="section-h2 reveal">Trades, releases, and call-outs — handled without you.</h2>
+    <p class="section-sub reveal">Three distinct workflows for when life happens. Staff self-serve through the platform. You set whether admin approval is required. Coverage gaps fill without you chasing anyone.</p>
+
+    <div class="marketplace-grid">
+      <div class="market-card trade reveal">
+        <div class="market-icon" style="background:rgba(17,134,237,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round">
+            <path d="M7 16V4m0 0L3 8m4-4l4 4"/><path d="M17 8v12m0 0l4-4m-4 4l-4-4"/>
+          </svg>
+        </div>
+        <h3 class="market-h3">Trade</h3>
+        <p class="market-body">1-for-1 swap between two providers — offered directly or posted org-wide for anyone to pick up. Rules and admin approval settings are yours to configure.</p>
+      </div>
+      <div class="market-card release reveal reveal-delay-1">
+        <div class="market-icon" style="background:rgba(18,183,106,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+          </svg>
+        </div>
+        <h3 class="market-h3">Release</h3>
+        <p class="market-body">"I'd prefer not to work this shift, but I will if no one else picks it up." Soft release into the open marketplace with a built-in fallback so coverage is never at risk.</p>
+      </div>
+      <div class="market-card callout reveal reveal-delay-2">
+        <div class="market-icon" style="background:rgba(247,144,9,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round">
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+          </svg>
+        </div>
+        <h3 class="market-h3">Call-Out</h3>
+        <p class="market-body">Last-minute illness notification that immediately alerts admin and opens the shift to the organization. Locum tenens partner integration available if no one picks it up.</p>
+      </div>
+    </div>
+
+    <div class="grade-callout reveal">
+      <div class="grade-callout-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+        </svg>
+      </div>
+      <div class="grade-callout-text">
+        <h3>Schedule Grade</h3>
+        <p>Every published schedule receives an automatic grade rating fairness, constraint coverage, and preference satisfaction. You see exactly how well the schedule performed against your rules — and staff can see which of their preferences were honored and why.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE ASSISTANT — THE HUMAN SIDE -->
+<section class="section" id="assistant">
+  <div class="section-inner">
+    <div class="assistant-wrap">
+      <div class="assistant-content reveal">
+        <span class="section-label" style="margin-bottom:12px;">The Human Side</span>
+        <h2 class="section-h2">Every client gets a dedicated schedule assistant.</h2>
+        <p style="font-size:17px;color:var(--gray-700);line-height:1.7;margin-bottom:24px;">Software alone doesn't solve the problem. That's why every Soonest client is assigned a real human assistant who builds your setup, handles the details, and keeps everything running.</p>
+        <p style="font-size:17px;color:var(--gray-700);line-height:1.7;font-weight:600;margin-bottom:0;">"We do the busy work. You stay in full control."</p>
+      </div>
+      <div class="assistant-visual reveal reveal-delay-1">
+        <div class="assistant-headline">Your Schedule Assistant</div>
+        <div class="assistant-sub">A real person. Not a ticket queue.</div>
+        <div class="assistant-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="assistant-item-text">Builds out your entire org, users, shifts, and locations during onboarding</span>
+        </div>
+        <div class="assistant-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="assistant-item-text">Imports existing preference data and historical schedules</span>
+        </div>
+        <div class="assistant-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="assistant-item-text">Trains your admins and staff — open office hours included</span>
+        </div>
+        <div class="assistant-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="assistant-item-text">Handles last-minute changes, coverage gaps, and edge cases ongoing</span>
+        </div>
+        <div class="assistant-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="assistant-item-text">Total admin time to get live: about 4 hours on your end</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FREE SCHEDULE CTA BAND -->
+<section class="cta-band" id="cta-free">
+  <div class="cta-band-inner">
+    <h2>Not sure where to start?<br>Let us build you a free schedule.</h2>
+    <p>Send us your shifts, locations, and headcount — in any format. Screenshots, Excel, Google Sheets, email — whatever's easiest. We'll build your custom schedule and show you exactly what Soonest can do for your organization. No commitment.</p>
+    <div class="cta-band-btns">
+      <a href="demo.html" target="_blank" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
+        Get Your Free Schedule
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="demo.html" target="_blank" class="btn-ghost">Request a Demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:sales@getsoonest.com">sales@getsoonest.com</a>
+          <a href="https://getsoonest.com" target="_blank">getsoonest.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling.html">AI Scheduling</a></li>
+          <li><a href="pulse-ai.html">Pulse AI</a></li>
+          <li><a href="homepage-v5.html#features">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="homepage-v5.html#about">About Us</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="homepage-v5.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo.html">Request a Demo</a></li>
+          <li><a href="#cta-free">Free Schedule Offer</a></li>
+          <li><a href="mailto:sales@getsoonest.com">Email Sales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Silicon Slopes, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
