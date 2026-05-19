@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burnout Is a Hidden Tax on Healthcare Organizations — Soonest</title>
+  <meta name="description" content="Turnover, overtime, locum spend — the financial cost of burnout is measurable and compounding. Most organizations don't see the full picture until it's a crisis." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED; --blue-dark: #0d6ec0; --navy: #1E284D; --navy-deep: #101828;
+      --gray-700: #475467; --gray-400: #98A2B3; --gray-200: #E4E5F3; --gray-100: #F2F4F7; --off-white: #F9FAFB;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: white; color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .announce-bar { background: var(--blue); color: white; text-align: center; padding: 10px 24px; font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 12px; position: relative; }
+    .announce-bar a { color: white; text-decoration: underline; }
+    .announce-dismiss { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; font-size: 18px; opacity: 0.8; }
+
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* Article Hero */
+    .article-hero { background: var(--hero-grad); padding: 60px 24px 72px; position: relative; overflow: hidden; }
+    .article-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 85%, rgba(17,134,237,.12) 0%, transparent 50%), radial-gradient(circle at 85% 15%, rgba(17,134,237,.07) 0%, transparent 50%); pointer-events: none; }
+    .article-hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .article-hero-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .article-back { display: inline-flex; align-items: center; gap: 6px; color: rgba(255,255,255,.5); font-size: 14px; text-decoration: none; margin-bottom: 28px; transition: color 0.15s; }
+    .article-back:hover { color: rgba(255,255,255,.85); }
+    .article-back svg { width: 14px; height: 14px; }
+    .article-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase; color: #5bb5ff; background: rgba(17,134,237,.2); padding: 4px 10px; border-radius: 100px; margin-bottom: 18px; }
+    .article-title { font-family: 'Poppins', sans-serif; font-size: 46px; font-weight: 800; color: white; letter-spacing: -1px; line-height: 1.12; margin-bottom: 24px; }
+    @media (max-width: 768px) { .article-title { font-size: 30px; } }
+    .article-meta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+    .article-meta-item { font-size: 14px; color: rgba(255,255,255,.5); }
+    .article-meta-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,.3); flex-shrink: 0; }
+
+    /* Article Body */
+    .article-body { max-width: 720px; margin: 0 auto; padding: 64px 24px 80px; }
+    .article-lead { font-size: 20px; color: var(--navy); line-height: 1.75; font-weight: 500; margin-bottom: 36px; padding-bottom: 36px; border-bottom: 1px solid var(--gray-200); }
+    .article-body p { font-size: 17px; color: var(--gray-700); line-height: 1.85; margin-bottom: 22px; }
+    .article-body h2 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; color: var(--navy); margin: 52px 0 16px; line-height: 1.3; }
+    .article-body ul { margin: 4px 0 22px 0; padding-left: 0; list-style: none; }
+    .article-body ul li { font-size: 17px; color: var(--gray-700); line-height: 1.85; margin-bottom: 8px; padding-left: 22px; position: relative; }
+    .article-body ul li::before { content: ''; position: absolute; left: 0; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+    .callout { background: rgba(17,134,237,.05); border-left: 3px solid var(--blue); border-radius: 0 10px 10px 0; padding: 22px 28px; margin: 40px 0 28px; }
+    .callout p { font-size: 18px; color: var(--navy); font-weight: 500; margin: 0; line-height: 1.7; font-style: italic; }
+
+    /* CTA */
+    .article-cta { background: var(--navy-deep); padding: 72px 24px; text-align: center; }
+    .article-cta-inner { max-width: 560px; margin: 0 auto; }
+    .article-cta h2 { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: white; letter-spacing: -0.5px; margin-bottom: 14px; line-height: 1.25; }
+    .article-cta p { font-size: 17px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 14px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.15s, transform 0.15s; }
+    .cta-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .cta-btn svg { width: 14px; height: 14px; }
+
+    /* Footer */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color 0.15s; }
+    .footer-legal a:hover { color: white; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="announce-bar" id="announce-bar">
+  <span>Now accepting early access partners for 2026 — <a href="demo.html">lock in founder pricing while it lasts</a></span>
+  <button class="announce-dismiss" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Dismiss">&times;</button>
+</div>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="scheduling.html">AI Scheduling</a></li>
+      <li><a href="pulse-ai.html">Pulse AI</a></li>
+      <li><a href="resources.html" class="active">Resources</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo.html" class="nav-btn">Request a Demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="article-hero-grid"></div>
+  <div class="article-hero-inner">
+    <a href="resources.html" class="article-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Resources
+    </a>
+    <div class="article-tag">Operations</div>
+    <h1 class="article-title">Burnout Is a Hidden Tax on Healthcare Organizations</h1>
+    <div class="article-meta">
+      <span class="article-meta-item">Jason Hanks</span>
+      <span class="article-meta-sep"></span>
+      <span class="article-meta-item">January 25, 2026</span>
+      <span class="article-meta-sep"></span>
+      <span class="article-meta-item">5 min read</span>
+    </div>
+  </div>
+</div>
+
+<!-- ARTICLE BODY -->
+<div class="article-body">
+
+  <p class="article-lead">Burnout among healthcare professionals is often discussed as a human or cultural issue. And it is. But it's also something else that doesn't get nearly enough attention: a direct and compounding financial drain on healthcare organizations.</p>
+
+  <p>Many organizations underestimate just how deeply burnout impacts their bottom line. When clinicians and staff are overworked, undersupported, and stuck in reactive schedules, the costs don't show up as a single line item. They show up everywhere.</p>
+
+  <h2>Turnover: The Most Obvious (and Expensive) Cost</h2>
+
+  <p>Burnout is one of the leading drivers of turnover in healthcare. When employees leave, organizations incur costs that go far beyond posting a job listing:</p>
+
+  <ul>
+    <li>Recruiting and hiring expenses</li>
+    <li>Onboarding and training time</li>
+    <li>Lost productivity during ramp-up</li>
+    <li>Increased workload and stress on remaining staff</li>
+  </ul>
+
+  <p>Replacing a single clinician or experienced staff member can cost tens or even hundreds of thousands of dollars, depending on the role. And when burnout is systemic, turnover becomes cyclical — creating a revolving door that organizations quietly normalize but never fully absorb.</p>
+
+  <p>Reducing burnout slows this cycle. When people stay, organizations spend less time and money rebuilding institutional knowledge they already had.</p>
+
+  <h2>Training and Ramp-Up: The Silent Productivity Killer</h2>
+
+  <p>Every new hire represents a period of reduced efficiency. Even strong performers take months to reach full productivity. During that time:</p>
+
+  <ul>
+    <li>Managers spend more hours training instead of leading</li>
+    <li>Senior staff are pulled away from patient care to mentor</li>
+    <li>Scheduling gaps and errors become more likely</li>
+  </ul>
+
+  <p>Lower burnout means fewer new hires to ramp, which preserves productivity and allows teams to operate closer to their true capacity.</p>
+
+  <h2>Overtime: A Burnout Multiplier (and Cost Amplifier)</h2>
+
+  <p>Burnout and overtime feed each other.</p>
+
+  <p>When schedules are uneven or reactive, some staff consistently carry more of the load. This leads to fatigue, disengagement, and eventually — more callouts and turnover. To fill the gaps, organizations rely on overtime, which:</p>
+
+  <ul>
+    <li>Increases labor costs immediately</li>
+    <li>Raises the risk of errors and safety issues</li>
+    <li>Accelerates burnout even further</li>
+  </ul>
+
+  <p>By reducing burnout, organizations are better able to create more equitable, predictable schedules, distributing workload fairly and reducing the need for overtime altogether. The result is a double win: lower labor costs and a more sustainable workforce.</p>
+
+  <h2>Locum Tenens and Agency Staff: The Costliest Safety Net</h2>
+
+  <p>When burnout drives vacancies and absenteeism, organizations often turn to locum tenens or agency staff as a stopgap. While sometimes necessary, this approach comes at a premium:</p>
+
+  <ul>
+    <li>Significantly higher hourly rates</li>
+    <li>Less familiarity with systems and workflows</li>
+    <li>Increased administrative and coordination burden</li>
+  </ul>
+
+  <p>Over time, heavy reliance on agency staff can quietly inflate labor budgets while masking the underlying issue.</p>
+
+  <p>Organizations that invest in reducing burnout — through better scheduling, clearer expectations, and more stable workloads — can dramatically reduce their dependence on these expensive alternatives.</p>
+
+  <h2>The Compounding Effect: Burnout Touches Everything</h2>
+
+  <p>Burnout doesn't just increase costs in isolation. It compounds across the organization:</p>
+
+  <ul>
+    <li>Higher turnover leads to more overtime</li>
+    <li>More overtime accelerates burnout</li>
+    <li>Burnout increases reliance on agency staff</li>
+    <li>Agency costs strain budgets, limiting investment in staff support</li>
+  </ul>
+
+  <p>Breaking this cycle requires recognizing burnout not as an unavoidable reality of healthcare, but as a business risk that can be managed.</p>
+
+  <h2>The ROI of Reducing Burnout</h2>
+
+  <p>When organizations take burnout seriously, the financial impact is measurable:</p>
+
+  <ul>
+    <li>Lower hiring and recruiting spend</li>
+    <li>Reduced training and onboarding costs</li>
+    <li>Decreased overtime expenses</li>
+    <li>Less reliance on locum tenens and agency labor</li>
+    <li>More stable, productive teams</li>
+  </ul>
+
+  <p>Most importantly, reducing burnout creates a workforce that can focus on delivering high-quality care — without constantly operating in crisis mode.</p>
+
+  <div class="callout">
+    <p>Burnout isn't just costing healthcare professionals their energy and joy. It's costing organizations far more than they realize. The organizations that win long-term will be the ones that stop treating burnout as an HR problem and start treating it as what it truly is: a strategic and financial imperative.</p>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<section class="article-cta">
+  <div class="article-cta-inner">
+    <h2>Less Burnout Starts With Better Schedules</h2>
+    <p>See how preference-based AI scheduling gives your team autonomy while keeping your operations running.</p>
+    <a href="demo.html" class="cta-btn">
+      Request a Demo
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+          <a href="tel:3854755793">385-475-5793</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling.html">AI Scheduling</a></li>
+          <li><a href="pulse-ai.html">Pulse AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="index.html#built-different">About Us</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo.html">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+</script>
+</body>
+</html>
