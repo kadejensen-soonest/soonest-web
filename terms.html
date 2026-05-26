@@ -18,9 +18,6 @@
     html { scroll-behavior: smooth; }
     body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
 
-    .announce-bar { background: var(--blue); color: white; text-align: center; padding: 10px 24px; font-size: 14px; font-weight: 500; display: flex; align-items: center; justify-content: center; position: relative; }
-    .announce-bar a { color: white; text-decoration: underline; }
-    .announce-dismiss { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); background: none; border: none; color: white; cursor: pointer; font-size: 18px; opacity: 0.8; }
 
     .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
     .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
@@ -88,11 +85,6 @@
   </style>
 </head>
 <body>
-
-<div class="announce-bar" id="announce-bar">
-  <span>Now accepting early access partners for 2026 — <a href="demo">lock in founder pricing while it lasts</a></span>
-  <button class="announce-dismiss" onclick="document.getElementById('announce-bar').style.display='none'" aria-label="Dismiss">&times;</button>
-</div>
 
 <nav class="nav" id="main-nav">
   <div class="nav-inner">
