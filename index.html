@@ -48,28 +48,6 @@
     }
 
     /* ── ANNOUNCEMENT BAR ── */
-    .announce-bar {
-      background: var(--blue);
-      color: white;
-      text-align: center;
-      padding: 10px 24px;
-      font-size: 14px;
-      font-weight: 500;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      position: relative;
-    }
-    .announce-bar a { color: white; text-decoration: underline; }
-    .announce-bar a:hover { opacity: 0.85; }
-    .announce-dismiss {
-      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: white; cursor: pointer;
-      font-size: 18px; line-height: 1; opacity: 0.8;
-    }
-    .announce-dismiss:hover { opacity: 1; }
-
     /* ── NAVIGATION ── */
     .nav {
       background: var(--navy-deep);
@@ -879,12 +857,6 @@
 </head>
 <body>
 
-<!-- ANNOUNCEMENT BAR -->
-<div class="announce-bar" id="announce-bar">
-  <span>Now accepting early access partners for 2026 — <a href="demo">lock in founder pricing while it lasts</a></span>
-  <button class="announce-dismiss" onclick="dismissBar()" aria-label="Dismiss">&times;</button>
-</div>
-
 <!-- NAVIGATION -->
 <nav class="nav" id="main-nav">
   <div class="nav-inner">
@@ -1479,9 +1451,6 @@
 </footer>
 
 <script>
-  function dismissBar() {
-    document.getElementById('announce-bar').style.display = 'none';
-  }
 
   const nav = document.getElementById('main-nav');
   window.addEventListener('scroll', () => {
