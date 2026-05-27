@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Dynamics Coaching — Soonest</title>
+  <meta name="description" content="Team dynamics coaching for medical groups. Strengthen collaboration, manage conflict, and build feedback cultures that hold up under clinical pressure." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --teal: #0ABFBC;
+      --teal-soft: rgba(10,191,188,.08);
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --black: #0D0E11;
+      --gray-700: #475467;
+      --gray-600: #4B5371;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --white: #FFFFFF;
+      --green: #12B76A;
+      --amber: #F79009;
+      --red: #F04438;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --cta-grad: linear-gradient(155deg, #2a3a6e 0%, #101828 100%);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s, transform 0.1s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    .breadcrumb { background: var(--navy-deep); padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .breadcrumb-inner { max-width: 1100px; margin: 0 auto; font-size: 13px; color: rgba(255,255,255,.45); }
+    .breadcrumb-inner a { color: rgba(255,255,255,.65); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb-inner a:hover { color: white; }
+    .breadcrumb-inner .sep { margin: 0 8px; opacity: 0.4; }
+    .breadcrumb-inner .current { color: rgba(255,255,255,.85); }
+
+    .page-hero { background: var(--hero-grad); padding: 72px 24px 80px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 80%, rgba(10,191,188,.16) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%); pointer-events: none; }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .page-hero-inner { max-width: 820px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .page-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(10,191,188,.18); border: 1px solid rgba(10,191,188,.35); color: #5fe5e2; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.2px; }
+    .page-hero h1 { font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 800; line-height: 1.1; color: white; letter-spacing: -1px; margin-bottom: 20px; }
+    .page-hero h1 span { color: #5fe5e2; }
+    .page-hero-sub { font-size: 18px; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 32px; }
+    .page-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--blue); color: white; padding: 14px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s, transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 16px rgba(17,134,237,.35); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(17,134,237,.45); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,.9); padding: 14px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,.25); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s, border-color 0.15s; }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+    @media (max-width: 600px) { .page-hero h1 { font-size: 38px; } .page-hero { padding: 56px 20px 64px; } }
+
+    .section { padding: 96px 24px; }
+    .section-alt { background: var(--gray-100); }
+    .section-dark { background: var(--navy-deep); color: white; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 12px; display: block; }
+    .section-dark .section-label { color: #5fe5e2; }
+    .section-h2 { font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.15; color: var(--navy); letter-spacing: -0.6px; margin-bottom: 16px; }
+    .section-dark .section-h2 { color: white; }
+    .section-sub { font-size: 17px; color: var(--gray-700); line-height: 1.7; max-width: 640px; margin-bottom: 56px; }
+    .section-dark .section-sub { color: rgba(255,255,255,.65); }
+    @media (max-width: 600px) { .section { padding: 64px 20px; } .section-h2 { font-size: 30px; } }
+
+    .signs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    @media (max-width: 700px) { .signs-grid { grid-template-columns: 1fr; } }
+    .sign-card { background: white; border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); display: flex; gap: 18px; align-items: flex-start; }
+    .sign-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--teal-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sign-icon svg { width: 22px; height: 22px; color: var(--teal); }
+    .sign-card h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .sign-card p { font-size: 14px; color: var(--gray-700); line-height: 1.6; }
+
+    .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 700px) { .programs-grid { grid-template-columns: 1fr; } }
+    .program-card { background: white; border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); transition: transform 0.2s, box-shadow 0.2s; }
+    .program-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+    .program-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--teal-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .program-icon svg { width: 26px; height: 26px; color: var(--teal); }
+    .program-card h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .program-card p { font-size: 15px; color: var(--gray-700); line-height: 1.65; margin-bottom: 14px; }
+    .program-card .program-format { font-size: 13px; font-weight: 600; color: var(--teal); letter-spacing: 0.3px; text-transform: uppercase; }
+
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 16px; }
+    @media (max-width: 800px) { .outcomes-grid { grid-template-columns: 1fr; } }
+    .outcome-card { padding: 24px 0; }
+    .outcome-num { font-family: 'Poppins', sans-serif; font-size: 44px; font-weight: 800; color: #5fe5e2; line-height: 1; margin-bottom: 12px; letter-spacing: -1.3px; }
+    .outcome-label { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 6px; }
+    .outcome-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    .cta-band { background: var(--cta-grad); padding: 72px 24px; }
+    .cta-band-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .cta-band h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.4px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-band-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="scheduling">AI Scheduling</a></li>
+      <li><a href="pulse-ai">Pulse AI</a></li>
+      <li><a href="coaching" class="active">Coaching</a></li>
+      <li><a href="resources">Resources</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Request a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo" class="nav-btn">Request a Demo</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="coaching">Coaching</a><span class="sep">/</span><span class="current">Team Dynamics Coaching</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Team Dynamics
+    </div>
+    <h1>Strong teams are built. <span>Not assigned.</span></h1>
+    <p class="page-hero-sub">When teams stop trusting each other, every clinical decision gets slower, every conflict gets louder, and every good employee starts to drift. Our team dynamics programs rebuild the foundation.</p>
+    <div class="page-hero-ctas">
+      <a href="demo" class="btn-primary">
+        Request a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#programs" class="btn-ghost">
+        See the Programs
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label reveal">When Teams Need This Work</span>
+    <h2 class="section-h2 reveal">If any of these sound familiar, you're in the right place.</h2>
+    <p class="section-sub reveal">Team dysfunction rarely shows up in a single dramatic moment. It compounds quietly through small breakdowns until the cost is impossible to ignore.</p>
+
+    <div class="signs-grid">
+      <div class="sign-card reveal">
+        <div class="sign-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <div>
+          <h3>Conflict is going underground</h3>
+          <p>Disagreements show up in side conversations and texts, not in the open. Decisions get re litigated after the meeting ends.</p>
+        </div>
+      </div>
+      <div class="sign-card reveal reveal-delay-1">
+        <div class="sign-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div>
+          <h3>Feedback is broken</h3>
+          <p>Performance reviews feel like ambushes. Tough conversations get postponed indefinitely or delivered too bluntly when they finally happen.</p>
+        </div>
+      </div>
+      <div class="sign-card reveal">
+        <div class="sign-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <h3>People aren't speaking up</h3>
+          <p>Clinical staff stay silent in safety huddles. Junior providers don't push back on bad calls. Errors get caught later instead of earlier.</p>
+        </div>
+      </div>
+      <div class="sign-card reveal reveal-delay-1">
+        <div class="sign-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div>
+          <h3>The team is changing fast</h3>
+          <p>A merger, a new partner, rapid hiring, or a leadership transition has thrown the working rhythms off. The old norms aren't holding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="programs">
+  <div class="section-inner">
+    <span class="section-label reveal">Programs</span>
+    <h2 class="section-h2 reveal">Four programs for stronger teams.</h2>
+    <p class="section-sub reveal">Each program is delivered by healthcare experienced facilitators. They blend group sessions, on the job application, and follow up to make the change stick.</p>
+
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>Team Dynamics &amp; Collaboration</h3>
+        <p>Rebuild how your team operates day to day. Roles, communication norms, decision making rights, and how the team handles change together.</p>
+        <span class="program-format">Workshop series / 4 to 8 weeks</span>
+      </div>
+      <div class="program-card reveal reveal-delay-1">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>Managing Conflict</h3>
+        <p>Practical tools for navigating clinical, interpersonal, and political conflict without damaging relationships. Especially valuable in high stakes environments where avoidance is the default.</p>
+        <span class="program-format">Workshop / 2 to 4 weeks</span>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <h3>Relational Feedback</h3>
+        <p>Train physicians and admins to give and receive feedback in a way that builds trust instead of eroding it. The skill that makes peer review and performance management actually work.</p>
+        <span class="program-format">Workshop series / 4 weeks</span>
+      </div>
+      <div class="program-card reveal reveal-delay-1">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h3>Leadership Development</h3>
+        <p>For new and seasoned medical leaders. Tactical skill building across decision making, delegation, accountability, and leading through change. Built for clinical schedules.</p>
+        <span class="program-format">Cohort / 3 to 6 months</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="outcomes">
+  <div class="section-inner">
+    <span class="section-label reveal">Outcomes</span>
+    <h2 class="section-h2 reveal">What healthier teams actually do differently.</h2>
+    <p class="section-sub reveal">Team work is invisible until it pays off. When the team is healthy, everything downstream gets faster, safer, and cheaper.</p>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal">
+        <div class="outcome-num">↓ Conflict</div>
+        <div class="outcome-label">Less drag on decisions</div>
+        <p class="outcome-body">Disagreements happen out in the open, get resolved faster, and stop spilling into clinical operations. Leaders spend less time mediating and more time leading.</p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-num">↑ Safety</div>
+        <div class="outcome-label">Stronger psychological safety</div>
+        <p class="outcome-body">Staff speak up earlier about errors, near misses, and concerns. Junior clinicians push back when they need to. Patient safety improves as a direct result.</p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-2">
+        <div class="outcome-num">↑ Retention</div>
+        <div class="outcome-label">People stay longer</div>
+        <p class="outcome-body">Most providers don't leave because of money. They leave because of who they have to work with. Better team dynamics is one of the highest leverage retention investments you can make.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <h2>Healthy teams aren't an accident.</h2>
+    <p>Book a 20 minute call. We'll talk through what's happening on your team and recommend the right starting point. No pitch, just a conversation.</p>
+    <div class="cta-band-btns">
+      <a href="demo" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
+        Request a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="coaching" class="btn-ghost">Back to Coaching</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+          <a href="tel:3854755793">385-475-5793</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Coaching</p>
+        <ul class="footer-links">
+          <li><a href="coaching-burnout">Burnout</a></li>
+          <li><a href="coaching-team-dynamics">Team Dynamics</a></li>
+          <li><a href="coaching-ai">AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navMenu.classList.toggle('open'); });
+  navMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { navToggle.classList.remove('open'); navMenu.classList.remove('open'); }); });
+</script>
+</body>
+</html>

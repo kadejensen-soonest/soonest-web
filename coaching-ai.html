@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Coaching — Soonest</title>
+  <meta name="description" content="AI coaching for healthcare leaders. Learn to use Claude, agents, and AI workflows to run your group with less admin burden and more leverage." />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --purple: #7C3AED;
+      --purple-soft: rgba(124,58,237,.08);
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --black: #0D0E11;
+      --gray-700: #475467;
+      --gray-600: #4B5371;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --white: #FFFFFF;
+      --green: #12B76A;
+      --amber: #F79009;
+      --red: #F04438;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --cta-grad: linear-gradient(155deg, #2a3a6e 0%, #101828 100%);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s, transform 0.1s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    .breadcrumb { background: var(--navy-deep); padding: 14px 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .breadcrumb-inner { max-width: 1100px; margin: 0 auto; font-size: 13px; color: rgba(255,255,255,.45); }
+    .breadcrumb-inner a { color: rgba(255,255,255,.65); text-decoration: none; transition: color 0.15s; }
+    .breadcrumb-inner a:hover { color: white; }
+    .breadcrumb-inner .sep { margin: 0 8px; opacity: 0.4; }
+    .breadcrumb-inner .current { color: rgba(255,255,255,.85); }
+
+    .page-hero { background: var(--hero-grad); padding: 72px 24px 80px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 80%, rgba(124,58,237,.16) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%); pointer-events: none; }
+    .hero-grid-bg { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px); background-size: 60px 60px; pointer-events: none; }
+    .page-hero-inner { max-width: 820px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
+    .page-hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(124,58,237,.18); border: 1px solid rgba(124,58,237,.35); color: #c4a8ff; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.2px; }
+    .page-hero h1 { font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 800; line-height: 1.1; color: white; letter-spacing: -1px; margin-bottom: 20px; }
+    .page-hero h1 span { color: #c4a8ff; }
+    .page-hero-sub { font-size: 18px; color: rgba(255,255,255,.75); line-height: 1.65; margin-bottom: 32px; }
+    .page-hero-ctas { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--blue); color: white; padding: 14px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s, transform 0.15s, box-shadow 0.15s; box-shadow: 0 4px 16px rgba(17,134,237,.35); }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(17,134,237,.45); }
+    .btn-ghost { background: transparent; color: rgba(255,255,255,.9); padding: 14px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,.25); cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s, border-color 0.15s; }
+    .btn-ghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+    @media (max-width: 600px) { .page-hero h1 { font-size: 38px; } .page-hero { padding: 56px 20px 64px; } }
+
+    .section { padding: 96px 24px; }
+    .section-alt { background: var(--gray-100); }
+    .section-dark { background: var(--navy-deep); color: white; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--purple); margin-bottom: 12px; display: block; }
+    .section-dark .section-label { color: #c4a8ff; }
+    .section-h2 { font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700; line-height: 1.15; color: var(--navy); letter-spacing: -0.6px; margin-bottom: 16px; }
+    .section-dark .section-h2 { color: white; }
+    .section-sub { font-size: 17px; color: var(--gray-700); line-height: 1.7; max-width: 640px; margin-bottom: 56px; }
+    .section-dark .section-sub { color: rgba(255,255,255,.65); }
+    @media (max-width: 600px) { .section { padding: 64px 20px; } .section-h2 { font-size: 30px; } }
+
+    .pain-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 800px) { .pain-grid { grid-template-columns: 1fr; } }
+    .pain-card { background: white; border-radius: var(--radius-lg); padding: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); }
+    .pain-icon { width: 44px; height: 44px; border-radius: 10px; background: var(--purple-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .pain-icon svg { width: 22px; height: 22px; color: var(--purple); }
+    .pain-card h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .pain-card p { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
+
+    .programs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 700px) { .programs-grid { grid-template-columns: 1fr; } }
+    .program-card { background: white; border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); transition: transform 0.2s, box-shadow 0.2s; }
+    .program-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+    .program-icon { width: 52px; height: 52px; border-radius: 12px; background: var(--purple-soft); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
+    .program-icon svg { width: 26px; height: 26px; color: var(--purple); }
+    .program-card h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .program-card p { font-size: 15px; color: var(--gray-700); line-height: 1.65; margin-bottom: 14px; }
+    .program-card .program-format { font-size: 13px; font-weight: 600; color: var(--purple); letter-spacing: 0.3px; text-transform: uppercase; }
+
+    .workflow-list { display: flex; flex-direction: column; gap: 20px; margin-top: 16px; }
+    .workflow-card { background: white; border-radius: var(--radius-lg); padding: 28px 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); display: flex; gap: 24px; align-items: center; }
+    @media (max-width: 700px) { .workflow-card { flex-direction: column; align-items: flex-start; padding: 24px; } }
+    .workflow-num { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: var(--purple); flex-shrink: 0; opacity: 0.5; min-width: 50px; }
+    .workflow-body h3 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .workflow-body p { font-size: 15px; color: var(--gray-700); line-height: 1.65; }
+
+    .outcomes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 16px; }
+    @media (max-width: 800px) { .outcomes-grid { grid-template-columns: 1fr; } }
+    .outcome-card { padding: 24px 0; }
+    .outcome-num { font-family: 'Poppins', sans-serif; font-size: 44px; font-weight: 800; color: #c4a8ff; line-height: 1; margin-bottom: 12px; letter-spacing: -1.3px; }
+    .outcome-label { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600; color: white; margin-bottom: 6px; }
+    .outcome-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+    .cta-band { background: var(--cta-grad); padding: 72px 24px; }
+    .cta-band-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .cta-band h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.4px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-band-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+  </style>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="scheduling">AI Scheduling</a></li>
+      <li><a href="pulse-ai">Pulse AI</a></li>
+      <li><a href="coaching" class="active">Coaching</a></li>
+      <li><a href="resources">Resources</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Request a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="demo" class="nav-btn">Request a Demo</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="breadcrumb">
+  <div class="breadcrumb-inner">
+    <a href="coaching">Coaching</a><span class="sep">/</span><span class="current">AI Coaching</span>
+  </div>
+</div>
+
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+      AI Coaching
+    </div>
+    <h1>AI is here. <span>Most leaders aren't using it.</span></h1>
+    <p class="page-hero-sub">Your competitors are quietly automating their back office. You're still drowning in spreadsheets and email threads. We help healthcare leaders actually use Claude, agents, and AI workflows to reclaim their week.</p>
+    <div class="page-hero-ctas">
+      <a href="demo" class="btn-primary">
+        Request a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#programs" class="btn-ghost">
+        See the Programs
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label reveal">The Gap</span>
+    <h2 class="section-h2 reveal">The tools exist. Almost nobody is actually using them.</h2>
+    <p class="section-sub reveal">Most healthcare leaders have either tried AI once, gotten a bad answer, and moved on, or feel like they're three steps behind everyone else. The truth is the gap isn't the technology. It's knowing how to use it.</p>
+
+    <div class="pain-grid">
+      <div class="pain-card reveal">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>You don't know where to start</h3>
+        <p>Claude. ChatGPT. Agents. MCPs. Automations. The landscape is overwhelming, and no one's translating it into something useful for a medical group operator.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-1">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+        </div>
+        <h3>You've tried it and given up</h3>
+        <p>You asked it something, got a generic answer, and concluded AI isn't useful for healthcare. The problem wasn't the tool. It was the prompt and the workflow.</p>
+      </div>
+      <div class="pain-card reveal reveal-delay-2">
+        <div class="pain-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+        </div>
+        <h3>You're losing time you can't get back</h3>
+        <p>The hours you're spending on scheduling, follow ups, drafting, reporting, and triage are exactly the hours AI does well. Every week without it compounds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt" id="programs">
+  <div class="section-inner">
+    <span class="section-label reveal">Programs</span>
+    <h2 class="section-h2 reveal">Four programs built for healthcare operators.</h2>
+    <p class="section-sub reveal">No theory. No hype. Every program builds working AI fluency around the actual jobs you do every day. Run them as standalone training, or as a multi quarter buildout.</p>
+
+    <div class="programs-grid">
+      <div class="program-card reveal">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+        </div>
+        <h3>AI Fluency for Healthcare Leaders</h3>
+        <p>The foundational program. How AI actually works, what it's good and bad at, prompt design, and the highest leverage ways for a clinical leader to use it day to day.</p>
+        <span class="program-format">Cohort / 4 weeks</span>
+      </div>
+      <div class="program-card reveal reveal-delay-1">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <h3>Agent Workflow Design</h3>
+        <p>Move beyond chat to AI that does work for you. Design custom agents for HubSpot, scheduling, email triage, recruiting, reporting, and operations. You leave with running agents, not slides.</p>
+        <span class="program-format">Workshop series / 6 weeks</span>
+      </div>
+      <div class="program-card reveal">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l4 4-4 4M5 19l4-4-4-4"/></svg>
+        </div>
+        <h3>Prompting &amp; Tool Use</h3>
+        <p>Hands on prompting practice for clinical and operational use cases. Sales follow ups, board prep, payer responses, recruiting outreach, internal comms, and SOPs. Tactical skill building.</p>
+        <span class="program-format">Workshop / 2 to 4 weeks</span>
+      </div>
+      <div class="program-card reveal reveal-delay-1">
+        <div class="program-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 9l-4 4-3-3-5 5"/></svg>
+        </div>
+        <h3>AI Adoption Roadmap</h3>
+        <p>For groups ready to operationalize AI across their org. We map your workflows, identify the highest ROI opportunities, design the rollout, and coach your team through adoption.</p>
+        <span class="program-format">Engagement / 3 to 6 months</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <span class="section-label reveal">What Leaders Actually Build</span>
+    <h2 class="section-h2 reveal">Concrete examples from healthcare operators.</h2>
+    <p class="section-sub reveal">These aren't theoretical. They're the kinds of workflows our coaching graduates run every week. Pick one and you've already gotten ROI on the program.</p>
+
+    <div class="workflow-list">
+      <div class="workflow-card reveal">
+        <div class="workflow-num">01</div>
+        <div class="workflow-body">
+          <h3>An agent that drafts your daily follow up emails</h3>
+          <p>Pulls from your CRM, drafts personalized follow ups in your voice, queues them up for review. What used to take 90 minutes now takes 10.</p>
+        </div>
+      </div>
+      <div class="workflow-card reveal">
+        <div class="workflow-num">02</div>
+        <div class="workflow-body">
+          <h3>A scheduling assistant that runs prep before every meeting</h3>
+          <p>Reads the attendee's LinkedIn, summarizes the deal history, pulls recent emails, drops a one page brief in your inbox the morning of.</p>
+        </div>
+      </div>
+      <div class="workflow-card reveal">
+        <div class="workflow-num">03</div>
+        <div class="workflow-body">
+          <h3>An AI ops layer for your BDR team</h3>
+          <p>Daily call summaries, scorecards, pacing reports, and coaching recommendations. Your reps spend more time selling and less time updating records.</p>
+        </div>
+      </div>
+      <div class="workflow-card reveal">
+        <div class="workflow-num">04</div>
+        <div class="workflow-body">
+          <h3>A finance agent for monthly close prep</h3>
+          <p>Pulls expense data, flags anomalies, drafts variance commentary, and builds the board ready financial summary. What used to take a CFO two days now takes a morning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" id="outcomes">
+  <div class="section-inner">
+    <span class="section-label reveal">Outcomes</span>
+    <h2 class="section-h2 reveal">What good AI adoption actually looks like.</h2>
+    <p class="section-sub reveal">The goal isn't impressing your friends with prompts. It's reclaiming your week and scaling what you can do without scaling headcount.</p>
+
+    <div class="outcomes-grid">
+      <div class="outcome-card reveal">
+        <div class="outcome-num">10+ hrs</div>
+        <div class="outcome-label">Returned to your week</div>
+        <p class="outcome-body">Most leaders save a full day a week within the first 30 days. That time goes back into strategy, hiring, fundraising, and patient facing work.</p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-1">
+        <div class="outcome-num">↑ Leverage</div>
+        <div class="outcome-label">Do more without hiring</div>
+        <p class="outcome-body">Agents handle the work that used to require a coordinator, an analyst, or a junior associate. You scale impact without scaling org chart.</p>
+      </div>
+      <div class="outcome-card reveal reveal-delay-2">
+        <div class="outcome-num">↓ Drift</div>
+        <div class="outcome-label">Stay ahead of the curve</div>
+        <p class="outcome-body">AI literacy compounds. Leaders who build the muscle now will move faster every quarter from here. Leaders who don't will fall further behind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="cta-band-inner">
+    <h2>The fastest growing groups are using AI. Are you?</h2>
+    <p>Book a 20 minute call. We'll show you what AI fluency looks like in practice and recommend a starting point based on where your week is leaking time.</p>
+    <div class="cta-band-btns">
+      <a href="demo" class="btn-primary" style="background:white;color:var(--navy);box-shadow:none;">
+        Request a Demo
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="coaching" class="btn-ghost">Back to Coaching</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+          <a href="tel:3854755793">385-475-5793</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Coaching</p>
+        <ul class="footer-links">
+          <li><a href="coaching-burnout">Burnout</a></li>
+          <li><a href="coaching-team-dynamics">Team Dynamics</a></li>
+          <li><a href="coaching-ai">AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if (!id) return;
+      const target = document.getElementById(id);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navMenu.classList.toggle('open'); });
+  navMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => { navToggle.classList.remove('open'); navMenu.classList.remove('open'); }); });
+</script>
+</body>
+</html>
