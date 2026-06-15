@@ -224,12 +224,16 @@ All pages use the same nav. The logo links back to `index.html`.
 - **DNS:** Managed at IONOS. `www` CNAME → Vercel. Google Workspace MX records in place.
 - **No build step** — changes to HTML/CSS/JS go live as-is after git push
 
+### At the start of every session:
+Always run `git pull origin main` before making any changes. Multiple people push to this repo and you will cause conflicts if you edit on a stale copy.
+
 ### To deploy a change:
-1. Edit files locally
-2. `git add <files>`
-3. `git commit -m "description"`
-4. `git push origin main`
-5. Vercel deploys automatically (usually 30–60 seconds)
+1. `git pull origin main` (always first)
+2. Edit files locally
+3. `git add <files>`
+4. `git commit -m "description"`
+5. `git push origin main`
+6. Vercel deploys automatically (usually 30–60 seconds)
 
 ---
 
