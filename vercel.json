@@ -1,5 +1,9 @@
 {
   "cleanUrls": true,
+  "redirects": [
+    { "source": "/cold-call-guide", "destination": "/", "permanent": false },
+    { "source": "/cold-call-guide.html", "destination": "/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
