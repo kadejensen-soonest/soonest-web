@@ -1,9 +1,5 @@
 User-agent: *
 Disallow: /cold-call-guide
-Disallow: /coaching
-Disallow: /coaching-ai
-Disallow: /coaching-burnout
-Disallow: /coaching-team-dynamics
 Disallow: /homepage-v2
 Disallow: /homepage-v3
 Disallow: /homepage-v4

@@ -26,6 +26,30 @@
   </url>
 
   <url>
+    <loc>https://www.soonest.io/coaching</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.soonest.io/coaching-burnout</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.soonest.io/coaching-team-dynamics</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
+    <loc>https://www.soonest.io/coaching-ai</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
     <loc>https://www.soonest.io/resources</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
