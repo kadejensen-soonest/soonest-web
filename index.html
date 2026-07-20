@@ -11,6 +11,119 @@
   <meta property="og:url" content="https://www.soonest.io/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Soonest" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.soonest.io/#organization",
+        "name": "Soonest",
+        "url": "https://www.soonest.io/",
+        "logo": "https://www.soonest.io/icon-mark.png",
+        "email": "support@getsoonest.com",
+        "sameAs": [
+          "https://www.linkedin.com/company/soonest/"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.soonest.io/#website",
+        "url": "https://www.soonest.io/",
+        "name": "Soonest",
+        "publisher": { "@id": "https://www.soonest.io/#organization" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.soonest.io/#webpage",
+        "url": "https://www.soonest.io/",
+        "name": "Healthcare Staff Scheduling Software | Soonest",
+        "description": "Soonest is healthcare staff scheduling software that reduces burnout and makes fair, preference-based scheduling effortless. Book a demo today.",
+        "isPartOf": { "@id": "https://www.soonest.io/#website" },
+        "about": { "@id": "https://www.soonest.io/#software" },
+        "primaryImageOfPage": "https://www.soonest.io/platform-diagram.png"
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://www.soonest.io/#software",
+        "name": "Soonest",
+        "applicationCategory": "BusinessApplication",
+        "applicationSubCategory": "Healthcare Staff Scheduling Software",
+        "operatingSystem": "Web, iOS, Android",
+        "description": "Healthcare scheduling that fights burnout, one shift at a time. AI-built, preference-based scheduling with payroll, real-time wellness intelligence, and coaching for healthcare teams.",
+        "url": "https://www.soonest.io/",
+        "image": "https://www.soonest.io/platform-diagram.png",
+        "publisher": { "@id": "https://www.soonest.io/#organization" },
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.soonest.io/demo",
+          "category": "Demo Request"
+        },
+        "featureList": [
+          "AI schedule building",
+          "Automated shift management (trades, releases, call-outs)",
+          "Payroll and time clock with geofencing",
+          "Pulse AI wellbeing intelligence",
+          "Coaching programs"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://www.soonest.io/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How long does implementation take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Usually 3–5 business days from data collection to your first published schedule. Total time commitment on your end is about 4 hours, spread across a few short calls. Your Schedule Assistant handles the rest — entering users, shifts, locations, and constraints on your behalf."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes Soonest different from QGenda or ShiftAdmin?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "QGenda and ShiftAdmin handle scheduling but leave the real work to admins and don't address wellbeing. Soonest automates preference collection, multi-site resolution, and ongoing swap management, and pairs that with Pulse AI and Coaching to address the root causes of burnout. Every tier also includes a dedicated human Schedule Assistant."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do our physicians have to download an app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No download is required. Staff can set preferences, view schedules, and manage shifts entirely from a browser on any device, including a phone. A dedicated mobile app is also available for iOS and Android with the full feature set."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can we customize scheduling rules for our group's specific needs?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The solver is built around your constraints, including shift minimums and maximums, role requirements per shift, location assignments, time-off blocks, and fairness rules. Hard blocks and soft preferences are handled separately."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What if we already have a scheduling tool?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most groups using existing tools still have admins doing heavy lifting around preferences, rework, and swap management, with no visibility into how their team is actually doing. Soonest can build a free custom schedule from your real data with no commitment required."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What happens when someone calls out or can't make their shift?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Soonest has three dedicated workflows: trade, release, and call-out. A call-out triggers an immediate admin notification and opens the shift to the org for staff to claim. Groups using locum coverage also have a built-in option to connect to a locum tenens partner."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/png" href="icon-mark.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
