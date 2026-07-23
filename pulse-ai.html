@@ -552,6 +552,11 @@
       .nav-dropdown-menu { position: static; box-shadow: none; border: none; border-radius: 0; padding: 4px 0 4px 16px; background: transparent; }
       .nav-dropdown-toggle { width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; justify-content: space-between; }
     }
+    @media (hover: hover) {
+      .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+      .nav-dropdown:hover .nav-dropdown-toggle { color: white; background: rgba(255,255,255,.08); }
+      .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+    }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
