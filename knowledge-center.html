@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knowledge Center — Soonest</title>
+  <meta name="description" content="Short video guides for building, managing, and publishing your schedule in Soonest. Everything from creating shifts to running the solver." />
+  <link rel="canonical" href="https://www.soonest.io/knowledge-center" />
+  <meta property="og:title" content="Knowledge Center — Soonest" />
+  <meta property="og:description" content="Short video guides for building, managing, and publishing your schedule in Soonest." />
+  <meta property="og:url" content="https://www.soonest.io/knowledge-center" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Soonest" />
+  <link rel="icon" type="image/png" href="icon-mark.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED; --blue-dark: #0d6ec0; --navy: #1E284D; --navy-deep: #101828;
+      --gray-700: #475467; --gray-600: #4B5371; --gray-400: #98A2B3;
+      --gray-200: #E4E5F3; --gray-100: #F2F4F7; --off-white: #F9FAFB;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover, .nav-links a.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    .page-header {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(17,134,237,.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-header-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-header-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .page-header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(17,134,237,.15); border: 1px solid rgba(17,134,237,.3);
+      color: #5bb5ff; font-size: 13px; font-weight: 600;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.2px;
+    }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.1; }
+    .page-header p { font-size: 18px; color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    @media (max-width: 768px) { .page-header h1 { font-size: 32px; } }
+
+    .section { padding: 64px 24px; }
+    .section-inner { max-width: 860px; margin: 0 auto; }
+    .kc-group { margin-bottom: 48px; }
+    .kc-group:last-child { margin-bottom: 0; }
+    .kc-group-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
+    .kc-group-title { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; margin-bottom: 20px; line-height: 1.25; }
+
+    .kc-item {
+      background: white;
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .kc-item[open] { box-shadow: var(--shadow-card); }
+    .kc-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .kc-item summary::-webkit-details-marker { display: none; }
+    .kc-item summary:hover { color: var(--blue); }
+    .kc-chevron { flex-shrink: 0; width: 18px; height: 18px; color: var(--gray-400); transition: transform 0.2s; }
+    .kc-item[open] .kc-chevron { transform: rotate(180deg); color: var(--blue); }
+    .kc-body { padding: 0 22px 22px; }
+    .kc-body p { font-size: 15px; color: var(--gray-700); line-height: 1.7; margin-bottom: 16px; }
+    .kc-video {
+      position: relative;
+      padding-bottom: 62.5%;
+      height: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--gray-100);
+    }
+    .kc-video iframe {
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    .kc-help {
+      background: rgba(17,134,237,.06);
+      border: 1px solid rgba(17,134,237,.15);
+      border-radius: 12px;
+      padding: 32px 40px;
+      text-align: center;
+      margin-top: 56px;
+    }
+    .kc-help h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .kc-help p { font-size: 15px; color: var(--gray-700); margin-bottom: 18px; }
+    .kc-help a.kc-help-btn { display: inline-block; background: var(--blue); color: white; padding: 12px 24px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.15s; }
+    .kc-help a.kc-help-btn:hover { background: var(--blue-dark); }
+
+    /* Footer */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color 0.15s; }
+    .footer-legal a:hover { color: white; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B81QG8E2N');
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="scheduling">AI Scheduling</a></li>
+      <li><a href="pulse-ai">Pulse AI</a></li>
+      <li><a href="coaching">Coaching</a></li>
+      <li><a href="resources">Resources</a></li>
+      <li><a href="https://schedule.soonest.io/" class="nav-mobile-cta" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);">Login</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Request a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://schedule.soonest.io/" class="nav-btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);font-weight:500;">Login</a>
+      <a href="demo" class="nav-btn">Request a Demo</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-grid-bg"></div>
+  <div class="page-header-inner">
+    <div class="page-header-badge">Knowledge Center</div>
+    <h1>Learn Soonest in minutes</h1>
+    <p>Short video guides for building, managing, and publishing your schedule. Watch them in order if you're new, or jump straight to what you need.</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+
+    <div class="kc-group">
+      <span class="kc-group-label">Step 1</span>
+      <h2 class="kc-group-title">Building Your Schedule</h2>
+
+      <details class="kc-item" data-loom="6c2cdcbd92da475abbb36672f86ea202">
+        <summary>How do I create a shift?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Start here. This video shows you how to create a new shift on your schedule.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="fedd5d6aa1144dd28c326a90ca6caeb6">
+        <summary>How do I manually assign shifts?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>When you want to place a specific person on a specific shift yourself, this video shows you how.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="45f99fd218c74cd584eab2f6e07adec6">
+        <summary>How do I update a shift?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Need to change a time, assignment, or detail on an existing shift? This video walks through updating shifts.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="c22022c891a342718d9be80d5a7e1bde">
+        <summary>How do I copy and paste shifts?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Save time by reusing shifts you have already built instead of recreating them from scratch.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="kc-group">
+      <span class="kc-group-label">Step 2</span>
+      <h2 class="kc-group-title">Running the Solver</h2>
+
+      <details class="kc-item" data-loom="178323bd5fd64223b62a37161114fb4b">
+        <summary>How do I run the solver?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>The solver builds your schedule automatically based on your rules and preferences. This video shows you how to run it.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="kc-group">
+      <span class="kc-group-label">Step 3</span>
+      <h2 class="kc-group-title">Cleaning Up the Schedule</h2>
+
+      <details class="kc-item" data-loom="deadf3aaa5254e329610ac2f0b219cc1">
+        <summary>How do I clear shifts?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Clearing removes assignments while keeping the shifts in place, so you can start fresh without rebuilding.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="4b2a0f81c5db42b4a26712fb977f3992">
+        <summary>How do I delete shifts?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Deleting removes shifts from the schedule entirely. This video shows you how, and when to delete versus clear.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="kc-group">
+      <span class="kc-group-label">Step 4</span>
+      <h2 class="kc-group-title">Publishing Your Schedule</h2>
+
+      <details class="kc-item" data-loom="11e3e694193c4ac08ae02e4c0d891c35">
+        <summary>How do I publish or unpublish a schedule?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Publishing makes the schedule visible to your team. This video covers publishing, and how to unpublish if you need to make changes.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="kc-group">
+      <span class="kc-group-label">Step 5</span>
+      <h2 class="kc-group-title">Settings and Views</h2>
+
+      <details class="kc-item" data-loom="1581b40612da44c4b4aa206fa0b6b5e7">
+        <summary>How do I work with filters?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Filters help you focus on exactly the shifts and people you want to see. This video covers how to use them.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="20ef9c9410d641d09ec8f6367dfc28e8">
+        <summary>How do I edit calendar settings?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Adjust how your calendar looks and behaves so it fits the way your team works.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="0970e8df78574e75a84d07701c482857">
+        <summary>How do I work with layers?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Layers let you organize and view different parts of your schedule together. This video shows you how to use them.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <div class="kc-help">
+      <h3>Still need help?</h3>
+      <p>If you have a question these videos don't cover, our team is happy to walk you through it.</p>
+      <a class="kc-help-btn" href="mailto:support@soonest.io">Email support@soonest.io</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+          <li><a href="knowledge-center">Knowledge Center</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+
+  // Lazy-load Loom embeds the first time each item is opened
+  document.querySelectorAll('.kc-item').forEach(item => {
+    item.addEventListener('toggle', () => {
+      if (item.open && !item.dataset.loaded) {
+        const id = item.dataset.loom;
+        const holder = item.querySelector('.kc-video');
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.loom.com/embed/' + id;
+        iframe.allowFullscreen = true;
+        iframe.setAttribute('allow', 'fullscreen');
+        holder.appendChild(iframe);
+        item.dataset.loaded = 'true';
+      }
+    });
+  });
+</script>
+</body>
+</html>
