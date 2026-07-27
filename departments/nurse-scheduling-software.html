@@ -17,56 +17,41 @@
     "@graph": [
       {
         "@type": "WebPage",
-        "@id": "https://www.soonest.io/departments/nurse-scheduling-software#webpage",
+        "@id": "https://www.soonest.io/departments/nurse-scheduling-software/#webpage",
         "url": "https://www.soonest.io/departments/nurse-scheduling-software",
         "name": "Nurse Scheduling Software | Soonest",
         "description": "Nurse scheduling software that builds fair, preference-based schedules automatically, reducing burnout and giving staff more control. Book a demo today.",
         "isPartOf": { "@id": "https://www.soonest.io/#website" },
-        "breadcrumb": { "@id": "https://www.soonest.io/departments/nurse-scheduling-software#breadcrumb" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.soonest.io/departments/nurse-scheduling-software#breadcrumb",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.soonest.io/" },
-          { "@type": "ListItem", "position": 2, "name": "Departments", "item": "https://www.soonest.io/departments/" },
-          { "@type": "ListItem", "position": 3, "name": "Nurse Scheduling Software", "item": "https://www.soonest.io/departments/nurse-scheduling-software" }
-        ]
+        "about": { "@id": "https://www.soonest.io/departments/nurse-scheduling-software/#software" },
+        "publisher": { "@id": "https://www.soonest.io/#organization" }
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://www.soonest.io/departments/nurse-scheduling-software#software",
-        "name": "Soonest Nurse Scheduling",
+        "@id": "https://www.soonest.io/departments/nurse-scheduling-software/#software",
+        "name": "Soonest for Nursing",
         "applicationCategory": "BusinessApplication",
         "applicationSubCategory": "Nurse Scheduling Software",
         "operatingSystem": "Web, iOS, Android",
-        "description": "Preference-based nurse scheduling software that builds fair, compliant schedules automatically, with real-time wellness intelligence and targeted coaching.",
-        "url": "https://www.soonest.io/departments/nurse-scheduling-software",
-        "publisher": { "@id": "https://www.soonest.io/#organization" },
-        "offers": {
-          "@type": "Offer",
-          "url": "https://www.soonest.io/demo",
-          "category": "Demo Request"
-        },
+        "description": "Nurse scheduling software that builds itself from staff preferences and unit constraints, with real-time wellness intelligence and targeted coaching for nursing units.",
+        "provider": { "@id": "https://www.soonest.io/#organization" },
         "featureList": [
-          "Preference-based nurse scheduling",
-          "Multi-unit cross-scheduling",
-          "Automated shift management (trades, releases, call-outs)",
-          "Payroll and time clock with geofencing",
-          "Pulse AI wellbeing intelligence",
-          "Coaching programs for nursing staff"
+          "Preference-based nurse scheduling with cross-unit resolution",
+          "Shift trades, releases, and call-outs with self-service workflows",
+          "Time clock with geofencing and payroll export",
+          "Pulse AI end-of-shift check-ins and burnout risk scoring",
+          "Targeted coaching programs driven by staff sentiment data"
         ]
       },
       {
         "@type": "FAQPage",
-        "@id": "https://www.soonest.io/departments/nurse-scheduling-software#faq",
+        "@id": "https://www.soonest.io/departments/nurse-scheduling-software/#faq",
         "mainEntity": [
           {
             "@type": "Question",
             "name": "How long does implementation take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Soonest's nurse scheduling software usually takes 3-5 business days to implement, from data collection to your first published schedule. This only takes up about 4 hours of your team's time total, spread across a few short calls — your Schedule Assistant handles the setup."
+              "text": "Soonest's nurse scheduling software usually takes 3-5 business days to implement, from data collection to your first published schedule. This only takes up about 4 hours of your team's time total, spread across a few short calls, since your Schedule Assistant handles the setup."
             }
           },
           {
@@ -74,7 +59,7 @@
             "name": "Can Soonest handle ratios, certifications, and seniority rules?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. The solver is built around your nursing unit's actual constraints, including staffing ratios, certification requirements, seniority-based preference weighting, float pool logic, and more. Hard rules and soft preferences are treated differently, so the system knows \"I can't\" from \"I'd rather not.\""
+              "text": "Yes. The solver is built around your nursing unit's actual constraints, including staffing ratios, certification requirements, seniority-based preference weighting, float pool logic, and more. Hard rules and soft preferences are treated differently, so the system knows what's required from what's merely preferred."
             }
           },
           {
@@ -90,7 +75,7 @@
             "name": "What if we already have nurse scheduling software?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Many nursing units using an existing tool still have someone doing the manual work around preferences, swaps, and coverage gaps, with zero visibility into how staff are actually doing shift to shift. Let us build a free custom schedule from your real data, no commitment required."
+              "text": "Many nursing units using an existing tool still have someone doing the manual work around preferences, swaps, and coverage gaps, with zero visibility into how staff are actually doing shift to shift. Soonest can build a free custom schedule from your real data, with no commitment required."
             }
           }
         ]
