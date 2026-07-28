@@ -93,6 +93,9 @@
     .kc-group:last-child { margin-bottom: 0; }
     .kc-group-label { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--blue); margin-bottom: 8px; }
     .kc-group-title { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: var(--navy); letter-spacing: -0.4px; margin-bottom: 20px; line-height: 1.25; }
+    .kc-audience { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; line-height: 1.2; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 2px solid var(--gray-200); }
+    .kc-audience + .kc-group { margin-top: 0; }
+    @media (max-width: 768px) { .kc-audience { font-size: 24px; } }
 
     .kc-item {
       background: white;
@@ -218,6 +221,28 @@
 
 <section class="section">
   <div class="section-inner">
+
+    <h2 class="kc-audience">For Staff</h2>
+
+    <div class="kc-group">
+      <details class="kc-item" data-loom="7868c5209c7047b69289999ab4c6834b">
+        <summary>How do I complete my post shift Pulse check in?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Submit your quick wellness check in after each shift and see why it matters.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+
+      <details class="kc-item" data-loom="99bea88e3ccf4e2c963e0887f28d1adc">
+        <summary>How do I manage my notifications?<svg class="kc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></summary>
+        <div class="kc-body">
+          <p>Choose how and when Soonest notifies you about schedules, requests, and messages.</p>
+          <div class="kc-video"></div>
+        </div>
+      </details>
+    </div>
+
+    <h2 class="kc-audience">For Admins</h2>
 
     <div class="kc-group">
       <span class="kc-group-label">Step 1</span>
