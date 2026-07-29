@@ -625,6 +625,7 @@
     <button class="comp-btn" onclick="switchComp('intrigma', this)">Intrigma</button>
     <button class="comp-btn" onclick="switchComp('bytebloc', this)">ByteBloc</button>
     <button class="comp-btn" onclick="switchComp('connectteams', this)">Connecteam</button>
+    <button class="comp-btn" onclick="switchComp('homebase', this)">Homebase</button>
   </div>
 
   <!-- QGENDA -->
@@ -993,6 +994,98 @@
         "One thing worth flagging — Connecteam isn't HIPAA compliant. For a healthcare organization, that's something most groups want covered. Soonest is built with that in mind from the ground up."
       </div>
       <div class="tip"><strong>Best play with Connecteam users:</strong> Most are using it primarily for messaging, not scheduling. Acknowledge what's working, then focus on the gap — the scheduling complexity they're still handling manually. That's where Soonest wins.</div>
+    </div>
+  </div>
+
+  <!-- HOMEBASE -->
+  <div id="homebase" class="comp-pane">
+    <div class="card">
+      <h2>Homebase — Overview</h2>
+      <span class="badge badge-blue" style="margin-bottom: 12px; display: inline-block;">Built for small businesses — retail, restaurants, and hourly workers</span>
+      <ul class="plain">
+        <li>Popular workforce management app combining scheduling, time tracking, messaging, and basic payroll</li>
+        <li>Common in independent urgent cares because it's free to start and easy to learn</li>
+        <li>Scheduling is template-based — admins copy a prior week's schedule and fill in changes manually</li>
+        <li>Has availability and time-off request tools, but no preference engine or fairness algorithm</li>
+        <li>Messaging and team communication features are genuinely good — often the real reason groups stick with it</li>
+        <li>Not HIPAA compliant — a real concern for any healthcare organization</li>
+        <li>Per-user pricing adds up quickly once a group grows past 20–30 staff</li>
+      </ul>
+      <div class="warn">⚠️ Homebase is not HIPAA compliant. Worth raising directly with any healthcare group using it.</div>
+    </div>
+
+    <div class="card">
+      <h2>🔴 Why "How long does it take?" Is the Wrong Question</h2>
+      <p style="font-size:14px; color:var(--gray-700); margin-bottom:12px;">Homebase users genuinely don't feel admin pain on schedule <em>creation</em> — the template copy-and-edit workflow is fast. Their pain lives elsewhere. Asking about build time will land you a dead end every time.</p>
+      <div class="tip">
+        <strong>Where the real pain is:</strong>
+        <ul style="margin-top:8px; padding-left:16px; list-style:disc;">
+          <li><strong>Post-schedule chaos</strong> — callouts, swaps, and ad hoc changes all come back to the admin manually</li>
+          <li><strong>No preference system</strong> — staff might text preferences informally; there's no structured intake or AI to honor them at scale</li>
+          <li><strong>No transparency for staff</strong> — providers have no visibility into whether their preferences were considered, which breeds resentment</li>
+          <li><strong>No wellbeing data</strong> — there's zero insight into how staff are doing shift to shift, who's burning out, or what's driving turnover</li>
+          <li><strong>Fairness is manual</strong> — whoever builds the schedule is the only thing standing between equitable distribution and favoritism</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Questions That Actually Surface Pain</h2>
+      <p style="font-size:13px; color:var(--gray-500); margin-bottom:10px;">Skip the build-time question. Use these to find the friction they haven't named yet.</p>
+      <ul class="q-list">
+        <li>"Once the schedule is posted, can your staff swap shifts or pick up open shifts on their own — or does that still come through you?"</li>
+        <li>"How do your staff communicate their availability or preferences before you build the schedule? Is that structured anywhere, or is it informal?"</li>
+        <li>"Does your system give staff any visibility into which preferences were honored — or do they just see the final schedule?"</li>
+        <li>"When someone calls out last minute, what does that process look like? Who handles finding coverage?"</li>
+        <li>"Do you have any way to see which staff have been working the harder shifts more frequently — or is that something you're tracking manually?"</li>
+        <li>"Do you ever hear from staff that the schedule doesn't feel fair — even if you're doing your best to balance it?"</li>
+        <li>"Do you know if Homebase is HIPAA compliant? That tends to come up for healthcare organizations." <em style="color:var(--gray-500); font-size:12px;">(it's not)</em></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>⚡ Follow-Up Pivots After Their Answers</h2>
+
+      <div class="section-label">If swaps still go through the admin</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "So every change still comes back to you — that's where the real time goes. Soonest lets staff handle that entirely on their own. The swap request, the approval, the schedule update — none of it touches you."
+      </div>
+
+      <div class="section-label">If preferences are collected informally (texts, email)</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "That's one of the most common things we hear. When preferences come in through texts or email, someone has to manually factor all of that in — and things get missed. Soonest collects preferences in the app and the AI builds the schedule around them automatically."
+      </div>
+
+      <div class="section-label">If staff have no visibility into their preferences being honored</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "That's actually a big driver of staff frustration we see constantly — providers feel like their preferences disappear into a black box. Soonest shows staff exactly what was honored and why anything couldn't be, which makes a huge difference in how they feel about the process."
+      </div>
+
+      <div class="section-label">If they have no wellbeing or burnout visibility</div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "That's a gap most scheduling tools have. Soonest has a built-in wellbeing layer — end-of-shift check-ins, burnout risk scoring, and a dashboard that flags when someone's heading in a bad direction before they quit or call out. That piece is something Homebase can't do."
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>💬 How to Position Soonest Against Homebase</h2>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "Homebase is great for scheduling a restaurant — it's genuinely easy to use. What it's not built for is the complexity of a clinical environment: preference-based scheduling at scale, self-service post-schedule management, and any kind of staff wellbeing visibility. That's exactly what Soonest is."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "The template schedule going up fast isn't the hard part. The hard part is everything after — the callouts, the swaps, the staff who feel like their preferences don't matter. Homebase doesn't solve any of that. Soonest does."
+      </div>
+      <div class="script-box">
+        <button class="copy-btn" onclick="copyScript(this)">Copy</button>
+        "One thing worth knowing — Homebase isn't HIPAA compliant. For a healthcare organization, that's something most groups want covered from day one. Soonest is built with that in mind."
+      </div>
+      <div class="tip"><strong>Best play with Homebase users:</strong> Don't attack the scheduling workflow — they like it. Attack the gaps around it: what happens after the schedule posts, what staff experience looks like, and whether they have any visibility into burnout. Those are the three angles Homebase can't answer.</div>
     </div>
   </div>
 
