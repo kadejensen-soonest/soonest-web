@@ -204,6 +204,21 @@
       .kc-layout { grid-template-columns: 1fr; gap: 0; }
       .kc-toc { position: static; max-height: none; overflow: visible; margin-bottom: 28px; padding: 16px; background: var(--off-white); border: 1px solid var(--gray-200); border-radius: 12px; }
     }
+
+    /* ---- Written guide (transcript, cleaned up) ---- */
+    .kc-guide { margin-top: 8px; border-top: 1px solid var(--gray-200); }
+    .kc-guide summary { list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; padding: 12px 0 6px; font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 600; color: var(--blue); }
+    .kc-guide summary::-webkit-details-marker { display: none; }
+    .kc-guide summary::before { content: '\25B8'; font-size: 11px; line-height: 1; transition: transform .15s; }
+    .kc-guide[open] summary::before { transform: rotate(90deg); }
+    .kc-guide summary:hover { color: var(--blue-dark); }
+    .kc-guide-body { padding: 4px 2px 10px; }
+    .kc-guide-body p { font-size: 14.5px; color: var(--gray-700); line-height: 1.7; margin-bottom: 12px; }
+    .kc-guide-body ol, .kc-guide-body ul { margin: 0 0 12px; padding-left: 22px; }
+    .kc-guide-body li { font-size: 14.5px; color: var(--gray-700); line-height: 1.7; margin-bottom: 7px; }
+    .kc-guide-body li ul { margin: 6px 0 0; list-style: disc; }
+    .kc-guide-note { background: rgba(17,134,237,.06); border: 1px solid rgba(17,134,237,.15); border-radius: 8px; padding: 10px 14px; font-size: 14px; color: var(--gray-700); margin-bottom: 0; }
+    .kc-guide-note strong { color: var(--navy); }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
@@ -273,6 +288,7 @@
         <div class="kc-body">
           <p>Set your work days, locations, and day and time preferences so your schedule fits your life.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Your general availability tells the scheduler when and where you prefer to work. Set it for every schedule you are on.</p><ol><li>Open the left panel and click General Availability.</li><li>Review your eligible work days. These are the days you can be scheduled. You cannot edit them yourself, so ask your admin if a day needs to change.</li><li>Rate location desirability. If your schedule has more than one location, rate each one from 1 to 10.</li><li>Enter any desired shifts for the schedule period.</li><li>Set day of the week preferences by rating each day from 1 to 10. These are preferences, so you can still be scheduled on lower rated days.</li><li>Add start and end preferences. Create rules for when you like shifts to start and end on certain days, for example start between 5am and 8am on Mondays and Thursdays. Add as many rules as you need.</li><li>Set weekend and night preferences. Choose a balanced number, a preference for more, or none.</li><li>Add any notes for your admin.</li><li>Click Save, or use the Preference Assistant to walk through each section in a guided way.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Preferences are set per schedule. If you are on more than one, set them for each by switching schedules.</p></div></details>
         </div>
       </details>
 
@@ -281,6 +297,7 @@
         <div class="kc-body">
           <p>Request time off and see your available, accrued, and pending hours before you submit.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>There are two ways to request time off in Soonest, and both take about a minute.</p><ol><li>Open the request. Click Add and choose PTO, or click a blank space on the date you want and choose PTO. Picking a date first auto fills that day.</li><li>Confirm your name. It fills in automatically. Admins can type another person name to request on their behalf.</li><li>Choose your dates on the calendar.</li><li>Set a start and end time for each day.</li><li>Select the leave type.</li><li>Add notes for your admin if needed.</li><li>Review your hours: requested, available, remaining after the request, accrued, used, and pending.</li><li>Click Submit Request.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> If the PTO layer is on, your request shows on those days as pending until an admin approves it.</p></div></details>
         </div>
       </details>
     </div>
@@ -294,6 +311,7 @@
         <div class="kc-body">
           <p>Release a shift or request a direct swap with a coworker.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>You can hand off a shift two ways, by releasing it for anyone to pick up or by requesting a direct swap with a specific coworker.</p><ol><li>Click the shift you want to give up. A side card opens.</li><li>Choose Release or Request a direct swap. You can switch between the two in the next window if you picked the wrong one.</li><li>To release, choose how it can be picked up:<ul><li>Claim only: a coworker takes it and does not give you a shift in return.</li><li>Trade only: a coworker takes it and gives you one of theirs.</li><li>Claim or trade: the coworker who picks it up decides.</li></ul></li><li>Add a note to your manager if needed, then submit.</li><li>To swap directly, select the coworker you have in mind, then pick one of their shifts to take in return. Ineligible shifts show the reason why.</li><li>Add a note and send the request.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> The other person accepts or denies your request, and your admin still needs to approve it before it is final.</p></div></details>
         </div>
       </details>
 
@@ -302,6 +320,7 @@
         <div class="kc-body">
           <p>Find open shifts, claim one, or offer a trade for it.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Open shifts are shifts no one is assigned to yet. You can claim one or offer a trade for it.</p><ol><li>Open the left panel and click Open Shifts.</li><li>Set the date range you want to look in. It defaults to the current month.</li><li>Find a shift and click View Details.</li><li>Choose your action. Claim the shift on its own, or Offer Trade to exchange it for one of your shifts.</li><li>Confirm to send your request to your admin for approval.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> You cannot pick up a shift that overlaps one of your own. If it conflicts, you will see an error.</p></div></details>
         </div>
       </details>
     </div>
@@ -315,6 +334,7 @@
         <div class="kc-body">
           <p>Start conversations, create groups, and message your team inside Soonest.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Messaging lets you talk with teammates without leaving Soonest.</p><ol><li>Open the left panel and click Messages. A side card shows your conversations.</li><li>Filter by unread only or include archived conversations, or search by name.</li><li>Click the new conversation button to start one.</li><li>Choose your participants. Pick one person for a direct message, or several to create a group.</li><li>For a group, add an optional name and description, then create the conversation.</li><li>To see everything in a larger view, click Expand Messages to Full Page.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> The full page view works the same as the side card. The only difference is where the new conversation button sits.</p></div></details>
         </div>
       </details>
 
@@ -323,6 +343,7 @@
         <div class="kc-body">
           <p>Submit your quick wellness check in after each shift and see why it matters.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Your post shift Pulse check in is a quick survey that gives your admins visibility into how things are going. Fill it out honestly and regularly.</p><ol><li>Go to the Pulse Check site and click the Pulse Check button at the top.</li><li>When the survey opens, confirm the shift details if you just finished a shift, or leave it as Custom if you did not.</li><li>Choose the location you worked at.</li><li>Rate your day from 1 to 10, where 10 is crushing it and 1 is a light day.</li><li>Add a short note on why you gave that rating. This is optional but helpful.</li><li>Check the anonymous box if you want to post without your name.</li><li>Click Post to send it.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Honest, regular check ins are what let your admins spot what needs attention.</p></div></details>
         </div>
       </details>
 
@@ -331,6 +352,7 @@
         <div class="kc-body">
           <p>Choose how and when Soonest notifies you about schedules, requests, and messages.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Notification settings control how and when Soonest reaches you.</p><ol><li>Open the left panel and click Notification Preferences.</li><li>Choose which of your schedules you want notifications from.</li><li>For each type of notification, choose how to receive it: in app, email, or text message.</li><li>To use text messages, add your phone number to your profile and check the box to agree to receive texts, then save.</li><li>Back in settings, toggle text on for the notifications you want.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> SMS only works once your phone number is on your profile and texts are allowed.</p></div></details>
         </div>
       </details>
     </div>
@@ -346,6 +368,7 @@
         <div class="kc-body">
           <p>Start here. This video shows you how to create a new shift on your schedule.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>There are two ways to create a shift, and both open the same form.</p><ol><li>Start the shift. Click Add and choose Create Shift, or click a blank space on the date you want. Clicking a date pre fills the start date for you.</li><li>Give it a title.</li><li>Choose a location if you have more than one.</li><li>Set the start and end times.</li><li>Set how often it repeats: daily, weekly, monthly, annually, or a custom pattern like every Tuesday and Thursday. Always set an end date, since a blank one repeats forever.</li><li>Add the roles you need, such as one RN and one medical assistant, and adjust the count per role.</li><li>Click Add Shift. It can take a few seconds to appear, so refresh the page if you do not see it.</li></ol></div></details>
         </div>
       </details>
 
@@ -354,6 +377,7 @@
         <div class="kc-body">
           <p>When you want to place a specific person on a specific shift yourself, this video shows you how.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Manual assignment lets you place a specific person on a specific shift yourself.</p><ol><li>Click the shift, then scroll down and click View Shift Design.</li><li>You will see a slot for each role the shift needs.</li><li>Click an unassigned slot and choose the person to place there.</li><li>Watch the tags next to each name. They tell you if someone is available, has a shift conflict, has requested PTO, or has hit their max shifts for the period.</li><li>Fill each slot, then click Save. Give it a few seconds to update.</li></ol></div></details>
         </div>
       </details>
 
@@ -362,6 +386,7 @@
         <div class="kc-body">
           <p>Need to change a time, assignment, or detail on an existing shift? This video walks through updating shifts.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>You can edit any shift after it is created, whether it is a one time change or a change across a recurring series.</p><ol><li>Click the shift you want to change. The form matches the one you used to create it.</li><li>Update what you need: start and end times, the occurrence end date, roles, or the number of people.</li><li>Click Update Shift and choose how far the change applies:<ul><li>This and future occurrences: changes this shift going forward.</li><li>All occurrences: changes this one plus every earlier one.</li><li>This occurrence: changes only this single day, and appears when you did not touch the recurrence.</li></ul></li><li>Confirm to save.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> To change just one day, leave the occurrence settings alone so the This occurrence option shows up.</p></div></details>
         </div>
       </details>
 
@@ -370,6 +395,7 @@
         <div class="kc-body">
           <p>Save time by reusing shifts you have already built instead of recreating them from scratch.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Copy and paste reuses shifts and their assignments from one set of days on another.</p><ol><li>Click the hamburger menu and choose Copy Paste Assignments.</li><li>Set your source date range, the days you are copying from.</li><li>Set your target date range, the days you are copying to.</li><li>Click Copy Assignments and wait a few seconds.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> The source and target ranges must be the same length. You cannot copy one day onto two, or two onto one. To copy a single day, select the same date twice.</p></div></details>
         </div>
       </details>
     </div>
@@ -383,6 +409,7 @@
         <div class="kc-body">
           <p>The solver builds your schedule automatically based on your rules and preferences. This video shows you how to run it.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>The solver fills your open shifts automatically so you do not have to assign them by hand.</p><ol><li>Click the hamburger menu and choose Assign Shifts.</li><li>Set the start and end dates you want to fill.</li><li>Choose a plan type:<ul><li>Incremental: fills empty shifts and keeps anything you assigned manually.</li><li>Clean: starts from scratch and replaces manual assignments too.</li></ul></li><li>Click Run Auto Assigner.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Planning usually takes 2 to 4 minutes. You will see a progress message while it runs.</p></div></details>
         </div>
       </details>
     </div>
@@ -396,6 +423,7 @@
         <div class="kc-body">
           <p>Clearing removes assignments while keeping the shifts in place, so you can start fresh without rebuilding.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Clearing removes the people assigned to shifts while keeping the shifts themselves in place.</p><ol><li>Click the hamburger menu and choose Clear Unpublished Assignments.</li><li>Set the date range you want to clear.</li><li>Optionally narrow it to specific users, locations, or roles.</li><li>Leave the run the solver option checked if you want it to reassign right away, or unchecked to leave them empty.</li><li>Click Clear and give it a few seconds.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> You cannot clear published shifts. A check mark on a shift means it is published.</p></div></details>
         </div>
       </details>
 
@@ -404,6 +432,7 @@
         <div class="kc-body">
           <p>Deleting removes shifts from the schedule entirely. This video shows you how, and when to delete versus clear.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Deleting removes shifts from the schedule entirely, unlike clearing which keeps them.</p><ol><li>Click the shift you want to remove, then scroll down and click Delete.</li><li>Choose how much to delete:<ul><li>This shift only.</li><li>This and future occurrences.</li><li>All occurrences, including ones you manually edited.</li></ul></li><li>Confirm to remove it.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Use Delete to remove a shift for good, and Clear if you only want to unassign the people on it.</p></div></details>
         </div>
       </details>
     </div>
@@ -417,6 +446,7 @@
         <div class="kc-body">
           <p>Publishing makes the schedule visible to your team. This video covers publishing, and how to unpublish if you need to make changes.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Publishing makes a schedule visible to your team. Depending on your settings, shifts publish automatically or you publish them yourself.</p><ol><li>Click the hamburger menu and choose Manage Shifts.</li><li>Set the date range you want to publish.</li><li>Click Publish Shifts. A check mark appears once they are live.</li><li>To hide them again, go back to Manage Shifts and choose Unpublish, set your range, and optionally narrow by user, location, or role.</li><li>Click Unpublish Shifts. The check marks disappear.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> A check mark on a shift means it is published and visible to staff.</p></div></details>
         </div>
       </details>
     </div>
@@ -430,6 +460,7 @@
         <div class="kc-body">
           <p>Filters help you focus on exactly the shifts and people you want to see. This video covers how to use them.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Filters let you focus on exactly the shifts and people you want to see.</p><ol><li>Click Filters.</li><li>Filter by user to see one person, or select several to compare.</li><li>Filter by Unassigned to see only open shifts.</li><li>Filter by location or by role. You can choose more than one of each.</li><li>Clear your filters at any time to see the whole schedule again.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Under Additional Calendars you can view other schedules alongside this one without switching. You cannot remove the schedule you are currently in from that list.</p></div></details>
         </div>
       </details>
 
@@ -438,6 +469,7 @@
         <div class="kc-body">
           <p>Adjust how your calendar looks and behaves so it fits the way your team works.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Schedule Settings control how a schedule behaves, from who is on it to the rules the solver follows.</p><ol><li>Open the left panel and click Schedule Settings.</li><li>Schedule Details: set the name, scheduling mode, schedule period, and other general options.</li><li>People: choose which users are on this schedule.</li><li>Time off settings: set limits on time off requests by role, for example five medical assistants off per day. Staff over the limit still see a warning when they request.</li><li>Workdays and Locations: unassign anyone who does not work certain days or locations.</li><li>Constraints: set max and min shifts and hours. Mark each as a preference, an objective, or a rule, which tells the solver how strictly to follow it.</li><li>Review the summary, then Save and Close.</li></ol></div></details>
         </div>
       </details>
 
@@ -446,6 +478,7 @@
         <div class="kc-body">
           <p>Layers let you organize and view different parts of your schedule together. This video shows you how to use them.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>Layers let you view different parts of your schedule on their own or together.</p><ol><li>Open the layers panel. You will see three layers.</li><li>Schedule: your shifts, who is assigned, and your locations.</li><li>PTO: anyone who requested time off on a given day, along with the status.</li><li>Availability: requests from staff who want, or do not want, to work specific dates, along with the status.</li><li>Toggle layers on and off to focus on one at a time or view them together.</li></ol></div></details>
         </div>
       </details>
     </div>
@@ -459,6 +492,7 @@
         <div class="kc-body">
           <p>Find pending PTO, swap, and release requests and approve or deny them, one at a time or in bulk.</p>
           <div class="kc-video"></div>
+        <details class="kc-guide"><summary>Read the written guide</summary><div class="kc-guide-body"><p>The Requests and Approvals page is where you review and act on everything your team submits.</p><ol><li>Open the left panel and click Requests and Approvals.</li><li>Use the filters to narrow the list by status, request type, location, or user. It defaults to pending.</li><li>Set a date range if you are looking for requests in a specific window.</li><li>Click any request to see its details, then approve or decline it.</li><li>To move faster, approve or deny directly from the Actions column without opening each one.</li><li>To handle many at once, check the requests you want, then use bulk approve or bulk reject. Clear the selection to start over.</li></ol><p class="kc-guide-note"><strong>Good to know:</strong> Requests are tied to a schedule, so if you manage more than one, switch schedules to see them all.</p></div></details>
         </div>
       </details>
     </div>
