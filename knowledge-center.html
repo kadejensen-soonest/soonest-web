@@ -173,6 +173,37 @@
     .footer-legal a:hover { color: white; }
     @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
     @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    /* ---- Two-column layout with sticky table of contents ---- */
+    .kc-layout { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 264px 1fr; gap: 48px; align-items: start; }
+    .kc-content { min-width: 0; }
+    .kc-toc { position: sticky; top: 88px; max-height: calc(100vh - 110px); overflow-y: auto; padding-right: 8px; }
+    .kc-toc-audience { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.4px; text-transform: uppercase; color: var(--navy); margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--gray-200); }
+    .kc-toc-audience:first-child { margin-top: 0; }
+    .kc-toc-group { font-size: 11px; font-weight: 700; letter-spacing: 0.6px; text-transform: uppercase; color: var(--blue); margin: 16px 0 6px; }
+    .kc-toc-link { display: block; font-size: 13.5px; line-height: 1.4; color: var(--gray-700); text-decoration: none; padding: 6px 10px; border-radius: 7px; border-left: 2px solid transparent; margin-bottom: 2px; transition: background .15s, color .15s; }
+    .kc-toc-link:hover { background: rgba(17,134,237,.06); color: var(--navy); }
+    .kc-toc-link.active { background: rgba(17,134,237,.08); color: var(--blue); border-left-color: var(--blue); font-weight: 600; }
+    .kc-item { scroll-margin-top: 88px; }
+    .kc-audience { scroll-margin-top: 84px; }
+
+    /* ---- Search ---- */
+    .kc-search { max-width: 1200px; margin: 0 auto 32px; }
+    .kc-search-box { position: relative; }
+    .kc-search-box > svg { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); width: 19px; height: 19px; color: var(--gray-400); pointer-events: none; }
+    .kc-search-input { width: 100%; padding: 15px 46px 15px 48px; font-size: 16px; font-family: inherit; color: var(--navy); background: #fff; border: 1px solid var(--gray-200); border-radius: 12px; box-shadow: var(--shadow-card); transition: border-color .15s, box-shadow .15s; }
+    .kc-search-input::placeholder { color: var(--gray-400); }
+    .kc-search-input:focus { outline: none; border-color: var(--blue); box-shadow: 0 0 0 3px rgba(17,134,237,.12); }
+    .kc-search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--gray-400); font-size: 22px; line-height: 1; padding: 4px 9px; border-radius: 8px; display: none; }
+    .kc-search-clear:hover { color: var(--navy); background: var(--gray-100); }
+    .kc-hidden { display: none !important; }
+    .kc-noresults { text-align: center; padding: 40px 20px; color: var(--gray-700); font-size: 15px; }
+    .kc-noresults strong { color: var(--navy); }
+
+    @media (max-width: 900px) {
+      .kc-layout { grid-template-columns: 1fr; gap: 0; }
+      .kc-toc { position: static; max-height: none; overflow: visible; margin-bottom: 28px; padding: 16px; background: var(--off-white); border: 1px solid var(--gray-200); border-radius: 12px; }
+    }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
@@ -220,7 +251,16 @@
 </div>
 
 <section class="section">
-  <div class="section-inner">
+  <div class="kc-search">
+    <div class="kc-search-box">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="kc-search-input" class="kc-search-input" placeholder="Search help articles (e.g. PTO, swap a shift, solver)" autocomplete="off" />
+      <button type="button" id="kc-search-clear" class="kc-search-clear" aria-label="Clear search">&times;</button>
+    </div>
+  </div>
+  <div class="kc-layout">
+    <nav class="kc-toc" id="kc-toc" aria-label="On this page"></nav>
+    <div class="kc-content" id="kc-content">
 
     <h2 class="kc-audience">For Staff</h2>
 
@@ -429,6 +469,7 @@
       <a class="kc-help-btn" href="mailto:support@soonest.io">Email support@soonest.io</a>
     </div>
 
+    </div>
   </div>
 </section>
 
@@ -513,6 +554,117 @@
       }
     });
   });
+</script>
+
+<script>
+(function () {
+  var content = document.getElementById('kc-content');
+  var toc = document.getElementById('kc-toc');
+  if (!content || !toc) return;
+
+  var model = [];        // [{contentEl, tocEl, groups:[{contentEl, tocEl, items:[{item, tocEl, haystack}]}]}]
+  var allItems = [];
+  var n = 0;
+  var curAud = null;
+
+  Array.prototype.forEach.call(content.children, function (node) {
+    if (node.classList.contains('kc-audience')) {
+      var tocA = document.createElement('div');
+      tocA.className = 'kc-toc-audience';
+      tocA.textContent = node.textContent.trim();
+      toc.appendChild(tocA);
+      curAud = { contentEl: node, tocEl: tocA, groups: [], audience: node.textContent.trim() };
+      model.push(curAud);
+    } else if (node.classList.contains('kc-group')) {
+      var titleEl = node.querySelector('.kc-group-title');
+      var groupTitle = titleEl ? titleEl.textContent.trim() : '';
+      var tocG = null;
+      if (groupTitle) {
+        tocG = document.createElement('div');
+        tocG.className = 'kc-toc-group';
+        tocG.textContent = groupTitle;
+        toc.appendChild(tocG);
+      }
+      var grp = { contentEl: node, tocEl: tocG, items: [] };
+      if (curAud) curAud.groups.push(grp);
+      node.querySelectorAll('details.kc-item').forEach(function (item) {
+        if (!item.id) item.id = 'q-' + (++n);
+        var summary = item.querySelector('summary');
+        var body = item.querySelector('.kc-body');
+        var qtext = (summary ? summary.textContent : '').trim();
+        var haystack = (qtext + ' ' + (body ? body.textContent : '') + ' ' + groupTitle + ' ' + (curAud ? curAud.audience : '')).toLowerCase();
+        var a = document.createElement('a');
+        a.className = 'kc-toc-link';
+        a.href = '#' + item.id;
+        a.textContent = qtext;
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          item.open = true;
+          item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', '#' + item.id);
+        });
+        toc.appendChild(a);
+        var rec = { item: item, tocEl: a, haystack: haystack };
+        grp.items.push(rec);
+        allItems.push(rec);
+      });
+    }
+  });
+
+  // No-results message
+  var noresults = document.createElement('div');
+  noresults.className = 'kc-noresults kc-hidden';
+  content.appendChild(noresults);
+
+  // Search filtering
+  var input = document.getElementById('kc-search-input');
+  var clearBtn = document.getElementById('kc-search-clear');
+
+  function applyFilter(q) {
+    q = (q || '').trim();
+    var tokens = q ? q.toLowerCase().split(/\s+/) : [];
+    var anyVisible = false;
+    model.forEach(function (aud) {
+      var audVisible = false;
+      aud.groups.forEach(function (grp) {
+        var grpVisible = false;
+        grp.items.forEach(function (it) {
+          var match = tokens.every(function (t) { return it.haystack.indexOf(t) !== -1; });
+          it.item.classList.toggle('kc-hidden', !match);
+          it.tocEl.classList.toggle('kc-hidden', !match);
+          if (match) { grpVisible = true; audVisible = true; anyVisible = true; }
+        });
+        grp.contentEl.classList.toggle('kc-hidden', !grpVisible);
+        if (grp.tocEl) grp.tocEl.classList.toggle('kc-hidden', !grpVisible);
+      });
+      aud.contentEl.classList.toggle('kc-hidden', !audVisible);
+      aud.tocEl.classList.toggle('kc-hidden', !audVisible);
+    });
+    if (!anyVisible && tokens.length) {
+      noresults.innerHTML = 'No results for <strong>"' + q.replace(/</g,'&lt;') + '"</strong>. Try another keyword.';
+      noresults.classList.remove('kc-hidden');
+    } else {
+      noresults.classList.add('kc-hidden');
+    }
+    clearBtn.style.display = q ? 'block' : 'none';
+  }
+
+  input.addEventListener('input', function () { applyFilter(input.value); });
+  clearBtn.addEventListener('click', function () { input.value=''; applyFilter(''); input.focus(); });
+
+  // Scrollspy
+  var byId = {};
+  allItems.forEach(function (l) { byId[l.item.id] = l.tocEl; });
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        allItems.forEach(function (l) { l.tocEl.classList.remove('active'); });
+        if (byId[entry.target.id]) byId[entry.target.id].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-88px 0px -70% 0px', threshold: 0 });
+  allItems.forEach(function (l) { obs.observe(l.item); });
+})();
 </script>
 </body>
 </html>
