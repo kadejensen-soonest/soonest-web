@@ -1036,6 +1036,55 @@
       .nav-dropdown:hover .nav-dropdown-toggle { color: white; background: rgba(255,255,255,.08); }
       .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
     }
+    /* ONE PLATFORM, TWO PROMISES */
+    .promises-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; margin-bottom: 24px; }
+    .promise-card { border-radius: var(--radius-lg); padding: 36px 32px; }
+    .promise-admin { background: var(--navy); }
+    .promise-staff { background: white; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); }
+    .promise-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .promise-h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    .promise-admin .promise-h3 { color: white; }
+    .promise-staff .promise-h3 { color: var(--navy); }
+    .promise-list { list-style: none; padding: 0; margin: 0; }
+    .promise-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; line-height: 1.55; padding: 12px 0; }
+    .promise-admin .promise-list li { color: rgba(255,255,255,.78); border-bottom: 1px solid rgba(255,255,255,.08); }
+    .promise-staff .promise-list li { color: var(--gray-700); border-bottom: 1px solid var(--gray-200); }
+    .promise-list li:last-child { border-bottom: none; }
+    .promise-list svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--blue); }
+    .promises-banner { text-align: center; font-size: 16px; font-weight: 500; color: var(--navy); background: rgba(17,134,237,.06); border: 1px solid rgba(17,134,237,.18); border-radius: 10px; padding: 20px 28px; }
+    @media (max-width: 768px) { .promises-grid { grid-template-columns: 1fr; } }
+    /* MEET THE AI SCHEDULE ASSISTANT */
+    .assistant-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 48px; }
+    .assistant-list { list-style: none; padding: 0; margin: 24px 0 0; display: flex; flex-direction: column; gap: 12px; }
+    .assistant-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--gray-700); line-height: 1.5; }
+    .assistant-list svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; color: var(--blue); }
+    .chat-mockup { background: white; border: 1px solid var(--gray-200); border-radius: 20px; box-shadow: var(--shadow-screenshot); overflow: hidden; max-width: 380px; margin: 0 auto; }
+    .chat-top { background: var(--navy); padding: 16px 20px; display: flex; align-items: center; gap: 12px; }
+    .chat-avatar { width: 36px; height: 36px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .chat-top-label { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 600; color: white; }
+    .chat-top-sub { font-size: 11px; color: rgba(255,255,255,.5); margin-top: 1px; }
+    .chat-body { padding: 20px 16px; display: flex; flex-direction: column; gap: 10px; background: var(--gray-100); }
+    .chat-bubble { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; }
+    .chat-bubble.user { background: var(--blue); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .chat-bubble.ai { background: white; color: var(--navy); align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    @media (max-width: 900px) { .assistant-layout { grid-template-columns: 1fr; } .chat-mockup { max-width: 100%; } }
+    /* HOW IT WORKS */
+    .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; position: relative; margin-top: 48px; }
+    .steps-grid::before { content: ''; position: absolute; top: 28px; left: calc(12.5% + 28px); right: calc(12.5% + 28px); height: 2px; background: linear-gradient(90deg, var(--blue), rgba(17,134,237,.2)); }
+    .step-card { text-align: center; position: relative; }
+    .step-num { width: 56px; height: 56px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: white; margin: 0 auto 20px; position: relative; z-index: 1; box-shadow: 0 4px 16px rgba(17,134,237,.35); }
+    .step-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 600; color: white; margin-bottom: 8px; }
+    .step-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.6; }
+    @media (max-width: 900px) { .steps-grid { grid-template-columns: 1fr 1fr; gap: 24px; } .steps-grid::before { display: none; } }
+    @media (max-width: 500px) { .steps-grid { grid-template-columns: 1fr; } }
+    /* THE MATH */
+    .math-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+    .math-card { background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 28px 24px; }
+    .math-icon { width: 44px; height: 44px; background: rgba(17,134,237,.18); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+    .math-stat { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: var(--blue); line-height: 1; margin-bottom: 6px; }
+    .math-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: white; margin-bottom: 10px; }
+    .math-body { font-size: 14px; color: rgba(255,255,255,.6); line-height: 1.65; }
+    @media (max-width: 768px) { .math-grid { grid-template-columns: 1fr; } }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
@@ -1215,123 +1264,80 @@
   </div>
 </section>
 
-<!-- SOLUTIONS SECTION -->
-<section class="section section-alt" id="solutions">
+<!-- ONE PLATFORM, TWO PROMISES -->
+<section class="section section-alt" id="promises">
   <div class="section-inner">
-    <span class="section-label reveal">Our Approach</span>
-    <h2 class="section-h2 reveal">Every dimension of healthcare burnout addressed in one platform.</h2>
-    <p class="section-sub reveal">Scheduling, wellbeing insights, communication, and coaching, all unified and working together. Not four separate tools. One comprehensive system built to reduce and prevent burnout across your healthcare organization.</p>
+    <span class="section-label reveal">One platform, two promises</span>
+    <h2 class="section-h2 reveal">Soonest is built for both sides of the healthcare schedule.</h2>
+    <p class="section-sub reveal">The admin gets their week back. The staff get a voice and a tool they actually want to use. Each promise makes the other easier to keep.</p>
 
-    <div class="solutions-frame reveal">
-
-      <div class="solutions-side">
-        <div class="solutions-side-label red">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-          Admin Burnout
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          AI Schedule Building
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-          Automated Shift Management
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          Scheduling Assistant (Human)
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Payroll &amp; Time Clock
-        </div>
-        <!-- Admin stat subcard -->
-        <div style="margin-top:16px;background:rgba(17,134,237,.05);border:1px solid rgba(17,134,237,.15);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
-          <div style="width:36px;height:36px;background:rgba(17,134,237,.12);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div>
-            <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1;">15+ hours saved</div>
-            <div style="font-size:12px;color:var(--gray-700);margin-top:3px;">Monthly</div>
-          </div>
-        </div>
+    <div class="promises-grid">
+      <div class="promise-card promise-admin reveal">
+        <div class="promise-tag">For Admins</div>
+        <h3 class="promise-h3">Robust. Hours and headaches back.</h3>
+        <ul class="promise-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Rules, fairness, and constraints baked into every schedule</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>15 to 20 plus hours of building and chasing cut to one click</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Swaps, callouts, and coverage resolve without your inbox</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Payroll, time clock, and reporting in the same system</li>
+        </ul>
       </div>
-
-      <div class="solutions-center">
-        <div class="solutions-connector"></div>
-        <div class="solutions-center-node">
-          <span>Soonest</span>
-          <small>the platform</small>
-        </div>
+      <div class="promise-card promise-staff reveal">
+        <div class="promise-tag">For Staff</div>
+        <h3 class="promise-h3">Effortless. Software they want to open.</h3>
+        <ul class="promise-list">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Ask anything in plain language. No menus, no training needed</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade, release, or pick up a shift in seconds from their phone</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Preferences that are actually heard and reflected in the schedule</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Full visibility into their hours, schedule, and open shifts</li>
+        </ul>
       </div>
+    </div>
 
-      <div class="solutions-side">
-        <div class="solutions-side-label amber">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Staff Burnout
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Preference Engine
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          Trade / Release / Call-out Flows
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          Pulse AI (Wellbeing Intelligence)
-        </div>
-        <div class="solutions-pill">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          Coaching Programs
-        </div>
-        <!-- Staff stat subcard -->
-        <div style="margin-top:16px;background:rgba(91,181,255,.06);border:1px solid rgba(91,181,255,.2);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;">
-          <div style="width:36px;height:36px;background:rgba(17,134,237,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <div>
-            <div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1;">Turnover reduced</div>
-            <div style="font-size:12px;color:var(--gray-700);margin-top:3px;">Staff who feel heard stay longer</div>
-          </div>
-        </div>
-      </div>
+    <div class="promises-banner reveal">
+      When staff love the tool, admins stop chasing them. Each side makes the other easier.
     </div>
   </div>
 </section>
 
 
-<!-- WHY SOONEST DARK BAND -->
-<section class="section section-dark" id="built-different" style="padding:72px 24px;">
+<!-- MEET THE AI SCHEDULE ASSISTANT -->
+<section class="section" id="assistant">
   <div class="section-inner">
-    <div style="text-align:center;margin-bottom:48px;">
-      <span class="section-label reveal" style="justify-content:center;display:block;">Built different</span>
-      <h2 class="section-h2 reveal" style="max-width:640px;margin:0 auto;">Most tools only handle the schedule. Soonest also handles the people.</h2>
+    <div class="assistant-layout">
+      <div class="assistant-content">
+        <span class="section-label reveal">Built into the whole platform</span>
+        <h2 class="section-h2 reveal">Meet the AI Schedule Assistant.</h2>
+        <p class="section-sub reveal">Your schedule, one question away. Staff and admins ask in plain language, get real answers, and take action from web or mobile without touching a menu.</p>
+        <ul class="assistant-list">
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>"Who do I work with tomorrow?" answered in seconds, not a phone tree</li>
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Input preferences and schedule updates in plain language</li>
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Trade, release, or pick up shifts in one message</li>
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Request PTO and get it confirmed on the spot</li>
+          <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>Check anything on the schedule, any time, from any device</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="chat-mockup">
+          <div class="chat-top">
+            <div class="chat-avatar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <div class="chat-top-label">Soonest AI</div>
+              <div class="chat-top-sub">Always available</div>
+            </div>
+          </div>
+          <div class="chat-body">
+            <div class="chat-bubble user">Who do I work with tomorrow?</div>
+            <div class="chat-bubble ai">Tomorrow you are on with Dr. Chen and NP Santos at the downtown clinic. Shift starts at 7am.</div>
+            <div class="chat-bubble user">Can I release my Thursday night shift?</div>
+            <div class="chat-bubble ai">Done. Your Thursday shift has been released and is open for pickup. I will let you know when someone claims it.</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="built-different-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
-        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        </div>
-        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">Built by physicians</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Soonest was built because our founder was frustrated building his own group's schedules by hand. The product exists because the people who built it lived the problem.</p>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
-        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">Human + AI, not one or the other</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Every client gets a dedicated schedule assistant — a real person who builds your setup, handles the details, and stays with you. Software alone doesn't solve the problem. Neither does a human working in spreadsheets.</p>
-      </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
-        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        </div>
-        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">End-to-end, not point solutions</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Scheduling, shift management, payroll, wellbeing intelligence, and coaching in one platform. When everything connects, the data means something — and the interventions actually work.</p>
-      </div>
-    </div></div>
+  </div>
 </section>
 
 <!-- FEATURE TABS -->
@@ -1486,6 +1492,109 @@
     </div>
 
   </div>
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section class="section section-dark" id="how-it-works">
+  <div class="section-inner">
+    <span class="section-label reveal" style="justify-content:center;display:block;text-align:center;">How it works</span>
+    <h2 class="section-h2 reveal" style="text-align:center;max-width:640px;margin:0 auto;">Your new scheduling workflow.</h2>
+    <p class="section-sub reveal" style="text-align:center;">The schedule takes the responsibility. It builds itself from staff preferences and your rules. When someone is unhappy, the fairness report answers for you.</p>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <h3 class="step-h3">Staff set preferences</h3>
+        <p class="step-body">Simple sliders, about two minutes, updated any time from a phone. No forms, no side texts to the scheduler.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <h3 class="step-h3">The AI builds the draft</h3>
+        <p class="step-body">The solver resolves every location, role, and rule at once, then grades its own fairness before you ever see it.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <h3 class="step-h3">You review and publish</h3>
+        <p class="step-body">Adjust anything you want, approve, done. The first pass is no longer your job.</p>
+      </div>
+      <div class="step-card reveal">
+        <div class="step-num">4</div>
+        <h3 class="step-h3">Day to day runs itself</h3>
+        <p class="step-body">Trades, releases, and callouts move through the platform, not your inbox.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- THE MATH -->
+<section class="section section-dark" id="math">
+  <div class="section-inner">
+    <span class="section-label reveal" style="justify-content:center;display:block;text-align:center;">The math</span>
+    <h2 class="section-h2 reveal" style="text-align:center;">The platform pays for itself.</h2>
+    <p class="section-sub reveal" style="text-align:center;">Every item on this page turns into a line item you can measure. One retained provider covers the cost, and the hours and overtime savings repeat every cycle after that.</p>
+
+    <div class="math-grid reveal">
+      <div class="math-card">
+        <div class="math-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="math-stat">15 to 20+</div>
+        <h3 class="math-h3">Hours back every cycle</h3>
+        <p class="math-body">Your schedulers get 15 to 20 or more hours back per cycle, per location. That time goes to work that grows the organization instead of manual rework.</p>
+      </div>
+      <div class="math-card">
+        <div class="math-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="math-stat">$25K+</div>
+        <h3 class="math-h3">Save on overtime and overstaffing</h3>
+        <p class="math-body">See staffing gaps, overtime exposure, and coverage risk before they hit payroll. Labor decisions move from reactive to planned.</p>
+      </div>
+      <div class="math-card">
+        <div class="math-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="math-stat">$60K+</div>
+        <h3 class="math-h3">One retained provider covers it</h3>
+        <p class="math-body">Replacing one provider costs $60K to $100K or more. Pulse AI flags who is at risk before the resignation letter arrives. Most clients keep several.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- WHY SOONEST DARK BAND -->
+<section class="section section-dark" id="built-different" style="padding:72px 24px;">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="section-label reveal" style="justify-content:center;display:block;">Built different</span>
+      <h2 class="section-h2 reveal" style="max-width:640px;margin:0 auto;">Most tools only handle the schedule. Soonest also handles the people.</h2>
+    </div>
+    <div class="built-different-grid reveal" style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
+        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">Built by physicians</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Soonest was built because our founder was frustrated building his own group's schedules by hand. The product exists because the people who built it lived the problem.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
+        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">Human + AI, not one or the other</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Every client gets a dedicated schedule assistant, a real person who builds your setup, handles the details, and stays with you. Software alone does not solve the problem. Neither does a human working in spreadsheets.</p>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:28px 24px;">
+        <div style="width:44px;height:44px;background:rgba(17,134,237,.18);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#5bb5ff" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3 style="font-family:'Poppins',sans-serif;font-size:17px;font-weight:700;color:white;margin-bottom:8px;">End-to-end, not point solutions</h3>
+        <p style="font-size:14px;color:rgba(255,255,255,.6);line-height:1.65;">Scheduling, shift management, payroll, wellbeing intelligence, and coaching in one platform. When everything connects, the data means something and the interventions actually work.</p>
+      </div>
+    </div></div>
 </section>
 
 
