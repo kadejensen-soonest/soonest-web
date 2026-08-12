@@ -1041,7 +1041,9 @@
     .promise-card { border-radius: var(--radius-lg); padding: 36px 32px; }
     .promise-admin { background: var(--navy); }
     .promise-staff { background: white; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); }
-    .promise-tag { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    .promise-tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 20px; margin-bottom: 18px; }
+    .promise-admin .promise-tag { background: rgba(17,134,237,.28); color: white; }
+    .promise-staff .promise-tag { background: var(--blue); color: white; }
     .promise-h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 20px; }
     .promise-admin .promise-h3 { color: white; }
     .promise-staff .promise-h3 { color: var(--navy); }
@@ -1232,8 +1234,8 @@
             <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
           </svg>
         </div>
-        <h3 class="problem-h3">Staff aren't heard</h3>
-        <p class="problem-body">Rotating schedules with zero input wreck providers' health, sleep, and personal lives. There's no structured outlet for what they experience on shift. When providers can't shape their schedule or flag what's happening, moral injury follows — and burnout isn't far behind.</p>
+        <h3 class="problem-h3">Staff have no voice</h3>
+        <p class="problem-body">Rotating schedules are built around coverage needs, not the people filling them. When staff have no way to submit preferences or flag what happens on shift, frustration accumulates quietly. Burned-out providers stop advocating for themselves and eventually stop showing up.</p>
         <span class="problem-stat">47% of physicians report burnout</span>
       </div>
 
@@ -1244,19 +1246,19 @@
             <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
         </div>
-        <h3 class="problem-h3">Admins are buried</h3>
-        <p class="problem-body">15 to 20+ hours per scheduling cycle spent chasing preferences, managing rework, and handling swap requests. That's before EHR updates, compliance tasks, and everything else already on their plate. The burden is relentless and it never fully resets.</p>
+        <h3 class="problem-h3">Schedulers are buried</h3>
+        <p class="problem-body">15 to 20 or more hours per scheduling cycle spent chasing preferences, managing rework, and fielding swap requests. That is before EHR updates, compliance tasks, and everything else already on their plate. The burden is relentless and it never fully resets.</p>
         <span class="problem-stat">4+ full workweeks lost per year</span>
       </div>
 
       <div class="problem-card org reveal reveal-delay-2">
         <div class="problem-icon blue">
           <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
           </svg>
         </div>
-        <h3 class="problem-h3">Emotional toll compounds</h3>
-        <p class="problem-body">High-acuity clinical work carries a cumulative emotional weight that doesn't reset between shifts. Without structured support or space to decompress, that toll compounds. Moral injury builds quietly when providers feel unheard or unsupported — and by the time it shows up in turnover, it's been years in the making.</p>
+        <h3 class="problem-h3">The organization pays for it</h3>
+        <p class="problem-body">Overtime from coverage gaps, turnover from staff who feel unheard, and recruiting costs every time a provider leaves. The schedule is the lever that moves all of it. When it fails, the financial impact compounds every pay period.</p>
         <span class="problem-stat">$750K+ to replace one physician</span>
       </div>
 
