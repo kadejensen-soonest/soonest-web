@@ -543,7 +543,7 @@
       .pref-cards-grid { grid-template-columns: 1fr !important; }
     }
 
-    /* ── DEPARTMENTS DROPDOWN ── */
+    /* ── NAV DROPDOWNS ── */
     .nav-dropdown { position: relative; }
     .nav-dropdown-toggle {
       display: flex;
@@ -590,6 +590,9 @@
       transition: color 0.15s, background 0.15s;
     }
     .nav-dropdown-item:hover, .nav-dropdown-item.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-item-soon { opacity: 0.45; cursor: default; pointer-events: none; }
+    .nav-soon-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.15); color: rgba(255,255,255,.7); margin-left: 6px; vertical-align: middle; }
     @media (max-width: 768px) {
       .nav-dropdown { width: 100%; }
       .nav-dropdown-menu { position: static; box-shadow: none; border: none; border-radius: 0; padding: 4px 0 4px 16px; background: transparent; }
@@ -621,28 +624,41 @@
     </a>
     <ul class="nav-links" id="nav-menu">
       <li><a href="/">Home</a></li>
-      <li><a href="scheduling" class="active">AI Scheduling</a></li>
-      <li><a href="pulse-ai">Pulse AI</a></li>
-      <li><a href="coaching">Coaching</a></li>
-      <li><a href="resources">Resources</a></li>
-      <li class="nav-dropdown" id="nav-dropdown">
-        <button class="nav-dropdown-toggle" id="nav-dropdown-toggle">
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle active">
+          Platform
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="scheduling" class="nav-dropdown-item active">AI Scheduling</a>
+          <a href="pulse-ai" class="nav-dropdown-item">Burnout Detection</a>
+          <a href="coaching" class="nav-dropdown-item">Coaching</a>
+          <span class="nav-dropdown-item nav-item-soon">Labor Forecasting <span class="nav-soon-badge">Soon</span></span>
+          <span class="nav-dropdown-item nav-item-soon">Payroll <span class="nav-soon-badge">Soon</span></span>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
           Departments
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="nav-dropdown-menu">
           <a href="departments/nurse-scheduling-software" class="nav-dropdown-item">Nurse Scheduling Software</a>
+          <span class="nav-dropdown-item nav-item-soon">Physician Scheduling Software <span class="nav-soon-badge">Soon</span></span>
+          <span class="nav-dropdown-item nav-item-soon">Medical Staff Scheduling Software <span class="nav-soon-badge">Soon</span></span>
         </div>
       </li>
       <li><a href="https://schedule.soonest.io/" class="nav-mobile-cta" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);">Login</a></li>
-      <li><a href="demo" class="nav-mobile-cta">Request a Demo</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Get a Demo</a></li>
     </ul>
     <div class="nav-right">
       <a href="https://schedule.soonest.io/" class="nav-btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);font-weight:500;">Login</a>
-      <a href="demo" class="nav-btn">Request a Demo</a>
+      <a href="demo" class="nav-btn">Get a Demo</a>
     </div>
     <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </div>
 </nav>
@@ -1028,19 +1044,28 @@
     });
   });
 
-  const dropdownEl = document.getElementById('nav-dropdown');
-  const dropdownToggle = document.getElementById('nav-dropdown-toggle');
-  if (dropdownEl && dropdownToggle) {
-    dropdownToggle.addEventListener('click', (e) => {
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', (e) => {
       e.stopPropagation();
-      dropdownEl.classList.toggle('open');
-      dropdownToggle.classList.toggle('open');
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.classList.add('open');
+      }
     });
-    document.addEventListener('click', () => {
-      dropdownEl.classList.remove('open');
-      dropdownToggle.classList.remove('open');
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
     });
-  }
+  });
 </script>
 </body>
 </html>
