@@ -56,6 +56,12 @@
   </url>
 
   <url>
+    <loc>https://www.soonest.io/departments/physician-scheduling-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
     <loc>https://www.soonest.io/resources</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
