@@ -1,8 +1,4 @@
 User-agent: *
 Disallow: /cold-call-guide
-Disallow: /homepage-v2
-Disallow: /homepage-v3
-Disallow: /homepage-v4
-Disallow: /homepage-v5
 
 Sitemap: https://www.soonest.io/sitemap.xml

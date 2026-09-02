@@ -2,7 +2,15 @@
   "cleanUrls": true,
   "redirects": [
     { "source": "/cold-call-guide", "destination": "/", "permanent": false },
-    { "source": "/cold-call-guide.html", "destination": "/", "permanent": false }
+    { "source": "/cold-call-guide.html", "destination": "/", "permanent": false },
+    { "source": "/homepage-v2", "destination": "/", "permanent": true },
+    { "source": "/homepage-v2.html", "destination": "/", "permanent": true },
+    { "source": "/homepage-v3", "destination": "/", "permanent": true },
+    { "source": "/homepage-v3.html", "destination": "/", "permanent": true },
+    { "source": "/homepage-v4", "destination": "/", "permanent": true },
+    { "source": "/homepage-v4.html", "destination": "/", "permanent": true },
+    { "source": "/homepage-v5", "destination": "/", "permanent": true },
+    { "source": "/homepage-v5.html", "destination": "/", "permanent": true }
   ],
   "headers": [
     {
