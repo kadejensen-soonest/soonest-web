@@ -1,384 +1,560 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Soonest Impact Calculator</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impact Calculator | Soonest</title>
+  <meta name="description" content="Estimate what scheduling inefficiency is costing your healthcare organization each year. Built on published national labor benchmarks from BLS and NSI." />
+  <link rel="canonical" href="https://www.soonest.io/impact-calculator" />
+  <link rel="icon" type="image/png" href="BlueIcon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
 
+    :root {
+      /* site palette */
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --black: #0D0E11;
+      --gray-700: #475467;
+      --gray-600: #4B5371;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --white: #FFFFFF;
+      --green: #12B76A;
+      --amber: #F79009;
+      --red: #F04438;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --cta-grad: linear-gradient(155deg, #2a3a6e 0%, #101828 100%);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+      --shadow-screenshot: 0 8px 40px rgba(0,0,0,.35);
+      /* calculator-specific */
+      --calc-navy: #16223F;
+      --panel: #FFFFFF;
+      --panel-2: #EEF1F6;
+      --ink: #16223F;
+      --ink-2: #4B5878;
+      --ink-3: #808CA6;
+      --rule: #E2E7EF;
+      --rule-soft: #EDF0F5;
+      --accent: #1186ED;
+      --accent-2: #3B9EFF;
+      --accent-soft: #E7F1FD;
+      --on-dark-2: #A8B4CC;
+      --on-dark-3: #7B89A6;
+      --dark-line: rgba(255,255,255,.14);
+      --c1: #1186ED;
+      --c2: #00A38C;
+      --c3: #D2691E;
+      --c4: #B5379B;
+      --shadow-m: 0 2px 4px rgba(22,34,63,.04), 0 12px 28px rgba(22,34,63,.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Figtree', sans-serif;
+      background: var(--off-white);
+      color: var(--navy);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--navy-deep);
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      transition: box-shadow 0.2s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+      background: var(--blue);
+      color: white;
+      border: none;
+      padding: 9px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: inherit;
+      transition: background 0.15s, transform 0.1s;
+      display: inline-block;
+    }
+    .nav-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    /* ── NAV DROPDOWNS ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      display: flex; align-items: center; gap: 4px;
+      color: rgba(255,255,255,.75); font-size: 14px; font-weight: 500;
+      padding: 8px 14px; border-radius: 6px; cursor: pointer;
+      background: none; border: none; font-family: inherit;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-toggle:hover, .nav-dropdown-toggle.open { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle svg { transition: transform 0.2s; margin-left: 2px; }
+    .nav-dropdown-toggle.open svg { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none; position: absolute; top: calc(100% + 8px); left: 0;
+      background: var(--navy-deep); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px; padding: 6px; min-width: 220px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4); z-index: 300;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+    .nav-dropdown-item {
+      display: block; color: rgba(255,255,255,.75); text-decoration: none;
+      font-size: 14px; font-weight: 500; padding: 10px 14px; border-radius: 7px;
+      white-space: nowrap; transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-item:hover, .nav-dropdown-item.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-item-soon { opacity: 0.45; cursor: default; pointer-events: none; }
+    .nav-soon-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.15); color: rgba(255,255,255,.7); margin-left: 6px; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .nav-dropdown { width: 100%; }
+      .nav-dropdown-menu { position: static; box-shadow: none; border: none; border-radius: 0; padding: 4px 0 4px 16px; background: transparent; }
+      .nav-dropdown-toggle { width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; justify-content: space-between; }
+    }
+    @media (hover: hover) {
+      .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+      .nav-dropdown:hover .nav-dropdown-toggle { color: white; background: rgba(255,255,255,.08); }
+      .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(17,134,237,.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .page-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(17,134,237,.15);
+      border: 1px solid rgba(17,134,237,.3);
+      color: #5bb5ff;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      letter-spacing: 0.2px;
+    }
+    .page-hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 52px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: white;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .page-hero h1 span { color: var(--blue); }
+    .page-hero-sub {
+      font-size: 18px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.65;
+    }
+    @media (max-width: 600px) { .page-hero h1 { font-size: 34px; } .page-hero { padding: 56px 20px 64px; } }
+
+    /* ── SECTION COMMON ── */
+    .section { padding: 96px 24px; }
+    .section-alt { background: var(--gray-100); }
+    .section-dark { background: var(--navy-deep); color: white; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-label {
+      font-size: 13px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px; display: block;
+    }
+    .section-dark .section-label { color: #5bb5ff; }
+    .section-h2 {
+      font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700;
+      line-height: 1.15; color: var(--navy); letter-spacing: -0.6px; margin-bottom: 16px;
+    }
+    .section-dark .section-h2 { color: white; }
+    .section-sub {
+      font-size: 17px; color: var(--gray-700); line-height: 1.7;
+      max-width: 600px; margin-bottom: 56px;
+    }
+    @media (max-width: 600px) { .section { padding: 64px 20px; } .section-h2 { font-size: 30px; } }
+
+    /* ── CTA BAND ── */
+    .cta-band { background: var(--cta-grad); padding: 72px 24px; }
+    .cta-band-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+    .cta-band h2 { font-family: 'Poppins', sans-serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.4px; }
+    .cta-band p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 32px; }
+    .cta-band-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--blue); color: white; padding: 14px 28px; border-radius: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: none; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.15s, transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(17,134,237,.35);
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(17,134,237,.45); }
+    .btn-outline-hero {
+      background: transparent; color: rgba(255,255,255,.9); padding: 14px 28px;
+      border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600;
+      text-decoration: none; border: 1px solid rgba(255,255,255,.25); cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .btn-outline-hero:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.4); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; }
+    .footer-legal a:hover { color: rgba(255,255,255,.6); }
+    @media (max-width: 900px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ── CALCULATOR SECTION ── */
+    .calc-section { background: var(--gray-100); padding: 40px 24px 64px; }
+    .calc-inner { max-width: 1200px; margin: 0 auto; }
+
+    .panel-card {
+      background: var(--panel); border: 1px solid var(--rule-soft);
+      border-radius: 18px; box-shadow: var(--shadow-m); overflow: hidden;
+    }
+    .panel-top { display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); }
+    .panel-input { padding: 28px 36px 32px; display: flex; flex-direction: column; justify-content: center; }
+    .panel-total {
+      position: relative; overflow: hidden;
+      background:
+        radial-gradient(600px 320px at 80% 15%, rgba(28,110,220,.35), transparent 62%),
+        linear-gradient(160deg, #1B2A4C 0%, #101A30 100%);
+      padding: 28px 36px 32px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .panel-total::before {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.1));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.1));
+    }
+    .panel-total > * { position: relative; }
+
+    .seg {
+      display: inline-flex; align-self: flex-start; background: var(--panel-2);
+      border: 1px solid var(--rule); border-radius: 10px; padding: 4px; gap: 4px;
+      margin-bottom: 24px; max-width: 100%; flex-wrap: wrap;
+    }
+    .seg button {
+      font-family: 'Figtree', inherit; font-size: 14.5px; font-weight: 500;
+      background: none; border: 0; color: var(--ink-2);
+      padding: 9px 17px; border-radius: 7px; cursor: pointer; white-space: nowrap;
+    }
+    .seg button[aria-pressed="true"] { background: var(--navy-deep); color: #fff; font-weight: 700; }
+    .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    .field-label { display: block; font-size: 14.5px; font-weight: 500; color: var(--ink-2); margin-bottom: 10px; }
+    .input-row { display: flex; align-items: center; gap: 16px; }
+    .big-input {
+      font-family: 'Poppins', sans-serif;
+      font-size: 34px; font-weight: 700; letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums; width: 200px; padding: 10px 18px;
+      background: #fff; border: 1px solid var(--rule);
+      border-radius: 10px; color: var(--ink);
+    }
+    .big-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+    .unit { font-size: 16px; color: var(--ink-2); }
+
+    input[type="range"] { width: 100%; height: 22px; -webkit-appearance: none; appearance: none; background: transparent; }
+    input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    .panel-input input[type="range"] { margin-top: 16px; }
+    .panel-input input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--rule); }
+    .panel-input input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin-top: -7px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
+    .panel-input input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--rule); }
+    .panel-input input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
+    .range-ends { display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-3); margin-top: 3px; font-variant-numeric: tabular-nums; }
+
+    .result-label { font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 8px; }
+    .hero-figure {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(52px, 6vw, 92px); line-height: .95; font-weight: 700;
+      letter-spacing: -0.045em; color: #fff;
+      font-variant-numeric: tabular-nums; margin: 0;
+    }
+    .hero-figure-sub { font-size: 15px; color: var(--on-dark-2); margin: 14px 0 0; }
+    .hero-figure-sub b { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .source-line { font-size: 12.5px; line-height: 1.55; color: var(--on-dark-3); margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16); }
+    .source-line a { color: var(--accent-2); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(59,158,255,.45); }
+    .source-line a:hover { border-bottom-color: var(--accent-2); }
+
+    .panel-results { border-top: 1px solid var(--rule-soft); padding: 24px 36px 28px; }
+    .results-head { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .results-h2 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; letter-spacing: -0.015em; color: var(--ink); margin: 0; }
+    .results-note { font-size: 13px; color: var(--ink-3); }
+
+    .results { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 38px; }
+    .res { padding-top: 14px; border-top: 4px solid var(--rule); }
+    .res.k1 { border-top-color: var(--c1); }
+    .res.k2 { border-top-color: var(--c2); }
+    .res.k3 { border-top-color: var(--c3); }
+    .res.k4 { border-top-color: var(--c4); }
+    .res h3 { font-size: 14.5px; font-weight: 600; color: var(--ink-2); margin: 0 0 9px; }
+    .res .num-display {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(34px, 3.5vw, 50px); font-weight: 700; letter-spacing: -0.04em;
+      color: var(--ink); font-variant-numeric: tabular-nums; line-height: .98; margin-bottom: 7px;
+    }
+    .res .share { font-size: 12.5px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+    .res p { font-size: 13px; line-height: 1.5; color: var(--ink-2); margin: 9px 0 0; }
+
+    /* ── CALCULATOR CTA ── */
+    .calc-cta-section { padding: 0 24px 64px; background: var(--gray-100); }
+    .calc-cta-inner { max-width: 1200px; margin: 0 auto; }
+    .cta-card {
+      background:
+        radial-gradient(700px 300px at 85% 20%, rgba(28,110,220,.32), transparent 62%),
+        linear-gradient(160deg, #16223F 0%, #0E1729 100%);
+      border-radius: 18px; padding: 48px 54px;
+      display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+      gap: 40px; align-items: center;
+    }
+    .cta-card h2 { font-family: 'Poppins', sans-serif; color: #fff; margin-bottom: 12px; font-size: clamp(26px, 3vw, 36px); line-height: 1.16; font-weight: 700; letter-spacing: -0.4px; }
+    .cta-card p.sub { font-size: 15.5px; color: var(--on-dark-2); margin: 0 0 26px; max-width: 52ch; }
+    .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .calc-btn {
+      font-family: 'Figtree', sans-serif; font-size: 15px; font-weight: 700; line-height: 1;
+      background: var(--accent); color: #fff; border: 0; border-radius: 8px;
+      padding: 13px 22px; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 9px;
+      transition: background 0.15s, transform 0.1s;
+    }
+    .calc-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .calc-btn-lg { font-size: 15.5px; padding: 14px 26px; }
+
+    .form-panel {
+      background: rgba(255,255,255,.05); border: 1px solid var(--dark-line);
+      border-radius: 14px; padding: 26px 26px 24px;
+    }
+    .form-panel .form-title { font-size: 13.5px; color: var(--on-dark-2); margin: 0 0 18px; }
+    .grid-fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 16px; margin-bottom: 18px; }
+    .f.wide { grid-column: 1 / -1; }
+    .f label { display: block; font-size: 12.5px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+    .f .hint { display: block; font-size: 11.5px; color: var(--on-dark-3); font-weight: 400; margin-top: 2px; }
+    .f input {
+      font-family: inherit; font-size: 14.5px; width: 100%; padding: 10px 12px;
+      background: rgba(255,255,255,.07); color: #fff;
+      border: 1px solid var(--dark-line); border-radius: 8px; font-variant-numeric: tabular-nums;
+    }
+    .f input::placeholder { color: #6E7C99; }
+    .f input:focus { outline: 2px solid var(--accent-2); outline-offset: 0; }
+    .note-ok {
+      display: flex; align-items: flex-start; gap: 10px;
+      background: rgba(59,158,255,.14); border: 1px solid rgba(59,158,255,.3);
+      border-radius: 10px; padding: 14px 16px; font-size: 13.5px; color: #DCE7F7; margin-top: 18px;
+    }
+    .note-ok b { color: #fff; font-weight: 700; }
+
+    /* ── METHODOLOGY SECTION ── */
+    .source-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .source-card {
+      background: white; border-radius: var(--radius-lg); padding: 28px;
+      border: 1px solid var(--gray-200); box-shadow: var(--shadow-card);
+    }
+    .source-card-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+    }
+    .source-card-icon svg { width: 22px; height: 22px; }
+    .source-card h3 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .source-card p { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
+    .source-card a { color: var(--blue); text-decoration: none; font-weight: 500; }
+    .source-card a:hover { text-decoration: underline; }
+    @media (max-width: 900px) { .source-cards { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .source-cards { grid-template-columns: 1fr; } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) { .results { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 34px 40px; } }
+    @media (max-width: 900px) {
+      .panel-top { grid-template-columns: 1fr; }
+      .panel-total { border-top: 1px solid var(--rule-soft); }
+      .cta-card { grid-template-columns: 1fr; padding: 34px 28px; }
+    }
+    @media (max-width: 600px) {
+      .panel-input, .panel-total, .panel-results { padding: 24px 20px 26px; }
+      .results { grid-template-columns: 1fr; }
+      .grid-fields { grid-template-columns: 1fr; }
+      .calc-section, .calc-cta-section { padding-left: 16px; padding-right: 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+  </style>
+  <!-- Google Analytics + Ads -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B81QG8E2N');
+    gtag('config', 'AW-18425608403');
+  </script>
 </head>
-<body style="margin:0">
-<style>
-  :root {
-    --ink-0: #0B0E14;
-    --navy: #16223F;
-    --navy-2: #0F1932;
-    --ground: #EDF1F7;
-    --panel: #FFFFFF;
-    --panel-2: #EEF1F6;
-    --ink: #16223F;
-    --ink-2: #4B5878;
-    --ink-3: #808CA6;
-    --rule: #E2E7EF;
-    --rule-soft: #EDF0F5;
-    --accent: #1186ED;
-    --accent-2: #3B9EFF;
-    --accent-soft: #E7F1FD;
-    --on-dark: #FFFFFF;
-    --on-dark-2: #A8B4CC;
-    --on-dark-3: #7B89A6;
-    --dark-line: rgba(255,255,255,.14);
-    --c1: #1186ED;
-    --c2: #00A38C;
-    --c3: #D2691E;
-    --c4: #B5379B;
-    --shadow-s: 0 1px 2px rgba(22,34,63,.05);
-    --shadow-m: 0 2px 4px rgba(22,34,63,.04), 0 12px 28px rgba(22,34,63,.08);
-    --shadow-l: 0 8px 24px rgba(6,12,28,.18), 0 32px 64px rgba(6,12,28,.24);
-  }
+<body>
 
-  * { box-sizing: border-box; }
-  [hidden] { display: none !important; }
-
-  html { color-scheme: light; }
-  body {
-    background: var(--ground);
-    color: var(--ink-2);
-    font-family: "DM Sans", system-ui, -apple-system, sans-serif;
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  h1, h2, h3, h4, .num-display, .brand-word {
-    font-family: "Poppins", "DM Sans", system-ui, sans-serif;
-  }
-
-  .wrap { max-width: 1480px; margin: 0 auto; padding: 0 40px; }
-
-  /* ================= NAV ================= */
-
-  .topbar { background: var(--ink-0); }
-  .nav {
-    display: flex; align-items: center; gap: 24px;
-    height: 68px;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; flex: none; }
-  .logo svg { display: block; }
-  .brand-word { font-size: 21px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
-
-  .nav-links { display: flex; align-items: center; gap: 4px; margin: 0 auto; }
-  .nav-links a {
-    font-size: 14.5px; font-weight: 500; color: #C9D2E2; text-decoration: none;
-    padding: 8px 15px; border-radius: 8px; display: flex; align-items: center; gap: 6px;
-  }
-  .nav-links a.on { background: rgba(255,255,255,.10); color: #fff; }
-  .nav-links a:hover { color: #fff; }
-  .nav-links a:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 2px; }
-  .caret { width: 9px; height: 9px; opacity: .7; }
-
-  .nav-cta { display: flex; align-items: center; gap: 12px; flex: none; }
-
-  .btn {
-    font-family: "DM Sans", system-ui, sans-serif;
-    font-size: 14.5px; font-weight: 700; line-height: 1;
-    background: var(--accent); color: #fff; border: 0; border-radius: 8px;
-    padding: 12px 20px; cursor: pointer; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 9px;
-  }
-  .btn:hover { background: #0E76D2; }
-  .btn:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
-  .btn-outline-dark {
-    background: transparent; color: #fff;
-    border: 1px solid rgba(255,255,255,.28);
-  }
-  .btn-outline-dark:hover { background: rgba(255,255,255,.08); }
-  .btn-lg { font-size: 15.5px; padding: 14px 24px; }
-
-  /* ================= CALCULATOR ================= */
-
-  .calc-band { background: var(--ground); padding: 22px 0 48px; }
-
-  .calc-head { margin-bottom: 16px; }
-  .eyebrow {
-    font-size: 12px; font-weight: 700; letter-spacing: .085em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 9px;
-  }
-  h1 {
-    font-size: clamp(26px, 2.6vw, 36px); line-height: 1.08; letter-spacing: -0.025em;
-    font-weight: 700; color: var(--ink); margin: 0; text-wrap: balance; max-width: 30ch;
-  }
-  h1 .hl { color: var(--accent); }
-
-  .panel-card {
-    background: var(--panel); border: 1px solid var(--rule-soft);
-    border-radius: 18px; box-shadow: var(--shadow-m); overflow: hidden;
-  }
-
-  .panel-top {
-    display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr);
-  }
-  .panel-input { padding: 24px 36px 28px; display: flex; flex-direction: column; justify-content: center; }
-  .panel-total {
-    position: relative; overflow: hidden;
-    background:
-      radial-gradient(600px 320px at 80% 15%, rgba(28,110,220,.35), transparent 62%),
-      linear-gradient(160deg, #1B2A4C 0%, #101A30 100%);
-    padding: 24px 36px 28px;
-    display: flex; flex-direction: column; justify-content: center;
-  }
-  .panel-total::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background-image:
-      linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.1));
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.85), rgba(0,0,0,.1));
-  }
-  .panel-total > * { position: relative; }
-
-  .seg {
-    display: inline-flex; align-self: flex-start; background: var(--panel-2);
-    border: 1px solid var(--rule); border-radius: 10px; padding: 4px; gap: 4px;
-    margin-bottom: 20px; max-width: 100%; flex-wrap: wrap;
-  }
-  .seg button {
-    font-family: inherit; font-size: 14.5px; font-weight: 500;
-    background: none; border: 0; color: var(--ink-2);
-    padding: 9px 17px; border-radius: 7px; cursor: pointer; white-space: nowrap;
-  }
-  .seg button[aria-pressed="true"] { background: var(--navy); color: #fff; font-weight: 700; }
-  .seg button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
-  .field-label { display: block; font-size: 14.5px; font-weight: 500; color: var(--ink-2); margin-bottom: 10px; }
-
-  .input-row { display: flex; align-items: center; gap: 16px; }
-  .big-input {
-    font-family: "Poppins", sans-serif;
-    font-size: 34px; font-weight: 700; letter-spacing: -0.03em;
-    font-variant-numeric: tabular-nums; width: 200px; padding: 10px 18px;
-    background: #fff; border: 1px solid var(--rule);
-    border-radius: 10px; color: var(--ink);
-  }
-  .big-input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
-  .unit { font-size: 16px; color: var(--ink-2); }
-
-  input[type="range"] { width: 100%; height: 22px; -webkit-appearance: none; appearance: none; background: transparent; }
-  input[type="range"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
-  .panel-input input[type="range"] { margin-top: 16px; }
-  .panel-input input[type="range"]::-webkit-slider-runnable-track { height: 6px; border-radius: 3px; background: var(--rule); }
-  .panel-input input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 20px; height: 20px; margin-top: -7px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
-  .panel-input input[type="range"]::-moz-range-track { height: 6px; border-radius: 3px; background: var(--rule); }
-  .panel-input input[type="range"]::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
-  .range-ends {
-    display: flex; justify-content: space-between; font-size: 12.5px;
-    color: var(--ink-3); margin-top: 3px; font-variant-numeric: tabular-nums;
-  }
-
-  .result-label { font-size: 13px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--accent-2); margin-bottom: 8px; }
-  .hero-figure {
-    font-family: "Poppins", sans-serif;
-    font-size: clamp(52px, 6vw, 92px); line-height: .95; font-weight: 700;
-    letter-spacing: -0.045em; color: #fff;
-    font-variant-numeric: tabular-nums; margin: 0;
-  }
-  .hero-figure-sub { font-size: 15px; color: var(--on-dark-2); margin: 14px 0 0; }
-  .hero-figure-sub b { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .source-line { font-size: 12.5px; line-height: 1.55; color: var(--on-dark-3); margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16); }
-  .source-line a { color: var(--accent-2); font-weight: 500; text-decoration: none; border-bottom: 1px solid rgba(59,158,255,.45); }
-  .source-line a:hover { border-bottom-color: var(--accent-2); }
-
-  /* ---- results, inside the same panel ---- */
-
-  .panel-results { border-top: 1px solid var(--rule-soft); padding: 22px 36px 26px; }
-  .results-head {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 20px;
-    flex-wrap: wrap; margin-bottom: 16px;
-  }
-  h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.015em; color: var(--ink); margin: 0; }
-  .results-note { font-size: 13px; color: var(--ink-3); }
-
-  .results { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 38px; }
-  .res { padding-top: 14px; border-top: 4px solid var(--rule); }
-  .res.k1 { border-top-color: var(--c1); }
-  .res.k2 { border-top-color: var(--c2); }
-  .res.k3 { border-top-color: var(--c3); }
-  .res.k4 { border-top-color: var(--c4); }
-  .res h3 { font-size: 14.5px; font-weight: 600; color: var(--ink-2); margin: 0 0 9px; font-family: "DM Sans", sans-serif; }
-  .res .num-display {
-    font-size: clamp(34px, 3.5vw, 50px); font-weight: 700; letter-spacing: -0.04em;
-    color: var(--ink); font-variant-numeric: tabular-nums; line-height: .98; margin-bottom: 7px;
-  }
-  .res .share { font-size: 12.5px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-  .res p { font-size: 13px; line-height: 1.5; color: var(--ink-2); margin: 9px 0 0; }
-
-  /* ================= CTA ================= */
-
-  .cta-band { padding: 0 0 70px; }
-  .cta-card {
-    background:
-      radial-gradient(700px 300px at 85% 20%, rgba(28,110,220,.32), transparent 62%),
-      linear-gradient(160deg, #16223F 0%, #0E1729 100%);
-    border-radius: 18px; padding: 48px 54px;
-    display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
-    gap: 40px; align-items: center;
-  }
-  .cta-card h2 { color: #fff; margin-bottom: 12px; max-width: 16ch; font-size: clamp(26px, 3vw, 36px); line-height: 1.16; }
-  .cta-card p.sub { font-size: 15.5px; color: var(--on-dark-2); margin: 0 0 26px; max-width: 52ch; }
-  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
-
-  .form-panel {
-    background: rgba(255,255,255,.05); border: 1px solid var(--dark-line);
-    border-radius: 14px; padding: 26px 26px 24px;
-  }
-  .form-panel .form-title { font-size: 13.5px; color: var(--on-dark-2); margin: 0 0 18px; }
-  .grid-fields { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px 16px; margin-bottom: 18px; }
-  .f.wide { grid-column: 1 / -1; }
-  .f label { display: block; font-size: 12.5px; font-weight: 500; color: #fff; margin-bottom: 6px; }
-  .f .hint { display: block; font-size: 11.5px; color: var(--on-dark-3); font-weight: 400; margin-top: 2px; }
-  .f input {
-    font-family: inherit; font-size: 14.5px; width: 100%; padding: 10px 12px;
-    background: rgba(255,255,255,.07); color: #fff;
-    border: 1px solid var(--dark-line); border-radius: 8px; font-variant-numeric: tabular-nums;
-  }
-  .f input::placeholder { color: #6E7C99; }
-  .f input:focus { outline: 2px solid var(--accent-2); outline-offset: 0; }
-
-  .note-ok {
-    display: flex; align-items: flex-start; gap: 10px;
-    background: rgba(59,158,255,.14); border: 1px solid rgba(59,158,255,.3);
-    border-radius: 10px; padding: 14px 16px; font-size: 13.5px; color: #DCE7F7; margin-top: 18px;
-  }
-  .note-ok b { color: #fff; font-weight: 700; }
-
-  /* ================= INTERNAL ================= */
-
-  .internal { margin: 0 0 70px; border: 1px dashed var(--rule); border-radius: 14px; background: var(--panel); }
-  .internal > summary {
-    list-style: none; cursor: pointer; padding: 18px 26px;
-    display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  }
-  .internal > summary::-webkit-details-marker { display: none; }
-  .internal > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 14px; }
-  .internal-title { font-size: 15px; font-weight: 700; color: var(--ink); font-family: "Poppins", sans-serif; }
-  .internal-title em { font-style: normal; color: var(--ink-3); font-weight: 400; font-family: "DM Sans", sans-serif; }
-  .chev { font-size: 12px; color: var(--ink-3); }
-  .internal[open] .chev::before { content: "close"; }
-  .internal:not([open]) .chev::before { content: "open"; }
-  .internal-body { padding: 4px 26px 28px; }
-
-  .ctrl-group { margin-bottom: 30px; }
-  .ctrl-legend {
-    font-size: 11px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase;
-    color: var(--ink-3); padding-bottom: 12px; margin-bottom: 20px; border-bottom: 1px solid var(--rule-soft);
-  }
-  .levers { display: grid; grid-template-columns: repeat(auto-fit, minmax(238px, 1fr)); gap: 22px 30px; }
-  .lever-head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 2px; }
-  .lever-name { font-size: 13px; font-weight: 500; color: var(--ink); }
-  .lever-val { font-size: 13px; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-  .lever input[type="range"] { margin-top: 4px; height: 20px; }
-  .lever input[type="range"]::-webkit-slider-runnable-track { height: 5px; border-radius: 3px; background: var(--rule); }
-  .lever input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 17px; height: 17px; margin-top: -6px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
-  .lever input[type="range"]::-moz-range-track { height: 5px; border-radius: 3px; background: var(--rule); }
-  .lever input[type="range"]::-moz-range-thumb { width: 17px; height: 17px; border: 0; border-radius: 50%; background: var(--accent); cursor: pointer; }
-  .lever-note { font-size: 11.5px; color: var(--ink-3); }
-
-  .wage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(196px, 1fr)); gap: 18px 24px; }
-  .wage-grid label { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink); margin-bottom: 6px; }
-  .wage-grid input {
-    font-family: inherit; font-size: 15px; width: 100%; padding: 9px 11px;
-    background: var(--panel); color: var(--ink); border: 1px solid var(--rule);
-    border-radius: 8px; font-variant-numeric: tabular-nums;
-  }
-  .wage-grid input:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
-  .wage-grid .n { font-size: 11.5px; color: var(--ink-3); margin-top: 5px; display: block; }
-
-  .detail-list { display: grid; gap: 12px; margin-bottom: 30px; }
-  .detail-list > div { display: grid; grid-template-columns: 190px 1fr; gap: 4px 18px; align-items: baseline; }
-  .d-name { font-size: 12.5px; font-weight: 700; color: var(--ink); }
-  .d-body { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 1.6; color: var(--ink-2); }
-
-  .compare { border-top: 1px solid var(--rule-soft); padding-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(184px, 1fr)); gap: 20px; }
-  .cmp-label { font-size: 12px; color: var(--ink-3); margin-bottom: 3px; }
-  .cmp-val { font-family: "Poppins", sans-serif; font-size: 21px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; letter-spacing: -0.015em; }
-  .cmp-note { font-size: 11.5px; color: var(--ink-3); margin-top: 2px; }
-  .btn-ghost {
-    background: transparent; color: var(--accent); border: 1px solid var(--rule);
-  }
-  .btn-ghost:hover { background: var(--accent-soft); }
-  .reset-row { margin-top: 22px; }
-
-  /* ================= FOOTER ================= */
-
-  .site-foot { background: var(--ink-0); color: #8E9BB4; padding: 34px 0; font-size: 13px; }
-  .site-foot strong { color: #DCE3EF; font-weight: 700; display: block; margin-bottom: 8px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; }
-  .site-foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; max-width: 92ch; }
-  .site-foot a { color: #C3CDDE; text-decoration: none; border-bottom: 1px solid #333D50; }
-  .site-foot a:hover { color: #fff; border-bottom-color: #7FB6F0; }
-
-  /* ================= RESPONSIVE ================= */
-
-  @media (max-width: 1180px) {
-    .results { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 34px 40px; }
-  }
-  @media (max-width: 940px) {
-    .nav-links { display: none; }
-    .panel-top { grid-template-columns: 1fr; }
-    .panel-total { border-top: 1px solid var(--rule-soft); }
-    .cta-card { grid-template-columns: 1fr; padding: 34px 28px; }
-  }
-  @media (max-width: 620px) {
-    .wrap { padding: 0 18px; }
-    .results { grid-template-columns: 1fr; }
-    .panel-input, .panel-total, .panel-results { padding: 26px 22px 28px; }
-    .grid-fields { grid-template-columns: 1fr; }
-    .detail-list > div { grid-template-columns: 1fr; }
-    .internal-body { padding: 4px 18px 22px; }
-    .internal > summary { padding: 16px 18px; }
-  }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
-</style>
-
-<div class="topbar">
-  <div class="wrap">
-    <nav class="nav">
-      <div class="logo">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-          <rect x="2.5" y="4.5" width="25" height="23" rx="5" stroke="#fff" stroke-width="2.4"/>
-          <path d="M9 2.5v4M21 2.5v4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M9.5 16.8l3.6 3.6 7-7.4" stroke="#1186ED" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <span class="brand-word">Soonest</span>
-      </div>
-      <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Platform
-          <svg class="caret" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#">Departments
-          <svg class="caret" viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
-        <a href="#" class="on">Impact Calculator</a>
-      </div>
-      <div class="nav-cta">
-        <a href="#" class="btn btn-outline-dark">Login</a>
-        <a href="#gate" class="btn">Get a Demo</a>
-      </div>
-    </nav>
-  </div>
-</div>
-
-<div class="calc-band">
-  <div class="wrap">
-
-    <div class="calc-head">
-      <div class="eyebrow">Impact Calculator</div>
-      <h1>What is your workforce <span class="hl">actually costing you?</span></h1>
+<!-- NAVIGATION -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Platform
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="scheduling" class="nav-dropdown-item">AI Scheduling</a>
+          <a href="pulse-ai" class="nav-dropdown-item">Burnout Detection</a>
+          <a href="coaching" class="nav-dropdown-item">Coaching</a>
+          <span class="nav-dropdown-item nav-item-soon">Labor Forecasting <span class="nav-soon-badge">Soon</span></span>
+          <span class="nav-dropdown-item nav-item-soon">Payroll <span class="nav-soon-badge">Soon</span></span>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Departments
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="departments/nurse-scheduling-software" class="nav-dropdown-item">Nurse Scheduling Software</a>
+          <a href="departments/physician-scheduling-software" class="nav-dropdown-item">Physician Scheduling Software</a>
+          <a href="departments/medical-staff-scheduling-software" class="nav-dropdown-item">Medical Staff Scheduling Software</a>
+        </div>
+      </li>
+      <li><a href="https://schedule.soonest.io/" class="nav-mobile-cta" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);">Login</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Get a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://schedule.soonest.io/" class="nav-btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);font-weight:500;">Login</a>
+      <a href="demo" class="nav-btn">Get a Demo</a>
     </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
 
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="hero-grid-bg"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-badge">Impact Calculator</div>
+    <h1>What is your workforce <span>actually costing you?</span></h1>
+    <p class="page-hero-sub">Estimate the annual cost of scheduling inefficiency across your organization. Adjust your workforce size and see where the money is going, broken down by category.</p>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<div class="calc-section">
+  <div class="calc-inner">
     <div class="panel-card">
       <div class="panel-top">
         <div class="panel-input">
@@ -401,35 +577,34 @@
           <p class="hero-figure" id="figTotal">$2.0M</p>
           <p class="hero-figure-sub"><b id="figHours">998</b> scheduling hours returned to your leaders each year</p>
           <div class="source-line">
-            Modeled from published BLS and NSI benchmarks.<br><a href="#gate">We will walk you through it</a>
+            Modeled from published BLS and NSI benchmarks.<br><a href="#gate">We'll walk you through it on a call.</a>
           </div>
         </div>
       </div>
 
       <div class="panel-results">
         <div class="results-head">
-          <h2>Where the money comes from</h2>
+          <h2 class="results-h2">Where the money comes from</h2>
           <span class="results-note">Hours returned are shown separately and never added to the dollar total.</span>
         </div>
-
         <div class="results">
           <div class="res k4">
             <h3>Right sized staffing</h3>
             <div class="num-display" id="valMix">$1.3M</div>
             <div class="share" id="shareMix">65% of total</div>
-            <p>Carrying more people, or the wrong full time and per diem mix, than demand calls for.</p>
+            <p>Carrying more people, or the wrong full-time and per-diem mix, than demand calls for.</p>
           </div>
           <div class="res k1">
             <h3>Premium labor</h3>
             <div class="num-display" id="valPremium">$308K</div>
             <div class="share" id="sharePremium">15% of total</div>
-            <p>Agency, travel, overtime and incentive shifts to fill gaps nobody saw coming.</p>
+            <p>Agency, travel, overtime, and incentive shifts to fill gaps nobody saw coming.</p>
           </div>
           <div class="res k2">
             <h3>Reduced turnover</h3>
             <div class="num-display" id="valTurnover">$370K</div>
             <div class="share" id="shareTurnover">18% of total</div>
-            <p>Recruiting, onboarding and lost productivity every time someone leaves.</p>
+            <p>Recruiting, onboarding, and lost productivity every time someone leaves.</p>
           </div>
           <div class="res k3">
             <h3>Leader time returned</h3>
@@ -440,27 +615,27 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<div class="cta-band">
-  <div class="wrap">
+<!-- CTA: WANT YOUR REAL NUMBER -->
+<div class="calc-cta-section">
+  <div class="calc-cta-inner">
     <div class="cta-card" id="gate">
       <div>
         <h2>Want your real number?</h2>
         <p class="sub">This estimate uses national benchmarks. In 30 minutes we rebuild it on your data and walk you through every assumption. Yours to keep either way.</p>
         <div class="cta-actions">
-          <button class="btn btn-lg" id="openGate" type="button">Get a Demo</button>
+          <button class="calc-btn calc-btn-lg" id="openGate" type="button">Get a Demo</button>
         </div>
         <div class="note-ok" id="gateDone" hidden>
           <span aria-hidden="true">&#10003;</span>
-          <div><b>Request received, and your estimate just updated with the numbers you gave us.</b> The line by line build behind these four figures is what we walk through together.</div>
+          <div><b>Request received, and your estimate just updated with the numbers you gave us.</b> The line-by-line breakdown behind these four figures is what we walk through together.</div>
         </div>
       </div>
 
       <form class="form-panel" id="gateForm" hidden>
-        <p class="form-title">Tell us what you already know and we will have your numbers loaded before the call starts.</p>
+        <p class="form-title">Tell us what you already know and we'll have your numbers loaded before the call starts.</p>
         <div class="grid-fields">
           <div class="f">
             <label for="inTurnClin">Clinical turnover<span class="hint">Percent per year</span></label>
@@ -483,505 +658,313 @@
             <input id="inEmail" type="email" placeholder="you@healthsystem.org">
           </div>
         </div>
-        <button class="btn" type="submit">Request my session</button>
+        <button class="calc-btn" type="submit">Request my session</button>
       </form>
     </div>
   </div>
 </div>
 
-<div class="wrap">
-  <details class="internal" id="assumptions">
-    <summary>
-      <span class="internal-title">Model controls <em>&nbsp;internal only, not part of the public page</em></span>
-      <span class="chev"></span>
-    </summary>
-    <div class="internal-body">
+<!-- METHODOLOGY: WHAT THIS IS BUILT ON -->
+<section class="section section-alt reveal" id="methodology">
+  <div class="section-inner">
+    <span class="section-label">Methodology</span>
+    <h2 class="section-h2">What this is built on</h2>
+    <p class="section-sub">Every figure in this calculator is derived from published national benchmarks, not proprietary assumptions. Here are the sources behind each input.</p>
 
-      <div class="ctrl-group">
-        <div class="ctrl-legend">Wages and replacement costs</div>
-        <div class="wage-grid">
-          <div>
-            <label for="wProv">Average provider salary</label>
-            <input id="wProv" type="number" min="60000" max="900000" step="5000" value="300000">
-            <span class="n">Physicians, APPs, dentists. The single biggest driver of the labor base.</span>
-          </div>
-          <div>
-            <label for="wClin">Average clinical salary</label>
-            <input id="wClin" type="number" min="20000" max="300000" step="1000" value="90000">
-            <span class="n">Nurses, techs, MAs, therapists. Excludes providers.</span>
-          </div>
-          <div>
-            <label for="wSupp">Average support salary</label>
-            <input id="wSupp" type="number" min="15000" max="150000" step="1000" value="42000">
-            <span class="n">Transport, EVS, dietary, front desk, unit clerks.</span>
-          </div>
-          <div>
-            <label for="wOwner">Average schedule owner salary</label>
-            <input id="wOwner" type="number" min="40000" max="300000" step="1000" value="105000">
-            <span class="n">A blend of unit managers at $133,580 and charge nurses. Not all directors.</span>
-          </div>
-          <div>
-            <label for="wLoad">Benefits load multiplier</label>
-            <input id="wLoad" type="number" min="1" max="2" step="0.001" value="1.462">
-            <span class="n">BLS ECEC: wages are 68.4% of total compensation.</span>
-          </div>
+    <div class="source-cards">
+      <div class="source-card reveal">
+        <div class="source-card-icon" style="background:rgba(17,134,237,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1186ED" stroke-width="2" stroke-linecap="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
         </div>
-        <div class="levers" style="margin-top:24px">
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Clinical share of non provider staff</span><span class="lever-val" id="lvClinV">75%</span></div>
-            <input type="range" id="lvClin" min="20" max="100" step="5" value="75">
-            <div class="lever-note" id="mixRead">225 clinical, 75 support</div>
-          </div>
-        </div>
+        <h3>Turnover &amp; Replacement Costs</h3>
+        <p>Turnover rates and replacement costs across nursing, clinical, and support roles are sourced from the <a href="https://www.nsinursingsolutions.com/documents/library/nsi_national_health_care_retention_report.pdf" target="_blank" rel="noopener">2026 NSI National Health Care Retention Report</a>, the industry's most widely cited benchmark for healthcare workforce data.</p>
       </div>
-
-      <div class="ctrl-group">
-        <div class="ctrl-legend">Turnover assumptions</div>
-        <div class="levers">
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Provider turnover rate</span><span class="lever-val" id="lvTpRateV">7.0%</span></div>
-            <input type="range" id="lvTpRate" min="0" max="25" step="0.5" value="7">
-            <div class="lever-note">Physician turnover runs far below staff turnover</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Provider replacement cost</span><span class="lever-val" id="lvRpV">100%</span></div>
-            <input type="range" id="lvRp" min="0" max="250" step="10" value="100">
-            <div class="lever-note" id="lvRpNote">of salary. Set to 0 if you will not claim provider retention.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Clinical turnover rate</span><span class="lever-val" id="lvTcRateV">17.6%</span></div>
-            <input type="range" id="lvTcRate" min="5" max="45" step="0.1" value="17.6">
-            <div class="lever-note">NSI 2026 RN national average</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Support turnover rate</span><span class="lever-val" id="lvTsRateV">30.0%</span></div>
-            <input type="range" id="lvTsRate" min="5" max="60" step="0.5" value="30">
-            <div class="lever-note">NSI: CNAs 36.1%, PCTs 34.2%, EVS 28.1%</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Clinical replacement cost</span><span class="lever-val" id="lvRcV">60%</span></div>
-            <input type="range" id="lvRc" min="20" max="120" step="5" value="60">
-            <div class="lever-note" id="lvRcNote">of salary. 60% reproduces NSI's $60,090 exactly.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Support replacement cost</span><span class="lever-val" id="lvRsV">35%</span></div>
-            <input type="range" id="lvRs" min="10" max="100" step="5" value="35">
-            <div class="lever-note" id="lvRsNote">of salary. Assumption, no public source.</div>
-          </div>
+      <div class="source-card reveal reveal-delay-1">
+        <div class="source-card-icon" style="background:rgba(18,183,106,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2" stroke-linecap="round">
+            <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+          </svg>
         </div>
+        <h3>Healthcare Wage Data</h3>
+        <p>Average salaries and total compensation data are drawn from the <a href="https://www.bls.gov/ooh/healthcare/registered-nurses.htm" target="_blank" rel="noopener">U.S. Bureau of Labor Statistics</a> Occupational Employment and Wage Statistics and the BLS Employer Costs for Employee Compensation survey, which sets the benefits load multiplier used in the model.</p>
       </div>
-
-      <div class="ctrl-group">
-        <div class="ctrl-legend">Improvement levers &middot; replace every one with Soonest customer data</div>
-        <div class="levers">
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Hours per week per schedule owner</span><span class="lever-val" id="lvHrsV">4</span></div>
-            <input type="range" id="lvHrs" min="1" max="20" step="0.5" value="4">
-            <div class="lever-note">Time spent building and adjusting schedules today</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Scheduling hours reduction</span><span class="lever-val" id="lvSchedV">60%</span></div>
-            <input type="range" id="lvSched" min="0" max="90" step="5" value="60">
-            <div class="lever-note">The website claims 85%. Pick one and back it up.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Staff per schedule owner</span><span class="lever-val" id="lvSpanV">40</span></div>
-            <input type="range" id="lvSpan" min="15" max="120" step="5" value="40">
-            <div class="lever-note">Span of control across your book</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Time realization factor</span><span class="lever-val" id="lvRealV">50%</span></div>
-            <input type="range" id="lvReal" min="0" max="100" step="5" value="50">
-            <div class="lever-note">How much saved time you count as cash</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Labor mix optimization</span><span class="lever-val" id="lvMixV">7.5%</span></div>
-            <input type="range" id="lvMix" min="0" max="20" step="0.25" value="7.5">
-            <div class="lever-note" id="lvMixNote">Applied to core payroll after premium spend is carved out</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Premium labor reduction</span><span class="lever-val" id="lvPremV">20%</span></div>
-            <input type="range" id="lvPrem" min="0" max="50" step="1" value="20">
-            <div class="lever-note">M7 claims 35%. Yours should be provable.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Turnover reduction</span><span class="lever-val" id="lvTurnV">15%</span></div>
-            <input type="range" id="lvTurn" min="0" max="40" step="1" value="15">
-            <div class="lever-note">Relative, applied to all three groups</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Premium labor fallback</span><span class="lever-val" id="lvFallV">4.5%</span></div>
-            <input type="range" id="lvFall" min="1" max="12" step="0.5" value="4.5">
-            <div class="lever-note">Share of loaded labor, used when no figure is entered. Drop it near 2% for ambulatory.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Provider share of staff</span><span class="lever-val" id="lvPshV">0%</span></div>
-            <input type="range" id="lvPsh" min="0" max="40" step="1" value="0">
-            <div class="lever-note">Only used in total staff mode. Appointments mode derives it.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Total staff per staffed bed</span><span class="lever-val" id="lvBedV">4.0</span></div>
-            <input type="range" id="lvBed" min="2" max="8" step="0.1" value="4">
-            <div class="lever-note">Clinical plus support. Only used to derive beds for the M7 comparison.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Appointments per provider per day</span><span class="lever-val" id="lvAppV">20</span></div>
-            <input type="range" id="lvApp" min="6" max="60" step="1" value="20">
-            <div class="lever-note">Only used in appointments mode. Primary care sits near 20, specialty runs lower.</div>
-          </div>
-          <div class="lever">
-            <div class="lever-head"><span class="lever-name">Total staff per provider</span><span class="lever-val" id="lvSppV">5.0</span></div>
-            <input type="range" id="lvSpp" min="2" max="10" step="0.5" value="5">
-            <div class="lever-note">Includes the provider. Multi specialty groups with imaging, lab and billing run 7 or higher.</div>
-          </div>
+      <div class="source-card reveal reveal-delay-2">
+        <div class="source-card-icon" style="background:rgba(247,144,9,.08);">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F79009" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
         </div>
-      </div>
-
-      <div class="ctrl-group">
-        <div class="ctrl-legend">How each number was built &middot; never shown on the public page</div>
-        <div class="detail-list">
-          <div><span class="d-name">Right sized staffing</span><span class="d-body" id="dbgMix"></span></div>
-          <div><span class="d-name">Premium labor</span><span class="d-body" id="dbgPrem"></span></div>
-          <div><span class="d-name">Reduced turnover</span><span class="d-body" id="dbgTurn"></span></div>
-          <div><span class="d-name">Leader time returned</span><span class="d-body" id="dbgAdmin"></span></div>
-        </div>
-      </div>
-
-      <div class="compare">
-        <div>
-          <div class="cmp-label">Soonest model</div>
-          <div class="cmp-val" id="cmpUs">$2,021,965</div>
-          <div class="cmp-note" id="cmpShare">5.9% of loaded labor</div>
-        </div>
-        <div>
-          <div class="cmp-label">M7 would show</div>
-          <div class="cmp-val" id="cmpM7">$278,325</div>
-          <div class="cmp-note" id="cmpM7Note">75 beds &times; $3,711</div>
-        </div>
-        <div>
-          <div class="cmp-label">Loaded labor base</div>
-          <div class="cmp-val" id="cmpBase">$34.2M</div>
-          <div class="cmp-note">clinical plus support, fully loaded</div>
-        </div>
-        <div>
-          <div class="cmp-label">Schedule owners</div>
-          <div class="cmp-val" id="cmpOwners">8</div>
-          <div class="cmp-note" id="cmpOwnersNote">derived from span of control</div>
-        </div>
-      </div>
-
-      <div class="reset-row">
-        <button class="btn btn-ghost" type="button" id="resetLevers">Reset to defaults</button>
+        <h3>A Note on These Estimates</h3>
+        <p>Every figure here is a national benchmark estimate, not a projection for your specific organization. Actual costs vary by market, role mix, and operating model. The real number is the one we build with you on a call, using your own data as the inputs.</p>
       </div>
     </div>
-  </details>
-</div>
-
-<div class="site-foot">
-  <div class="wrap">
-    <strong>What this is built on</strong>
-    <ul>
-      <li>Turnover rates and replacement costs across nursing, clinical and support roles &middot; <a href="https://www.nsinursingsolutions.com/documents/library/nsi_national_health_care_retention_report.pdf">2026 NSI National Health Care Retention Report</a></li>
-      <li>Healthcare wage and compensation data &middot; <a href="https://www.bls.gov/ooh/healthcare/registered-nurses.htm">US Bureau of Labor Statistics</a></li>
-      <li>Every figure here is a national benchmark estimate, not a projection for your organization. We build the real one with you.</li>
-    </ul>
   </div>
-</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+          <li><a href="impact-calculator">Impact Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-(function () {
-  "use strict";
+  /* ── NAV ── */
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
 
-  var TURN_COST_RN = 60090;
-  var M7_PER_BED = 3711;
-
-  var DEFAULTS = {
-    wProv: 300000, wClin: 90000, wSupp: 42000, wOwner: 105000, wLoad: 1.462,
-    tpRate: 7, tcRate: 17.6, tsRate: 30, rp: 100, rc: 60, rs: 35,
-    hrs: 4, sched: 60, span: 40, real: 50,
-    prem: 20, mixopt: 7.5, turn: 15, fall: 4.5, bed: 4.0, app: 20, spp: 5.0, psh: 0
-  };
-  var L = Object.assign({}, DEFAULTS);
-
-  var state = { mode: "staff", size: 300, mix: 75, tcRate: null, tsRate: null, premium: null, owners: null };
-
-  function save() { try { localStorage.setItem("soonest.levers.v7", JSON.stringify(L)); } catch (e) {} }
-  function load() {
-    try {
-      var raw = localStorage.getItem("soonest.levers.v7");
-      if (!raw) return;
-      var v = JSON.parse(raw);
-      Object.keys(DEFAULTS).forEach(function (k) {
-        if (typeof v[k] === "number" && isFinite(v[k])) L[k] = v[k];
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
       });
-    } catch (e) {}
-  }
-
-  function money(v) {
-    if (v >= 1e9) return "$" + (v / 1e9).toFixed(1) + "B";
-    if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
-    if (v >= 1e4) return "$" + Math.round(v / 1e3) + "K";
-    return "$" + Math.round(v).toLocaleString();
-  }
-  function dollars(v) { return "$" + Math.round(v).toLocaleString(); }
-  function num(v) { return Math.round(v).toLocaleString(); }
-
-  function compute() {
-    var providers = 0;
-    var total;
-    if (state.mode === "appts") {
-      providers = state.size / L.app;
-      total = providers * L.spp;
-    } else {
-      total = state.size;
-    }
-    total = Math.max(1, total);
-    var beds = total / L.bed;
-
-    if (state.mode !== "appts") providers = total * (L.psh / 100);
-    var rest = Math.max(0, total - providers);
-    var clinical = rest * (state.mix / 100);
-    var support = rest - clinical;
-
-    var ownerHourly = L.wOwner / 2080 * L.wLoad;
-    var owners = state.owners !== null ? state.owners : Math.max(1, Math.ceil(total / L.span));
-    var hours = owners * L.hrs * 52 * (L.sched / 100);
-    var admin = hours * ownerHourly * (L.real / 100);
-
-    var base = (providers * L.wProv + clinical * L.wClin + support * L.wSupp) * L.wLoad;
-    var premiumSpend = state.premium !== null ? state.premium : base * (L.fall / 100);
-    var premium = premiumSpend * (L.prem / 100);
-    var corePayroll = Math.max(0, base - premiumSpend);
-    var mixSave = corePayroll * (L.mixopt / 100);
-
-    var tc = (state.tcRate !== null ? state.tcRate : L.tcRate) / 100;
-    var ts = (state.tsRate !== null ? state.tsRate : L.tsRate) / 100;
-    var red = L.turn / 100;
-    var avoidProv = providers * (L.tpRate / 100) * red;
-    var avoidClin = clinical * tc * red;
-    var avoidSupp = support * ts * red;
-    var costProv = L.wProv * (L.rp / 100);
-    var costClin = L.wClin * (L.rc / 100);
-    var costSupp = L.wSupp * (L.rs / 100);
-    var turnover = avoidProv * costProv + avoidClin * costClin + avoidSupp * costSupp;
-
-    return {
-      total: total, beds: beds, providers: providers, clinical: clinical, support: support,
-      owners: owners, hours: hours, ownerHourly: ownerHourly, admin: admin,
-      base: base, premiumSpend: premiumSpend, premium: premium,
-      corePayroll: corePayroll, mixSave: mixSave,
-      avoidProv: avoidProv, avoidClin: avoidClin, avoidSupp: avoidSupp,
-      costProv: costProv, costClin: costClin, costSupp: costSupp,
-      turnover: turnover, grand: admin + premium + turnover + mixSave
-    };
-  }
-
-  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var anim = { from: 0, to: 0, start: 0, raf: 0 };
-  var $ = function (id) { return document.getElementById(id); };
-  var elTotal = $("figTotal");
-
-  function setTotal(v) {
-    if (reduce) { elTotal.textContent = money(v); anim.to = v; return; }
-    anim.from = anim.to; anim.to = v; anim.start = performance.now();
-    if (anim.raf) cancelAnimationFrame(anim.raf);
-    var step = function (t) {
-      var p = Math.min((t - anim.start) / 550, 1);
-      var e = 1 - Math.pow(1 - p, 3);
-      elTotal.textContent = money(anim.from + e * (anim.to - anim.from));
-      if (p < 1) anim.raf = requestAnimationFrame(step);
-    };
-    anim.raf = requestAnimationFrame(step);
-  }
-
-  function render() {
-    var r = compute();
-
-    setTotal(r.grand);
-    $("figHours").textContent = num(r.hours);
-    $("mixRead").textContent = (r.providers >= 0.5 ? num(r.providers) + " providers, " : "") +
-      num(r.clinical) + " clinical, " + num(r.support) + " support";
-
-    $("valMix").textContent = money(r.mixSave);
-    $("valPremium").textContent = money(r.premium);
-    $("valTurnover").textContent = money(r.turnover);
-    $("valAdmin").textContent = money(r.admin);
-
-    $("dbgMix").textContent = L.mixopt + "% \u00d7 " + dollars(r.corePayroll) +
-      " core payroll (base " + money(r.base) + " less " + money(r.premiumSpend) + " premium) = " + dollars(r.mixSave);
-    $("dbgPrem").textContent = L.prem + "% \u00d7 " + dollars(r.premiumSpend) +
-      (state.premium !== null ? " entered" : " estimated") + " premium spend = " + dollars(r.premium);
-    $("dbgTurn").textContent =
-      (r.avoidProv >= 0.05 ? r.avoidProv.toFixed(2) + " provider \u00d7 " + dollars(r.costProv) + " + " : "") +
-      r.avoidClin.toFixed(2) + " clinical \u00d7 " + dollars(r.costClin) +
-      " + " + r.avoidSupp.toFixed(2) + " support \u00d7 " + dollars(r.costSupp) + " = " + dollars(r.turnover);
-    $("dbgAdmin").textContent = num(r.owners) + " owners \u00d7 " + L.hrs + " hrs/wk \u00d7 52 \u00d7 " + L.sched +
-      "% = " + num(r.hours) + " hrs, \u00d7 $" + r.ownerHourly.toFixed(2) + " \u00d7 " + L.real + "% = " + dollars(r.admin);
-
-    var tot = r.mixSave + r.premium + r.turnover + r.admin || 1;
-    var pct = function (v) { return Math.round(v / tot * 100) + "% of total"; };
-    $("shareMix").textContent = pct(r.mixSave);
-    $("sharePremium").textContent = pct(r.premium);
-    $("shareTurnover").textContent = pct(r.turnover);
-    $("shareAdmin").textContent = pct(r.admin);
-
-    $("cmpUs").textContent = dollars(r.grand);
-    $("cmpShare").textContent = (r.grand / r.base * 100).toFixed(1) + "% of loaded labor";
-    if (state.mode === "appts") {
-      $("cmpM7").textContent = "No answer";
-      $("cmpM7Note").textContent = "Their calculator only takes beds";
-    } else {
-      $("cmpM7").textContent = dollars(r.beds * M7_PER_BED);
-      $("cmpM7Note").textContent = num(r.beds) + " beds \u00d7 $3,711";
-    }
-    $("cmpBase").textContent = money(r.base);
-    $("cmpOwners").textContent = num(r.owners);
-    $("cmpOwnersNote").textContent = state.owners !== null ? "entered by visitor" : "derived from span of control";
-
-    $("lvRpNote").textContent = "of salary, so " + dollars(r.costProv) + " each. Set to 0 to drop the claim.";
-    $("lvRcNote").textContent = "of salary, so " + dollars(r.costClin) + " each. 60% reproduces NSI's $60,090.";
-    $("lvRsNote").textContent = "of salary, so " + dollars(r.costSupp) + " each. Assumption, no public source.";
-  }
-
-  // ---------- size + mix ----------
-  var sizeInput = $("sizeInput"), sizeRange = $("sizeRange");
-
-  function setSize(v, syncInput, syncRange) {
-    v = Math.max(1, Math.min(30000, Math.round(v || 0)));
-    state.size = v;
-    if (syncInput) sizeInput.value = v;
-    if (syncRange) sizeRange.value = Math.max(+sizeRange.min, Math.min(+sizeRange.max, v));
-    render();
-  }
-  sizeInput.addEventListener("input", function () {
-    var v = parseInt(sizeInput.value, 10);
-    if (!isFinite(v) || v < 1) return;
-    setSize(v, false, true);
-  });
-  sizeInput.addEventListener("blur", function () {
-    if (!isFinite(parseInt(sizeInput.value, 10))) setSize(state.size, true, true);
-  });
-  sizeRange.addEventListener("input", function () { setSize(parseInt(sizeRange.value, 10), true, false); });
-
-  $("lvClin").addEventListener("input", function () {
-    state.mix = parseInt($("lvClin").value, 10);
-    $("lvClinV").textContent = state.mix + "%";
-    render();
-  });
-
-  var MODES = {
-    staff: { label: "How many people do you schedule?", unit: "total staff", max: 1500, start: 300, mix: 75 },
-    appts: { label: "How many appointments do you run a day?", unit: "appointments per day", max: 5000, start: 300, mix: 60 }
-  };
-
-  function setMode(mode) {
-    state.mode = mode;
-    var m = MODES[mode];
-    ["staff", "appts"].forEach(function (k) {
-      $("mode" + k.charAt(0).toUpperCase() + k.slice(1)).setAttribute("aria-pressed", String(k === mode));
+      if (!isOpen) { dropdown.classList.add('open'); toggle.classList.add('open'); }
     });
-    $("sizeLabel").textContent = m.label;
-    $("sizeUnit").textContent = m.unit;
-    sizeRange.max = m.max;
-    $("rangeMax").textContent = num(m.max);
-    state.mix = m.mix;
-    $("lvClin").value = m.mix;
-    $("lvClinV").textContent = m.mix + "%";
-    setSize(m.start, true, true);
-  }
-  $("modeStaff").addEventListener("click", function () { setMode("staff"); });
-  $("modeAppts").addEventListener("click", function () { setMode("appts"); });
-
-  // ---------- gate ----------
-  $("openGate").addEventListener("click", function () {
-    $("openGate").hidden = true;
-    $("gateForm").hidden = false;
-    $("inTurnClin").focus();
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+    });
   });
 
-  function readGate() {
-    var a = parseFloat($("inTurnClin").value);
-    var b = parseFloat($("inTurnSupp").value);
-    var p = parseFloat($("inPremium").value);
-    var o = parseInt($("inOwners").value, 10);
-    state.tcRate = isFinite(a) && a > 0 ? a : null;
-    state.tsRate = isFinite(b) && b > 0 ? b : null;
-    state.premium = isFinite(p) && p >= 0 ? p : null;
-    state.owners = isFinite(o) && o > 0 ? o : null;
-  }
+  /* ── SCROLL REVEAL ── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
 
-  $("gateForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    readGate();
-    $("gateDone").hidden = false;
-    render();
-    $("gate").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
-  });
+  /* ── CALCULATOR ── */
+  (function () {
+    "use strict";
 
-  ["inTurnClin", "inTurnSupp", "inPremium", "inOwners"].forEach(function (id) {
-    $(id).addEventListener("input", function () {
-      if ($("gateDone").hidden) return;
-      readGate();
+    var M7_PER_BED = 3711;
+
+    var DEFAULTS = {
+      wProv: 300000, wClin: 90000, wSupp: 42000, wOwner: 105000, wLoad: 1.462,
+      tpRate: 7, tcRate: 17.6, tsRate: 30, rp: 100, rc: 60, rs: 35,
+      hrs: 4, sched: 60, span: 40, real: 50,
+      prem: 20, mixopt: 7.5, turn: 15, fall: 4.5, bed: 4.0, app: 20, spp: 5.0, psh: 0
+    };
+    var L = Object.assign({}, DEFAULTS);
+
+    var state = { mode: "staff", size: 300, mix: 75, tcRate: null, tsRate: null, premium: null, owners: null };
+
+    function money(v) {
+      if (v >= 1e9) return "$" + (v / 1e9).toFixed(1) + "B";
+      if (v >= 1e6) return "$" + (v / 1e6).toFixed(1) + "M";
+      if (v >= 1e4) return "$" + Math.round(v / 1e3) + "K";
+      return "$" + Math.round(v).toLocaleString();
+    }
+    function num(v) { return Math.round(v).toLocaleString(); }
+
+    function compute() {
+      var providers = 0, total;
+      if (state.mode === "appts") {
+        providers = state.size / L.app;
+        total = providers * L.spp;
+      } else {
+        total = state.size;
+      }
+      total = Math.max(1, total);
+      var beds = total / L.bed;
+      if (state.mode !== "appts") providers = total * (L.psh / 100);
+      var rest = Math.max(0, total - providers);
+      var clinical = rest * (state.mix / 100);
+      var support = rest - clinical;
+
+      var ownerHourly = L.wOwner / 2080 * L.wLoad;
+      var owners = state.owners !== null ? state.owners : Math.max(1, Math.ceil(total / L.span));
+      var hours = owners * L.hrs * 52 * (L.sched / 100);
+      var admin = hours * ownerHourly * (L.real / 100);
+
+      var base = (providers * L.wProv + clinical * L.wClin + support * L.wSupp) * L.wLoad;
+      var premiumSpend = state.premium !== null ? state.premium : base * (L.fall / 100);
+      var premium = premiumSpend * (L.prem / 100);
+      var corePayroll = Math.max(0, base - premiumSpend);
+      var mixSave = corePayroll * (L.mixopt / 100);
+
+      var tc = (state.tcRate !== null ? state.tcRate : L.tcRate) / 100;
+      var ts = (state.tsRate !== null ? state.tsRate : L.tsRate) / 100;
+      var red = L.turn / 100;
+      var avoidProv = providers * (L.tpRate / 100) * red;
+      var avoidClin = clinical * tc * red;
+      var avoidSupp = support * ts * red;
+      var turnover = avoidProv * (L.wProv * (L.rp / 100)) + avoidClin * (L.wClin * (L.rc / 100)) + avoidSupp * (L.wSupp * (L.rs / 100));
+
+      return { hours: hours, admin: admin, premium: premium, mixSave: mixSave, turnover: turnover, grand: admin + premium + turnover + mixSave };
+    }
+
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var anim = { from: 0, to: 0, start: 0, raf: 0 };
+    var $ = function (id) { return document.getElementById(id); };
+    var elTotal = $("figTotal");
+
+    function setTotal(v) {
+      if (reduce) { elTotal.textContent = money(v); anim.to = v; return; }
+      anim.from = anim.to; anim.to = v; anim.start = performance.now();
+      if (anim.raf) cancelAnimationFrame(anim.raf);
+      var step = function (t) {
+        var p = Math.min((t - anim.start) / 550, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        elTotal.textContent = money(anim.from + e * (anim.to - anim.from));
+        if (p < 1) anim.raf = requestAnimationFrame(step);
+      };
+      anim.raf = requestAnimationFrame(step);
+    }
+
+    function render() {
+      var r = compute();
+      setTotal(r.grand);
+      $("figHours").textContent = num(r.hours);
+      $("valMix").textContent = money(r.mixSave);
+      $("valPremium").textContent = money(r.premium);
+      $("valTurnover").textContent = money(r.turnover);
+      $("valAdmin").textContent = money(r.admin);
+      var tot = r.mixSave + r.premium + r.turnover + r.admin || 1;
+      var pct = function (v) { return Math.round(v / tot * 100) + "% of total"; };
+      $("shareMix").textContent = pct(r.mixSave);
+      $("sharePremium").textContent = pct(r.premium);
+      $("shareTurnover").textContent = pct(r.turnover);
+      $("shareAdmin").textContent = pct(r.admin);
+    }
+
+    var sizeInput = $("sizeInput"), sizeRange = $("sizeRange");
+
+    function setSize(v, syncInput, syncRange) {
+      v = Math.max(1, Math.min(30000, Math.round(v || 0)));
+      state.size = v;
+      if (syncInput) sizeInput.value = v;
+      if (syncRange) sizeRange.value = Math.max(+sizeRange.min, Math.min(+sizeRange.max, v));
       render();
+    }
+    sizeInput.addEventListener("input", function () {
+      var v = parseInt(sizeInput.value, 10);
+      if (!isFinite(v) || v < 1) return;
+      setSize(v, false, true);
     });
-  });
-
-  // ---------- controls ----------
-  var SLIDERS = [
-    { k: "tpRate", el: "lvTpRate", out: "lvTpRateV", f: function (v) { return v.toFixed(1) + "%"; } },
-    { k: "rp", el: "lvRp", out: "lvRpV", f: function (v) { return v + "%"; } },
-    { k: "psh", el: "lvPsh", out: "lvPshV", f: function (v) { return v + "%"; } },
-    { k: "tcRate", el: "lvTcRate", out: "lvTcRateV", f: function (v) { return v.toFixed(1) + "%"; } },
-    { k: "tsRate", el: "lvTsRate", out: "lvTsRateV", f: function (v) { return v.toFixed(1) + "%"; } },
-    { k: "rc", el: "lvRc", out: "lvRcV", f: function (v) { return v + "%"; } },
-    { k: "rs", el: "lvRs", out: "lvRsV", f: function (v) { return v + "%"; } },
-    { k: "hrs", el: "lvHrs", out: "lvHrsV", f: function (v) { return String(v); } },
-    { k: "sched", el: "lvSched", out: "lvSchedV", f: function (v) { return v + "%"; } },
-    { k: "span", el: "lvSpan", out: "lvSpanV", f: function (v) { return String(v); } },
-    { k: "real", el: "lvReal", out: "lvRealV", f: function (v) { return v + "%"; } },
-    { k: "mixopt", el: "lvMix", out: "lvMixV", f: function (v) { return v + "%"; } },
-    { k: "prem", el: "lvPrem", out: "lvPremV", f: function (v) { return v + "%"; } },
-    { k: "turn", el: "lvTurn", out: "lvTurnV", f: function (v) { return v + "%"; } },
-    { k: "fall", el: "lvFall", out: "lvFallV", f: function (v) { return v + "%"; } },
-    { k: "bed", el: "lvBed", out: "lvBedV", f: function (v) { return v.toFixed(1); } },
-    { k: "app", el: "lvApp", out: "lvAppV", f: function (v) { return String(v); } },
-    { k: "spp", el: "lvSpp", out: "lvSppV", f: function (v) { return v.toFixed(1); } }
-  ];
-  var NUMBERS = ["wProv", "wClin", "wSupp", "wOwner", "wLoad"];
-
-  function paint() {
-    SLIDERS.forEach(function (S) { $(S.el).value = L[S.k]; $(S.out).textContent = S.f(L[S.k]); });
-    NUMBERS.forEach(function (k) { $(k).value = L[k]; });
-  }
-
-  SLIDERS.forEach(function (S) {
-    $(S.el).addEventListener("input", function () {
-      L[S.k] = parseFloat($(S.el).value);
-      $(S.out).textContent = S.f(L[S.k]);
-      save(); render();
+    sizeInput.addEventListener("blur", function () {
+      if (!isFinite(parseInt(sizeInput.value, 10))) setSize(state.size, true, true);
     });
-  });
+    sizeRange.addEventListener("input", function () { setSize(parseInt(sizeRange.value, 10), true, false); });
 
-  NUMBERS.forEach(function (k) {
-    $(k).addEventListener("input", function () {
-      var v = parseFloat($(k).value);
-      if (!isFinite(v) || v <= 0) return;
-      L[k] = v; save(); render();
+    var MODES = {
+      staff: { label: "How many people do you schedule?", unit: "total staff", max: 1500, start: 300, mix: 75 },
+      appts: { label: "How many appointments do you run a day?", unit: "appointments per day", max: 5000, start: 300, mix: 60 }
+    };
+
+    function setMode(mode) {
+      state.mode = mode;
+      var m = MODES[mode];
+      ["staff", "appts"].forEach(function (k) {
+        $("mode" + k.charAt(0).toUpperCase() + k.slice(1)).setAttribute("aria-pressed", String(k === mode));
+      });
+      $("sizeLabel").textContent = m.label;
+      $("sizeUnit").textContent = m.unit;
+      sizeRange.max = m.max;
+      $("rangeMax").textContent = num(m.max);
+      state.mix = m.mix;
+      setSize(m.start, true, true);
+    }
+    $("modeStaff").addEventListener("click", function () { setMode("staff"); });
+    $("modeAppts").addEventListener("click", function () { setMode("appts"); });
+
+    $("openGate").addEventListener("click", function () {
+      $("openGate").hidden = true;
+      $("gateForm").hidden = false;
+      $("inTurnClin").focus();
     });
-  });
 
-  $("resetLevers").addEventListener("click", function () {
-    L = Object.assign({}, DEFAULTS);
-    save(); paint(); render();
-  });
+    function readGate() {
+      var a = parseFloat($("inTurnClin").value);
+      var b = parseFloat($("inTurnSupp").value);
+      var p = parseFloat($("inPremium").value);
+      var o = parseInt($("inOwners").value, 10);
+      state.tcRate = isFinite(a) && a > 0 ? a : null;
+      state.tsRate = isFinite(b) && b > 0 ? b : null;
+      state.premium = isFinite(p) && p >= 0 ? p : null;
+      state.owners = isFinite(o) && o > 0 ? o : null;
+    }
 
-  load();
-  paint();
-  elTotal.textContent = "";
-  render();
-})();
+    $("gateForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      readGate();
+      $("gateDone").hidden = false;
+      render();
+      $("gate").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+    });
+
+    ["inTurnClin", "inTurnSupp", "inPremium", "inOwners"].forEach(function (id) {
+      $(id).addEventListener("input", function () {
+        if ($("gateDone").hidden) return;
+        readGate(); render();
+      });
+    });
+
+    elTotal.textContent = "";
+    render();
+  })();
 </script>
-
 
 </body>
 </html>
