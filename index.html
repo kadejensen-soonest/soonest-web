@@ -1089,6 +1089,84 @@
 .math-h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
     .math-body { font-size: 14px; color: var(--gray-700); line-height: 1.65; }
     @media (max-width: 768px) { .math-grid { grid-template-columns: 1fr; } }
+
+    /* ── IMPACT MINI-CALCULATOR ── */
+    .ic-card {
+      background:
+        radial-gradient(700px 340px at 72% 18%, rgba(28,110,220,.3), transparent 60%),
+        linear-gradient(160deg, #1a2a4a 0%, #0e1729 100%);
+      border-radius: 24px; padding: 52px 56px;
+      position: relative; overflow: hidden;
+    }
+    .ic-card::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.05));
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.7), rgba(0,0,0,.05));
+    }
+    .ic-inner {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
+      align-items: center; position: relative; z-index: 1;
+    }
+    .ic-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #3B9EFF; margin-bottom: 10px; }
+    .ic-h2 {
+      font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700;
+      color: white; line-height: 1.2; letter-spacing: -0.3px; margin-bottom: 28px;
+    }
+    .ic-seg {
+      display: inline-flex; background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14); border-radius: 10px;
+      padding: 4px; gap: 4px; margin-bottom: 22px; flex-wrap: wrap;
+    }
+    .ic-seg button {
+      font-family: 'Figtree', sans-serif; font-size: 14px; font-weight: 500;
+      background: none; border: 0; color: rgba(255,255,255,.6);
+      padding: 8px 16px; border-radius: 7px; cursor: pointer; white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+    }
+    .ic-seg button[aria-pressed="true"] { background: rgba(255,255,255,.14); color: white; font-weight: 700; }
+    .ic-field-label { display: block; font-size: 14px; font-weight: 500; color: rgba(255,255,255,.6); margin-bottom: 10px; }
+    .ic-input-row { display: flex; align-items: center; gap: 12px; }
+    .ic-big-input {
+      font-family: 'Poppins', sans-serif; font-size: 34px; font-weight: 700;
+      letter-spacing: -0.03em; font-variant-numeric: tabular-nums;
+      width: 180px; padding: 8px 16px;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 10px; color: white;
+    }
+    .ic-big-input:focus { outline: 2px solid #3B9EFF; border-color: #3B9EFF; }
+    .ic-unit { font-size: 15px; color: rgba(255,255,255,.45); }
+    .ic-range { width: 100%; height: 22px; -webkit-appearance: none; appearance: none; background: transparent; margin-top: 14px; }
+    .ic-range::-webkit-slider-runnable-track { height: 5px; border-radius: 3px; background: rgba(255,255,255,.18); }
+    .ic-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; margin-top: -6.5px; border: 0; border-radius: 50%; background: #3B9EFF; cursor: pointer; }
+    .ic-range::-moz-range-track { height: 5px; border-radius: 3px; background: rgba(255,255,255,.18); }
+    .ic-range::-moz-range-thumb { width: 18px; height: 18px; border: 0; border-radius: 50%; background: #3B9EFF; cursor: pointer; }
+    .ic-range-ends { display: flex; justify-content: space-between; font-size: 12px; color: rgba(255,255,255,.3); margin-top: 3px; font-variant-numeric: tabular-nums; }
+    .ic-result-label { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #3B9EFF; margin-bottom: 10px; }
+    .ic-hero-figure {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(60px, 7vw, 100px); line-height: .95; font-weight: 700;
+      letter-spacing: -0.045em; color: white; font-variant-numeric: tabular-nums; margin-bottom: 14px;
+    }
+    .ic-hero-sub { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.5; margin-bottom: 28px; }
+    .ic-hero-sub b { color: rgba(255,255,255,.8); font-variant-numeric: tabular-nums; }
+    .ic-cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(59,158,255,.15); border: 1px solid rgba(59,158,255,.35);
+      color: #5bb5ff; font-size: 15px; font-weight: 600;
+      padding: 12px 22px; border-radius: 8px; text-decoration: none;
+      font-family: 'Poppins', sans-serif;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .ic-cta-btn:hover { background: rgba(59,158,255,.25); border-color: rgba(59,158,255,.55); color: white; }
+    @media (max-width: 860px) {
+      .ic-inner { grid-template-columns: 1fr; gap: 40px; }
+      .ic-card { padding: 36px 28px; border-radius: 18px; }
+      .ic-h2 { font-size: 24px; }
+    }
   </style>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
@@ -1229,6 +1307,40 @@
       <div class="logo-item"><img src="carepoint-logo.svg" alt="CarePoint logo, a Soonest client" /></div>
       <div class="logo-item"><img src="purepediatrics-logo.webp" alt="Pure Pediatrics logo, a Soonest client" /></div>
       <div class="logo-item"><img src="https://images.squarespace-cdn.com/content/v1/67d07844f8351329271efc93/fd26020f-921f-46ec-b677-77df201d7cfd/cropped-My-ER-Logo.png?format=300w" alt="My Emergency Room 24/7 logo, a Soonest client" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT MINI-CALCULATOR -->
+<section class="section" id="cost-calculator" style="padding:72px 24px;">
+  <div style="max-width:1040px;margin:0 auto;">
+    <div class="ic-card reveal">
+      <div class="ic-inner">
+        <div class="ic-inputs">
+          <p class="ic-eyebrow">Cost Estimator</p>
+          <h2 class="ic-h2">What is your workforce costing you?</h2>
+          <div class="ic-seg" role="group" aria-label="Input type">
+            <button type="button" id="ic-modeStaff" aria-pressed="true">Total staff</button>
+            <button type="button" id="ic-modeAppts" aria-pressed="false">Daily appointments</button>
+          </div>
+          <label class="ic-field-label" for="ic-sizeInput" id="ic-sizeLabel">How many people do you schedule?</label>
+          <div class="ic-input-row">
+            <input class="ic-big-input" id="ic-sizeInput" type="number" min="10" max="30000" step="10" value="300" inputmode="numeric">
+            <span class="ic-unit" id="ic-sizeUnit">total staff</span>
+          </div>
+          <input type="range" id="ic-sizeRange" min="25" max="1500" step="25" value="300" class="ic-range" aria-label="Adjust workforce size">
+          <div class="ic-range-ends"><span>25</span><span id="ic-rangeMax">1,500</span></div>
+        </div>
+        <div class="ic-result">
+          <p class="ic-result-label">Estimated annual impact</p>
+          <p class="ic-hero-figure" id="ic-figTotal"></p>
+          <p class="ic-hero-sub"><b id="ic-figHours"></b> scheduling hours returned to your leaders per year</p>
+          <a href="impact-calculator" class="ic-cta-btn">
+            See where this comes from
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1844,6 +1956,134 @@
       d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
     });
   });
+</script>
+
+<script>
+/* ── IMPACT MINI-CALCULATOR ── */
+(function () {
+  var L = {
+    wProv: 300000, wClin: 90000, wSupp: 42000, wOwner: 105000, wLoad: 1.462,
+    tpRate: 7, tcRate: 17.6, tsRate: 30, rp: 100, rc: 60, rs: 35,
+    hrs: 4, sched: 60, span: 40, real: 50,
+    prem: 20, mixopt: 7.5, turn: 15, fall: 4.5, app: 20, spp: 5.0, psh: 0
+  };
+  var state = { mode: 'staff', size: 300, mix: 75 };
+
+  function money(v) {
+    if (v >= 1e9) return '$' + (v / 1e9).toFixed(1) + 'B';
+    if (v >= 1e6) return '$' + (v / 1e6).toFixed(1) + 'M';
+    if (v >= 1e4) return '$' + Math.round(v / 1e3) + 'K';
+    return '$' + Math.round(v).toLocaleString();
+  }
+  function num(v) { return Math.round(v).toLocaleString(); }
+
+  function compute() {
+    var providers = 0, total;
+    if (state.mode === 'appts') {
+      providers = state.size / L.app;
+      total = providers * L.spp;
+    } else {
+      total = state.size;
+    }
+    total = Math.max(1, total);
+    if (state.mode !== 'appts') providers = total * (L.psh / 100);
+    var rest = Math.max(0, total - providers);
+    var clinical = rest * (state.mix / 100);
+    var support = rest - clinical;
+    var ownerHourly = L.wOwner / 2080 * L.wLoad;
+    var owners = Math.max(1, Math.ceil(total / L.span));
+    var hours = owners * L.hrs * 52 * (L.sched / 100);
+    var admin = hours * ownerHourly * (L.real / 100);
+    var base = (providers * L.wProv + clinical * L.wClin + support * L.wSupp) * L.wLoad;
+    var premiumSpend = base * (L.fall / 100);
+    var premium = premiumSpend * (L.prem / 100);
+    var corePayroll = Math.max(0, base - premiumSpend);
+    var mixSave = corePayroll * (L.mixopt / 100);
+    var red = L.turn / 100;
+    var turnover = providers * (L.tpRate / 100) * red * (L.wProv * (L.rp / 100))
+                 + clinical * (L.tcRate / 100) * red * (L.wClin * (L.rc / 100))
+                 + support * (L.tsRate / 100) * red * (L.wSupp * (L.rs / 100));
+    return { hours: hours, grand: admin + premium + turnover + mixSave };
+  }
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var anim = { from: 0, to: 0, start: 0, raf: 0 };
+  var elTotal = document.getElementById('ic-figTotal');
+
+  function setTotal(v) {
+    if (!elTotal) return;
+    if (reduce) { elTotal.textContent = money(v); anim.to = v; return; }
+    anim.from = anim.to; anim.to = v; anim.start = performance.now();
+    if (anim.raf) cancelAnimationFrame(anim.raf);
+    var step = function (t) {
+      var p = Math.min((t - anim.start) / 550, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      elTotal.textContent = money(anim.from + e * (anim.to - anim.from));
+      if (p < 1) anim.raf = requestAnimationFrame(step);
+    };
+    anim.raf = requestAnimationFrame(step);
+  }
+
+  function render() {
+    var r = compute();
+    setTotal(r.grand);
+    var fh = document.getElementById('ic-figHours');
+    if (fh) fh.textContent = num(r.hours);
+  }
+
+  var sizeInput = document.getElementById('ic-sizeInput');
+  var sizeRange = document.getElementById('ic-sizeRange');
+
+  function setSize(v, syncInput, syncRange) {
+    v = Math.max(1, Math.min(30000, Math.round(v || 0)));
+    state.size = v;
+    if (syncInput && sizeInput) sizeInput.value = v;
+    if (syncRange && sizeRange) sizeRange.value = Math.max(+sizeRange.min, Math.min(+sizeRange.max, v));
+    render();
+  }
+
+  if (sizeInput) {
+    sizeInput.addEventListener('input', function () {
+      var v = parseInt(sizeInput.value, 10);
+      if (!isFinite(v) || v < 1) return;
+      setSize(v, false, true);
+    });
+    sizeInput.addEventListener('blur', function () {
+      if (!isFinite(parseInt(sizeInput.value, 10))) setSize(state.size, true, true);
+    });
+  }
+  if (sizeRange) sizeRange.addEventListener('input', function () { setSize(parseInt(sizeRange.value, 10), true, false); });
+
+  var MODES = {
+    staff: { label: 'How many people do you schedule?', unit: 'total staff', max: 1500, start: 300, mix: 75 },
+    appts: { label: 'How many appointments do you run a day?', unit: 'appts per day', max: 5000, start: 300, mix: 60 }
+  };
+
+  function setMode(mode) {
+    state.mode = mode;
+    var m = MODES[mode];
+    var sb = document.getElementById('ic-modeStaff');
+    var ab = document.getElementById('ic-modeAppts');
+    if (sb) sb.setAttribute('aria-pressed', String(mode === 'staff'));
+    if (ab) ab.setAttribute('aria-pressed', String(mode === 'appts'));
+    var lbl = document.getElementById('ic-sizeLabel');
+    if (lbl) lbl.textContent = m.label;
+    var unit = document.getElementById('ic-sizeUnit');
+    if (unit) unit.textContent = m.unit;
+    if (sizeRange) sizeRange.max = m.max;
+    var rm = document.getElementById('ic-rangeMax');
+    if (rm) rm.textContent = num(m.max);
+    state.mix = m.mix;
+    setSize(m.start, true, true);
+  }
+
+  var sb = document.getElementById('ic-modeStaff');
+  var ab = document.getElementById('ic-modeAppts');
+  if (sb) sb.addEventListener('click', function () { setMode('staff'); });
+  if (ab) ab.addEventListener('click', function () { setMode('appts'); });
+
+  render();
+})();
 </script>
 
 </body>
