@@ -1325,7 +1325,7 @@
           <p class="ic-result-label">Estimated annual impact</p>
           <p class="ic-hero-figure" id="ic-figTotal"></p>
           <p class="ic-hero-sub"><b id="ic-figHours"></b> scheduling hours returned to your leaders per year</p>
-          <a href="impact-calculator" class="ic-cta-btn">
+          <a href="impact-calculator" class="ic-cta-btn" id="ic-cta-link">
             See where this comes from
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
@@ -2019,6 +2019,8 @@
     setTotal(r.grand);
     var fh = document.getElementById('ic-figHours');
     if (fh) fh.textContent = num(r.hours);
+    var link = document.getElementById('ic-cta-link');
+    if (link) link.href = 'impact-calculator?size=' + state.size + '&mode=' + state.mode;
   }
 
   var sizeInput = document.getElementById('ic-sizeInput');

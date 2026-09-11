@@ -963,6 +963,17 @@
 
     elTotal.textContent = "";
     render();
+
+    // Pre-initialize from homepage mini-calculator URL params
+    (function () {
+      try {
+        var params = new URLSearchParams(window.location.search);
+        var mode = params.get('mode');
+        var size = parseInt(params.get('size'), 10);
+        if (mode === 'appts') setMode('appts');
+        if (isFinite(size) && size > 0) setSize(size, true, true);
+      } catch (e) {}
+    })();
   })();
 </script>
 
