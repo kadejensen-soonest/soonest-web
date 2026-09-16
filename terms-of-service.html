@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Service Agreement — Soonest</title>
+  <meta name="description" content="The Soonest Master Service Agreement referenced in Soonest Order Forms, governing subscription access to the Soonest scheduling platform." />
+  <link rel="canonical" href="https://www.soonest.io/terms-of-service" />
+  <meta property="og:title" content="Master Service Agreement — Soonest" />
+  <meta property="og:url" content="https://www.soonest.io/terms-of-service" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Soonest" />
+  <link rel="icon" type="image/png" href="BlueIcon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Figtree:wght@0,400;0,500;0,600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED; --blue-dark: #0d6ec0; --navy: #1E284D; --navy-deep: #101828;
+      --gray-700: #475467; --gray-400: #98A2B3; --gray-200: #E4E5F3; --gray-100: #F2F4F7; --off-white: #F9FAFB;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    /* ── NAV DROPDOWNS ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-toggle:hover, .nav-dropdown-toggle.open { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle svg { transition: transform 0.2s; margin-left: 2px; }
+    .nav-dropdown-toggle.open svg { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--navy-deep);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: 6px;
+      min-width: 220px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+      z-index: 300;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+    .nav-dropdown-item {
+      display: block;
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 14px;
+      border-radius: 7px;
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-item:hover, .nav-dropdown-item.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-item-soon { opacity: 0.45; cursor: default; pointer-events: none; }
+    .nav-soon-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.15); color: rgba(255,255,255,.7); margin-left: 6px; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .nav-dropdown { width: 100%; }
+      .nav-dropdown-menu { position: static; box-shadow: none; border: none; border-radius: 0; padding: 4px 0 4px 16px; background: transparent; }
+      .nav-dropdown-toggle { width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; justify-content: space-between; }
+    }
+    @media (hover: hover) {
+      .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+      .nav-dropdown:hover .nav-dropdown-toggle { color: white; background: rgba(255,255,255,.08); }
+      .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+    }
+
+    .page-header { background: var(--hero-grad); padding: 56px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 20% 80%, rgba(17,134,237,.1) 0%, transparent 50%); pointer-events: none; }
+    .page-header-inner { position: relative; z-index: 1; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: 40px; font-weight: 700; color: white; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-header p { font-size: 15px; color: rgba(255,255,255,.55); }
+
+    .legal-wrap { max-width: 800px; margin: 0 auto; padding: 64px 24px 96px; }
+    .legal-wrap h2 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin: 40px 0 12px; }
+    .legal-wrap h2:first-child { margin-top: 0; }
+    .legal-wrap p { font-size: 15px; color: var(--gray-700); line-height: 1.75; margin-bottom: 16px; }
+    .legal-wrap ul { margin: 0 0 16px 20px; }
+    .legal-wrap ul li { font-size: 15px; color: var(--gray-700); line-height: 1.75; margin-bottom: 8px; }
+    .legal-wrap a { color: var(--blue); }
+    .legal-meta { font-size: 13px; color: var(--gray-400); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--gray-200); }
+
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color 0.15s; }
+    .footer-legal a:hover { color: white; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B81QG8E2N');
+  gtag('config', 'AW-18425608403');
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Platform
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="scheduling" class="nav-dropdown-item">AI Scheduling</a>
+          <a href="pulse-ai" class="nav-dropdown-item">Burnout Detection</a>
+          <a href="coaching" class="nav-dropdown-item">Coaching</a>
+          <span class="nav-dropdown-item nav-item-soon">Labor Forecasting <span class="nav-soon-badge">Soon</span></span>
+          <span class="nav-dropdown-item nav-item-soon">Payroll <span class="nav-soon-badge">Soon</span></span>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Departments
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="departments/nurse-scheduling-software" class="nav-dropdown-item">Nurse Scheduling Software</a>
+          <a href="departments/physician-scheduling-software" class="nav-dropdown-item">Physician Scheduling Software</a>
+          <a href="departments/medical-staff-scheduling-software" class="nav-dropdown-item">Medical Staff Scheduling Software</a>
+        </div>
+      </li>
+      <li><a href="https://schedule.soonest.io/" class="nav-mobile-cta" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);">Login</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Get a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://schedule.soonest.io/" class="nav-btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);font-weight:500;">Login</a>
+      <a href="demo" class="nav-btn">Get a Demo</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <h1>Master Service Agreement</h1>
+    <p>Last updated: September 2026</p>
+  </div>
+</div>
+
+<div class="legal-wrap">
+  <p class="legal-meta">This is the Master Service Agreement referenced in Soonest Order Forms. If you use Soonest without a signed Order Form, our <a href="terms">Terms of Service</a> apply instead.</p>
+
+  <p>This Master Service Agreement (the "<strong>MSA</strong>") is effective upon execution of an Order Form to which this MSA is attached or otherwise referencing this MSA (each an "<strong>Order Form</strong>" and together with this MSA, the "<strong>Agreement</strong>"), by and between Soonest, Inc., a Delaware corporation ("<strong>Soonest</strong>") and the party named as Customer in the Order Form (the "<strong>Customer</strong>"). This Agreement governs Customer's access to and use of the services offered by Soonest and described at soonest.io and referenced on the Order Form (the "<strong>Service</strong>").</p>
+
+  <h2>1. The Service</h2>
+  <p><strong>1.1. Subscriptions.</strong> Soonest and Customer may enter into one or more Order Forms referencing this MSA, pursuant to which Customer may purchase a subscription to remotely access and use the Service, subject to this Agreement (a "<strong>Subscription</strong>"). Soonest and Customer's Affiliates may enter into Order Forms for Subscriptions, subject to the terms of this Agreement; provided that (i) all references to "Customer" herein will refer to the applicable Affiliate with regard to such Affiliate's Order Form and (ii) the original Customer and Affiliate remain jointly and severally liable for any breach by such Affiliate. "Affiliate" means any entity that controls, is controlled by, or is under common control with the Customer.</p>
+  <p><strong>1.2. Authorized Users.</strong> An "<strong>Authorized User</strong>" is a person who the Customer, or a person with admin access on a Customer's account, has invited to join Customer's account on the Service, either via the interface of the Service or via a request to Soonest. Authorized Users may be employees, contractors or agents of Customer. Customer is responsible for all actions by Authorized Users on the Customer's account.</p>
+  <p><strong>1.3. Access to the Service.</strong> During the term of a Subscription, Soonest shall provide Customer and Customer's Authorized Users with non-exclusive access to the Service. Customer and the Authorized Users may use the Service solely for Customer's own internal business purposes and not for resale, in a service bureau arrangement or via distribution by any means not explicitly allowed under this Agreement.</p>
+
+  <h2>2. Billing and Payments</h2>
+  <p><strong>2.1. Pricing Structure.</strong> Fees for access to the Service are described on the applicable Order Form (the "<strong>Fees</strong>") and are not refundable.</p>
+  <p><strong>2.2. Billing and Invoices.</strong> Unless otherwise stated on an Order Form, Fees are invoiced in advance upon execution of the Order Form and all invoices are due upon receipt.</p>
+  <p><strong>2.3. Late Charges.</strong> Late payments are subject to interest charges of 1.5% per month, or if lower, the maximum amount allowed by law. In addition, Customer will reimburse Soonest for all costs of collection (including attorneys' fees).</p>
+  <p><strong>2.4. Taxes.</strong> Fees are exclusive of sales, use, value added, and similar taxes. Customer is solely responsible for payment of any such taxes resulting from the use of the Service, other than taxes based on Soonest's income. Where Soonest is required by law to collect such taxes, Soonest will add them to Customer's invoice at the rate applicable to Customer's billing address. If any such taxes are required to be withheld, Customer shall pay an amount to Soonest such that the net amount payable to Soonest after withholding of taxes shall equal the amount that would have been otherwise payable under this Agreement.</p>
+  <p><strong>2.5. Billing Disputes.</strong> Customer agrees that it will notify Soonest within 30 days of receipt of an invoice from Soonest if it intends to dispute the amounts owed under such invoice, and that after 30 days all undisputed invoices will be deemed to have been accepted.</p>
+
+  <h2>3. Intellectual Property Rights and Restrictions</h2>
+  <p><strong>3.1. User Content Transmitted Through the Service.</strong> As between Customer and Soonest, Customer shall retain all right, title and interest to the information, data, text, images, video or other materials ("<strong>Content</strong>") that Customer and Authorized Users upload, post, publish, display, transmit or send (collectively, "<strong>Transmit</strong>") through the Service or share with other users, and Soonest agrees that it obtains no intellectual property rights in the Content except the limited license set forth herein. Customer hereby grants Soonest a license to the Content to provide the Service to Customer and Customer's Authorized Users and to support, manage and improve the Service. Customer acknowledges and agrees that the Content does not include any System Data. System Data is owned by Soonest.</p>
+  <p><strong>3.2. Soonest Intellectual Property.</strong> Soonest shall retain all intellectual property rights in the Service, including any and all derivatives, changes and improvements thereto, and Customer agrees that it obtains no intellectual property rights or licenses by this Agreement except those expressly granted herein. Customer agrees that it shall (i) not attempt to infiltrate, hack, reverse engineer, decompile, or disassemble the Service; (ii) not represent that it possesses any proprietary interest in the Service; (iii) not directly or indirectly, take any action to contest Soonest's intellectual property rights or infringe them in any way; and (iv) except as specifically permitted hereunder, not use the name, trademarks, trade names, and logos of Soonest.</p>
+  <p><strong>3.3. Soonest System Data.</strong> In the course of providing the Service, Soonest may collect statistical data and performance information, analytics, meta-data or similar information, generated through instrumentation and logging systems, regarding the operation of the Service, including Customer's use of the Service (the "<strong>System Data</strong>"). Nothing in this Agreement shall restrict Soonest's right to collect System Data or to use it for any internal business purpose, provided however, that Soonest will not disclose System Data to any third party in a manner that allows such third party to identify Customer or any Authorized User.</p>
+  <p><strong>3.4. Feedback.</strong> Customer may, from time to time, provide Soonest with ideas, suggestions, feedback, recommendations or improvements pertaining to the Service (collectively, "<strong>Feedback</strong>"). Customer hereby grants Soonest a non-exclusive, perpetual, irrevocable, royalty-free license to use all Feedback for any purpose. Feedback is provided to Soonest on an "as-is" basis without warranties of any kind.</p>
+  <p><strong>3.5. Marketing Rights.</strong> Customer consents to the inclusion of its name and logo on the Soonest website and in Soonest's marketing materials, describing Customer as a customer of Soonest.</p>
+
+  <h2>4. Privacy and Security</h2>
+  <p><strong>4.1. Security.</strong> Soonest will implement reasonable and appropriate measures designed to help secure the Content and Confidential Information against accidental or unlawful loss, access, or disclosure.</p>
+  <p><strong>4.2. Account Security.</strong> Login credentials cannot be shared or used by more than one individual authorized user. Customer will notify Soonest immediately if Customer believes that an unauthorized third party has accessed Customer's account on the Service, or that an Authorized User's account credentials or Content have been compromised.</p>
+  <p><strong>4.3. Data Privacy.</strong> Except as described in this Agreement and in Soonest's Privacy Policy, available online at <a href="privacy">soonest.io/privacy</a> (the "<strong>Privacy Policy</strong>"), or as otherwise required by applicable law, Soonest will not disclose Content or Customer's Confidential Information to any third party.</p>
+  <p><strong>4.4. Customer Responsibilities.</strong> Customer acknowledges and agrees that Customer and its Authorized Users control the choice of any Content which they Transmit through the Service. Accordingly, as between Customer and Soonest, Customer is solely responsible for accuracy, content and legality of all Content. In addition, Customer acknowledges and agrees that it is responsible for procuring and maintaining any necessary consents and permissions and providing and making any necessary notifications required to ensure: (i) Customer is lawfully (without being in breach of applicable laws) able to disclose, provide or make available the Content to Soonest in connection with this Agreement and the Service, including (but not limited to) any consents required to enable the lawful transfer of Content to Soonest located in the United States; and (ii) Soonest is lawfully (without being in breach of applicable law) able to use, store, handle and process the Content in accordance with and for the purposes contemplated by this Agreement.</p>
+  <p><strong>4.5. Temporary Suspension.</strong> Soonest may temporarily suspend Customer's access to the Service if Soonest reasonably determines that: (a) Customer's use of the Service disrupts or creates a security risk to the Service or Soonest systems; (b) Customer is using the Service in violation of any applicable law or regulation or this Agreement; or (c) Customer fails to pay fees owed to Soonest in accordance with this Agreement. In the event of any suspension pursuant to this section, Soonest will use commercially reasonable efforts to provide notice thereof to Customer, and to restore access to the Service as promptly as reasonably practicable.</p>
+
+  <h2>5. Confidentiality</h2>
+  <p><strong>5.1. Confidential Information.</strong> "<strong>Confidential Information</strong>" shall mean all information of a party disclosed to the other party, regardless of the form of disclosure, that is designated as confidential or that reasonably should be understood to be confidential given the nature of the information and the circumstances of disclosure, including without limitation and without the need to designate as confidential (i) with respect to Customer, the Content, but not the System Data, and (ii) with respect to Soonest, the pricing terms offered to Customer by Soonest.</p>
+  <p><strong>5.2. Nondisclosure.</strong> Each party (each a "<strong>Receiving Party</strong>") agrees that (i) it shall use and reproduce the Confidential Information of the other party (the "<strong>Disclosing Party</strong>") only for purposes of exercising its rights and performing its obligations under this Agreement and only to the extent necessary for such purposes and (ii) it shall restrict disclosure of such Confidential Information to the Receiving Party's employees, consultants, service providers or advisors who have a need to know and who are bound by obligations of confidentiality and non-use at least as protective of such information as this Agreement, and shall not otherwise disclose such Confidential Information to any third party without the prior written approval of the Disclosing Party. The Receiving Party will exercise at least the same degree of care used to restrict disclosure and use of its own information of like importance, but not less than reasonable care. Notwithstanding the foregoing, it shall not be a breach of this Agreement for the Receiving Party to disclose Confidential Information if compelled to do so under law, in a judicial or other governmental investigation or proceeding, provided that, to the extent permitted by law, the Receiving Party has given the Disclosing Party prior notice and reasonable assistance to permit the Disclosing Party a reasonable opportunity to object to and/or limit the judicial or governmental requirement to disclosure.</p>
+  <p><strong>5.3. Exceptions.</strong> Notwithstanding anything to the contrary herein, neither party shall be liable for using or disclosing information that such party can prove: (i) was publicly known at the time it was disclosed or has become publicly known through no fault of the Receiving Party; (ii) was known to the Receiving Party, without restriction, at the time of disclosure, as demonstrated by files in existence at the time of disclosure; (iii) is disclosed with the prior written approval of the Disclosing Party; (iv) was independently developed by the Receiving Party without any use of the Confidential Information, as demonstrated by files created at the time of such independent development; (v) becomes known to the Receiving Party, without restriction, from a source other than the Disclosing Party without breach of this Agreement by the Receiving Party and otherwise not in violation of the Disclosing Party's rights; or (vi) is disclosed generally to third parties by the Disclosing Party without restrictions similar to those contained in this Agreement.</p>
+
+  <h2>6. Representations and Warranties</h2>
+  <p><strong>6.1. Customer Representations and Warranties.</strong> Customer represents and warrants to Soonest that: (i) Customer has all necessary right and authority to upload the Content to the Service without infringement upon any third party's proprietary or privacy rights, including intellectual property rights; (ii) the Content does not contain any viruses, worms, Trojan horses or other harmful or destructive code or content; and (iii) Customer will use the Service in compliance with all applicable laws, rules and regulations, and in accordance with this Agreement.</p>
+  <p><strong>6.2. Soonest Representations and Warranties.</strong> Soonest represents and warrants to Customer that Soonest will provide the Service to Customer in accordance with all applicable laws, rules and regulations.</p>
+  <p><strong>6.3. Mutual Representations and Warranties.</strong> Each party represents and warrants that it has the necessary corporate authority to enter into this Agreement, and this Agreement is a valid and binding obligation, enforceable against it, in accordance with its terms.</p>
+  <p><strong>6.4. Disclaimer of Warranties.</strong> EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, SOONEST PROVIDES THE SERVICE TO CUSTOMER ON AN "AS IS" BASIS, WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING THE WARRANTY OF MERCHANTABILITY, NON-INFRINGEMENT OR FITNESS FOR PARTICULAR PURPOSE, WHETHER ALLEGED TO ARISE BY LAW, BY USAGE IN THE TRADE, BY COURSE OF DEALING OR COURSE OF PERFORMANCE. NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, SOONEST DOES NOT WARRANT THAT THE SERVICE WILL BE DELIVERED OR PERFORMED ERROR-FREE OR WITHOUT INTERRUPTION OR THAT CUSTOMER WILL ACHIEVE ANY PARTICULAR BUSINESS RESULTS BY USE OF THE SERVICE.</p>
+
+  <h2>7. Limitation of Liability</h2>
+  <p><strong>7.1. Exclusion of Damages.</strong> IN NO EVENT WILL EITHER PARTY BE LIABLE FOR ANY INDIRECT, INCIDENTAL, CONSEQUENTIAL, SPECIAL, PUNITIVE OR EXEMPLARY DAMAGES, INCLUDING LOST PROFITS, LOSS OF USE, LOSS OF DATA, COST OF PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES, HOWEVER CAUSED, AND ON ANY THEORY OF LIABILITY, WHETHER FOR BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE AND STRICT LIABILITY), OR OTHERWISE, WHETHER OR NOT SUCH PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+  <p><strong>7.2. Maximum Aggregate Liability.</strong> EACH PARTY'S MAXIMUM AGGREGATE LIABILITY UNDER, ARISING OUT OF OR RELATING TO THIS AGREEMENT SHALL NOT EXCEED THE TOTAL AMOUNT OF FEES PAID OR PAYABLE BY CUSTOMER TO SOONEST DURING THE TWELVE MONTHS PRECEDING THE DATE THE LIABILITY FIRST ARISES (OR, IF NO AMOUNTS HAVE BEEN PAID, SUCH AMOUNT SHALL BE $100.00).</p>
+  <p><strong>7.3. Acknowledgement.</strong> THE LIABILITIES LIMITED BY THIS SECTION APPLY: (i) TO LIABILITY FOR NEGLIGENCE; (ii) REGARDLESS OF THE FORM OF ACTION, WHETHER IN CONTRACT, TORT, STRICT PRODUCT LIABILITY, OR OTHERWISE; (iii) EVEN IF A PARTY IS ADVISED IN ADVANCE OF THE POSSIBILITY OF THE DAMAGES IN QUESTION AND EVEN IF SUCH DAMAGES WERE FORESEEABLE; AND (iv) EVEN IF A PARTY'S REMEDIES FAIL OF THEIR ESSENTIAL PURPOSE. IF APPLICABLE LAW LIMITS THE APPLICATION OF THE PROVISIONS OF THIS SECTION 7, EACH PARTY'S LIABILITY WILL BE LIMITED TO THE MAXIMUM EXTENT PERMISSIBLE BY SUCH LAW.</p>
+
+  <h2>8. Term; Termination</h2>
+  <p><strong>8.1. Term.</strong> This MSA shall be effective for so long as there is an Order Form in effect between Customer and Soonest, or until otherwise terminated as provided herein.</p>
+  <p><strong>8.2. Termination for Cause.</strong> Either party may terminate this Agreement by giving written notice to the other party if: (i) the other party breaches a material provision of this Agreement and fails to cure the breach within 30 days after being given written notice thereof; (ii) the other party is judged bankrupt or insolvent, makes a general assignment for the benefit of its creditors, a trustee or receiver is appointed for such party or any petition by or on behalf of such party is filed under any bankruptcy or similar laws.</p>
+  <p><strong>8.3. Effect of Termination.</strong> Upon termination or expiration of this Agreement for any reason, Customer's right to access and use the Service shall immediately terminate and Customer will immediately cease use of the Service.</p>
+  <p><strong>8.4. Survival.</strong> Section 3 (Intellectual Property Rights and Restrictions), Section 4 (Privacy and Security), Section 5 (Confidentiality), Section 6 (Representations and Warranties), Section 7 (Limitation of Liability), and Section 9 (Miscellaneous) shall survive any expiration or termination of this Agreement.</p>
+
+  <h2>9. Miscellaneous</h2>
+  <p><strong>9.1. Amendments.</strong> This Agreement may be amended only by a written agreement by authorized representatives of each party.</p>
+  <p><strong>9.2. Governing Law; Jurisdiction; Venue.</strong> This Agreement shall be governed by the laws of the State of Utah and the United States without regard to conflicts of laws provisions thereof, and without regard to the United Nations Convention on the International Sale of Goods. Except for claims for injunctive or equitable relief or claims regarding intellectual property rights (which may be brought in any competent court), any dispute arising under this Agreement shall be finally settled in accordance with the Rules of the Judicial Arbitration and Mediation Service ("<strong>JAMS</strong>") in accordance with such Rules. To the extent the JAMS streamlined rules are available they shall apply. The arbitration shall take place in Salt Lake City, Utah, in the English language and the arbitral decision may be enforced in any court. To the extent a claim cannot legally be arbitrated (as determined by an arbitrator), the jurisdiction and venue for actions related to the subject matter hereof shall be the state and United States federal courts located in Salt Lake City, Utah and both parties hereby irrevocably submit to the personal jurisdiction of such courts.</p>
+  <p><strong>9.3. Assignment.</strong> Neither party may transfer or assign its rights or obligations under this Agreement to any third party without the prior written approval of the other party, except for an assignment to an affiliated company or to a successor in connection with a merger, acquisition, reorganization or sale of substantially all of its assets or voting securities. Any purported assignment contrary to this section shall be void. Subject to the foregoing, this Agreement will be binding upon, and inure to the benefit of the parties and their respective successors and assigns.</p>
+  <p><strong>9.4. Notices.</strong> All notices and other communications hereunder shall be in writing and shall be deemed to have been duly given when sent by email.</p>
+  <p><strong>9.5. Relationship of Parties.</strong> The parties are independent contractors and will have no right to assume or create any obligation or responsibility on behalf of the other party. Neither party shall hold itself out as an agent of the other party. This Agreement will not be construed to create or imply any partnership, agency, joint venture or formal business entity of any kind.</p>
+  <p><strong>9.6. Severability.</strong> If any provision of this Agreement is held invalid or unenforceable, it shall be replaced with the valid provision that most closely reflects the intent of the Parties and the remaining provisions of the Agreement will remain in full force and effect.</p>
+  <p><strong>9.7. Force Majeure.</strong> Except for payment obligations under this Agreement, neither party hereto shall be liable for any loss, damage, or penalty resulting from such party's failure to perform its obligations hereunder when such failure is due to events beyond its reasonable control, such as, without limitation, flood, earthquake, fire, acts of God, military insurrection, civil riot, or labor strikes.</p>
+
+  <h2>10. Contact</h2>
+  <p>Questions about this Agreement: <a href="mailto:support@getsoonest.com">support@getsoonest.com</a><br>Soonest, Inc., Salt Lake City, Utah</p>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+          <li><a href="impact-calculator">Impact Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.classList.add('open');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
