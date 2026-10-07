@@ -458,6 +458,7 @@ window.addEventListener('message', function (e) {
   if (!/^https:\/\/([a-z0-9-]+\.)*hubspot\.com$/.test(e.origin)) return;
   if (e.data && e.data.meetingBookSucceeded) {
     gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
+    gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_page_hubspot_meeting'});
   }
 });
 </script>
