@@ -10,7 +10,9 @@
     { "source": "/homepage-v4", "destination": "/", "permanent": true },
     { "source": "/homepage-v4.html", "destination": "/", "permanent": true },
     { "source": "/homepage-v5", "destination": "/", "permanent": true },
-    { "source": "/homepage-v5.html", "destination": "/", "permanent": true }
+    { "source": "/homepage-v5.html", "destination": "/", "permanent": true },
+    { "source": "/homepage", "destination": "/", "permanent": true },
+    { "source": "/homepage.html", "destination": "/", "permanent": true }
   ],
   "headers": [
     {

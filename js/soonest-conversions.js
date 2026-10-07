@@ -50,7 +50,7 @@
   document.addEventListener('click', function (e) {
     var el = e.target.closest ? e.target.closest('a, button') : null;
     if (!el) return;
-    var href = el.getAttribute('href') || '';
+    var href = el.href || el.getAttribute('href') || '';
     var text = (el.textContent || '').trim().toLowerCase();
     var isDemoLink = /\/demo(\.html)?(\/|\?|#|$)/.test(href);
     var isDemoButton = /^(get|request|book) a demo$/.test(text);
