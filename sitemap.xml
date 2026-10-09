@@ -68,6 +68,12 @@
   </url>
 
   <url>
+    <loc>https://www.soonest.io/departments/pediatric-scheduling-software</loc>
+    <priority>0.8</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+
+  <url>
     <loc>https://www.soonest.io/impact-calculator</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
