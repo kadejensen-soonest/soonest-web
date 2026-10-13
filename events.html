@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Great Meeting You | Soonest</title>
-  <meta name="description" content="Thanks for stopping by the Soonest booth. Book a 30 minute follow up and get a free sample schedule built for your group." />
+  <meta name="description" content="Great meeting you. Book a 30 minute follow up and get a free sample schedule built for your group." />
   <meta name="robots" content="noindex, nofollow" />
   <link rel="icon" type="image/png" href="BlueIcon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -323,7 +323,7 @@
 <div class="page-header">
   <div class="page-header-grid-bg"></div>
   <div class="page-header-inner">
-    <div class="page-header-badge" id="event-badge">Great meeting you</div>
+    <div class="page-header-badge">Great meeting you</div>
     <h1>Let's pick up where we left off.</h1>
     <p>Grab a 30 minute time below. We'll build a free sample schedule for your group before you commit to anything.</p>
   </div>
@@ -350,7 +350,7 @@
     <!-- RIGHT: Offer + what to expect -->
     <div class="demo-info">
       <div class="offer-card">
-        <span class="offer-tag">Booth offer</span>
+        <span class="offer-tag">Event offer</span>
         <h3>A free sample schedule, built for your group</h3>
         <p>Share your providers, locations, and rules. We'll build a real schedule with them so you can see the difference before making any decision.</p>
       </div>
@@ -498,18 +498,9 @@
   });
 </script>
 <script>
-  // Event personalization: soonest.io/event?e=rhau  (add new shows to EVENTS)
+  // Tag bookings so HubSpot shows they came from an event
   (function () {
-    var EVENTS = {
-      rhau: 'Great meeting you at RHAU 2026'
-    };
-    var params = new URLSearchParams(location.search);
-    var key = (params.get('e') || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-    if (EVENTS[key]) document.getElementById('event-badge').textContent = EVENTS[key];
-    window.snEvent = key || 'unknown';
-
-    // Tag the booking with the event so HubSpot shows where the lead came from
-    var utm = 'utm_source=tradeshow&utm_medium=qr&utm_campaign=' + encodeURIComponent(window.snEvent);
+    var utm = 'utm_source=event&utm_medium=qr&utm_campaign=events';
     var c = document.getElementById('meetings-container');
     c.setAttribute('data-src', c.getAttribute('data-src') + '&' + utm);
     var f = document.getElementById('meetings-fallback');
@@ -522,7 +513,7 @@
   window.addEventListener('message', function (e) {
     if (!/^https:\/\/([a-z0-9-]+\.)*hubspot\.com$/.test(e.origin)) return;
     if (e.data && e.data.meetingBookSucceeded) {
-      gtag('event', 'generate_lead', { lead_source: 'tradeshow', event_name_tag: window.snEvent });
+      gtag('event', 'generate_lead', { lead_source: 'event' });
     }
   });
 </script>

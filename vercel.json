@@ -1,30 +1,94 @@
 {
   "cleanUrls": true,
   "redirects": [
-    { "source": "/cold-call-guide", "destination": "/", "permanent": false },
-    { "source": "/cold-call-guide.html", "destination": "/", "permanent": false },
-    { "source": "/homepage-v2", "destination": "/", "permanent": true },
-    { "source": "/homepage-v2.html", "destination": "/", "permanent": true },
-    { "source": "/homepage-v3", "destination": "/", "permanent": true },
-    { "source": "/homepage-v3.html", "destination": "/", "permanent": true },
-    { "source": "/homepage-v4", "destination": "/", "permanent": true },
-    { "source": "/homepage-v4.html", "destination": "/", "permanent": true },
-    { "source": "/homepage-v5", "destination": "/", "permanent": true },
-    { "source": "/homepage-v5.html", "destination": "/", "permanent": true },
-    { "source": "/homepage", "destination": "/", "permanent": true },
-    { "source": "/homepage.html", "destination": "/", "permanent": true }
+    {
+      "source": "/cold-call-guide",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/cold-call-guide.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/homepage-v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v2.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v3",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v3.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v4",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v4.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v5",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage-v5.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/homepage.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/event",
+      "destination": "/events",
+      "permanent": true
+    },
+    {
+      "source": "/event.html",
+      "destination": "/events",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/sitemap.xml",
       "headers": [
-        { "key": "Content-Type", "value": "application/xml" }
+        {
+          "key": "Content-Type",
+          "value": "application/xml"
+        }
       ]
     },
     {
       "source": "/robots.txt",
       "headers": [
-        { "key": "Content-Type", "value": "text/plain" }
+        {
+          "key": "Content-Type",
+          "value": "text/plain"
+        }
       ]
     }
   ]
