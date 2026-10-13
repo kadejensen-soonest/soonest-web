@@ -488,5 +488,16 @@ window.addEventListener('message', function (e) {
 });
 </script>
 <script src="/js/soonest-conversions.js" defer></script>
+<script>
+  // Remove HubSpot branding injected dynamically after form render
+  const hsObserver = new MutationObserver(() => {
+    document.querySelectorAll('.hs-form-branding, .hubspot-link__container').forEach(el => el.remove());
+    document.querySelectorAll('.embed-body a[href*="hubspot.com"]').forEach(el => {
+      const parent = el.closest('div');
+      if (parent && !parent.classList.contains('hs-form-field')) parent.remove();
+    });
+  });
+  hsObserver.observe(document.body, { childList: true, subtree: true });
+</script>
 </body>
 </html>
