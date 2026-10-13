@@ -171,7 +171,18 @@
     }
     .embed-card-header h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
     .embed-card-header p { font-size: 13px; color: rgba(255,255,255,.55); }
-    .embed-body { padding: 0; min-height: 500px; }
+    .embed-body { padding: 28px 28px 20px; min-height: 500px; }
+
+    /* HubSpot form overrides */
+    .embed-body .hs-form-field { margin-bottom: 18px; }
+    .embed-body .hs-form-field label { font-family: 'Figtree', sans-serif; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; display: block; }
+    .embed-body .hs-input { width: 100% !important; border: 1px solid var(--gray-200) !important; border-radius: 8px !important; padding: 10px 14px !important; font-family: 'Figtree', sans-serif !important; font-size: 14px !important; color: var(--navy) !important; background: var(--off-white) !important; transition: border-color 0.15s !important; box-sizing: border-box !important; }
+    .embed-body .hs-input:focus { outline: none !important; border-color: var(--blue) !important; background: white !important; }
+    .embed-body .hs-button { background: var(--blue) !important; color: white !important; border: none !important; border-radius: 8px !important; padding: 12px 28px !important; font-family: 'Poppins', sans-serif !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; transition: background 0.15s !important; margin-top: 4px !important; }
+    .embed-body .hs-button:hover { background: var(--blue-dark) !important; }
+    .embed-body .hs-error-msg { font-size: 12px !important; color: #e53e3e !important; margin-top: 4px !important; }
+    .embed-body .legal-consent-container { font-size: 11px !important; color: var(--gray-400) !important; margin-top: 12px !important; }
+    .embed-body .hs_error_rollup { display: none; }
 
     /* HubSpot embed placeholder — replace this div with the HubSpot meetings embed script */
     .hubspot-placeholder {
@@ -309,8 +320,8 @@
     <!-- LEFT: HubSpot meeting embed -->
     <div class="embed-card">
       <div class="embed-card-header">
-        <h2>Book a time that works for you</h2>
-        <p>Pick any open slot below — we'll confirm within the hour.</p>
+        <h2>Tell us about your group</h2>
+        <p>Fill out the form and we'll reach out to schedule your demo.</p>
       </div>
       <div class="embed-body">
         <!-- HubSpot Form Embed -->
