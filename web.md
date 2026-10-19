@@ -25,6 +25,7 @@ Internal reference for anyone working on the site. For brand guidelines, design 
 | `index.html` | / | Live | Main homepage — primary conversion page |
 | `scheduling.html` | /scheduling | Live | AI scheduling feature page |
 | `pulse-ai.html` | /pulse-ai | Live | Pulse AI feature page (in-development feature) |
+| `labor-forecasting.html` | /labor-forecasting | Live | Labor forecasting platform page (feature coming soon) + free Labor Forecast Assessment offer |
 | `resources.html` | /resources | Live | Blog/resources listing |
 | `demo.html` | /demo | Live | Book a demo page — primary CTA destination |
 | `privacy.html` | /privacy | Live | Privacy policy |
