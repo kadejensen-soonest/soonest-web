@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demo Booked — Soonest</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="BlueIcon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B81QG8E2N');
+    gtag('config', 'AW-18425608403');
+
+    // Hard conversion: demo actually booked
+    // This fires only when someone lands here after completing the calendar booking
+    gtag('event', 'conversion', {
+      'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE',
+      'value': 1.0,
+      'currency': 'USD'
+    });
+    gtag('event', 'demo_booked', {
+      'send_to': 'G-2B81QG8E2N',
+      'event_category': 'conversion',
+      'event_label': 'demo_confirmed_page'
+    });
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED;
+      --blue-dark: #0d6ec0;
+      --navy: #1E284D;
+      --navy-deep: #101828;
+      --gray-700: #475467;
+      --gray-400: #98A2B3;
+      --gray-200: #E4E5F3;
+      --gray-100: #F2F4F7;
+      --off-white: #F9FAFB;
+      --green: #12B76A;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Nav */
+    .nav { background: var(--navy-deep); padding: 0 24px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+
+    /* Main */
+    main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 64px 24px; }
+    .confirmed-card { background: white; border-radius: 16px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-card); max-width: 580px; width: 100%; padding: 52px 48px; text-align: center; }
+    @media (max-width: 600px) { .confirmed-card { padding: 40px 28px; } }
+
+    .check-wrap { width: 72px; height: 72px; background: rgba(18,183,106,.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 28px; }
+    .check-wrap svg { width: 32px; height: 32px; }
+
+    h1 { font-family: 'Poppins', sans-serif; font-size: 32px; font-weight: 800; color: var(--navy); letter-spacing: -0.5px; margin-bottom: 12px; line-height: 1.15; }
+    .sub { font-size: 17px; color: var(--gray-700); line-height: 1.65; margin-bottom: 36px; }
+
+    .expect-list { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+    .expect-list li { display: flex; align-items: flex-start; gap: 14px; font-size: 15px; color: var(--gray-700); line-height: 1.55; }
+    .expect-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(17,134,237,.08); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .expect-icon svg { width: 16px; height: 16px; color: var(--blue); }
+
+    .divider { border: none; border-top: 1px solid var(--gray-200); margin: 0 0 32px; }
+
+    .back-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--blue); color: white; padding: 13px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-decoration: none; transition: background 0.15s, transform 0.1s; }
+    .back-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    /* Footer */
+    footer { background: var(--navy-deep); padding: 24px; text-align: center; }
+    footer p { font-size: 13px; color: rgba(255,255,255,.3); }
+    footer a { color: rgba(255,255,255,.4); text-decoration: none; }
+    footer a:hover { color: white; }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+  </div>
+</nav>
+
+<main>
+  <div class="confirmed-card">
+
+    <div class="check-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <h1>Your demo is booked.</h1>
+    <p class="sub">Check your inbox for a calendar invite. We're looking forward to showing you what Soonest can do for your team.</p>
+
+    <ul class="expect-list">
+      <li>
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <span><strong style="color:var(--navy);">30 minutes, no slides.</strong> We'll walk through your group's actual scheduling setup and show you exactly how Soonest would handle it.</span>
+      </li>
+      <li>
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <span><strong style="color:var(--navy);">Come with your messy details.</strong> Provider count, locations, shift types, how you handle swaps — the more specific you are, the more useful the demo.</span>
+      </li>
+      <li>
+        <div class="expect-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <span><strong style="color:var(--navy);">Free sample schedule included.</strong> We'll build a real schedule from your data before you commit to anything.</span>
+      </li>
+    </ul>
+
+    <hr class="divider" />
+
+    <a href="/" class="back-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Back to Soonest
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Soonest. &nbsp; <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms">Terms</a></p>
+</footer>
+
+</body>
+</html>

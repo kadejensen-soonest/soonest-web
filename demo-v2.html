@@ -559,12 +559,13 @@
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
       );
       if (!res.ok) throw new Error('Submit failed');
-      // Fire conversion tracking
-      gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
-      gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_page_native_form'});
-      // Show success state
-      document.getElementById('demo-form').style.display = 'none';
-      document.getElementById('form-success').style.display = 'block';
+      // Fire soft conversion: lead captured (contact created in HubSpot)
+      gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_form_submit'});
+      // Redirect to calendar with pre-filled fields
+      const first = encodeURIComponent(form.firstname.value.trim());
+      const last  = encodeURIComponent(form.lastname.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      window.location.href = `https://meetings-na2.hubspot.com/jason2412/discovery-demo-meeting?firstname=${first}&lastname=${last}&email=${email}`;
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Get a Demo';
