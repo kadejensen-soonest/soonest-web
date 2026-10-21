@@ -338,6 +338,21 @@
             portalId: "47082704",
             formId: "926a3c92-1cd4-43eb-acf4-c73884d691e8",
             region: "na2",
+            onFormReady: function($form) {
+              // Override button inline styles HubSpot injects
+              var btn = $form[0].querySelector('input[type="submit"], .hs-button');
+              if (btn) {
+                btn.style.setProperty('background', '#1186ED', 'important');
+                btn.style.setProperty('background-color', '#1186ED', 'important');
+                btn.style.setProperty('border-color', '#1186ED', 'important');
+                btn.style.setProperty('color', '#ffffff', 'important');
+                btn.style.setProperty('border-radius', '8px', 'important');
+                btn.style.setProperty('font-family', "'Poppins', sans-serif", 'important');
+                btn.style.setProperty('font-weight', '600', 'important');
+                btn.style.setProperty('font-size', '15px', 'important');
+                btn.style.setProperty('padding', '12px 28px', 'important');
+              }
+            },
             onFormSubmitted: function () {
               // Google Ads conversion: Demo Booked (fires on demo form submit)
               gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
@@ -494,15 +509,36 @@ window.addEventListener('message', function (e) {
 </script>
 <script src="/js/soonest-conversions.js" defer></script>
 <script>
-  // Remove HubSpot branding injected dynamically after form render
-  const hsObserver = new MutationObserver(() => {
-    document.querySelectorAll('.hs-form-branding, .hubspot-link__container').forEach(el => el.remove());
-    document.querySelectorAll('.embed-body a[href*="hubspot.com"]').forEach(el => {
-      const parent = el.closest('div');
-      if (parent && !parent.classList.contains('hs-form-field')) parent.remove();
+  function removeHubSpotBranding() {
+    // Target by known class names
+    document.querySelectorAll('.hs-form-branding, .hubspot-link__container, .hs-richtext.hs-main-font-element').forEach(el => {
+      if (el.textContent.includes('hubspot') || el.querySelector('a[href*="hubspot"]')) el.remove();
     });
-  });
+    // Target any element containing the exact branding text
+    document.querySelectorAll('.embed-body *').forEach(el => {
+      if (el.children.length === 0 && el.textContent.trim().toLowerCase().includes('create your own free forms')) {
+        let node = el;
+        while (node.parentElement && node.parentElement.classList.contains && !node.parentElement.classList.contains('embed-body')) {
+          node = node.parentElement;
+        }
+        node.remove();
+      }
+    });
+    // Target any link to hubspot.com inside the form area
+    document.querySelectorAll('.embed-body a[href*="hubspot.com"]').forEach(el => {
+      let node = el;
+      while (node.parentElement && !node.parentElement.classList.contains('embed-body') && !node.parentElement.classList.contains('hs-form-field')) {
+        node = node.parentElement;
+      }
+      node.remove();
+    });
+  }
+  const hsObserver = new MutationObserver(removeHubSpotBranding);
   hsObserver.observe(document.body, { childList: true, subtree: true });
+  // Also poll for 5 seconds after load as a fallback
+  document.addEventListener('DOMContentLoaded', () => {
+    [200, 500, 1000, 2000, 5000].forEach(ms => setTimeout(removeHubSpotBranding, ms));
+  });
 </script>
 </body>
 </html>
