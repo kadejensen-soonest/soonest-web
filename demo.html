@@ -171,26 +171,33 @@
     }
     .embed-card-header h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
     .embed-card-header p { font-size: 13px; color: rgba(255,255,255,.55); }
-    .embed-body { padding: 28px 28px 20px; min-height: 500px; }
+    .embed-body { padding: 28px 28px 24px; }
 
-    /* HubSpot form overrides */
-    .embed-body .hs-form-field { margin-bottom: 18px; }
-    .embed-body .hs-form-field label { font-family: 'Figtree', sans-serif; font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; display: block; }
-    .embed-body .hs-input { width: 100% !important; border: 1px solid var(--gray-200) !important; border-radius: 8px !important; padding: 10px 14px !important; font-family: 'Figtree', sans-serif !important; font-size: 14px !important; color: var(--navy) !important; background: var(--off-white) !important; transition: border-color 0.15s !important; box-sizing: border-box !important; }
-    .embed-body .hs-input:focus { outline: none !important; border-color: var(--blue) !important; background: white !important; }
-    .embed-body .hs-button,
-    .embed-body input[type="submit"],
-    .embed-body .hs-button.primary,
-    .embed-body .hs-submit input { background: #1186ED !important; background-color: #1186ED !important; color: white !important; border: none !important; border-radius: 8px !important; padding: 12px 28px !important; font-family: 'Poppins', sans-serif !important; font-size: 15px !important; font-weight: 600 !important; cursor: pointer !important; transition: background 0.15s !important; margin-top: 4px !important; }
-    .embed-body .hs-button:hover,
-    .embed-body input[type="submit"]:hover { background: #0d6ec0 !important; background-color: #0d6ec0 !important; }
-    .embed-body .hs-error-msg { font-size: 12px !important; color: #e53e3e !important; margin-top: 4px !important; }
-    .embed-body .legal-consent-container { font-size: 11px !important; color: var(--gray-400) !important; margin-top: 12px !important; }
-    .embed-body .hs_error_rollup { display: none; }
-    /* Hide HubSpot branding footer */
-    .embed-body .hs-form-branding,
-    .embed-body .hubspot-link__container,
-    .embed-body .hs-richtext.hs-main-font-element + div a[href*="hubspot"] { display: none !important; }
+    /* Native form styles */
+    .demo-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+    .form-field label .req { color: #e53e3e; margin-left: 2px; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea { border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 14px; font-family: 'Figtree', sans-serif; font-size: 14px; color: var(--navy); background: var(--off-white); transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { outline: none; border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(17,134,237,.1); }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-error { font-size: 12px; color: #e53e3e; display: none; }
+    .form-field.invalid input,
+    .form-field.invalid select { border-color: #e53e3e; }
+    .form-field.invalid .form-error { display: block; }
+    .form-submit-btn { background: var(--blue); color: white; border: none; border-radius: 8px; padding: 13px 28px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; margin-top: 4px; }
+    .form-submit-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .form-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-success { display: none; text-align: center; padding: 32px 16px; }
+    .form-success-icon { width: 52px; height: 52px; background: rgba(18,183,106,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .form-success h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .form-success p { font-size: 15px; color: var(--gray-700); line-height: 1.6; }
 
     /* HubSpot embed placeholder — replace this div with the HubSpot meetings embed script */
     .hubspot-placeholder {
@@ -331,35 +338,43 @@
         <h2>Want to see more?</h2>
       </div>
       <div class="embed-body">
-        <!-- HubSpot Form Embed -->
-        <script charset="utf-8" type="text/javascript" src="//js-na2.hsforms.net/forms/embed/v2.js"></script>
-        <script>
-          hbspt.forms.create({
-            portalId: "47082704",
-            formId: "926a3c92-1cd4-43eb-acf4-c73884d691e8",
-            region: "na2",
-            onFormReady: function($form) {
-              // Override button inline styles HubSpot injects
-              var btn = $form[0].querySelector('input[type="submit"], .hs-button');
-              if (btn) {
-                btn.style.setProperty('background', '#1186ED', 'important');
-                btn.style.setProperty('background-color', '#1186ED', 'important');
-                btn.style.setProperty('border-color', '#1186ED', 'important');
-                btn.style.setProperty('color', '#ffffff', 'important');
-                btn.style.setProperty('border-radius', '8px', 'important');
-                btn.style.setProperty('font-family', "'Poppins', sans-serif", 'important');
-                btn.style.setProperty('font-weight', '600', 'important');
-                btn.style.setProperty('font-size', '15px', 'important');
-                btn.style.setProperty('padding', '12px 28px', 'important');
-              }
-            },
-            onFormSubmitted: function () {
-              // Google Ads conversion: Demo Booked (fires on demo form submit)
-              gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
-              gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_page_hubspot_form'});
-            }
-          });
-        </script>
+        <form class="demo-form" id="demo-form" novalidate>
+          <div class="form-row">
+            <div class="form-field" id="field-firstname">
+              <label for="firstname">First Name<span class="req">*</span></label>
+              <input type="text" id="firstname" name="firstname" autocomplete="given-name" placeholder="Jane" />
+              <span class="form-error">Please enter your first name.</span>
+            </div>
+            <div class="form-field" id="field-lastname">
+              <label for="lastname">Last Name<span class="req">*</span></label>
+              <input type="text" id="lastname" name="lastname" autocomplete="family-name" placeholder="Smith" />
+              <span class="form-error">Please enter your last name.</span>
+            </div>
+          </div>
+          <div class="form-field" id="field-company">
+            <label for="company">Company / Group Name<span class="req">*</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization" placeholder="Mountain View Emergency Physicians" />
+            <span class="form-error">Please enter your organization name.</span>
+          </div>
+          <div class="form-field" id="field-email">
+            <label for="email">Work Email<span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="jane@yourgroup.com" />
+            <span class="form-error">Please enter a valid email address.</span>
+          </div>
+          <div class="form-field" id="field-phone">
+            <label for="phone">Phone Number<span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(801) 555-0100" />
+            <span class="form-error">Please enter your phone number.</span>
+          </div>
+          <button type="submit" class="form-submit-btn" id="form-submit-btn">Get a Demo</button>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>You're all set!</h3>
+          <p>We'll be in touch shortly to schedule your demo. Check your inbox for a confirmation.</p>
+        </div>
       </div>
     </div>
 
@@ -497,47 +512,65 @@
     });
   });
 </script>
-<!-- Google Ads conversion: HubSpot meeting booked -->
-<script>
-window.addEventListener('message', function (e) {
-  if (!/^https:\/\/([a-z0-9-]+\.)*hubspot\.com$/.test(e.origin)) return;
-  if (e.data && e.data.meetingBookSucceeded) {
-    gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
-    gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_page_hubspot_meeting'});
-  }
-});
-</script>
 <script src="/js/soonest-conversions.js" defer></script>
 <script>
-  function removeHubSpotBranding() {
-    // Target by known class names
-    document.querySelectorAll('.hs-form-branding, .hubspot-link__container, .hs-richtext.hs-main-font-element').forEach(el => {
-      if (el.textContent.includes('hubspot') || el.querySelector('a[href*="hubspot"]')) el.remove();
+  document.getElementById('demo-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('form-submit-btn');
+
+    // Validate
+    const fields = [
+      { id: 'field-firstname', input: 'firstname', test: v => v.trim().length > 0 },
+      { id: 'field-lastname',  input: 'lastname',  test: v => v.trim().length > 0 },
+      { id: 'field-company',   input: 'company',   test: v => v.trim().length > 0 },
+      { id: 'field-email',     input: 'email',     test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'field-phone',     input: 'phone',     test: v => v.trim().length > 6 },
+    ];
+    let valid = true;
+    fields.forEach(f => {
+      const wrap = document.getElementById(f.id);
+      const val = form.querySelector('#' + f.input).value;
+      if (!f.test(val)) { wrap.classList.add('invalid'); valid = false; }
+      else wrap.classList.remove('invalid');
     });
-    // Target any element containing the exact branding text
-    document.querySelectorAll('.embed-body *').forEach(el => {
-      if (el.children.length === 0 && el.textContent.trim().toLowerCase().includes('create your own free forms')) {
-        let node = el;
-        while (node.parentElement && node.parentElement.classList.contains && !node.parentElement.classList.contains('embed-body')) {
-          node = node.parentElement;
-        }
-        node.remove();
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      fields: [
+        { name: 'firstname',  value: form.firstname.value.trim() },
+        { name: 'lastname',   value: form.lastname.value.trim() },
+        { name: 'company',    value: form.company.value.trim() },
+        { name: 'email',      value: form.email.value.trim() },
+        { name: 'phone',      value: form.phone.value.trim() },
+      ],
+      context: {
+        pageUri: 'https://www.soonest.io/demo',
+        pageName: 'Book a Free Demo — Soonest'
       }
-    });
-    // Target any link to hubspot.com inside the form area
-    document.querySelectorAll('.embed-body a[href*="hubspot.com"]').forEach(el => {
-      let node = el;
-      while (node.parentElement && !node.parentElement.classList.contains('embed-body') && !node.parentElement.classList.contains('hs-form-field')) {
-        node = node.parentElement;
-      }
-      node.remove();
-    });
-  }
-  const hsObserver = new MutationObserver(removeHubSpotBranding);
-  hsObserver.observe(document.body, { childList: true, subtree: true });
-  // Also poll for 5 seconds after load as a fallback
-  document.addEventListener('DOMContentLoaded', () => {
-    [200, 500, 1000, 2000, 5000].forEach(ms => setTimeout(removeHubSpotBranding, ms));
+    };
+
+    try {
+      const res = await fetch(
+        'https://api.hsforms.com/submissions/v3/integration/submit/47082704/926a3c92-1cd4-43eb-acf4-c73884d691e8',
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+      );
+      if (!res.ok) throw new Error('Submit failed');
+      // Fire soft conversion: lead captured (contact created in HubSpot)
+      gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_form_submit'});
+      // Redirect to calendar with pre-filled fields
+      const first = encodeURIComponent(form.firstname.value.trim());
+      const last  = encodeURIComponent(form.lastname.value.trim());
+      const email = encodeURIComponent(form.email.value.trim());
+      window.location.href = `https://meetings-na2.hubspot.com/jason2412/discovery-demo-meeting?firstname=${first}&lastname=${last}&email=${email}`;
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Get a Demo';
+      alert('Something went wrong — please try again or email us at support@getsoonest.com');
+    }
   });
 </script>
 </body>
