@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Free Demo — Soonest Scheduling Software</title>
+  <meta name="description" content="See Soonest in action. 30 minutes, no pressure. Walk away with a free custom schedule built from your group's real data." />
+  <link rel="canonical" href="https://www.soonest.io/demo" />
+  <meta property="og:title" content="Book a Free Demo — Soonest Scheduling Software" />
+  <meta property="og:description" content="See Soonest in action. 30 minutes, no pressure. Walk away with a free custom schedule built from your group's real data." />
+  <meta property="og:url" content="https://www.soonest.io/demo" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Soonest" />
+  <link rel="icon" type="image/png" href="BlueIcon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --blue: #1186ED; --blue-dark: #0d6ec0; --navy: #1E284D; --navy-deep: #101828;
+      --gray-700: #475467; --gray-600: #4B5371; --gray-400: #98A2B3;
+      --gray-200: #E4E5F3; --gray-100: #F2F4F7; --off-white: #F9FAFB;
+      --hero-grad: linear-gradient(150deg, #2a3a6e 0%, #1E284D 40%, #0D0E11 100%);
+      --shadow-card: 0 1px 3px rgba(0,0,0,.1), 0 4px 16px rgba(0,0,0,.06);
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Figtree', sans-serif; background: var(--off-white); color: var(--navy); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* Announce bar */
+
+    /* Nav */
+    .nav { background: var(--navy-deep); padding: 0 24px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid rgba(255,255,255,.06); transition: box-shadow 0.2s; }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 32px; width: 32px; object-fit: contain; }
+    .nav-logo-text { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; letter-spacing: -0.3px; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,.75); text-decoration: none; font-size: 14px; font-weight: 500; padding: 8px 14px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,.08); }
+    .nav-right { display: flex; align-items: center; }
+    .nav-btn { background: var(--blue); color: white; border: none; padding: 9px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; font-family: inherit; transition: background 0.15s; display: inline-block; }
+    .nav-btn:hover { background: var(--blue-dark); }
+    .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; border-radius: 6px; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: white; border-radius: 2px; transition: transform 0.2s, opacity 0.2s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile-cta { display: none; }
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-right { display: none; }
+      .nav-links { display: none; position: absolute; top: 65px; left: 0; right: 0; flex-direction: column; background: var(--navy-deep); padding: 8px 16px 16px; gap: 2px; border-top: 1px solid rgba(255,255,255,.08); border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 8px 24px rgba(0,0,0,.4); z-index: 200; }
+      .nav-links.open { display: flex; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; }
+      .nav-mobile-cta { display: block; margin-top: 8px; padding: 12px 16px; background: var(--blue); color: white !important; text-decoration: none; border-radius: 8px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; text-align: center; }
+    }
+
+    /* ── NAV DROPDOWNS ── */
+    .nav-dropdown { position: relative; }
+    .nav-dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: rgba(255,255,255,.75);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-toggle:hover, .nav-dropdown-toggle.open { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-dropdown-toggle svg { transition: transform 0.2s; margin-left: 2px; }
+    .nav-dropdown-toggle.open svg { transform: rotate(180deg); }
+    .nav-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      background: var(--navy-deep);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 10px;
+      padding: 6px;
+      min-width: 220px;
+      box-shadow: 0 8px 32px rgba(0,0,0,.4);
+      z-index: 300;
+    }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-menu::before { content: ''; position: absolute; top: -8px; left: 0; right: 0; height: 8px; }
+    .nav-dropdown-item {
+      display: block;
+      color: rgba(255,255,255,.75);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 14px;
+      border-radius: 7px;
+      white-space: nowrap;
+      transition: color 0.15s, background 0.15s;
+    }
+    .nav-dropdown-item:hover, .nav-dropdown-item.active { color: white; background: rgba(255,255,255,.08); }
+    .nav-item-soon { opacity: 0.45; cursor: default; pointer-events: none; }
+    .nav-soon-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 2px 6px; border-radius: 10px; background: rgba(255,255,255,.15); color: rgba(255,255,255,.7); margin-left: 6px; vertical-align: middle; }
+    @media (max-width: 768px) {
+      .nav-dropdown { width: 100%; }
+      .nav-dropdown-menu { position: static; box-shadow: none; border: none; border-radius: 0; padding: 4px 0 4px 16px; background: transparent; }
+      .nav-dropdown-toggle { width: 100%; padding: 12px 16px; font-size: 15px; border-radius: 8px; justify-content: space-between; }
+    }
+    @media (hover: hover) {
+      .nav-dropdown:hover .nav-dropdown-menu { display: block; }
+      .nav-dropdown:hover .nav-dropdown-toggle { color: white; background: rgba(255,255,255,.08); }
+      .nav-dropdown:hover .nav-dropdown-toggle svg { transform: rotate(180deg); }
+    }
+
+    /* Page header */
+    .page-header {
+      background: var(--hero-grad);
+      padding: 72px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 20% 80%, rgba(17,134,237,.12) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(17,134,237,.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-header-grid-bg {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+    .page-header-inner { position: relative; z-index: 1; max-width: 760px; margin: 0 auto; }
+    .page-header-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(17,134,237,.15); border: 1px solid rgba(17,134,237,.3);
+      color: #5bb5ff; font-size: 13px; font-weight: 600;
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 20px; letter-spacing: 0.2px;
+    }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: 52px; font-weight: 800; color: white; letter-spacing: -1px; margin-bottom: 16px; line-height: 1.1; }
+    .page-header p { font-size: 18px; color: rgba(255,255,255,.75); max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    @media (max-width: 768px) { .page-header h1 { font-size: 32px; } .page-header p { font-size: 16px; } }
+
+    /* Main layout */
+    .demo-section { padding: 72px 24px; }
+    .demo-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: 64px; align-items: start; }
+    @media (max-width: 900px) { .demo-inner { grid-template-columns: 1fr; gap: 48px; } }
+
+    /* Embed side */
+    .embed-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      border: 1px solid var(--gray-200);
+    }
+    .embed-card-header {
+      background: var(--navy-deep);
+      padding: 20px 28px;
+    }
+    .embed-card-header h2 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; color: white; margin-bottom: 4px; }
+    .embed-card-header p { font-size: 13px; color: rgba(255,255,255,.55); }
+    .embed-body { padding: 28px 28px 24px; }
+
+    /* Native form styles */
+    .demo-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 500px) { .form-row { grid-template-columns: 1fr; } }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field label { font-size: 13px; font-weight: 600; color: var(--gray-700); }
+    .form-field label .req { color: #e53e3e; margin-left: 2px; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea { border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px 14px; font-family: 'Figtree', sans-serif; font-size: 14px; color: var(--navy); background: var(--off-white); transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { outline: none; border-color: var(--blue); background: white; box-shadow: 0 0 0 3px rgba(17,134,237,.1); }
+    .form-field textarea { resize: vertical; min-height: 80px; }
+    .form-error { font-size: 12px; color: #e53e3e; display: none; }
+    .form-field.invalid input,
+    .form-field.invalid select { border-color: #e53e3e; }
+    .form-field.invalid .form-error { display: block; }
+    .form-submit-btn { background: var(--blue); color: white; border: none; border-radius: 8px; padding: 13px 28px; font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; margin-top: 4px; }
+    .form-submit-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+    .form-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .form-success { display: none; text-align: center; padding: 32px 16px; }
+    .form-success-icon { width: 52px; height: 52px; background: rgba(18,183,106,.12); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .form-success h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .form-success p { font-size: 15px; color: var(--gray-700); line-height: 1.6; }
+
+    /* HubSpot embed placeholder — replace this div with the HubSpot meetings embed script */
+    .hubspot-placeholder {
+      min-height: 500px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 32px;
+      text-align: center;
+      background: var(--off-white);
+    }
+    .hubspot-placeholder svg { width: 48px; height: 48px; color: var(--blue); margin-bottom: 16px; }
+    .hubspot-placeholder h3 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 600; color: var(--navy); margin-bottom: 8px; }
+    .hubspot-placeholder p { font-size: 14px; color: var(--gray-700); max-width: 280px; line-height: 1.6; margin-bottom: 24px; }
+    .placeholder-note { font-size: 12px; color: var(--gray-400); font-style: italic; background: var(--gray-100); padding: 8px 16px; border-radius: 6px; }
+
+    /* Info side */
+    .demo-info h2 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; color: var(--navy); margin-bottom: 12px; letter-spacing: -0.3px; line-height: 1.3; }
+    .demo-info > p { font-size: 16px; color: var(--gray-700); margin-bottom: 36px; line-height: 1.7; }
+
+    .expect-list { list-style: none; margin-bottom: 40px; }
+    .expect-list li { display: flex; align-items: flex-start; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--gray-100); }
+    .expect-list li:last-child { border-bottom: none; }
+    .expect-icon { width: 36px; height: 36px; background: rgba(17,134,237,.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .expect-icon svg { width: 18px; height: 18px; color: var(--blue); }
+    .expect-text strong { display: block; font-size: 15px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
+    .expect-text span { font-size: 14px; color: var(--gray-700); line-height: 1.5; }
+
+    .contact-block { background: white; border: 1px solid var(--gray-200); border-radius: 10px; padding: 24px; }
+    .contact-block h3 { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-400); margin-bottom: 16px; }
+    .contact-person { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+    .contact-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: white; flex-shrink: 0; }
+    .contact-name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .contact-title { font-size: 13px; color: var(--gray-700); }
+    .contact-links { display: flex; flex-direction: column; gap: 8px; }
+    .contact-link { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--gray-700); text-decoration: none; transition: color 0.15s; }
+    .contact-link:hover { color: var(--blue); }
+    .contact-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Footer */
+    footer { background: var(--navy-deep); color: white; padding: 60px 24px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.08); margin-bottom: 32px; }
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .footer-brand-logo img { height: 28px; width: 28px; }
+    .footer-brand-logo span { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; color: white; }
+    .footer-tagline { font-size: 14px; color: rgba(255,255,255,.45); line-height: 1.6; max-width: 220px; margin-bottom: 16px; }
+    .footer-contact a { display: block; font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; margin-bottom: 6px; transition: color 0.15s; }
+    .footer-contact a:hover { color: white; }
+    .footer-col-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: 16px; }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { font-size: 14px; color: rgba(255,255,255,.55); text-decoration: none; transition: color 0.15s; }
+    .footer-links a:hover { color: white; }
+    .footer-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+    .footer-legal { display: flex; gap: 20px; }
+    .footer-legal a { font-size: 13px; color: rgba(255,255,255,.3); text-decoration: none; transition: color 0.15s; }
+    .footer-legal a:hover { color: white; }
+    @media (max-width: 768px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 500px) { .footer-top { grid-template-columns: 1fr; } }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B81QG8E2N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B81QG8E2N');
+  gtag('config', 'AW-18425608403');
+  </script>
+</head>
+<body>
+
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="icon-mark.png" alt="Soonest icon" />
+      <span class="nav-logo-text">Soonest</span>
+    </a>
+    <ul class="nav-links" id="nav-menu">
+      <li><a href="/">Home</a></li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Platform
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="scheduling" class="nav-dropdown-item">AI Scheduling</a>
+          <a href="pulse-ai" class="nav-dropdown-item">Burnout Detection</a>
+          <a href="coaching" class="nav-dropdown-item">Coaching</a>
+          <span class="nav-dropdown-item nav-item-soon">Labor Forecasting <span class="nav-soon-badge">Soon</span></span>
+          <span class="nav-dropdown-item nav-item-soon">Payroll <span class="nav-soon-badge">Soon</span></span>
+        </div>
+      </li>
+      <li class="nav-dropdown">
+        <button class="nav-dropdown-toggle">
+          Departments
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          <a href="departments/nurse-scheduling-software" class="nav-dropdown-item">Nurse Scheduling Software</a>
+          <a href="departments/physician-scheduling-software" class="nav-dropdown-item">Physician Scheduling Software</a>
+          <a href="departments/medical-staff-scheduling-software" class="nav-dropdown-item">Medical Staff Scheduling Software</a>
+          <a href="departments/pediatric-scheduling-software" class="nav-dropdown-item">Pediatric Scheduling Software</a>
+        </div>
+      </li>
+      <li><a href="https://schedule.soonest.io/" class="nav-mobile-cta" style="background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.85);">Login</a></li>
+      <li><a href="demo" class="nav-mobile-cta">Get a Demo</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://schedule.soonest.io/" class="nav-btn" style="background:transparent;border:1px solid rgba(255,255,255,.25);font-weight:500;">Login</a>
+      <a href="demo" class="nav-btn">Get a Demo</a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-grid-bg"></div>
+  <div class="page-header-inner">
+    <div class="page-header-badge">Book a Demo</div>
+    <h1>See Soonest in action.</h1>
+    <p>30 minutes. No sales pressure. Walk away with a clear picture of how Soonest works for your specific group.</p>
+  </div>
+</div>
+
+<section class="demo-section">
+  <div class="demo-inner">
+
+    <!-- LEFT: HubSpot form embed -->
+    <div class="embed-card">
+      <div class="embed-card-header">
+        <h2>Want to see more?</h2>
+      </div>
+      <div class="embed-body">
+        <form class="demo-form" id="demo-form" novalidate>
+          <div class="form-row">
+            <div class="form-field" id="field-firstname">
+              <label for="firstname">First Name<span class="req">*</span></label>
+              <input type="text" id="firstname" name="firstname" autocomplete="given-name" placeholder="Jane" />
+              <span class="form-error">Please enter your first name.</span>
+            </div>
+            <div class="form-field" id="field-lastname">
+              <label for="lastname">Last Name<span class="req">*</span></label>
+              <input type="text" id="lastname" name="lastname" autocomplete="family-name" placeholder="Smith" />
+              <span class="form-error">Please enter your last name.</span>
+            </div>
+          </div>
+          <div class="form-field" id="field-company">
+            <label for="company">Company / Group Name<span class="req">*</span></label>
+            <input type="text" id="company" name="company" autocomplete="organization" placeholder="Mountain View Emergency Physicians" />
+            <span class="form-error">Please enter your organization name.</span>
+          </div>
+          <div class="form-field" id="field-email">
+            <label for="email">Work Email<span class="req">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="jane@yourgroup.com" />
+            <span class="form-error">Please enter a valid email address.</span>
+          </div>
+          <div class="form-field" id="field-phone">
+            <label for="phone">Phone Number<span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="(801) 555-0100" />
+            <span class="form-error">Please enter your phone number.</span>
+          </div>
+          <button type="submit" class="form-submit-btn" id="form-submit-btn">Get a Demo</button>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="form-success-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#12B76A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>You're all set!</h3>
+          <p>We'll be in touch shortly to schedule your demo. Check your inbox for a confirmation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: What to expect + contact -->
+    <div class="demo-info">
+      <h2>What happens on the call</h2>
+      <p>This isn't a feature walkthrough. It's a working session tailored to how your group actually schedules.</p>
+
+      <ul class="expect-list">
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>We learn your setup first</strong>
+            <span>How many providers, how many locations, how you currently build schedules — and where it breaks down.</span>
+          </div>
+        </li>
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>Receive custom demo</strong>
+            <span>We'll build a demo tailored to your group's actual scheduling setup — shifts, locations, headcount. No generic walkthrough.</span>
+          </div>
+        </li>
+        <li>
+          <div class="expect-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="expect-text">
+            <strong>30 minutes, no longer</strong>
+            <span>We respect your time. If it's not a fit, we'll tell you straight.</span>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-logo">
+          <img src="icon-mark.png" alt="Soonest" />
+          <span>Soonest</span>
+        </div>
+        <p class="footer-tagline">A comprehensive platform to prevent and reduce burnout across your healthcare organization.</p>
+        <div class="footer-contact">
+          <a href="mailto:support@getsoonest.com">support@getsoonest.com</a>
+
+        </div>
+      </div>
+      <div>
+        <p class="footer-col-title">Solutions</p>
+        <ul class="footer-links">
+          <li><a href="scheduling">AI Scheduling</a></li>
+          <li><a href="pulse-ai">Pulse AI</a></li>
+          <li><a href="coaching">Coaching</a></li>
+          <li><a href="impact-calculator">Impact Calculator</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Company</p>
+        <ul class="footer-links">
+          <li><a href="/#built-different">About Us</a></li>
+          <li><a href="resources">Resources</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contact</p>
+        <ul class="footer-links">
+          <li><a href="demo">Request a Demo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Soonest. All rights reserved. Salt Lake City, Utah.</span>
+      <div class="footer-legal">
+        <a href="privacy">Privacy Policy</a>
+        <a href="terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-menu');
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+  navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navMenu.classList.remove('open');
+    });
+  });
+  document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
+    const toggle = dropdown.querySelector('.nav-dropdown-toggle');
+    if (!toggle) return;
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = dropdown.classList.contains('open');
+      document.querySelectorAll('.nav-dropdown').forEach(d => {
+        d.classList.remove('open');
+        d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+      });
+      if (!isOpen) {
+        dropdown.classList.add('open');
+        toggle.classList.add('open');
+      }
+    });
+  });
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.nav-dropdown').forEach(d => {
+      d.classList.remove('open');
+      d.querySelector('.nav-dropdown-toggle')?.classList.remove('open');
+    });
+  });
+</script>
+<script src="/js/soonest-conversions.js" defer></script>
+<script>
+  document.getElementById('demo-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = document.getElementById('form-submit-btn');
+
+    // Validate
+    const fields = [
+      { id: 'field-firstname', input: 'firstname', test: v => v.trim().length > 0 },
+      { id: 'field-lastname',  input: 'lastname',  test: v => v.trim().length > 0 },
+      { id: 'field-company',   input: 'company',   test: v => v.trim().length > 0 },
+      { id: 'field-email',     input: 'email',     test: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) },
+      { id: 'field-phone',     input: 'phone',     test: v => v.trim().length > 6 },
+    ];
+    let valid = true;
+    fields.forEach(f => {
+      const wrap = document.getElementById(f.id);
+      const val = form.querySelector('#' + f.input).value;
+      if (!f.test(val)) { wrap.classList.add('invalid'); valid = false; }
+      else wrap.classList.remove('invalid');
+    });
+    if (!valid) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    const payload = {
+      fields: [
+        { name: 'firstname',  value: form.firstname.value.trim() },
+        { name: 'lastname',   value: form.lastname.value.trim() },
+        { name: 'company',    value: form.company.value.trim() },
+        { name: 'email',      value: form.email.value.trim() },
+        { name: 'phone',      value: form.phone.value.trim() },
+      ],
+      context: {
+        pageUri: 'https://www.soonest.io/demo',
+        pageName: 'Book a Free Demo — Soonest'
+      }
+    };
+
+    try {
+      const res = await fetch(
+        'https://api.hsforms.com/submissions/v3/integration/submit/47082704/926a3c92-1cd4-43eb-acf4-c73884d691e8',
+        { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
+      );
+      if (!res.ok) throw new Error('Submit failed');
+      // Fire conversion tracking
+      gtag('event', 'conversion', {'send_to': 'AW-18425608403/SpY_CI-D3ZMdENPxgdJE'});
+      gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_page_native_form'});
+      // Show success state
+      document.getElementById('demo-form').style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Get a Demo';
+      alert('Something went wrong — please try again or email us at support@getsoonest.com');
+    }
+  });
+</script>
+</body>
+</html>
