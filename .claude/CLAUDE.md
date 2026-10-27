@@ -244,6 +244,7 @@ Always run `git pull origin main` before making any changes. Multiple people pus
 - **Inline styles per page** — each HTML file contains its own `<style>` block; there is no shared stylesheet
 - **Image paths are relative** — all assets are in the root directory alongside the HTML files
 - **Keep pages self-contained** — don't introduce dependencies between pages (e.g., shared JS files) unless explicitly asked
+- **Client logo bar is shared** — the "Trusted by healthcare organizations" marquee on every page is rendered by `js/logo-bar.js`. To add/remove/reorder a client logo, edit the `LOGOS` list in that file only. New pages get the bar with `<div class="logos-track" data-logo-bar></div>` inside the logos-bar section, followed by `<script src="/js/logo-bar.js"></script>`
 
 ---
 
