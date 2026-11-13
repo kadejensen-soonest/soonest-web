@@ -12,14 +12,14 @@
 */
 (function () {
   var LOGOS = [
-    { src: 'https://img1.wsimg.com/isteam/ip/ee1e83b5-a539-4603-8859-a88284673861/output-onlinepngtools-0248888.png/:/rs=h:90,cg:true,m/qt=q:95', name: 'Utah Emergency Physicians' },
-    { src: 'https://www.thehouseofhearing.com/wp-content/uploads/2023/12/House-of-Hearing-Logo-150x103.png', name: 'House of Hearing' },
-    { src: 'https://cdn.worldvectorlogo.com/logos/university-of-utah-health-care.svg', name: 'University of Utah Health' },
+    { src: '/uep-logo.png', name: 'Utah Emergency Physicians' },
+    { src: '/houseofhearing-logo.png', name: 'House of Hearing' },
+    { src: '/uofuhealth-logo.svg', name: 'University of Utah Health' },
     { src: '/purepediatrics-logo.webp', name: 'Pure Pediatrics' },
     { src: '/forest-hills-logo.png', name: 'Forest Hills Pediatric Associates' },
     { src: '/pns-logo.webp', name: 'Pediatric & Neonatal Specialists', height: 48 },
     { src: '/healthfront-logo.png', name: 'HealthFront Emergency Physicians' },
-    { src: 'https://images.squarespace-cdn.com/content/v1/67d07844f8351329271efc93/fd26020f-921f-46ec-b677-77df201d7cfd/cropped-My-ER-Logo.png?format=300w', name: 'My Emergency Room 24/7' }
+    { src: '/myER-logo.png', name: 'My Emergency Room 24/7' }
   ];
 
   // The track scrolls by -50% of its width, so it holds two identical halves.
