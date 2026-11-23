@@ -3,8 +3,21 @@
   Account: AW-18425608403
   Load on EVERY page, after the existing Google tag, with:
     <script src="/js/soonest-conversions.js" defer></script>
-  Note: "Demo Booked" is NOT in this file. It stays in demo.html as it is today.
+  Note: the demo conversions are NOT in this file.
+    "Demo Request (form submit)" (primary) fires in demo.html after the HubSpot form succeeds.
+    "Demo Booked" (primary) fires on demo-confirmed.html, where the HubSpot meeting link redirects.
+  Also loads the HubSpot tracking code (portal 47082704) so HubSpot can attribute lead sources.
 */
+(function () {
+  if (document.getElementById('hs-script-loader')) return;
+  var hs = document.createElement('script');
+  hs.id = 'hs-script-loader';
+  hs.async = true;
+  hs.defer = true;
+  hs.src = 'https://js-na2.hs-scripts.com/47082704.js';
+  document.body.appendChild(hs);
+})();
+
 (function () {
   if (typeof window.gtag !== 'function') return;
 
@@ -58,8 +71,13 @@
   }, true);
 
   // 5. Impact Calculator Request: the "Request my session" form on /impact-calculator
+  //    Only counts when a valid work email is entered (a real lead, not just a calculation)
   var gate = document.getElementById('gateForm');
   if (gate) {
-    gate.addEventListener('submit', function () { fire('calculatorRequest'); });
+    gate.addEventListener('submit', function () {
+      var emailEl = document.getElementById('inEmail');
+      var email = emailEl ? emailEl.value.trim() : '';
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) fire('calculatorRequest');
+    });
   }
 })();
