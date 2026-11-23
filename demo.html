@@ -338,7 +338,7 @@
         <h2>Want to see more?</h2>
       </div>
       <div class="embed-body">
-        <form class="demo-form" id="demo-form" novalidate>
+        <form class="demo-form" id="demo-form" novalidate data-hs-do-not-collect="true">
           <div class="form-row">
             <div class="form-field" id="field-firstname">
               <label for="firstname">First Name<span class="req">*</span></label>
@@ -548,10 +548,13 @@
         { name: 'phone',      value: form.phone.value.trim() },
       ],
       context: {
-        pageUri: 'https://www.soonest.io/demo',
+        pageUri: window.location.href,
         pageName: 'Book a Free Demo — Soonest'
       }
     };
+    // HubSpot visitor cookie: ties this submission to how the visitor found us (ads, search, email)
+    const hutk = (document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/) || [])[1];
+    if (hutk) payload.context.hutk = hutk;
 
     try {
       const res = await fetch(
@@ -559,13 +562,26 @@
         { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }
       );
       if (!res.ok) throw new Error('Submit failed');
-      // Fire soft conversion: lead captured (contact created in HubSpot)
-      gtag('event', 'generate_lead', {'send_to': 'G-2B81QG8E2N', 'lead_source': 'demo_form_submit'});
-      // Redirect to calendar with pre-filled fields
+      // Redirect to calendar with pre-filled fields, but only after the conversion pings are sent
       const first = encodeURIComponent(form.firstname.value.trim());
       const last  = encodeURIComponent(form.lastname.value.trim());
       const email = encodeURIComponent(form.email.value.trim());
-      window.location.href = `https://meetings-na2.hubspot.com/jason2412/discovery-demo-meeting?firstname=${first}&lastname=${last}&email=${email}`;
+      const calendarUrl = `https://meetings-na2.hubspot.com/jason2412/discovery-demo-meeting?firstname=${first}&lastname=${last}&email=${email}`;
+      let redirected = false;
+      const goToCalendar = () => { if (!redirected) { redirected = true; window.location.href = calendarUrl; } };
+      if (typeof gtag === 'function') {
+        // GA4 lead event
+        gtag('event', 'generate_lead', { send_to: 'G-2B81QG8E2N', lead_source: 'demo_form_submit' });
+        // Google Ads primary conversion: Demo Request (form submit)
+        gtag('event', 'conversion', {
+          send_to: 'AW-18425608403/faPVCIS3hL4dENPxgdJE',
+          value: 1.0,
+          currency: 'USD',
+          event_callback: goToCalendar
+        });
+      }
+      // Fallback if the tag is blocked or slow
+      setTimeout(goToCalendar, 1200);
     } catch (err) {
       btn.disabled = false;
       btn.textContent = 'Get a Demo';
