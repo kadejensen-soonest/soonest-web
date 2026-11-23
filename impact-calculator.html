@@ -635,7 +635,7 @@
         </div>
       </div>
 
-      <form class="form-panel" id="gateForm" hidden>
+      <form class="form-panel" id="gateForm" hidden data-hs-do-not-collect="true">
         <p class="form-title">Tell us what you already know and we'll have your numbers loaded before the call starts.</p>
         <div class="grid-fields">
           <div class="f">
@@ -947,8 +947,36 @@
       state.owners = isFinite(o) && o > 0 ? o : null;
     }
 
+    // Send session requests to HubSpot ("Impact Calculator Request" form) so the lead is not lost
+    function sendToHubSpot(email) {
+      var hutk = (document.cookie.match(/(?:^|;\s*)hubspotutk=([^;]+)/) || [])[1];
+      function val(id, pre, post) { var v = $(id).value; return v ? (pre || "") + v + (post || "") : "not entered"; }
+      var notes = "Impact calculator inputs: clinical turnover " + val("inTurnClin", "", "%") +
+        ", support turnover " + val("inTurnSupp", "", "%") +
+        ", premium labor spend " + val("inPremium", "$") +
+        ", schedule builders " + val("inOwners");
+      var payload = {
+        fields: [
+          { name: "email", value: email },
+          { name: "message", value: notes }
+        ],
+        context: { pageUri: window.location.href, pageName: document.title }
+      };
+      if (hutk) payload.context.hutk = hutk;
+      try {
+        fetch("https://api.hsforms.com/submissions/v3/integration/submit/47082704/c11e66f1-4ad5-446e-909b-7eec76a47d01", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(function () {});
+      } catch (err) {}
+    }
+
     $("gateForm").addEventListener("submit", function (e) {
       e.preventDefault();
+      var gateEmail = ($("inEmail").value || "").trim();
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(gateEmail)) sendToHubSpot(gateEmail);
       readGate();
       $("gateDone").hidden = false;
       render();
