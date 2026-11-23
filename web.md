@@ -47,6 +47,19 @@ Internal reference for anyone working on the site. For brand guidelines, design 
 | Google Analytics 4 | Live | Set up and linked to site |
 | Google Search Console | Live | Set up by Jason |
 | Vercel Analytics | Available | Built into Vercel dashboard — basic traffic data |
+| HubSpot tracking code | Live | Portal 47082704 (na2). Loaded by `js/soonest-conversions.js` on every page that includes it, and directly on `demo-confirmed.html`. Gives lead source attribution in HubSpot |
+| Google Ads conversions | Live | Account AW-18425608403. See below |
+
+**Google Ads conversions (primary = used for bidding)**
+
+| Conversion | Type | Where it fires |
+|------|------|------|
+| Demo Request (form submit) | Primary | `demo.html`, after the HubSpot form submit succeeds, before redirecting to the calendar |
+| Demo Booked | Primary | `demo-confirmed.html` (HubSpot meeting link redirects there after booking) |
+| Impact Calculator Request | Primary | `js/soonest-conversions.js`, only when a valid work email is entered. Email is also sent to the HubSpot "Impact Calculator Request" form |
+| Demo Page Visit, Product Page Visit, Get a Demo Click, Engaged Visit | Secondary | `js/soonest-conversions.js` |
+
+Forms submitted through the HubSpot API carry `data-hs-do-not-collect="true"` so HubSpot does not double count them, and pass the `hubspotutk` cookie so the lead keeps its source.
 
 **Next step:** Submit sitemap.xml to Google Search Console. Allow data to accumulate before drawing SEO conclusions.
 
